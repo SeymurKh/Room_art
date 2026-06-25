@@ -30,9 +30,9 @@ export function HomeExperience({ data }: { data: SiteData }) {
       <SiteNav settings={data.settings} dark />
       <section className="dark-room relative min-h-screen overflow-hidden text-[#f4f1ea]">
         <motion.div style={{ scale: heroScale, y: heroY }} className="absolute inset-0">
-          <RoomImage src={data.home.heroImage} alt="" fill priority className="object-cover opacity-42" fallbackText="Hero image" />
+          <RoomImage src={data.home.heroImage} alt="" fill priority className="object-cover opacity-70 saturate-0" fallbackText="Hero image" />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/78 to-black/24" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/45 to-black/24" />
         <div className="room-shell relative flex min-h-screen items-center pt-20">
           <div className="max-w-2xl">
             <p className="section-kicker text-white/60">{data.home.eyebrow}</p>
@@ -75,11 +75,11 @@ export function HomeExperience({ data }: { data: SiteData }) {
         <motion.div {...reveal}>
           <SectionHeading kicker="Room artist base" title="Our artists" copy="Individual practices with biographies, statements, and connected portfolios." />
         </motion.div>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {data.artists.slice(0, 6).map((artist, index) => (
             <motion.div key={artist.slug} {...reveal} transition={{ ...reveal.transition, delay: index * 0.04 }}>
               <Link href={`/artists/${artist.slug}`} className="group block">
-                <div className="card-img-overlay relative aspect-[4/5] overflow-hidden bg-black">
+                <div className="card-img-overlay relative aspect-[3/4] overflow-hidden bg-black">
                   <RoomImage src={artist.portrait} alt={artist.name} fill className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" fallbackText={artist.name} />
                   <span className="overlay-text">View artist</span>
                 </div>
