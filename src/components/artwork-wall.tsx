@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Artwork, SiteSettings } from "@/lib/types";
 import { whatsappArtworkUrl } from "@/lib/whatsapp";
+import { RoomImage } from "@/components/room-image";
 
 export function ArtworkWall({
   artwork,
@@ -26,7 +26,7 @@ export function ArtworkWall({
             className="gallery-shadow relative aspect-[4/5] w-[min(72vw,430px)] border-[14px] border-[#11100e] bg-black"
             style={{ transformPerspective: 1200 }}
           >
-            <Image src={artwork.image} alt={artwork.title} fill priority className="object-cover" />
+            <RoomImage src={artwork.image} alt={artwork.title} fill priority className="object-cover" fallbackText="Artwork image unavailable" />
           </motion.div>
           <div className="absolute bottom-10 left-1/2 h-9 w-[62%] -translate-x-1/2 rounded-full bg-black/22 blur-2xl" />
         </div>
@@ -46,7 +46,7 @@ export function ArtworkWall({
             <Row label="Dimensions" value={artwork.dimensions} />
             <Row label="Availability" value={artwork.availability} />
           </dl>
-          <a href={whatsappArtworkUrl(settings, artwork)} target="_blank" className="mt-8 inline-flex items-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
+          <a href={whatsappArtworkUrl(settings, artwork)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
             Inquire on WhatsApp <ArrowUpRight size={16} />
           </a>
         </motion.aside>

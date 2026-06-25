@@ -1,9 +1,7 @@
-import Image from "next/image";
 import { PageHero } from "@/components/page-hero";
 import { SiteFooter } from "@/components/site-footer";
+import { RoomImage } from "@/components/room-image";
 import { getSiteData } from "@/lib/site-data";
-
-export const dynamic = "force-dynamic";
 
 export default async function EventsPage() {
   const data = await getSiteData();
@@ -27,7 +25,7 @@ function EventGroup({ title, events }: { title: string; events: Awaited<ReturnTy
         {events.map((event) => (
           <article key={event.slug} className="bg-[#ebe7df] p-3">
             <div className="relative aspect-[4/3] overflow-hidden">
-              <Image src={event.image} alt={event.title} fill className="object-cover" />
+              <RoomImage src={event.image} alt={event.title} fill className="object-cover" fallbackText={event.title} />
             </div>
             <p className="section-kicker mt-5">{event.type}</p>
             <h2 className="room-serif mt-2 text-4xl leading-none">{event.title}</h2>

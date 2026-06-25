@@ -1,10 +1,7 @@
-import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { SiteFooter } from "@/components/site-footer";
+import { ContactForm } from "@/components/contact-form";
 import { getSiteData } from "@/lib/site-data";
-import { whatsappContactUrl } from "@/lib/whatsapp";
-
-export const dynamic = "force-dynamic";
 
 export default async function ContactPage() {
   const data = await getSiteData();
@@ -17,19 +14,11 @@ export default async function ContactPage() {
           <p>{data.settings.phone}</p>
           <p>{data.settings.email}</p>
           <div className="mt-8 flex gap-5 text-xs font-semibold uppercase tracking-[0.16em] text-[#11100e]">
-            <a href={data.settings.instagram}>Instagram</a>
-            <a href={data.settings.facebook}>Facebook</a>
+            <a href={data.settings.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href={data.settings.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
           </div>
         </aside>
-        <form action={whatsappContactUrl(data.settings, "a collaboration")} className="grid gap-4 border border-black/10 bg-white/35 p-6 md:p-10">
-          <input className="admin-input" name="name" placeholder="Name" />
-          <input className="admin-input" name="email" type="email" placeholder="Email" />
-          <input className="admin-input" name="subject" placeholder="Subject" />
-          <textarea className="admin-input min-h-40 resize-none" name="message" placeholder="Message" />
-          <a href={whatsappContactUrl(data.settings, "a collaboration")} target="_blank" className="inline-flex w-fit items-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
-            Send on WhatsApp <ArrowUpRight size={16} />
-          </a>
-        </form>
+        <ContactForm settings={data.settings} />
       </section>
       <SiteFooter settings={data.settings} />
     </main>

@@ -3,8 +3,6 @@ import { SiteFooter } from "@/components/site-footer";
 import { GalleryFilter } from "@/components/gallery-filter";
 import { getSiteData } from "@/lib/site-data";
 
-export const dynamic = "force-dynamic";
-
 export default async function GalleryPage() {
   const data = await getSiteData();
   return (

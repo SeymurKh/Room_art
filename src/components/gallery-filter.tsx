@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { SiteData } from "@/lib/types";
+import { RoomImage } from "@/components/room-image";
 
 const all = "All";
 
@@ -39,8 +39,9 @@ export function GalleryFilter({ data }: { data: SiteData }) {
       <div className="mt-10 grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((artwork) => (
           <Link href={`/gallery/${artwork.slug}`} key={artwork.slug} className="group block">
-            <div className="relative aspect-[4/5] overflow-hidden bg-[#e2ded4]">
-              <Image src={artwork.image} alt={artwork.title} fill className="object-cover transition duration-700 group-hover:scale-105" />
+            <div className="card-img-overlay relative aspect-[4/5] overflow-hidden bg-[#e2ded4]">
+              <RoomImage src={artwork.image} alt={artwork.title} fill className="object-cover transition duration-700 group-hover:scale-105" fallbackText={artwork.title} />
+              <span className="overlay-text">View artwork</span>
             </div>
             <div className="mt-4 flex items-start justify-between gap-4">
               <div>

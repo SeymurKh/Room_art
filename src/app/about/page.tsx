@@ -1,9 +1,7 @@
-import Image from "next/image";
 import { PageHero } from "@/components/page-hero";
 import { SiteFooter } from "@/components/site-footer";
+import { RoomImage } from "@/components/room-image";
 import { getSiteData } from "@/lib/site-data";
-
-export const dynamic = "force-dynamic";
 
 export default async function AboutPage() {
   const data = await getSiteData();
@@ -17,7 +15,7 @@ export default async function AboutPage() {
           <Block title="Identity" copy={data.about.identity} />
         </div>
         <div className="relative min-h-[700px] overflow-hidden">
-          <Image src={data.about.image} alt="ROOM interior" fill priority className="object-cover" />
+          <RoomImage src={data.about.image} alt="ROOM interior" fill priority className="object-cover" fallbackText="ROOM interior" />
         </div>
       </section>
       <SiteFooter settings={data.settings} />

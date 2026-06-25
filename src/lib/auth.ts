@@ -3,11 +3,27 @@ import { createHash } from "crypto";
 
 const cookieName = "room-admin-session";
 
+export function ensureAdminCredentials() {
+  if (!process.env.ADMIN_PASSWORD || !process.env.ADMIN_SECRET) {
+    const nodeEnv = process.env.NODE_ENV as string | undefined;
+    if (nodeEnv === "production") {
+      throw new Error(
+        "ADMIN_PASSWORD and ADMIN_SECRET must be set in production environment"
+      );
+    }
+    console.warn(
+      "⚠ Using default admin credentials. Set ADMIN_PASSWORD and ADMIN_SECRET in .env before production."
+    );
+    console.warn("  Default password: room-admin");
+  }
+}
+
 function secret() {
   return process.env.ADMIN_SECRET ?? "room-local-secret";
 }
 
 export function adminPassword() {
+  ensureAdminCredentials();
   return process.env.ADMIN_PASSWORD ?? "room-admin";
 }
 

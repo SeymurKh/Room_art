@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
@@ -8,6 +7,7 @@ import type { SiteData } from "@/lib/types";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SectionHeading } from "@/components/section-heading";
+import { RoomImage } from "@/components/room-image";
 import { whatsappContactUrl } from "@/lib/whatsapp";
 
 const reveal = {
@@ -30,7 +30,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
       <SiteNav settings={data.settings} dark />
       <section className="dark-room relative min-h-screen overflow-hidden text-[#f4f1ea]">
         <motion.div style={{ scale: heroScale, y: heroY }} className="absolute inset-0">
-          <Image src={data.home.heroImage} alt="" fill priority className="object-cover opacity-42" />
+          <RoomImage src={data.home.heroImage} alt="" fill priority className="object-cover opacity-42" fallbackText="Hero image" />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/78 to-black/24" />
         <div className="room-shell relative flex min-h-screen items-center pt-20">
@@ -79,8 +79,9 @@ export function HomeExperience({ data }: { data: SiteData }) {
           {data.artists.slice(0, 6).map((artist, index) => (
             <motion.div key={artist.slug} {...reveal} transition={{ ...reveal.transition, delay: index * 0.04 }}>
               <Link href={`/artists/${artist.slug}`} className="group block">
-                <div className="relative aspect-[4/5] overflow-hidden bg-black">
-                  <Image src={artist.portrait} alt={artist.name} fill className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+                <div className="card-img-overlay relative aspect-[4/5] overflow-hidden bg-black">
+                  <RoomImage src={artist.portrait} alt={artist.name} fill className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" fallbackText={artist.name} />
+                  <span className="overlay-text">View artist</span>
                 </div>
                 <div className="mt-4 flex items-start justify-between gap-4">
                   <div>
@@ -104,8 +105,9 @@ export function HomeExperience({ data }: { data: SiteData }) {
             {featuredArtworks.map((artwork, index) => (
               <motion.div key={artwork.slug} {...reveal} transition={{ ...reveal.transition, delay: index * 0.05 }} className={index === 0 ? "md:col-span-2 md:row-span-2" : ""}>
                 <Link href={`/gallery/${artwork.slug}`} className="group block">
-                  <div className="relative aspect-[4/5] overflow-hidden bg-white/5">
-                    <Image src={artwork.image} alt={artwork.title} fill className="object-cover transition duration-700 group-hover:scale-105" />
+                  <div className="card-img-overlay relative aspect-[4/5] overflow-hidden bg-white/5">
+                    <RoomImage src={artwork.image} alt={artwork.title} fill className="object-cover transition duration-700 group-hover:scale-105" fallbackText={artwork.title} />
+                    <span className="overlay-text">View artwork</span>
                   </div>
                   <p className="mt-3 text-xs uppercase tracking-[0.14em] text-white/60">
                     {getArtistName(artwork.artistSlug)}
@@ -129,7 +131,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
           {data.exhibitions.map((event, index) => (
             <motion.article key={event.slug} {...reveal} transition={{ ...reveal.transition, delay: index * 0.05 }} className="border border-black/10 bg-[#ebe7df] p-3">
               <div className="relative aspect-[4/3] overflow-hidden">
-                <Image src={event.image} alt={event.title} fill className="object-cover" />
+                <RoomImage src={event.image} alt={event.title} fill className="object-cover" fallbackText={event.title} />
               </div>
               <p className="section-kicker mt-5">{event.type}</p>
               <h3 className="room-serif mt-2 text-3xl leading-none">{event.title}</h3>
@@ -146,7 +148,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
             <p className="mt-8 text-sm leading-7 text-[#6f6a61]">{data.about.vision}</p>
           </motion.div>
           <motion.div {...reveal} className="relative min-h-[520px] overflow-hidden">
-            <Image src={data.about.image} alt="ROOM interior" fill className="object-cover" />
+            <RoomImage src={data.about.image} alt="ROOM interior" fill className="object-cover" fallbackText="ROOM interior" />
           </motion.div>
         </div>
       </section>
@@ -158,7 +160,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
             <p className="text-sm leading-7 text-[#6f6a61]">{data.settings.address}</p>
             <p className="mt-4 text-sm">{data.settings.email}</p>
             <p className="text-sm">{data.settings.phone}</p>
-            <a href={whatsappContactUrl(data.settings)} target="_blank" className="mt-8 inline-flex items-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
+              <a href={whatsappContactUrl(data.settings)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
               Write on WhatsApp <ArrowUpRight size={16} />
             </a>
           </div>

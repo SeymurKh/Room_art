@@ -16,7 +16,7 @@ const tabs: [Tab, string][] = [
   ["json", "JSON"],
 ];
 
-export function AdminDashboard({ initialData, saved }: { initialData: SiteData; saved: boolean }) {
+export function AdminDashboard({ initialData, saved, saveError }: { initialData: SiteData; saved: boolean; saveError?: string | null }) {
   const [data, setData] = useState(initialData);
   const [tab, setTab] = useState<Tab>("settings");
   const payload = useMemo(() => JSON.stringify(data), [data]);
@@ -56,6 +56,11 @@ export function AdminDashboard({ initialData, saved }: { initialData: SiteData; 
           </button>
         </div>
 
+        {saveError ? (
+          <div className="mb-6 inline-flex items-start gap-2 border border-red-400/30 bg-red-50/70 px-4 py-3 text-sm text-red-800">
+            <span className="mt-0.5 shrink-0">⚠</span> {saveError}
+          </div>
+        ) : null}
         {saved ? (
           <div className="mb-6 inline-flex items-center gap-2 border border-black/10 bg-white/50 px-4 py-3 text-sm">
             <Check size={16} /> Changes saved.

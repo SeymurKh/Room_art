@@ -3,8 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { adminPassword, clearAdminSession, isAdmin, setAdminSession } from "@/lib/auth";
-import { saveSiteData } from "@/lib/site-data";
-import type { SiteData } from "@/lib/types";
+import { saveSiteData, SiteDataValidationError } from "@/lib/site-data";
 
 export async function loginAdmin(formData: FormData) {
   const password = String(formData.get("password") ?? "");
@@ -25,8 +24,17 @@ export async function saveAdminData(formData: FormData) {
     redirect("/admin");
   }
   const payload = String(formData.get("payload") ?? "");
-  const data = JSON.parse(payload) as SiteData;
-  await saveSiteData(data);
+  try {
+    const data = JSON.parse(payload);
+    await saveSiteData(data);
+  } catch (error) {
+    if (error instanceof SiteDataValidationError) {
+      redirect(
+        `/admin?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`
+      );
+    }
+    redirect("/admin?error=json");
+  }
   revalidatePath("/");
   revalidatePath("/artists");
   revalidatePath("/gallery");

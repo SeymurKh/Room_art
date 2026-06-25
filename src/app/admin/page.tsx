@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string; saved?: string }>;
+  searchParams: Promise<{ error?: string; saved?: string; details?: string }>;
 }) {
   const params = await searchParams;
   const authed = await isAdmin();
@@ -30,5 +30,10 @@ export default async function AdminPage({
   }
 
   const data = await getSiteData();
-  return <AdminDashboard initialData={data} saved={params.saved === "1"} />;
+  const saveError = params.error === "validation" && params.details
+    ? `Validation errors: ${decodeURIComponent(params.details)}`
+    : params.error === "json"
+      ? "Invalid JSON. Please check your data structure."
+      : null;
+  return <AdminDashboard initialData={data} saved={params.saved === "1"} saveError={saveError} />;
 }

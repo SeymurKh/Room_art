@@ -19,8 +19,8 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
           <p>{settings.email}</p>
         </div>
         <div className="flex items-start gap-5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
-          <a href={settings.instagram}>Instagram</a>
-          <a href={settings.facebook}>Facebook</a>
+          <a href={settings.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href={settings.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
         </div>
       </div>
     </footer>

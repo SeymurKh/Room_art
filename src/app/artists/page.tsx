@@ -1,11 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { SiteFooter } from "@/components/site-footer";
+import { RoomImage } from "@/components/room-image";
 import { getSiteData } from "@/lib/site-data";
-
-export const dynamic = "force-dynamic";
 
 export default async function ArtistsPage() {
   const data = await getSiteData();
@@ -15,8 +13,9 @@ export default async function ArtistsPage() {
       <section className="room-shell grid gap-5 py-16 sm:grid-cols-2 lg:grid-cols-3">
         {data.artists.map((artist) => (
           <Link href={`/artists/${artist.slug}`} key={artist.slug} className="group">
-            <div className="relative aspect-[4/5] overflow-hidden bg-black">
-              <Image src={artist.portrait} alt={artist.name} fill className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+            <div className="card-img-overlay relative aspect-[4/5] overflow-hidden bg-black">
+              <RoomImage src={artist.portrait} alt={artist.name} fill className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" fallbackText={artist.name} />
+              <span className="overlay-text">View artist</span>
             </div>
             <div className="mt-4 flex items-start justify-between">
               <div>

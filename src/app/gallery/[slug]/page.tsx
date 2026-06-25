@@ -1,10 +1,24 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { ArtworkWall } from "@/components/artwork-wall";
 import { getSiteData } from "@/lib/site-data";
 
-export const dynamic = "force-dynamic";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const data = await getSiteData();
+  const artwork = data.artworks.find((item) => item.slug === slug);
+  if (!artwork) return { title: "Artwork not found" };
+  return {
+    title: artwork.title,
+    description: artwork.description,
+  };
+}
 
 export default async function ArtworkPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
