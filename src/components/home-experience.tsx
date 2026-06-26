@@ -35,11 +35,9 @@ export function HomeExperience({ data }: { data: SiteData }) {
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/45 to-black/24" />
         <div className="room-shell relative flex min-h-screen items-center pt-20">
           <div className="max-w-2xl">
-            <p className="section-kicker text-white/60">{data.home.eyebrow}</p>
-            <h1 className="room-serif mt-5 text-[clamp(4rem,13vw,12rem)] font-medium uppercase leading-[0.78] text-[#f4f1ea]">
-              {data.home.headline}
+            <h1 className="room-serif mt-5 text-[clamp(2rem,5vw,4rem)] font-medium uppercase leading-[0.9] text-[#f4f1ea]">
+              CONTEMPORARY ART SPACE IN BAKU
             </h1>
-            <p className="mt-8 max-w-md text-sm leading-7 text-white/78">{data.home.intro}</p>
             <div className="mt-9 flex max-w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="/gallery" className="inline-flex items-center justify-center gap-2 border border-white/30 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition hover:bg-white hover:text-black sm:justify-start">
                 Discover gallery <ArrowUpRight size={16} />
