@@ -7,8 +7,8 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-
 import type { SiteSettings } from "@/lib/types";
 
 const links = [
-  ["Artists", "/artists"],
   ["Gallery", "/gallery"],
+  ["Artists", "/artists"],
   ["Events", "/events"],
   ["About", "/about"],
   ["Contact", "/contact"],

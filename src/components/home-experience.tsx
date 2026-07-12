@@ -69,6 +69,30 @@ export function HomeExperience({ data }: { data: SiteData }) {
         </div>
       </section>
 
+      <section className="dark-room py-24 text-[#f4f1ea] md:py-32">
+        <div className="room-shell">
+          <motion.div {...reveal}>
+            <SectionHeading light kicker="Gallery" title="Works that hold the room" copy="Filter by artist, medium, or category, then enter each artwork page as a wall-based viewing moment." />
+          </motion.div>
+          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-5">
+            {featuredArtworks.map((artwork, index) => (
+              <motion.div key={artwork.slug} {...reveal} transition={{ ...reveal.transition, delay: index * 0.05 }} className={index === 0 ? "md:col-span-2 md:row-span-2" : ""}>
+                <Link href={`/gallery/${artwork.slug}`} className="group block">
+                  <div className="card-img-overlay relative aspect-[4/5] overflow-hidden bg-white/5">
+                    <RoomImage src={artwork.image} alt={artwork.title} fill className="object-cover transition duration-700 group-hover:scale-105" fallbackText={artwork.title} />
+                    <span className="overlay-text">View artwork</span>
+                  </div>
+                  <p className="mt-3 text-xs uppercase tracking-[0.14em] text-white/60">
+                    {getArtistName(artwork.artistSlug)}
+                  </p>
+                  <p className="room-serif text-2xl">{artwork.title}</p>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="room-shell py-24 md:py-32" id="artists">
         <motion.div {...reveal}>
           <SectionHeading kicker="Room artist base" title="Our artists" copy="Individual practices with biographies, statements, and connected portfolios." />
@@ -91,30 +115,6 @@ export function HomeExperience({ data }: { data: SiteData }) {
               </Link>
             </motion.div>
           ))}
-        </div>
-      </section>
-
-      <section className="dark-room py-24 text-[#f4f1ea] md:py-32">
-        <div className="room-shell">
-          <motion.div {...reveal}>
-            <SectionHeading light kicker="Gallery" title="Works that hold the room" copy="Filter by artist, medium, or category, then enter each artwork page as a wall-based viewing moment." />
-          </motion.div>
-          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-5">
-            {featuredArtworks.map((artwork, index) => (
-              <motion.div key={artwork.slug} {...reveal} transition={{ ...reveal.transition, delay: index * 0.05 }} className={index === 0 ? "md:col-span-2 md:row-span-2" : ""}>
-                <Link href={`/gallery/${artwork.slug}`} className="group block">
-                  <div className="card-img-overlay relative aspect-[4/5] overflow-hidden bg-white/5">
-                    <RoomImage src={artwork.image} alt={artwork.title} fill className="object-cover transition duration-700 group-hover:scale-105" fallbackText={artwork.title} />
-                    <span className="overlay-text">View artwork</span>
-                  </div>
-                  <p className="mt-3 text-xs uppercase tracking-[0.14em] text-white/60">
-                    {getArtistName(artwork.artistSlug)}
-                  </p>
-                  <p className="room-serif text-2xl">{artwork.title}</p>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
