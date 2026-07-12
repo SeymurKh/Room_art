@@ -7,6 +7,11 @@ import { SiteFooter } from "@/components/site-footer";
 import { RoomImage } from "@/components/room-image";
 import { getSiteData } from "@/lib/site-data";
 
+export async function generateStaticParams() {
+  const data = await getSiteData();
+  return data.artists.map((artist) => ({ slug: artist.slug }));
+}
+
 export async function generateMetadata({
   params,
 }: {

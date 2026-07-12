@@ -5,6 +5,11 @@ import { SiteFooter } from "@/components/site-footer";
 import { ArtworkWall } from "@/components/artwork-wall";
 import { getSiteData } from "@/lib/site-data";
 
+export async function generateStaticParams() {
+  const data = await getSiteData();
+  return data.artworks.map((artwork) => ({ slug: artwork.slug }));
+}
+
 export async function generateMetadata({
   params,
 }: {
