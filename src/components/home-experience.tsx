@@ -12,6 +12,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SectionHeading } from "@/components/section-heading";
 import { RoomImage } from "@/components/room-image";
 import { HeroSlideshowShader } from "@/components/hero-slideshow-shader";
+import { ParallaxWindow } from "@/components/parallax-window";
 import { whatsappContactUrl } from "@/lib/whatsapp";
 
 const reveal = {
@@ -90,21 +91,21 @@ export function HomeExperience({ data }: { data: SiteData }) {
         </div>
       </section>
 
-      <section>
-        <div className="room-shell grid divide-y divide-black/10 md:grid-cols-3 md:divide-x md:divide-y-0">
+      <ParallaxWindow src="/assets/room-window-bg.png" alt="Room interior">
+        <div className="room-shell grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
           {[
             ["Current exhibition", current?.title, current?.date],
             ["Upcoming event", data.exhibitions.find((event) => event.type === "Event")?.title, "8 Jun"],
             ["New artworks", "Discover", "The latest additions"],
           ].map(([kicker, title, meta]) => (
             <Link href={kicker === "New artworks" ? "/gallery" : "/events"} key={kicker} className="group py-8 md:px-8">
-              <p className="section-kicker">{kicker}</p>
-              <p className="room-serif mt-4 text-3xl leading-none">{title}</p>
-              <p className="mt-2 text-sm text-[#6f6a61]">{meta}</p>
+              <p className="section-kicker text-white/60">{kicker}</p>
+              <p className="room-serif mt-4 text-3xl leading-none text-[#f4f1ea]">{title}</p>
+              <p className="mt-2 text-sm text-white/50">{meta}</p>
             </Link>
           ))}
         </div>
-      </section>
+      </ParallaxWindow>
 
       <section className="dark-room py-24 text-[#f4f1ea] md:py-32">
         <div className="room-shell">
