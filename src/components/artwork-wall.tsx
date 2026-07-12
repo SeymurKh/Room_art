@@ -6,6 +6,14 @@ import type { Artwork, SiteSettings } from "@/lib/types";
 import { whatsappArtworkUrl } from "@/lib/whatsapp";
 import { RoomImage } from "@/components/room-image";
 
+function scaleFactor(widthCm: number, heightCm: number): number {
+  // Max dimension of this artwork vs a reference ~max artwork size (140cm)
+  const maxDim = Math.max(widthCm, heightCm);
+  const refMax = 140;
+  // scale from 0.55 (smallest) to 1.0 (largest)
+  return 0.55 + (maxDim / refMax) * 0.45;
+}
+
 export function ArtworkWall({
   artwork,
   artist,
@@ -15,18 +23,39 @@ export function ArtworkWall({
   artist: string;
   settings: SiteSettings;
 }) {
+  const aspect = artwork.widthCm / artwork.heightCm;
+  const isPortrait = aspect < 1;
+  const scale = scaleFactor(artwork.widthCm, artwork.heightCm);
+
+  // Container width based on scale: smaller artwork = smaller frame
+  const baseWidth = isPortrait ? `${40 * scale}vw` : `${65 * scale}vw`;
+  const maxWidth = isPortrait ? `${420 * scale}px` : `${700 * scale}px`;
+  const borderWidth = `${Math.round(10 + scale * 10)}px`; // 10–20px border
+
   return (
     <section className="wall min-h-screen pt-16">
       <div className="room-shell grid min-h-[calc(100vh-4rem)] items-center gap-10 py-16 md:grid-cols-[1.15fr_.85fr]">
         <div className="relative flex min-h-[560px] items-center justify-center overflow-hidden">
           <motion.div
-            initial={{ opacity: 0, y: 160, rotateX: 54, scale: 0.62 }}
+            initial={{ opacity: 0, y: 120, rotateX: 40, scale: 0.7 }}
             animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-            transition={{ duration: 1.15, ease: "easeOut" }}
-            className="gallery-shadow relative aspect-[4/5] w-[min(72vw,430px)] border-[14px] border-[#11100e] bg-black"
-            style={{ transformPerspective: 1200 }}
+            transition={{ duration: 1.0, ease: "easeOut" }}
+            className="gallery-shadow relative border-[#11100e] bg-black"
+            style={{
+              width: `min(${baseWidth}, ${maxWidth})`,
+              aspectRatio: `${artwork.widthCm} / ${artwork.heightCm}`,
+              borderWidth,
+              transformPerspective: 1200,
+            }}
           >
-            <RoomImage src={artwork.image} alt={artwork.title} fill priority className="object-cover" fallbackText="Artwork image unavailable" />
+            <RoomImage
+              src={artwork.image}
+              alt={artwork.title}
+              fill
+              priority
+              className="object-cover"
+              fallbackText="Artwork image unavailable"
+            />
           </motion.div>
           <div className="absolute bottom-10 left-1/2 h-9 w-[62%] -translate-x-1/2 rounded-full bg-black/22 blur-2xl" />
         </div>
@@ -46,7 +75,12 @@ export function ArtworkWall({
             <Row label="Dimensions" value={artwork.dimensions} />
             <Row label="Availability" value={artwork.availability} />
           </dl>
-          <a href={whatsappArtworkUrl(settings, artwork)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
+          <a
+            href={whatsappArtworkUrl(settings, artwork)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]"
+          >
             Inquire on WhatsApp <ArrowUpRight size={16} />
           </a>
         </motion.aside>

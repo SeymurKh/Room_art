@@ -36,6 +36,8 @@ export type Artwork = {
   medium: string;
   category: string;
   dimensions: string;
+  widthCm: number;
+  heightCm: number;
   image: string;
   availability: "Available" | "Reserved" | "Private collection";
   description: string;

@@ -38,6 +38,8 @@ const artworkSchema = z.object({
   medium: z.string().min(1),
   category: z.string().min(1),
   dimensions: z.string().min(1),
+  widthCm: z.number().positive(),
+  heightCm: z.number().positive(),
   image: z.string().min(1),
   availability: z.enum(["Available", "Reserved", "Private collection"]),
   description: z.string().min(1),

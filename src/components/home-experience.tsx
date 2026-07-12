@@ -1,13 +1,17 @@
 "use client";
 
+import { useMemo } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import type { SiteData } from "@/lib/types";
+import { useTypewriter } from "@/lib/use-typewriter";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SectionHeading } from "@/components/section-heading";
 import { RoomImage } from "@/components/room-image";
+import { HeroSlideshowShader } from "@/components/hero-slideshow-shader";
 import { whatsappContactUrl } from "@/lib/whatsapp";
 
 const reveal = {
@@ -18,42 +22,75 @@ const reveal = {
 } as const;
 
 export function HomeExperience({ data }: { data: SiteData }) {
-  const { scrollYProgress } = useScroll();
-  const heroScale = useTransform(scrollYProgress, [0, 0.22], [1.08, 0.98]);
-  const heroY = useTransform(scrollYProgress, [0, 0.22], [0, 90]);
+  const { displayed, cursor } = useTypewriter();
   const current = data.exhibitions.find((item) => item.slug === data.home.currentExhibitionSlug) ?? data.exhibitions[0];
   const featuredArtworks = data.artworks.slice(0, 5);
   const getArtistName = (slug: string) => data.artists.find((artist) => artist.slug === slug)?.name ?? "ROOM artist";
 
+  const slideshowImages = useMemo(() => {
+    const shuffled = [...data.artworks].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 5).map((a) => a.image);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <main className="bg-[#f4f1ea]">
       <SiteNav settings={data.settings} dark />
-      <section className="dark-room relative min-h-screen overflow-hidden text-[#f4f1ea]">
-        <motion.div style={{ scale: heroScale, y: heroY }} className="absolute inset-0">
-          <RoomImage src={data.home.heroImage} alt="" fill priority className="object-cover opacity-70 saturate-0" fallbackText="Hero image" />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/45 to-black/24" />
-        <div className="room-shell relative flex min-h-screen items-center pt-20">
-          <div className="max-w-2xl">
-            <h1 className="room-serif mt-5 text-[clamp(2rem,5vw,4rem)] font-medium uppercase leading-[0.9] text-[#f4f1ea]">
-              CONTEMPORARY ART SPACE IN BAKU
-            </h1>
-            <div className="mt-9 flex max-w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link href="/gallery" className="inline-flex items-center justify-center gap-2 border border-white/30 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition hover:bg-white hover:text-black sm:justify-start">
-                Discover gallery <ArrowUpRight size={16} />
-              </Link>
-              <Link href="/events" className="inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/78 transition hover:text-white sm:justify-start">
-                Current exhibition
-              </Link>
-            </div>
+
+      {/* ===== HERO ===== */}
+      <section className="relative grid min-h-screen overflow-hidden bg-[#0c0c0b] text-[#f4f1ea] lg:grid-cols-[65fr_35fr] -mb-px">
+        {/* Левая колонка — typewriter + кнопки */}
+        <div className="relative z-10 flex min-h-screen flex-col justify-center py-20 lg:items-start">
+          {/* Фоновое изображение */}
+          <Image
+            src="/background-hero.png"
+            alt=""
+            fill
+            priority
+            className="object-cover opacity-50"
+            sizes="(max-width: 1024px) 100vw, 65vw"
+          />
+          {/* Затемнение поверх фона */}
+          <div className="absolute inset-0 bg-black/40" />
+          {/* Градиентный переход к правой колонке */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-[5] w-[140px] bg-gradient-to-l from-[#0c0c0b] to-transparent" />
+          <div className="room-shell relative z-10">
+          <h1 className="room-serif text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[0.9]">
+            <span>{displayed}</span>
+            <span
+              className={`ml-1 inline-block w-[0.05em] align-middle font-light ${
+                cursor ? "opacity-100" : "opacity-0"
+              } transition-opacity duration-75`}
+              style={{ backgroundColor: "currentColor", height: "0.75em" }}
+            >
+              &nbsp;
+            </span>
+          </h1>
+          <div className="mt-9 flex max-w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Link
+              href="/gallery"
+              className="inline-flex items-center justify-center gap-2 border border-white/30 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition hover:bg-white hover:text-black sm:justify-start"
+            >
+              Discover gallery <ArrowUpRight size={16} />
+            </Link>
+            <Link
+              href="/events"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/78 transition hover:text-white sm:justify-start"
+            >
+              Current exhibition
+            </Link>
           </div>
-          <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 text-white/50 md:block">
-            <ChevronDown size={24} />
           </div>
+        </div>
+
+        {/* Правая колонка — шейдерное слайдшоу (только на lg+) */}
+        <div className="relative hidden overflow-hidden lg:block">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[120px] bg-gradient-to-r from-[#0c0c0b] to-transparent" />
+          <HeroSlideshowShader images={slideshowImages} />
         </div>
       </section>
 
-      <section className="border-b border-black/10">
+      <section>
         <div className="room-shell grid divide-y divide-black/10 md:grid-cols-3 md:divide-x md:divide-y-0">
           {[
             ["Current exhibition", current?.title, current?.date],

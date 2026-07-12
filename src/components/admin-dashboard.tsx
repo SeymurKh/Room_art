@@ -123,8 +123,8 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
             onRemove={(index) => update("artworks", data.artworks.filter((_, i) => i !== index))}
             render={(artwork, index) => (
               <Grid>
-                {(["slug", "title", "artistSlug", "year", "medium", "category", "dimensions", "image", "availability", "description"] as (keyof Artwork)[]).map((key) => (
-                  <Field key={key} multiline={key === "description"} label={key} value={artwork[key]} onChange={(value) => updateItem(data.artworks, index, { ...artwork, [key]: value }, (items) => update("artworks", items))} />
+                {(["slug", "title", "artistSlug", "year", "medium", "category", "dimensions", "widthCm", "heightCm", "image", "availability", "description"] as (keyof Artwork)[]).map((key) => (
+                  <Field key={key} multiline={key === "description"} label={key} value={String(artwork[key])} onChange={(value) => updateItem(data.artworks, index, { ...artwork, [key]: key === "widthCm" || key === "heightCm" ? Number(value) : value }, (items) => update("artworks", items))} />
                 ))}
               </Grid>
             )}
