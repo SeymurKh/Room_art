@@ -149,11 +149,6 @@ function SlideshowScene({
         texture={textures[activeIndex]}
         progressRef={progressInRef}
       />
-      {/* Dark overlay */}
-      <mesh position={[0, 0, 0.01]}>
-        <planeGeometry args={[100, 100]} />
-        <meshBasicMaterial color="#000000" transparent opacity={0.5} />
-      </mesh>
     </>
   );
 }

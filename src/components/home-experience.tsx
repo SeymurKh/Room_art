@@ -2,7 +2,6 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { SiteData } from "@/lib/types";
@@ -39,23 +38,15 @@ export function HomeExperience({ data }: { data: SiteData }) {
       <SiteNav settings={data.settings} dark />
 
       {/* ===== HERO ===== */}
-      <section className="relative grid min-h-screen overflow-hidden bg-[#0c0c0b] text-[#f4f1ea] lg:grid-cols-[65fr_35fr] -mb-px">
-        {/* Левая колонка — typewriter + кнопки */}
-        <div className="relative z-10 flex min-h-screen flex-col justify-center py-20 lg:items-start">
-          {/* Фоновое изображение */}
-          <Image
-            src="/background-hero.png"
-            alt=""
-            fill
-            priority
-            className="object-cover opacity-50"
-            sizes="(max-width: 1024px) 100vw, 65vw"
-          />
-          {/* Затемнение поверх фона */}
-          <div className="absolute inset-0 bg-black/40" />
-          {/* Градиентный переход к правой колонке */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-[5] w-[140px] bg-gradient-to-l from-[#0c0c0b] to-transparent" />
-          <div className="room-shell relative z-10">
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0c0c0b] text-[#f4f1ea]">
+        {/* Слайдшоу на весь фон */}
+        <HeroSlideshowShader images={slideshowImages} />
+
+        {/* Затемнение */}
+        <div className="absolute inset-0 bg-black/25 pointer-events-none" />
+
+        {/* Контент */}
+        <div className="room-shell relative z-10 text-center">
           <h1 className="room-serif text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[0.9]">
             <span>{displayed}</span>
             <span
@@ -67,27 +58,20 @@ export function HomeExperience({ data }: { data: SiteData }) {
               &nbsp;
             </span>
           </h1>
-          <div className="mt-9 flex max-w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
             <Link
               href="/gallery"
-              className="inline-flex items-center justify-center gap-2 border border-white/30 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition hover:bg-white hover:text-black sm:justify-start"
+              className="inline-flex items-center justify-center gap-2 border border-white/30 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition hover:bg-white hover:text-black"
             >
               Discover gallery <ArrowUpRight size={16} />
             </Link>
             <Link
               href="/events"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/78 transition hover:text-white sm:justify-start"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/78 transition hover:text-white"
             >
               Current exhibition
             </Link>
           </div>
-          </div>
-        </div>
-
-        {/* Правая колонка — шейдерное слайдшоу (только на lg+) */}
-        <div className="relative hidden overflow-hidden lg:block">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[120px] bg-gradient-to-r from-[#0c0c0b] to-transparent" />
-          <HeroSlideshowShader images={slideshowImages} />
         </div>
       </section>
 
