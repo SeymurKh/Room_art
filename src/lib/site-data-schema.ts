@@ -18,7 +18,7 @@ const homeContentSchema = z.object({
   headline: z.string().min(1),
   intro: z.string().min(1),
   heroImage: z.string().min(1),
-  currentExhibitionSlug: z.string().min(1),
+  currentExhibitionSlug: z.string(),
 });
 
 const artistSchema = z.object({
@@ -49,7 +49,7 @@ const exhibitionSchema = z.object({
   slug: z.string().min(1),
   title: z.string().min(1),
   type: z.enum(["Exhibition", "Event"]),
-  status: z.enum(["Upcoming", "Past"]),
+  status: z.enum(["Upcoming", "Current", "Past"]),
   date: z.string().min(1),
   image: z.string().min(1),
   description: z.string().min(1),

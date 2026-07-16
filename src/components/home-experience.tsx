@@ -14,6 +14,7 @@ import { HeroSlideshowShader } from "@/components/hero-slideshow-shader";
 import { ParallaxWindow } from "@/components/parallax-window";
 import { GalleryScrolltelling } from "@/components/gallery-scrolltelling";
 import { ArtistsCarousel } from "@/components/artists-carousel";
+import { EventsScrolltelling } from "@/components/events-scrolltelling";
 import { whatsappContactUrl } from "@/lib/whatsapp";
 
 const reveal = {
@@ -104,26 +105,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
         </div>
       </section>
 
-      <section className="room-shell grid gap-12 py-24 md:grid-cols-[.9fr_1.1fr] md:py-32">
-        <motion.div {...reveal}>
-          <SectionHeading kicker="Exhibitions & events" title="Activity around the work" copy="Upcoming exhibitions, artist talks, and an archive of past ROOM projects." />
-          <Link href="/events" className="mt-9 inline-flex items-center gap-2 border border-black/18 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em]">
-            View archive <ArrowUpRight size={16} />
-          </Link>
-        </motion.div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {data.exhibitions.map((event, index) => (
-            <motion.article key={event.slug} {...reveal} transition={{ ...reveal.transition, delay: index * 0.05 }} className="border border-black/10 bg-[#ebe7df] p-3">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <RoomImage src={event.image} alt={event.title} fill className="object-cover" fallbackText={event.title} />
-              </div>
-              <p className="section-kicker mt-5">{event.type}</p>
-              <h3 className="room-serif mt-2 text-3xl leading-none">{event.title}</h3>
-              <p className="mt-2 text-sm text-[#6f6a61]">{event.date}</p>
-            </motion.article>
-          ))}
-        </div>
-      </section>
+      <EventsScrolltelling exhibitions={data.exhibitions} />
 
       <section className="border-y border-black/10 bg-[#ebe7df] py-24 md:py-32">
         <div className="room-shell grid gap-12 md:grid-cols-[.85fr_1.15fr]">

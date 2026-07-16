@@ -47,7 +47,7 @@ export type Exhibition = {
   slug: string;
   title: string;
   type: "Exhibition" | "Event";
-  status: "Upcoming" | "Past";
+  status: "Upcoming" | "Current" | "Past";
   date: string;
   image: string;
   description: string;

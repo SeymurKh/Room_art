@@ -17,7 +17,7 @@ export const defaultSiteData: SiteData = {
     intro:
       "ROOM is a contemporary gallery and cultural platform shaped around artists, collectors, exhibitions, and slow encounters with art.",
     heroImage: "/assets/interiors/hero-gallery.jpg",
-    currentExhibitionSlug: "seven-ya",
+    currentExhibitionSlug: "",
   },
   artists: [
     {
@@ -138,38 +138,7 @@ export const defaultSiteData: SiteData = {
       description: "A vertical study of the sky as sculptural form — minimal, atmospheric, and emotionally resonant.",
     },
   ],
-  exhibitions: [
-    {
-      slug: "seven-ya",
-      title: "Seven Ya",
-      type: "Exhibition",
-      status: "Upcoming",
-      date: "25 Apr - 25 May 2026",
-      image: "/assets/events/seven-ya.jpg",
-      description:
-        "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition.",
-    },
-    {
-      slug: "artist-talk-with-gunel",
-      title: "Artist Talk with Gunel",
-      type: "Event",
-      status: "Upcoming",
-      date: "8 Jun 2026",
-      image: "/assets/events/artist-talk.jpg",
-      description:
-        "An evening conversation about process, material research, and the role of intimate archives in contemporary practice.",
-    },
-    {
-      slug: "memories-of-objects",
-      title: "Memories of Objects",
-      type: "Exhibition",
-      status: "Past",
-      date: "Aug 2024",
-      image: "/assets/events/memories.jpg",
-      description:
-        "A past exhibition exploring sculptural fragments, domestic rituals, and objects as carriers of memory.",
-    },
-  ],
+  exhibitions: [],
   about: {
     concept:
       "ROOM is a contemporary art space in the heart of Baku where art, wine, and culture come together through exhibitions, talks, and curated encounters.",
