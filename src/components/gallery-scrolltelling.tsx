@@ -25,7 +25,7 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    setActiveIndex(Math.min(Math.round(progress * n), n - 1));
+    setActiveIndex(Math.min(Math.floor(progress * n), n - 1));
   });
 
   // scaleFactor — как в artwork-wall
@@ -35,8 +35,15 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
   }
 
   return (
-    <div ref={containerRef} style={{ height: "200vh" }}>
-      <section className="wall sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
+    <div ref={containerRef} style={{ height: `${n * 40}vh` }}>
+      <section
+        className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden"
+        style={{
+          backgroundImage: "url('/assets/wall-interior.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         {/* Текст-табличка внизу */}
         <div className="pointer-events-none absolute bottom-8 left-0 right-0 z-30 text-center">
           <p className="room-serif text-base italic text-[#6f6a61] md:text-lg">
