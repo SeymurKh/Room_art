@@ -13,6 +13,7 @@ import { RoomImage } from "@/components/room-image";
 import { HeroSlideshowShader } from "@/components/hero-slideshow-shader";
 import { ParallaxWindow } from "@/components/parallax-window";
 import { GalleryScrolltelling } from "@/components/gallery-scrolltelling";
+import { ArtistsCarousel } from "@/components/artists-carousel";
 import { whatsappContactUrl } from "@/lib/whatsapp";
 
 const reveal = {
@@ -98,24 +99,8 @@ export function HomeExperience({ data }: { data: SiteData }) {
         <motion.div {...reveal}>
           <SectionHeading kicker="Room artist base" title="Our artists" copy="Individual practices with biographies, statements, and connected portfolios." />
         </motion.div>
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {data.artists.slice(0, 6).map((artist, index) => (
-            <motion.div key={artist.slug} {...reveal} transition={{ ...reveal.transition, delay: index * 0.04 }}>
-              <Link href={`/artists/${artist.slug}`} className="group block">
-                <div className="card-img-overlay relative aspect-[3/4] overflow-hidden bg-black">
-                  <RoomImage src={artist.portrait} alt={artist.name} fill className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" fallbackText={artist.name} />
-                  <span className="overlay-text">View artist</span>
-                </div>
-                <div className="mt-4 flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.12em]">{artist.name}</p>
-                    <p className="mt-1 text-sm text-[#6f6a61]">{artist.role}</p>
-                  </div>
-                  <ArrowUpRight size={18} className="opacity-30 transition group-hover:opacity-100" />
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+        <div className="mt-12">
+          <ArtistsCarousel artists={data.artists} />
         </div>
       </section>
 
