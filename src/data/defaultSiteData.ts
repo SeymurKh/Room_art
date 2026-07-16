@@ -17,7 +17,7 @@ export const defaultSiteData: SiteData = {
     intro:
       "ROOM is a contemporary gallery and cultural platform shaped around artists, collectors, exhibitions, and slow encounters with art.",
     heroImage: "/assets/interiors/hero-gallery.jpg",
-    currentExhibitionSlug: "",
+    currentExhibitionSlug: "seven-ya",
   },
   artists: [
     {
@@ -138,7 +138,38 @@ export const defaultSiteData: SiteData = {
       description: "A vertical study of the sky as sculptural form — minimal, atmospheric, and emotionally resonant.",
     },
   ],
-  exhibitions: [],
+  exhibitions: [
+    {
+      slug: "artist-talk-with-elnur",
+      title: "Artist Talk with Elnur",
+      type: "Event",
+      status: "Upcoming",
+      date: "15 Jun 2026",
+      image: "/assets/events/artist-talk.jpg",
+      description:
+        "Elnur Babayev discusses his atmospheric painting technique and the rhythm of architectural space.",
+    },
+    {
+      slug: "seven-ya",
+      title: "Seven Ya",
+      type: "Exhibition",
+      status: "Current",
+      date: "25 Apr — 25 May 2026",
+      image: "/assets/events/seven-ya.jpg",
+      description:
+        "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition.",
+    },
+    {
+      slug: "memories-of-objects",
+      title: "Memories of Objects",
+      type: "Exhibition",
+      status: "Past",
+      date: "Aug 2024",
+      image: "/assets/events/memories.jpg",
+      description:
+        "A past exhibition exploring sculptural fragments, domestic rituals, and objects as carriers of memory.",
+    },
+  ],
   about: {
     concept:
       "ROOM is a contemporary art space in the heart of Baku where art, wine, and culture come together through exhibitions, talks, and curated encounters.",

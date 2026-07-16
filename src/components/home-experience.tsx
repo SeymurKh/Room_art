@@ -78,7 +78,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
         </div>
       </section>
 
-      <ParallaxWindow src="/assets/room-window-bg.png" alt="Room interior">
+      <ParallaxWindow src="/assets/window-bg.jpg" alt="Room interior">
         <div className="room-shell grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
           {[
             ["Current exhibition", current?.title, current?.date],
