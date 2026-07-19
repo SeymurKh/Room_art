@@ -11,7 +11,7 @@ export function DeleteButton({ itemName }: { itemName: string }) {
           e.preventDefault();
         }
       }}
-      className="grid size-8 place-items-center border border-black/12 text-[#6f6a61] transition hover:border-red-400 hover:text-red-600"
+      className="grid size-8 place-items-center border border-black/40 text-[#11100e] transition hover:border-red-400 hover:text-red-600"
       aria-label={`Delete ${itemName}`}
       title={`Delete ${itemName}`}
     >

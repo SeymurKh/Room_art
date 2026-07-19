@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Save } from "lucide-react";
+import { UploadField } from "@/components/upload-field";
 import type { Artist } from "@/lib/types";
 
 export function ArtistForm({ defaults }: { defaults: Artist }) {
@@ -16,10 +17,9 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
 
   return (
     <div className="max-w-2xl space-y-5">
-      <Field label="Slug" value={data.slug} onChange={(v) => updateField("slug", v)} />
       <Field label="Name" value={data.name} onChange={(v) => updateField("name", v)} />
       <Field label="Role" value={data.role} onChange={(v) => updateField("role", v)} />
-      <Field label="Portrait" value={data.portrait} onChange={(v) => updateField("portrait", v)} />
+      <UploadField label="Portrait" value={data.portrait} onChange={(v) => updateField("portrait", v)} folder="uploads/artists" />
       <Field multiline label="Bio" value={data.bio} onChange={(v) => updateField("bio", v)} />
       <Field multiline label="Statement" value={data.statement} onChange={(v) => updateField("statement", v)} />
       <button

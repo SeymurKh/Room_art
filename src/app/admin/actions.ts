@@ -2,9 +2,21 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { promises as fs } from "fs";
+import path from "path";
 import { adminPassword, clearAdminSession, isAdmin, setAdminSession } from "@/lib/auth";
 import { getSiteData, saveSiteData, SiteDataValidationError } from "@/lib/site-data";
 import type { Artist, Artwork, Exhibition } from "@/lib/types";
+
+async function tryDeleteFile(filePath: string) {
+  if (!filePath || !filePath.startsWith("/uploads/")) return;
+  try {
+    const fullPath = path.join(process.cwd(), "public", filePath);
+    await fs.unlink(fullPath);
+  } catch {
+    // file doesn't exist or can't be deleted — ignore
+  }
+}
 
 export async function loginAdmin(formData: FormData) {
   const password = String(formData.get("password") ?? "");
@@ -94,6 +106,8 @@ export async function createArtist(formData: FormData) {
 export async function deleteArtist(slug: string) {
   if (!(await isAdmin())) redirect("/admin");
   const data = await getSiteData();
+  const artist = data.artists.find((a) => a.slug === slug);
+  if (artist?.portrait) await tryDeleteFile(artist.portrait);
   data.artists = data.artists.filter((a) => a.slug !== slug);
   await saveSiteData(data);
   revalidatePath("/artists");
@@ -151,6 +165,8 @@ export async function createArtwork(formData: FormData) {
 export async function deleteArtwork(slug: string) {
   if (!(await isAdmin())) redirect("/admin");
   const data = await getSiteData();
+  const artwork = data.artworks.find((a) => a.slug === slug);
+  if (artwork?.image) await tryDeleteFile(artwork.image);
   data.artworks = data.artworks.filter((a) => a.slug !== slug);
   await saveSiteData(data);
   revalidatePath("/artists");

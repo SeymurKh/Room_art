@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Save } from "lucide-react";
+import { UploadField } from "@/components/upload-field";
 import type { Artwork, Artist } from "@/lib/types";
 
 export function ArtworkForm({
@@ -26,7 +27,6 @@ export function ArtworkForm({
 
   return (
     <div className="max-w-2xl space-y-5">
-      <Field label="Slug" value={data.slug} onChange={(v) => updateField("slug", v)} />
       <Field label="Title" value={data.title} onChange={(v) => updateField("title", v)} />
       {preselectedArtist ? (
         <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
@@ -55,7 +55,7 @@ export function ArtworkForm({
       <Field label="Dimensions" value={data.dimensions} onChange={(v) => updateField("dimensions", v)} />
       <Field label="Width (cm)" value={String(data.widthCm)} onChange={(v) => updateField("widthCm", Number(v))} />
       <Field label="Height (cm)" value={String(data.heightCm)} onChange={(v) => updateField("heightCm", Number(v))} />
-      <Field label="Image" value={data.image} onChange={(v) => updateField("image", v)} />
+      <UploadField label="Image" value={data.image} onChange={(v) => updateField("image", v)} folder="uploads/artworks" />
       <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
         Availability
         <select
