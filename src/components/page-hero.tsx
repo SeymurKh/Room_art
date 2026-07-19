@@ -15,12 +15,12 @@ export function PageHero({
   return (
     <section className="border-b border-black/10 bg-[#f4f1ea] pt-16">
       <SiteNav settings={settings} />
-      <div className="room-shell py-20 md:py-28">
+      <div className="room-shell py-14 md:py-20">
         <p className="section-kicker">{kicker}</p>
-        <h1 className="room-serif mt-5 max-w-4xl text-6xl font-medium leading-[0.9] md:text-8xl">
+        <h1 className="room-serif mt-4 max-w-4xl text-4xl font-medium leading-[0.95] md:text-6xl">
           {title}
         </h1>
-        {copy ? <p className="mt-7 max-w-xl text-sm leading-7 text-[#6f6a61]">{copy}</p> : null}
+        {copy ? <p className="mt-6 max-w-xl text-sm leading-7 text-[#6f6a61]">{copy}</p> : null}
       </div>
     </section>
   );

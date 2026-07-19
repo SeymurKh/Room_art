@@ -26,7 +26,7 @@ export default async function AboutPage() {
 function Block({ title, copy }: { title: string; copy: string }) {
   return (
     <article className="border-b border-black/10 pb-8">
-      <p className="section-kicker">{title}</p>
+      <h2 className="room-serif text-2xl">{title}</h2>
       <p className="mt-4 max-w-xl text-sm leading-7 text-[#6f6a61]">{copy}</p>
     </article>
   );

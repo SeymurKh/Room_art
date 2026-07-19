@@ -5,7 +5,7 @@ import { Check, CopyPlus, LogOut, Save, Trash2 } from "lucide-react";
 import type { Artist, Artwork, Exhibition, SiteData } from "@/lib/types";
 import { logoutAdmin, saveAdminData } from "@/app/admin/actions";
 
-type Tab = "settings" | "pages" | "artists" | "artworks" | "events" | "json";
+type Tab = "settings" | "pages" | "artists" | "artworks" | "events";
 
 const tabs: [Tab, string][] = [
   ["settings", "Settings"],
@@ -13,7 +13,6 @@ const tabs: [Tab, string][] = [
   ["artists", "Artists"],
   ["artworks", "Artworks"],
   ["events", "Events"],
-  ["json", "JSON"],
 ];
 
 export function AdminDashboard({ initialData, saved, saveError }: { initialData: SiteData; saved: boolean; saveError?: string | null }) {
@@ -103,7 +102,19 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
           <Collection
             title="Artists"
             items={data.artists}
-            onAdd={() => update("artists", [...data.artists, { ...data.artists[0], slug: `artist-${data.artists.length + 1}`, name: "New Artist" }])}
+            onAdd={() =>
+              update("artists", [
+                ...data.artists,
+                {
+                  slug: `artist-${Date.now()}`,
+                  name: "New Artist",
+                  role: "",
+                  portrait: "",
+                  bio: "",
+                  statement: "",
+                },
+              ])
+            }
             onRemove={(index) => update("artists", data.artists.filter((_, i) => i !== index))}
             render={(artist, index) => (
               <Grid>
@@ -119,7 +130,25 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
           <Collection
             title="Artworks"
             items={data.artworks}
-            onAdd={() => update("artworks", [...data.artworks, { ...data.artworks[0], slug: `artwork-${data.artworks.length + 1}`, title: "New Artwork" }])}
+            onAdd={() =>
+              update("artworks", [
+                ...data.artworks,
+                {
+                  slug: `artwork-${Date.now()}`,
+                  title: "New Artwork",
+                  artistSlug: "",
+                  year: String(new Date().getFullYear()),
+                  medium: "",
+                  category: "",
+                  dimensions: "",
+                  widthCm: 0,
+                  heightCm: 0,
+                  image: "",
+                  availability: "Available" as const,
+                  description: "",
+                },
+              ])
+            }
             onRemove={(index) => update("artworks", data.artworks.filter((_, i) => i !== index))}
             render={(artwork, index) => (
               <Grid>
@@ -135,7 +164,20 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
           <Collection
             title="Exhibitions & events"
             items={data.exhibitions}
-            onAdd={() => update("exhibitions", [...data.exhibitions, { ...data.exhibitions[0], slug: `event-${data.exhibitions.length + 1}`, title: "New Event" }])}
+            onAdd={() =>
+              update("exhibitions", [
+                ...data.exhibitions,
+                {
+                  slug: `event-${Date.now()}`,
+                  title: "New Event",
+                  type: "Exhibition" as const,
+                  status: "Upcoming" as const,
+                  date: "",
+                  image: "",
+                  description: "",
+                },
+              ])
+            }
             onRemove={(index) => update("exhibitions", data.exhibitions.filter((_, i) => i !== index))}
             render={(event, index) => (
               <Grid>
@@ -147,21 +189,6 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
           />
         ) : null}
 
-        {tab === "json" ? (
-          <Panel title="Raw JSON editor">
-            <textarea
-              className="admin-input min-h-[620px] font-mono text-xs"
-              value={JSON.stringify(data, null, 2)}
-              onChange={(event) => {
-                try {
-                  setData(JSON.parse(event.target.value) as SiteData);
-                } catch {
-                  event.currentTarget.dataset.invalid = "true";
-                }
-              }}
-            />
-          </Panel>
-        ) : null}
       </form>
     </main>
   );
@@ -230,7 +257,17 @@ function Collection<T extends { slug: string; title?: string; name?: string }>({
           <article key={`${item.slug}-${index}`} className="border border-black/10 bg-[#f4f1ea] p-4">
             <div className="mb-5 flex items-center justify-between gap-4">
               <h3 className="room-serif text-3xl">{item.title ?? item.name ?? item.slug}</h3>
-              <button type="button" onClick={() => onRemove(index)} className="grid size-10 place-items-center border border-black/12" aria-label="Remove item" title="Remove item">
+              <button
+                type="button"
+                onClick={() => {
+                  if (window.confirm(`Delete "${item.title ?? item.name ?? item.slug}"? This cannot be undone.`)) {
+                    onRemove(index);
+                  }
+                }}
+                className="grid size-10 place-items-center border border-black/12"
+                aria-label="Remove item"
+                title="Remove item"
+              >
                 <Trash2 size={16} />
               </button>
             </div>

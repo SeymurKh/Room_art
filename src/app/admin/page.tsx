@@ -23,7 +23,6 @@ export default async function AdminPage({
           <button className="mt-6 w-full bg-[#f4f1ea] px-5 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#11100e]">
             Enter admin panel
           </button>
-          <p className="mt-5 text-xs leading-5 text-white/45">Default local password: room-admin. Set ADMIN_PASSWORD before production.</p>
         </form>
       </main>
     );
