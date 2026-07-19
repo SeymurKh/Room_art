@@ -45,7 +45,7 @@ export function ArtworkFrame({
       }}
     >
       <div className="frame-mat h-full w-full" style={{ padding: matPadding }}>
-        <div className="relative h-full w-full">
+        <div className="frame-artwork relative h-full w-full">
           <RoomImage
             src={artwork.image}
             alt={artwork.title}
@@ -54,6 +54,7 @@ export function ArtworkFrame({
             className="object-cover"
             fallbackText={artwork.title}
           />
+          <div className="frame-artwork-overlay" aria-hidden="true" />
         </div>
       </div>
     </div>
