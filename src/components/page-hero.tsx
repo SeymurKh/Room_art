@@ -15,7 +15,7 @@ export function PageHero({
   return (
     <section className="border-b border-black/10 bg-[#f4f1ea] pt-16">
       <SiteNav settings={settings} />
-      <div className="room-shell py-14 md:py-20">
+      <div className="room-shell py-3 md:py-6">
         <p className="section-kicker">{kicker}</p>
         <h1 className="room-serif mt-4 max-w-4xl text-4xl font-medium leading-[0.95] md:text-6xl">
           {title}
