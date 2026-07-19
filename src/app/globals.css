@@ -62,10 +62,6 @@ select {
   margin-inline: auto;
 }
 
-.hairline {
-  border-color: var(--line);
-}
-
 .section-kicker {
   font-size: 0.72rem;
   letter-spacing: 0.18em;
@@ -122,58 +118,6 @@ select {
 
 .admin-input:focus {
   border-color: rgba(17, 16, 14, 0.52);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  padding: 0.75rem 1.25rem;
-  transition: all 0.22s ease;
-}
-
-.btn:hover {
-  transform: scale(1.02);
-}
-
-.btn:active {
-  transform: scale(0.98);
-}
-
-.btn-primary {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.btn-primary:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
-}
-
-.btn-outline {
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--ink);
-}
-
-.btn-outline:hover {
-  border-color: var(--ink);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-}
-
-.btn-outline-light {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: transparent;
-  color: #f4f1ea;
-}
-
-.btn-outline-light:hover {
-  background: #fff;
-  color: var(--ink);
-  border-color: #fff;
 }
 
 /* Hover overlay for artwork cards */

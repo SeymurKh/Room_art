@@ -74,11 +74,10 @@ export function useTypewriter() {
     return () => clearTimeout(timeout);
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const cleanup = animate();
     return cleanup;
-  }, []);
+  }, [animate]);
 
   return { displayed, cursor };
 }

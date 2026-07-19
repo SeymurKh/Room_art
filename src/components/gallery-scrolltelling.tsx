@@ -41,7 +41,7 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
         {/* Текст-табличка внизу */}
         <div className="pointer-events-none absolute bottom-8 left-0 right-0 z-30 text-center">
           <p className="room-serif text-base italic text-[#6f6a61] md:text-lg">
-            What's currently on display at ROOM
+            What{"'"}s currently on display at ROOM
           </p>
         </div>
 

@@ -28,13 +28,11 @@ export function HomeExperience({ data }: { data: SiteData }) {
   const { displayed, cursor } = useTypewriter();
   const current = data.exhibitions.find((item) => item.slug === data.home.currentExhibitionSlug) ?? data.exhibitions[0];
   const featuredArtworks = data.artworks.slice(0, 5);
-  const getArtistName = (slug: string) => data.artists.find((artist) => artist.slug === slug)?.name ?? "ROOM artist";
 
   const slideshowImages = useMemo(() => {
-    const shuffled = [...data.artworks].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 5).map((a) => a.image);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // Стабильный детерминированный порядок: первые 5 произведений
+    return data.artworks.slice(0, 5).map((a) => a.image);
+  }, [data.artworks]);
 
   return (
     <main className="bg-[#f4f1ea]">
