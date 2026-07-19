@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import type { SiteSettings } from "@/lib/types";
 
 const links = [
   ["Gallery", "/gallery"],
@@ -14,7 +13,7 @@ const links = [
   ["Contact", "/contact"],
 ];
 
-export function SiteNav({ settings, dark = false }: { settings: SiteSettings; dark?: boolean }) {
+export function SiteNav({ dark = false }: { dark?: boolean }) {
   const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
@@ -40,7 +39,7 @@ export function SiteNav({ settings, dark = false }: { settings: SiteSettings; da
     >
       <div className="room-shell flex h-16 items-center justify-between gap-6">
         <Link href="/" className="room-serif text-2xl font-semibold leading-none">
-          {settings.brand}
+          ROOM
         </Link>
         <nav className="hidden items-center gap-7 text-[0.68rem] font-semibold uppercase tracking-[0.18em] md:flex">
           {links.map(([label, href]) => (

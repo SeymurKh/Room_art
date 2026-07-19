@@ -2,22 +2,12 @@ import type { SiteData } from "@/lib/types";
 
 export const defaultSiteData: SiteData = {
   settings: {
-    brand: "ROOM",
-    locale: "en",
     whatsappNumber: "994501234567",
     email: "info@roombaku.com",
     phone: "+994 50 123 45 67",
     address: "Nizami St. 85, Baku, Azerbaijan",
     instagram: "https://instagram.com/roombaku",
     facebook: "https://facebook.com/roombaku",
-  },
-  home: {
-    eyebrow: "Contemporary art space in Baku",
-    headline: "Art lives here",
-    intro:
-      "ROOM is a contemporary gallery and cultural platform shaped around artists, collectors, exhibitions, and slow encounters with art.",
-    heroImage: "/assets/interiors/hero-gallery.jpg",
-    currentExhibitionSlug: "seven-ya",
   },
   artists: [
     {
@@ -177,6 +167,5 @@ export const defaultSiteData: SiteData = {
       "To support contemporary artists and build a thoughtful creative community around collecting, learning, and conversation.",
     identity:
       "Minimal, neutral, atmospheric, and emotionally precise. ROOM places the artwork first and lets the digital experience behave like a gallery visit.",
-    image: "/assets/interiors/about-room.jpg",
   },
 };

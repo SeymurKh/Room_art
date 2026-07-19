@@ -1,24 +1,12 @@
 import { z } from "zod";
 
-const localeSchema = z.enum(["en", "az", "ru"]);
-
 const siteSettingsSchema = z.object({
-  brand: z.string().min(1, "Brand is required"),
-  locale: localeSchema,
   whatsappNumber: z.string().min(1, "WhatsApp number is required"),
   email: z.string().email("Invalid email format"),
   phone: z.string().min(1, "Phone is required"),
   address: z.string().min(1, "Address is required"),
   instagram: z.string().url("Instagram must be a valid URL"),
   facebook: z.string().url("Facebook must be a valid URL"),
-});
-
-const homeContentSchema = z.object({
-  eyebrow: z.string().min(1),
-  headline: z.string().min(1),
-  intro: z.string().min(1),
-  heroImage: z.string().min(1),
-  currentExhibitionSlug: z.string(),
 });
 
 const artistSchema = z.object({
@@ -59,12 +47,10 @@ const aboutContentSchema = z.object({
   concept: z.string().min(1),
   vision: z.string().min(1),
   identity: z.string().min(1),
-  image: z.string().min(1),
 });
 
 export const siteDataSchema = z.object({
   settings: siteSettingsSchema,
-  home: homeContentSchema,
   artists: z.array(artistSchema),
   artworks: z.array(artworkSchema),
   exhibitions: z.array(exhibitionSchema),

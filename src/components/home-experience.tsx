@@ -26,27 +26,21 @@ const reveal = {
 
 export function HomeExperience({ data }: { data: SiteData }) {
   const { displayed, cursor } = useTypewriter();
-  const current = data.exhibitions.find((item) => item.slug === data.home.currentExhibitionSlug) ?? data.exhibitions[0];
+  const current = data.exhibitions.find((item) => item.status === "Current") ?? null;
   const featuredArtworks = data.artworks.slice(0, 5);
 
   const slideshowImages = useMemo(() => {
-    // Стабильный детерминированный порядок: первые 5 произведений
     return data.artworks.slice(0, 5).map((a) => a.image);
   }, [data.artworks]);
 
   return (
     <main className="bg-[#f4f1ea]">
-      <SiteNav settings={data.settings} dark />
+      <SiteNav dark />
 
       {/* ===== HERO ===== */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0c0c0b] text-[#f4f1ea]">
-        {/* Слайдшоу на весь фон */}
         <HeroSlideshowShader images={slideshowImages} />
-
-        {/* Затемнение */}
         <div className="absolute inset-0 bg-black/25 pointer-events-none" />
-
-        {/* Контент */}
         <div className="room-shell relative z-10 text-center">
           <h1 className="room-serif text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[0.9]">
             <span>{displayed}</span>
@@ -110,9 +104,6 @@ export function HomeExperience({ data }: { data: SiteData }) {
           <motion.div {...reveal}>
             <SectionHeading kicker="About Room" title="A Baku space for precise encounters" copy={data.about.concept} />
             <p className="mt-8 text-sm leading-7 text-[#6f6a61]">{data.about.vision}</p>
-          </motion.div>
-          <motion.div {...reveal} className="relative min-h-[520px] overflow-hidden">
-            <RoomImage src={data.about.image} alt="ROOM interior" fill className="object-cover" fallbackText="ROOM interior" />
           </motion.div>
         </div>
       </section>

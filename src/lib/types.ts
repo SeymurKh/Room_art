@@ -1,22 +1,10 @@
-export type Locale = "en" | "az" | "ru";
-
 export type SiteSettings = {
-  brand: string;
-  locale: Locale;
   whatsappNumber: string;
   email: string;
   phone: string;
   address: string;
   instagram: string;
   facebook: string;
-};
-
-export type HomeContent = {
-  eyebrow: string;
-  headline: string;
-  intro: string;
-  heroImage: string;
-  currentExhibitionSlug: string;
 };
 
 export type Artist = {
@@ -57,12 +45,10 @@ export type AboutContent = {
   concept: string;
   vision: string;
   identity: string;
-  image: string;
 };
 
 export type SiteData = {
   settings: SiteSettings;
-  home: HomeContent;
   artists: Artist[];
   artworks: Artwork[];
   exhibitions: Exhibition[];

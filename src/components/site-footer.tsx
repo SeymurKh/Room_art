@@ -2,12 +2,13 @@ import Link from "next/link";
 import type { SiteSettings } from "@/lib/types";
 
 export function SiteFooter({ settings }: { settings: SiteSettings }) {
+  const brand = "ROOM";
   return (
     <footer className="border-t border-black/10 bg-[#11100e] py-12 text-[#f4f1ea]">
       <div className="room-shell grid gap-8 md:grid-cols-[1.1fr_.9fr_.9fr]">
         <div>
           <Link href="/" className="room-serif text-4xl font-semibold">
-            {settings.brand}
+            {brand}
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-6 text-white/58">
             Contemporary art, exhibitions, artists, and cultural encounters in Baku.

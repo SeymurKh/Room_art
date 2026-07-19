@@ -35,7 +35,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   const artworks = data.artworks.filter((item) => item.artistSlug === artist.slug);
   return (
     <main>
-      <SiteNav settings={data.settings} />
+      <SiteNav />
       <section className="room-shell grid min-h-screen gap-12 pt-28 md:grid-cols-[.85fr_1.15fr]">
         <div>
           <p className="section-kicker">{artist.role}</p>

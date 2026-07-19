@@ -35,7 +35,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
   return (
     <main>
-      <SiteNav settings={data.settings} />
+      <SiteNav />
       <section className="room-shell grid min-h-screen gap-12 pt-28 md:grid-cols-[.85fr_1.15fr]">
         <div>
           <div className="flex items-center gap-3">

@@ -1,28 +1,38 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Check, CopyPlus, LogOut, Save, Trash2 } from "lucide-react";
-import type { Artist, Artwork, Exhibition, SiteData } from "@/lib/types";
+import { Check, LogOut, Save } from "lucide-react";
+import type { SiteData, Exhibition } from "@/lib/types";
 import { logoutAdmin, saveAdminData } from "@/app/admin/actions";
 
-type Tab = "settings" | "pages" | "artists" | "artworks" | "events";
+type Tab = "settings" | "about" | "events";
 
 const tabs: [Tab, string][] = [
   ["settings", "Settings"],
-  ["pages", "Home / About"],
-  ["artists", "Artists"],
-  ["artworks", "Artworks"],
+  ["about", "About"],
   ["events", "Events"],
 ];
+
+type EventSection = "current" | "upcoming" | "past";
 
 export function AdminDashboard({ initialData, saved, saveError }: { initialData: SiteData; saved: boolean; saveError?: string | null }) {
   const [data, setData] = useState(initialData);
   const [tab, setTab] = useState<Tab>("settings");
+  const [eventSection, setEventSection] = useState<EventSection>("current");
   const payload = useMemo(() => JSON.stringify(data), [data]);
 
   function update<K extends keyof SiteData>(key: K, value: SiteData[K]) {
     setData((current) => ({ ...current, [key]: value }));
   }
+
+  const currentEvents = data.exhibitions.filter((e) => e.status === "Current");
+  const upcomingEvents = data.exhibitions.filter((e) => e.status === "Upcoming");
+  const pastEvents = data.exhibitions.filter((e) => e.status === "Past");
+
+  const eventList =
+    eventSection === "current" ? currentEvents
+    : eventSection === "upcoming" ? upcomingEvents
+    : pastEvents;
 
   return (
     <main className="min-h-screen bg-[#f4f1ea]">
@@ -42,10 +52,35 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
 
       <form action={saveAdminData} className="room-shell py-8">
         <input type="hidden" name="payload" value={payload} readOnly />
+
+        <div className="mb-8 border border-black/10 bg-white/36 p-6">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <h2 className="room-serif text-4xl">Artists & Artworks</h2>
+              <p className="mt-1 text-sm text-[#6f6a61]">Manage artists and their artworks on a dedicated page.</p>
+            </div>
+            <a
+              href="/admin/artists"
+              className="inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]"
+            >
+              Manage Artists →
+            </a>
+          </div>
+        </div>
+
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap gap-2">
             {tabs.map(([id, label]) => (
-              <button key={id} type="button" onClick={() => setTab(id)} className={`px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] ${tab === id ? "bg-[#11100e] text-[#f4f1ea]" : "border border-black/12"}`}>
+              <button
+                key={id}
+                type="button"
+                onClick={() => setTab(id)}
+                className={`px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] ${
+                  tab === id
+                    ? "bg-[#11100e] text-[#f4f1ea]"
+                    : "border border-black/40 text-[#11100e] transition hover:bg-black/5"
+                }`}
+              >
                 {label}
               </button>
             ))}
@@ -76,127 +111,111 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
           </Panel>
         ) : null}
 
-        {tab === "pages" ? (
-          <div className="grid gap-6">
-            <Panel title="Home">
-              <Grid>
-                <Field label="Eyebrow" value={data.home.eyebrow} onChange={(value) => update("home", { ...data.home, eyebrow: value })} />
-                <Field label="Headline" value={data.home.headline} onChange={(value) => update("home", { ...data.home, headline: value })} />
-                <Field label="Hero image path" value={data.home.heroImage} onChange={(value) => update("home", { ...data.home, heroImage: value })} />
-                <Field label="Current exhibition slug" value={data.home.currentExhibitionSlug} onChange={(value) => update("home", { ...data.home, currentExhibitionSlug: value })} />
-              </Grid>
-              <Field multiline label="Intro" value={data.home.intro} onChange={(value) => update("home", { ...data.home, intro: value })} />
-            </Panel>
-            <Panel title="About">
-              <Grid>
-                <Field multiline label="Concept" value={data.about.concept} onChange={(value) => update("about", { ...data.about, concept: value })} />
-                <Field multiline label="Vision" value={data.about.vision} onChange={(value) => update("about", { ...data.about, vision: value })} />
-                <Field multiline label="Identity" value={data.about.identity} onChange={(value) => update("about", { ...data.about, identity: value })} />
-                <Field label="Image path" value={data.about.image} onChange={(value) => update("about", { ...data.about, image: value })} />
-              </Grid>
-            </Panel>
-          </div>
-        ) : null}
-
-        {tab === "artists" ? (
-          <Collection
-            title="Artists"
-            items={data.artists}
-            onAdd={() =>
-              update("artists", [
-                ...data.artists,
-                {
-                  slug: `artist-${Date.now()}`,
-                  name: "New Artist",
-                  role: "",
-                  portrait: "",
-                  bio: "",
-                  statement: "",
-                },
-              ])
-            }
-            onRemove={(index) => update("artists", data.artists.filter((_, i) => i !== index))}
-            render={(artist, index) => (
-              <Grid>
-                {(["slug", "name", "role", "portrait", "bio", "statement"] as (keyof Artist)[]).map((key) => (
-                  <Field key={key} multiline={key === "bio" || key === "statement"} label={key} value={artist[key]} onChange={(value) => updateItem(data.artists, index, { ...artist, [key]: value }, (items) => update("artists", items))} />
-                ))}
-              </Grid>
-            )}
-          />
-        ) : null}
-
-        {tab === "artworks" ? (
-          <Collection
-            title="Artworks"
-            items={data.artworks}
-            onAdd={() =>
-              update("artworks", [
-                ...data.artworks,
-                {
-                  slug: `artwork-${Date.now()}`,
-                  title: "New Artwork",
-                  artistSlug: "",
-                  year: String(new Date().getFullYear()),
-                  medium: "",
-                  category: "",
-                  dimensions: "",
-                  widthCm: 0,
-                  heightCm: 0,
-                  image: "",
-                  availability: "Available" as const,
-                  description: "",
-                },
-              ])
-            }
-            onRemove={(index) => update("artworks", data.artworks.filter((_, i) => i !== index))}
-            render={(artwork, index) => (
-              <Grid>
-                {(["slug", "title", "artistSlug", "year", "medium", "category", "dimensions", "widthCm", "heightCm", "image", "availability", "description"] as (keyof Artwork)[]).map((key) => (
-                  <Field key={key} multiline={key === "description"} label={key} value={String(artwork[key])} onChange={(value) => updateItem(data.artworks, index, { ...artwork, [key]: key === "widthCm" || key === "heightCm" ? Number(value) : value }, (items) => update("artworks", items))} />
-                ))}
-              </Grid>
-            )}
-          />
+        {tab === "about" ? (
+          <Panel title="About">
+            <Field multiline label="Concept" value={data.about.concept} onChange={(value) => update("about", { ...data.about, concept: value })} />
+            <Field multiline label="Vision" value={data.about.vision} onChange={(value) => update("about", { ...data.about, vision: value })} />
+            <Field multiline label="Identity" value={data.about.identity} onChange={(value) => update("about", { ...data.about, identity: value })} />
+          </Panel>
         ) : null}
 
         {tab === "events" ? (
-          <Collection
-            title="Exhibitions & events"
-            items={data.exhibitions}
-            onAdd={() =>
-              update("exhibitions", [
-                ...data.exhibitions,
-                {
-                  slug: `event-${Date.now()}`,
-                  title: "New Event",
-                  type: "Exhibition" as const,
-                  status: "Upcoming" as const,
-                  date: "",
-                  image: "",
-                  description: "",
-                },
-              ])
-            }
-            onRemove={(index) => update("exhibitions", data.exhibitions.filter((_, i) => i !== index))}
-            render={(event, index) => (
-              <Grid>
-                {(["slug", "title", "type", "status", "date", "image", "description"] as (keyof Exhibition)[]).map((key) => (
-                  <Field key={key} multiline={key === "description"} label={key} value={event[key]} onChange={(value) => updateItem(data.exhibitions, index, { ...event, [key]: value }, (items) => update("exhibitions", items))} />
-                ))}
-              </Grid>
+          <div>
+            <div className="mb-5 flex flex-wrap gap-2">
+              {([
+                ["current", `Current (${currentEvents.length})`],
+                ["upcoming", `Upcoming (${upcomingEvents.length})`],
+                ["past", `Past (${pastEvents.length})`],
+              ] as [EventSection, string][]).map(([section, label]) => (
+                <button
+                  key={section}
+                  type="button"
+                  onClick={() => setEventSection(section)}
+                  className={`px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] ${
+                    eventSection === section
+                      ? "bg-[#11100e] text-[#f4f1ea]"
+                      : "border border-black/40 text-[#11100e] transition hover:bg-black/5"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            {eventList.length === 0 ? (
+              <p className="py-8 text-sm text-[#6f6a61]">No events in this section.</p>
+            ) : (
+              <Panel title={eventSection.charAt(0).toUpperCase() + eventSection.slice(1)}>
+                <div className="grid gap-5">
+                  {eventList.map((event, index) => (
+                    <article key={event.slug} className="border border-black/10 bg-[#f4f1ea] p-4">
+                      <div className="mb-4 flex items-center justify-between gap-4">
+                        <h3 className="room-serif text-3xl">{event.title}</h3>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (window.confirm(`Delete "${event.title}"? This cannot be undone.`)) {
+                              update(
+                                "exhibitions",
+                                data.exhibitions.filter((e) => e.slug !== event.slug)
+                              );
+                            }
+                          }}
+                          className="grid size-10 place-items-center border border-black/40 text-[#11100e] transition hover:border-red-400 hover:text-red-600"
+                          aria-label={`Delete ${event.title}`}
+                          title={`Delete ${event.title}`}
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                      <Grid>
+                        {(["slug", "title", "type", "status", "date", "image", "description"] as (keyof Exhibition)[]).map((key) => (
+                          <Field
+                            key={key}
+                            multiline={key === "description"}
+                            label={key}
+                            value={String(event[key])}
+                            onChange={(value) => {
+                              const updated = data.exhibitions.map((e, i) =>
+                                i === index ? { ...e, [key]: value } : e
+                              );
+                              update("exhibitions", updated);
+                            }}
+                          />
+                        ))}
+                      </Grid>
+                    </article>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    update("exhibitions", [
+                      ...data.exhibitions,
+                      {
+                        slug: `event-${Date.now()}`,
+                        title: "New Event",
+                        type: "Exhibition" as const,
+                        status: eventSection === "current" ? "Current" : eventSection === "upcoming" ? "Upcoming" : "Past",
+                        date: "",
+                        image: "",
+                        description: "",
+                      },
+                    ])
+                  }
+                  className="mt-5 inline-flex items-center gap-2 border border-black/40 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#11100e] transition hover:bg-black/5"
+                >
+                  + Add event
+                </button>
+              </Panel>
             )}
-          />
+          </div>
         ) : null}
-
       </form>
     </main>
   );
 }
 
-function updateItem<T>(items: T[], index: number, next: T, commit: (items: T[]) => void) {
-  commit(items.map((item, i) => (i === index ? next : item)));
-}
+import { Trash2 } from "lucide-react";
 
 function Panel({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -223,7 +242,7 @@ function Field({
   multiline?: boolean;
 }) {
   return (
-    <label className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
+    <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
       {label}
       {multiline ? (
         <textarea className="admin-input mt-2 min-h-28 resize-y text-sm normal-case tracking-normal text-[#11100e]" value={value} onChange={(event) => onChange(event.target.value)} />
@@ -231,50 +250,5 @@ function Field({
         <input className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={value} onChange={(event) => onChange(event.target.value)} />
       )}
     </label>
-  );
-}
-
-function Collection<T extends { slug: string; title?: string; name?: string }>({
-  title,
-  items,
-  onAdd,
-  onRemove,
-  render,
-}: {
-  title: string;
-  items: T[];
-  onAdd: () => void;
-  onRemove: (index: number) => void;
-  render: (item: T, index: number) => React.ReactNode;
-}) {
-  return (
-    <Panel title={title}>
-      <button type="button" onClick={onAdd} className="inline-flex w-fit items-center gap-2 border border-black/14 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em]">
-        <CopyPlus size={16} /> Add item
-      </button>
-      <div className="grid gap-5">
-        {items.map((item, index) => (
-          <article key={`${item.slug}-${index}`} className="border border-black/10 bg-[#f4f1ea] p-4">
-            <div className="mb-5 flex items-center justify-between gap-4">
-              <h3 className="room-serif text-3xl">{item.title ?? item.name ?? item.slug}</h3>
-              <button
-                type="button"
-                onClick={() => {
-                  if (window.confirm(`Delete "${item.title ?? item.name ?? item.slug}"? This cannot be undone.`)) {
-                    onRemove(index);
-                  }
-                }}
-                className="grid size-10 place-items-center border border-black/12"
-                aria-label="Remove item"
-                title="Remove item"
-              >
-                <Trash2 size={16} />
-              </button>
-            </div>
-            {render(item, index)}
-          </article>
-        ))}
-      </div>
-    </Panel>
   );
 }
