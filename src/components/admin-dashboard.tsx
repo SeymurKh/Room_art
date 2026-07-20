@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Check, LogOut, Save } from "lucide-react";
+import { UploadField } from "@/components/upload-field";
 import type { SiteData, Exhibition } from "@/lib/types";
 import { logoutAdmin, saveAdminData } from "@/app/admin/actions";
 
@@ -155,6 +156,9 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                           type="button"
                           onClick={() => {
                             if (window.confirm(`Delete "${event.title}"? This cannot be undone.`)) {
+                              if (event.image) {
+                                fetch(`/api/upload?path=${encodeURIComponent(event.image)}`, { method: "DELETE" }).catch(() => {});
+                              }
                               update(
                                 "exhibitions",
                                 data.exhibitions.filter((e) => e.slug !== event.slug)
@@ -169,20 +173,35 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                         </button>
                       </div>
                       <Grid>
-                        {(["slug", "title", "type", "status", "date", "image", "description"] as (keyof Exhibition)[]).map((key) => (
-                          <Field
-                            key={key}
-                            multiline={key === "description"}
-                            label={key}
-                            value={String(event[key])}
-                            onChange={(value) => {
-                              const updated = data.exhibitions.map((e, i) =>
-                                i === index ? { ...e, [key]: value } : e
-                              );
-                              update("exhibitions", updated);
-                            }}
-                          />
-                        ))}
+                        {(["slug", "title", "type", "status", "date", "image", "description"] as (keyof Exhibition)[]).map((key) =>
+                          key === "image" ? (
+                            <UploadField
+                              key={key}
+                              label="Image"
+                              value={event.image}
+                              onChange={(value) => {
+                                const updated = data.exhibitions.map((e, i) =>
+                                  i === index ? { ...e, image: value } : e
+                                );
+                                update("exhibitions", updated);
+                              }}
+                              folder="uploads/events"
+                            />
+                          ) : (
+                            <Field
+                              key={key}
+                              multiline={key === "description"}
+                              label={key}
+                              value={String(event[key])}
+                              onChange={(value) => {
+                                const updated = data.exhibitions.map((e, i) =>
+                                  i === index ? { ...e, [key]: value } : e
+                                );
+                                update("exhibitions", updated);
+                              }}
+                            />
+                          )
+                        )}
                       </Grid>
                     </article>
                   ))}
