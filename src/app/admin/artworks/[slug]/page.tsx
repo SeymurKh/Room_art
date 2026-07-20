@@ -29,7 +29,7 @@ export default async function AdminArtworkPage({
   const preselectedArtistSlug = isNew ? (sp.artist ?? "") : (artwork?.artistSlug ?? "");
 
   const defaults: Artwork = artwork ?? {
-    slug: `artwork-${Date.now()}`,
+    slug: `artwork-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
     title: "",
     artistSlug: preselectedArtistSlug,
     year: String(new Date().getFullYear()),
@@ -88,7 +88,7 @@ export default async function AdminArtworkPage({
           </div>
         ) : null}
 
-        <ArtworkForm defaults={defaults} artists={data.artists} preselectedArtist={!!preselectedArtistSlug && isNew} />
+        <ArtworkForm defaults={defaults} artists={data.artists} preselectedArtist={!isNew || !!preselectedArtistSlug} />
       </form>
     </main>
   );

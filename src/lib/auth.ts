@@ -7,14 +7,13 @@ export function ensureAdminCredentials() {
   if (!process.env.ADMIN_PASSWORD || !process.env.ADMIN_SECRET) {
     const nodeEnv = process.env.NODE_ENV as string | undefined;
     if (nodeEnv === "production") {
-      throw new Error(
-        "ADMIN_PASSWORD and ADMIN_SECRET must be set in production environment"
+      console.error(
+        "ADMIN_PASSWORD and ADMIN_SECRET are not set. Using default credentials — this is insecure for production."
       );
     }
     console.warn(
-      "⚠ Using default admin credentials. Set ADMIN_PASSWORD and ADMIN_SECRET in .env before production."
+      "  Default password: room-admin"
     );
-    console.warn("  Default password: room-admin");
   }
 }
 

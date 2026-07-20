@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { Check, LogOut, Save } from "lucide-react";
 import type { SiteData, Exhibition } from "@/lib/types";
 import { logoutAdmin, saveAdminData } from "@/app/admin/actions";
@@ -59,12 +60,12 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
               <h2 className="room-serif text-4xl">Artists & Artworks</h2>
               <p className="mt-1 text-sm text-[#6f6a61]">Manage artists and their artworks on a dedicated page.</p>
             </div>
-            <a
+            <Link
               href="/admin/artists"
-              className="inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]"
+              className="inline-flex items-center gap-2 bg-black px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white"
             >
               Manage Artists →
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -192,7 +193,7 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                     update("exhibitions", [
                       ...data.exhibitions,
                       {
-                        slug: `event-${Date.now()}`,
+                        slug: `event-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
                         title: "New Event",
                         type: "Exhibition" as const,
                         status: eventSection === "current" ? "Current" : eventSection === "upcoming" ? "Upcoming" : "Past",

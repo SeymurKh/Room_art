@@ -23,7 +23,7 @@ async function readSiteData(): Promise<SiteData> {
 
 export const getSiteData = cache(readSiteData, ["site-data"], {
   tags: [CACHE_TAG],
-  revalidate: false,
+  revalidate: 60,
 });
 
 export class SiteDataValidationError extends Error {

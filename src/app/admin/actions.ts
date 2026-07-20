@@ -38,8 +38,16 @@ export async function saveAdminData(formData: FormData) {
   }
   const payload = String(formData.get("payload") ?? "");
   try {
-    const data = JSON.parse(payload);
-    await saveSiteData(data);
+    const incoming = JSON.parse(payload);
+    const current = await getSiteData();
+    // Dashboard only edits settings/about/exhibitions — preserve current artists/artworks
+    // to prevent data loss when editing artist/artwork in another tab.
+    const merged = {
+      ...incoming,
+      artists: current.artists,
+      artworks: current.artworks,
+    };
+    await saveSiteData(merged);
   } catch (error) {
     if (error instanceof SiteDataValidationError) {
       redirect(
@@ -67,7 +75,14 @@ export async function saveArtist(formData: FormData) {
     const data = await getSiteData();
     const index = data.artists.findIndex((a) => a.slug === slug);
     if (index === -1) redirect("/admin/artists?error=notfound");
+    const oldSlug = data.artists[index].slug;
     data.artists[index] = artist;
+    // If slug changed, update artistSlug in all artworks referencing the old slug
+    if (artist.slug !== oldSlug) {
+      data.artworks = data.artworks.map((aw) =>
+        aw.artistSlug === oldSlug ? { ...aw, artistSlug: artist.slug } : aw
+      );
+    }
     await saveSiteData(data);
   } catch (error) {
     if (error instanceof SiteDataValidationError) {
@@ -124,6 +139,9 @@ export async function saveArtwork(formData: FormData) {
   try {
     const artwork = JSON.parse(payload) as Artwork;
     const data = await getSiteData();
+    if (!data.artists.some((a) => a.slug === artwork.artistSlug)) {
+      redirect(`/admin/artworks/${slug}?error=validation&details=${encodeURIComponent(`Artist with slug "${artwork.artistSlug}" does not exist`)}`);
+    }
     const index = data.artworks.findIndex((a) => a.slug === slug);
     if (index === -1) redirect("/admin/artworks?error=notfound");
     data.artworks[index] = artwork;
@@ -147,6 +165,9 @@ export async function createArtwork(formData: FormData) {
   try {
     const artwork = JSON.parse(payload) as Artwork;
     const data = await getSiteData();
+    if (!data.artists.some((a) => a.slug === artwork.artistSlug)) {
+      redirect(`/admin/artworks/new?error=validation&details=${encodeURIComponent(`Artist with slug "${artwork.artistSlug}" does not exist`)}`);
+    }
     data.artworks.push(artwork);
     await saveSiteData(data);
   } catch (error) {
