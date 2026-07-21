@@ -21,8 +21,6 @@ export type Artwork = {
   title: string;
   artistSlug: string;
   year: string;
-  medium: string;
-  category: string;
   dimensions: string;
   widthCm: number;
   heightCm: number;

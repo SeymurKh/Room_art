@@ -8,13 +8,23 @@ import { RoomImage } from "@/components/room-image";
 
 const all = "All";
 
+type FormatCategory = "Landscape" | "Square" | "Portrait";
+
+function getFormat(artwork: { widthCm: number; heightCm: number }): FormatCategory {
+  const { widthCm, heightCm } = artwork;
+  const max = Math.max(widthCm, heightCm);
+  if (max === 0) return "Portrait";
+  const ratio = Math.abs(widthCm - heightCm) / max;
+  if (ratio <= 0.05) return "Square";
+  return widthCm > heightCm ? "Landscape" : "Portrait";
+}
+
+const formatOptions: string[] = [all, "Landscape", "Square", "Portrait"];
+
 export function GalleryFilter({ data }: { data: SiteData }) {
   const [artist, setArtist] = useState(all);
-  const [medium, setMedium] = useState(all);
-  const [category, setCategory] = useState(all);
+  const [format, setFormat] = useState(all);
   const artistOptions = [all, ...data.artists.map((item) => item.slug)];
-  const mediumOptions = [all, ...Array.from(new Set(data.artworks.map((item) => item.medium)))];
-  const categoryOptions = [all, ...Array.from(new Set(data.artworks.map((item) => item.category)))];
   const artistLabel = (slug: string) => data.artists.find((item) => item.slug === slug)?.name ?? slug;
 
   const filtered = useMemo(
@@ -22,19 +32,17 @@ export function GalleryFilter({ data }: { data: SiteData }) {
       data.artworks.filter((item) => {
         return (
           (artist === all || item.artistSlug === artist) &&
-          (medium === all || item.medium === medium) &&
-          (category === all || item.category === category)
+          (format === all || getFormat(item) === format)
         );
       }),
-    [artist, category, data.artworks, medium],
+    [artist, format, data.artworks],
   );
 
   return (
     <>
-      <div className="grid gap-3 border-b border-black/10 pb-8 md:grid-cols-3">
+      <div className="grid gap-3 border-b border-black/10 pb-8 md:grid-cols-2">
         <Filter label="Artist" value={artist} options={artistOptions} getLabel={artistLabel} onChange={setArtist} />
-        <Filter label="Medium" value={medium} options={mediumOptions} onChange={setMedium} />
-        <Filter label="Category" value={category} options={categoryOptions} onChange={setCategory} />
+        <Filter label="Format" value={format} options={formatOptions} onChange={setFormat} />
       </div>
       <div className="mt-10 grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((artwork) => (
@@ -45,7 +53,7 @@ export function GalleryFilter({ data }: { data: SiteData }) {
             </div>
             <div className="mt-4 flex items-start justify-between gap-4">
               <div>
-                <p className="section-kicker text-[#6f6a61]">{artwork.category}</p>
+                <p className="section-kicker text-[#6f6a61]">{getFormat(artwork)}</p>
                 <h2 className="room-serif mt-2 text-3xl leading-none">{artwork.title}</h2>
                 <p className="mt-2 text-sm text-[#6f6a61]">{artistLabel(artwork.artistSlug)}</p>
               </div>

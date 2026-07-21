@@ -33,8 +33,6 @@ export default async function AdminArtworkPage({
     title: "",
     artistSlug: preselectedArtistSlug,
     year: String(new Date().getFullYear()),
-    medium: "",
-    category: "",
     dimensions: "",
     widthCm: 0,
     heightCm: 0,

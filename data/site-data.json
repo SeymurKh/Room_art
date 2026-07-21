@@ -55,8 +55,6 @@
       "title": "Children",
       "artistSlug": "aliyev-farid",
       "year": "2026",
-      "medium": "Oil on canvas",
-      "category": "Painting",
       "dimensions": "140 x 100 cm",
       "widthCm": 140,
       "heightCm": 100,
@@ -69,8 +67,6 @@
       "title": "Head",
       "artistSlug": "elnur-babayev",
       "year": "2026",
-      "medium": "Acrylic on canvas",
-      "category": "Painting",
       "dimensions": "80 x 100 cm",
       "widthCm": 80,
       "heightCm": 100,
@@ -83,8 +79,6 @@
       "title": "Ioan",
       "artistSlug": "gunel-agayeva",
       "year": "2025",
-      "medium": "Mixed media on canvas",
-      "category": "Mixed media",
       "dimensions": "70 x 90 cm",
       "widthCm": 70,
       "heightCm": 90,
@@ -97,8 +91,6 @@
       "title": "Sea",
       "artistSlug": "sabina-shikhli",
       "year": "2026",
-      "medium": "Archival pigment print",
-      "category": "Photography",
       "dimensions": "140 x 80 cm",
       "widthCm": 140,
       "heightCm": 80,
@@ -111,8 +103,6 @@
       "title": "Sky",
       "artistSlug": "orxhan-huseynov",
       "year": "2026",
-      "medium": "Photograph on archival paper",
-      "category": "Photography",
       "dimensions": "50 x 70 cm",
       "widthCm": 50,
       "heightCm": 70,
@@ -121,35 +111,7 @@
       "description": "A vertical study of the sky as sculptural form — minimal, atmospheric, and emotionally resonant."
     }
   ],
-  "exhibitions": [
-    {
-      "slug": "artist-talk-with-elnur",
-      "title": "Artist Talk with Elnur",
-      "type": "Event",
-      "status": "Upcoming",
-      "date": "15 Jun 2026",
-      "image": "/assets/events/artist-talk.jpg",
-      "description": "Elnur Babayev discusses his atmospheric painting technique and the rhythm of architectural space."
-    },
-    {
-      "slug": "seven-ya",
-      "title": "Seven Ya",
-      "type": "Exhibition",
-      "status": "Current",
-      "date": "25 Apr — 25 May 2026",
-      "image": "/assets/events/seven-ya.jpg",
-      "description": "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition."
-    },
-    {
-      "slug": "memories-of-objects",
-      "title": "Memories of Objects",
-      "type": "Exhibition",
-      "status": "Past",
-      "date": "Aug 2024",
-      "image": "/assets/events/memories.jpg",
-      "description": "A past exhibition exploring sculptural fragments, domestic rituals, and objects as carriers of memory."
-    }
-  ],
+  "exhibitions": [],
   "about": {
     "concept": "ROOM is a contemporary art space in the heart of Baku where art, wine, and culture come together through exhibitions, talks, and curated encounters.",
     "vision": "To support contemporary artists and build a thoughtful creative community around collecting, learning, and conversation.",

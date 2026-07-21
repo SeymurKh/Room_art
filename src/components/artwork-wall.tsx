@@ -40,8 +40,6 @@ export function ArtworkWall({
           <p className="mt-6 text-sm leading-7 text-[#6f6a61]">{artwork.description}</p>
           <dl className="mt-8 grid gap-4 border-y border-black/10 py-6 text-sm">
             <Row label="Year" value={artwork.year} />
-            <Row label="Medium" value={artwork.medium} />
-            <Row label="Category" value={artwork.category} />
             <Row label="Dimensions" value={artwork.dimensions} />
             <Row label="Availability" value={artwork.availability} />
           </dl>

@@ -50,8 +50,6 @@ export function ArtworkForm({
         </label>
       )}
       <Field label="Year" value={data.year} onChange={(v) => updateField("year", v)} />
-      <Field label="Medium" value={data.medium} onChange={(v) => updateField("medium", v)} />
-      <Field label="Category" value={data.category} onChange={(v) => updateField("category", v)} />
       <Field label="Dimensions" value={data.dimensions} onChange={(v) => updateField("dimensions", v)} />
       <Field label="Width (cm)" value={String(data.widthCm)} onChange={(v) => updateField("widthCm", Number(v))} />
       <Field label="Height (cm)" value={String(data.heightCm)} onChange={(v) => updateField("heightCm", Number(v))} />
