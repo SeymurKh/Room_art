@@ -111,7 +111,20 @@
       "description": "A vertical study of the sky as sculptural form — minimal, atmospheric, and emotionally resonant."
     }
   ],
-  "exhibitions": [],
+  "exhibitions": [
+    {
+      "slug": "event-1784634406431-a0zx",
+      "title": "New Event",
+      "type": "Exhibition",
+      "status": "Current",
+      "date": "",
+      "image": "/uploads/events/1784638298939-fm3r3f.PNG",
+      "heroTransform": "translate(-491px, -619px) scale(0.2)",
+      "thumbTransform": "translate(-341px, -624px) scale(0.4)",
+      "detailTransform": "translate(-337px, -547px) scale(0.1)",
+      "description": ""
+    }
+  ],
   "about": {
     "concept": "ROOM is a contemporary art space in the heart of Baku where art, wine, and culture come together through exhibitions, talks, and curated encounters.",
     "vision": "To support contemporary artists and build a thoughtful creative community around collecting, learning, and conversation.",

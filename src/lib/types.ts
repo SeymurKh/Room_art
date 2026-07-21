@@ -36,6 +36,9 @@ export type Exhibition = {
   status: "Upcoming" | "Current" | "Past";
   date: string;
   image: string;
+  heroTransform: string;
+  thumbTransform: string;
+  detailTransform: string;
   description: string;
 };
 

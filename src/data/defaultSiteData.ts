@@ -16,8 +16,7 @@ export const defaultSiteData: SiteData = {
       role: "Painter",
       portrait: "/assets/artists/farid.jpg",
       bio: "Farid works with layered surfaces, muted pigments, and fragments of urban memory collected around Baku.",
-      statement:
-        "I treat the canvas as a room where traces can stay visible: touch, silence, distance, and the pressure of time.",
+      statement: "I treat the canvas as a room where traces can stay visible: touch, silence, distance, and the pressure of time.",
     },
     {
       slug: "gunel-agayeva",
@@ -25,8 +24,7 @@ export const defaultSiteData: SiteData = {
       role: "Mixed media artist",
       portrait: "/assets/artists/gunel.jpg",
       bio: "Gunel combines paper, textile, mineral tones, and archival gestures into quiet material compositions.",
-      statement:
-        "My practice is about fragile systems: the things we keep, cover, fold, and later rediscover.",
+      statement: "My practice is about fragile systems: the things we keep, cover, fold, and later rediscover.",
     },
     {
       slug: "orxhan-huseynov",
@@ -34,8 +32,7 @@ export const defaultSiteData: SiteData = {
       role: "Sculptor",
       portrait: "/assets/artists/orxhan.jpg",
       bio: "Orxhan explores weight, shadow, and imperfect geometry through compact sculptural forms.",
-      statement:
-        "I look for the moment when a solid object begins to feel temporary, almost like a thought.",
+      statement: "I look for the moment when a solid object begins to feel temporary, almost like a thought.",
     },
     {
       slug: "sabina-shikhli",
@@ -43,8 +40,7 @@ export const defaultSiteData: SiteData = {
       role: "Photographer",
       portrait: "/assets/artists/sabina.jpg",
       bio: "Sabina creates monochrome studies of interiors, bodies, and transitional city spaces.",
-      statement:
-        "Photography lets me hold the interval between a place being empty and being remembered.",
+      statement: "Photography lets me hold the interval between a place being empty and being remembered.",
     },
     {
       slug: "elnur-babayev",
@@ -52,8 +48,7 @@ export const defaultSiteData: SiteData = {
       role: "Painter",
       portrait: "/assets/artists/elnur.jpg",
       bio: "Elnur builds dense atmospheric paintings from smoke-like marks, scraped color, and architectural rhythm.",
-      statement:
-        "A painting should not explain itself immediately. It should make the viewer adjust their eyes.",
+      statement: "A painting should not explain itself immediately. It should make the viewer adjust their eyes.",
     },
   ],
   artworks: [
@@ -126,8 +121,10 @@ export const defaultSiteData: SiteData = {
       status: "Upcoming",
       date: "15 Jun 2026",
       image: "/assets/events/artist-talk.jpg",
-      description:
-        "Elnur Babayev discusses his atmospheric painting technique and the rhythm of architectural space.",
+      heroTransform: "translate(0px, 0px) scale(1)",
+      thumbTransform: "translate(0px, 0px) scale(1)",
+      detailTransform: "translate(0px, 0px) scale(1)",
+      description: "Elnur Babayev discusses his atmospheric painting technique and the rhythm of architectural space.",
     },
     {
       slug: "seven-ya",
@@ -136,8 +133,10 @@ export const defaultSiteData: SiteData = {
       status: "Current",
       date: "25 Apr — 25 May 2026",
       image: "/assets/events/seven-ya.jpg",
-      description:
-        "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition.",
+      heroTransform: "translate(0px, 0px) scale(1)",
+      thumbTransform: "translate(0px, 0px) scale(1)",
+      detailTransform: "translate(0px, 0px) scale(1)",
+      description: "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition.",
     },
     {
       slug: "memories-of-objects",
@@ -146,16 +145,15 @@ export const defaultSiteData: SiteData = {
       status: "Past",
       date: "Aug 2024",
       image: "/assets/events/memories.jpg",
-      description:
-        "A past exhibition exploring sculptural fragments, domestic rituals, and objects as carriers of memory.",
+      heroTransform: "translate(0px, 0px) scale(1)",
+      thumbTransform: "translate(0px, 0px) scale(1)",
+      detailTransform: "translate(0px, 0px) scale(1)",
+      description: "A past exhibition exploring sculptural fragments, domestic rituals, and objects as carriers of memory.",
     },
   ],
   about: {
-    concept:
-      "ROOM is a contemporary art space in the heart of Baku where art, wine, and culture come together through exhibitions, talks, and curated encounters.",
-    vision:
-      "To support contemporary artists and build a thoughtful creative community around collecting, learning, and conversation.",
-    identity:
-      "Minimal, neutral, atmospheric, and emotionally precise. ROOM places the artwork first and lets the digital experience behave like a gallery visit.",
+    concept: "ROOM is a contemporary art space in the heart of Baku where art, wine, and culture come together through exhibitions, talks, and curated encounters.",
+    vision: "To support contemporary artists and build a thoughtful creative community around collecting, learning, and conversation.",
+    identity: "Minimal, neutral, atmospheric, and emotionally precise. ROOM places the artwork first and lets the digital experience behave like a gallery visit.",
   },
 };

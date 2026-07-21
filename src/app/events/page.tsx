@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { SiteFooter } from "@/components/site-footer";
-import { RoomImage } from "@/components/room-image";
 import { getSiteData } from "@/lib/site-data";
 
 export default async function EventsPage() {
@@ -30,14 +29,15 @@ function EventGroup({ title, events }: { title: string; events: Awaited<ReturnTy
           <Link href={`/events/${event.slug}`} key={event.slug} className="group">
             <article className="bg-[#ebe7df] p-3">
               <div className="card-img-overlay relative aspect-4/3 overflow-hidden">
-                <RoomImage src={event.image} alt={event.title} fill className="object-cover transition duration-700 group-hover:scale-105" fallbackText={event.title} />
+                {event.image ? (
+                  <img src={event.image} alt={event.title} className="pointer-events-none select-none" style={{ width: "auto", height: "auto", maxWidth: "none", transform: event.thumbTransform }} draggable={false} />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-[#e2ded4] text-xs uppercase tracking-[0.14em] text-[#6f6a61]">No image</div>
+                )}
                 <span className="overlay-text">View event</span>
               </div>
               <p className="section-kicker mt-5 text-[#6f6a61]">{event.type}</p>
-              <div className="mt-2 flex items-start justify-between gap-3">
-                <h2 className="room-serif text-4xl leading-none">{event.title}</h2>
-                <ArrowUpRight size={18} className="mt-1 shrink-0 opacity-30 transition group-hover:opacity-100" />
-              </div>
+              <div className="mt-2 flex items-start justify-between gap-3"><h2 className="room-serif text-4xl leading-none">{event.title}</h2><ArrowUpRight size={18} className="mt-1 shrink-0 opacity-30 transition group-hover:opacity-100" /></div>
               <p className="mt-2 text-sm text-[#6f6a61]">{event.date}</p>
               <p className="mt-5 text-sm leading-7 text-[#6f6a61]">{event.description}</p>
             </article>
