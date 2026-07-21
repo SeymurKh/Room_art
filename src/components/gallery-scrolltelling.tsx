@@ -98,7 +98,6 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
           </p>
           {/* Индикатор прогресса — полоска с метками */}
           <div className="flex items-center gap-3">
-            <span className="text-xs text-white/40 tabular-nums">0</span>
             <div className="relative flex h-1 w-48 items-center rounded-full bg-white/12 md:w-64">
               <div
                 className="h-full rounded-full bg-[#f4f1ea]/80 transition-none"
@@ -116,7 +115,6 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
                 );
               })}
             </div>
-            <span className="text-xs text-white/40 tabular-nums">{n}</span>
           </div>
         </div>
       </section>

@@ -16,9 +16,9 @@ export function ArtworkWall({
   settings: SiteSettings;
 }) {
   return (
-    <section className="wall min-h-screen pt-16">
-      <div className="room-shell grid min-h-[calc(100vh-4rem)] items-center gap-10 py-16 md:grid-cols-[1.15fr_.85fr]">
-        <div className="relative flex min-h-140 items-center justify-center overflow-hidden">
+    <section className="wall min-h-fit pt-24 pb-16 md:pt-32 md:pb-24">
+      <div className="room-shell grid items-start gap-10 py-8 md:grid-cols-[1.25fr_0.75fr] md:items-center md:py-16">
+        <div className="relative flex min-h-[65vh] items-center justify-center md:min-h-[75vh]">
           <motion.div
             initial={{ opacity: 0, y: 120, rotateX: 40, scale: 0.7 }}
             animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
