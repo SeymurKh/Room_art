@@ -28,8 +28,8 @@ export function ArtworkFrame({
   const isPortrait = aspect < 1;
   const scale = scaleFactor(artwork.widthCm, artwork.heightCm);
 
-  const baseWidth = isPortrait ? `${40 * scale}vw` : `${65 * scale}vw`;
-  const maxWidth = isPortrait ? `${420 * scale}px` : `${700 * scale}px`;
+  const baseWidth = isPortrait ? `${50 * scale}vw` : `${80 * scale}vw`;
+  const maxWidth = isPortrait ? `${550 * scale}px` : `${900 * scale}px`;
   // Внешняя рама: 15-20px (масштабируется)
   const outerPadding = `${Math.round(15 + scale * 5)}px`;
   // Паспарту: ~40-60px (масштабируется)
