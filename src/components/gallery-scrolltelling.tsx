@@ -28,7 +28,7 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
 
   // target для spring — сырой прогресс, который потом снапится
   const target = useMotionValue(0);
-  const smoothProgress = useSpring(target, { stiffness: 100, damping: 25 });
+  const smoothProgress = useSpring(target, { stiffness: 80, damping: 35 });
 
   const n = artworks.length;
   const [progress, setProgress] = useState(0);
@@ -59,7 +59,7 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
   const progressPercent = Math.round(progress * 100);
 
   return (
-    <div ref={containerRef} style={{ height: `${n * 120}vh` }}>
+    <div ref={containerRef} style={{ height: `${n * 80}vh` }}>
       <section
         className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden"
         style={{
