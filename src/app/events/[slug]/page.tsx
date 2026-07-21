@@ -39,7 +39,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       <section className="room-shell grid min-h-screen gap-12 pt-28 md:grid-cols-[.85fr_1.15fr]">
         <div>
           <div className="flex items-center gap-3">
-            <p className="section-kicker">{event.type}</p>
+            <p className="section-kicker text-[#6f6a61]">{event.type}</p>
             <span className="border border-black/20 px-3 py-0.5 text-xs font-semibold uppercase tracking-[0.12em]">{event.status}</span>
           </div>
           <h1 className="room-serif mt-5 text-7xl font-medium leading-[0.88] md:text-9xl">{event.title}</h1>
@@ -49,7 +49,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             <ArrowUpRight size={16} /> All events
           </Link>
         </div>
-        <div className="relative min-h-[640px] overflow-hidden bg-black">
+        <div className="relative min-h-160 overflow-hidden bg-black">
           <RoomImage src={event.image} alt={event.title} fill priority className="object-cover" fallbackText={event.title} />
         </div>
       </section>

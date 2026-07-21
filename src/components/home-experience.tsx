@@ -53,20 +53,6 @@ export function HomeExperience({ data }: { data: SiteData }) {
               &nbsp;
             </span>
           </h1>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
-            <Link
-              href="/gallery"
-              className="inline-flex items-center justify-center gap-2 border border-white/30 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition hover:bg-white hover:text-black"
-            >
-              Discover gallery <ArrowUpRight size={16} />
-            </Link>
-            <Link
-              href="/events"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/78 transition hover:text-white"
-            >
-              Current exhibition
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -78,9 +64,9 @@ export function HomeExperience({ data }: { data: SiteData }) {
             ["New artworks", "Discover", "The latest additions"],
           ].map(([kicker, title, meta]) => (
             <Link href={kicker === "New artworks" ? "/gallery" : "/events"} key={kicker} className="group py-8 md:px-8">
-              <p className="section-kicker text-white/60">{kicker}</p>
+              <p className="section-kicker text-white/85">{kicker}</p>
               <p className="room-serif mt-4 text-3xl leading-none text-[#f4f1ea]">{title}</p>
-              <p className="mt-2 text-sm text-white/50">{meta}</p>
+              <p className="mt-2 text-sm text-white/80">{meta}</p>
             </Link>
           ))}
         </div>
