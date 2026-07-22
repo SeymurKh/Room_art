@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState, useEffect, useCallback } from "react";
+import { useMemo, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { Check, LogOut, Save, Star, Trash2 } from "lucide-react";
 import { UploadField } from "@/components/upload-field";
@@ -12,22 +12,12 @@ type Tab = "settings" | "about" | "events";
 type EventSection = "current" | "upcoming" | "past";
 type PreviewKey = "hero" | "thumb" | "detail";
 
-// Real container sizes (approximate, used for scale factor)
-const REAL_SIZES: Record<PreviewKey, number> = {
-  hero: 576,   // ~40% of 1440px screen
-  thumb: 400,  // ~1/3 of 1200px content area
-  detail: 640, // min-h-160 = 40rem = 640px
-};
-
 const tabs: [Tab, string][] = [
   ["settings", "Settings"],
   ["about", "About"],
   ["events", "Events"],
 ];
 
-/**
- * Parse "translate(Xpx, Ypx) scale(Z)" → { tx, ty, scale }
- */
 function parseTransform(t: string): { tx: number; ty: number; scale: number } {
   const m = t.match(/translate\(([^)]+)\)\s*scale\(([^)]+)\)/);
   if (!m) return { tx: 0, ty: 0, scale: 1 };
@@ -44,15 +34,10 @@ function getHeroClipPath(status: Exhibition["status"]): string {
   return stripe?.clipPath ?? STRIPES[0].clipPath;
 }
 
-/**
- * PreviewBlock — drag + zoom image position editor.
- * Stores transform in real-container pixels, scales to/from preview size.
- */
 function PreviewBlock({
   label,
   event,
   index,
-  data,
   updateExhibitions,
   previewKey,
   containerClassName,
@@ -64,8 +49,7 @@ function PreviewBlock({
   label: string;
   event: Exhibition;
   index: number;
-  data: SiteData;
-  updateExhibitions: (u: Exhibition[]) => void;
+  updateExhibitions: (fn: (prev: Exhibition[]) => Exhibition[]) => void;
   previewKey: PreviewKey;
   containerClassName: string;
   containerStyle?: React.CSSProperties;
@@ -78,44 +62,26 @@ function PreviewBlock({
   const parsed = parseTransform(transform);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(REAL_SIZES[previewKey]);
   const [overlayOn, setOverlayOn] = useState(initialOverlay ?? false);
 
-  // Refs to avoid stale closure
   const txRef = useRef(parsed.tx);
   const tyRef = useRef(parsed.ty);
   const scaleRef = useRef(parsed.scale);
   const lastMouseRef = useRef({ x: 0, y: 0 });
+  const indexRef = useRef(index);
+  indexRef.current = index;
 
   txRef.current = parsed.tx;
   tyRef.current = parsed.ty;
   scaleRef.current = parsed.scale;
 
-  // Measure preview container width
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([entry]) => {
-      if (entry) setContainerWidth(entry.contentRect.width);
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const scaleFactor = containerWidth / REAL_SIZES[previewKey];
-
-  // Display transform (scaled from real px to preview px)
-  const displayTransform = `translate(${parsed.tx * scaleFactor}px, ${parsed.ty * scaleFactor}px) scale(${parsed.scale})`;
-
-  function saveTransform(previewTx: number, previewTy: number, scale: number) {
-    // Convert preview px → real px
-    const realTx = Math.round(previewTx / scaleFactor);
-    const realTy = Math.round(previewTy / scaleFactor);
-    const value = `translate(${realTx}px, ${realTy}px) scale(${scale})`;
-    const updated = data.exhibitions.map((ev, i) =>
-      i === index ? { ...ev, [field]: value } : ev
+  function saveTransform(tx: number, ty: number, scale: number) {
+    const value = `translate(${Math.round(tx)}px, ${Math.round(ty)}px) scale(${scale})`;
+    updateExhibitions((prev) =>
+      prev.map((ev, i) =>
+        i === indexRef.current ? { ...ev, [field]: value } : ev
+      )
     );
-    updateExhibitions(updated);
   }
 
   function handleReset() {
@@ -131,7 +97,7 @@ function PreviewBlock({
             <button
               type="button"
               onClick={() => setOverlayOn((o) => !o)}
-              className={`text-[10px] uppercase tracking-wider px-2 py-0.5 border ${overlayOn ? "bg-black/20 border-black/30" : "border-black/20"}`}
+              className="text-[10px] uppercase tracking-wider px-2 py-0.5 border border-black/20"
             >
               Overlay
             </button>
@@ -152,10 +118,9 @@ function PreviewBlock({
         onMouseDown={(e) => {
           lastMouseRef.current.x = e.clientX;
           lastMouseRef.current.y = e.clientY;
-          // Re-read current transform from DOM/data
           const current = parseTransform((event[field] as string) ?? "translate(0px, 0px) scale(1)");
-          txRef.current = current.tx * scaleFactor;
-          tyRef.current = current.ty * scaleFactor;
+          txRef.current = current.tx;
+          tyRef.current = current.ty;
           scaleRef.current = current.scale;
         }}
         onMouseMove={(e) => {
@@ -164,8 +129,9 @@ function PreviewBlock({
           const dy = e.clientY - lastMouseRef.current.y;
           lastMouseRef.current.x = e.clientX;
           lastMouseRef.current.y = e.clientY;
-          txRef.current += dx;
-          tyRef.current += dy;
+          const s = scaleRef.current || 1;
+          txRef.current += dx / s;
+          tyRef.current += dy / s;
           saveTransform(txRef.current, tyRef.current, scaleRef.current);
         }}
       >
@@ -174,7 +140,7 @@ function PreviewBlock({
             src={event.image}
             alt=""
             className="pointer-events-none select-none"
-            style={{ width: "auto", height: "auto", maxWidth: "none", transform: displayTransform }}
+            style={{ width: "auto", height: "auto", maxWidth: "none", transform }}
             draggable={false}
           />
         ) : (
@@ -213,27 +179,16 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
     setData((current) => ({ ...current, [key]: value }));
   }
 
-  const updateExhibitionField = useCallback((index: number, field: keyof Exhibition, value: string | boolean) => {
-    setData((prev) => {
-      const updated = prev.exhibitions.map((ev, i) =>
-        i === index ? { ...ev, [field]: value } : ev
-      );
-      return { ...prev, exhibitions: updated };
-    });
+  const updateExhibitions = useCallback((fn: (prev: Exhibition[]) => Exhibition[]) => {
+    setData((prev) => ({ ...prev, exhibitions: fn(prev.exhibitions) }));
   }, []);
 
   const deleteEvent = useCallback(async (event: Exhibition) => {
     if (!window.confirm(`Delete "${event.title}"?`)) return;
-    // Delete file first, then update state
     if (event.image) {
-      try {
-        await fetch(`/api/upload?path=${encodeURIComponent(event.image)}`, { method: "DELETE" });
-      } catch { /* ignore */ }
+      try { await fetch(`/api/upload?path=${encodeURIComponent(event.image)}`, { method: "DELETE" }); } catch { /* ignore */ }
     }
-    setData((prev) => ({
-      ...prev,
-      exhibitions: prev.exhibitions.filter((e) => e.slug !== event.slug),
-    }));
+    setData((prev) => ({ ...prev, exhibitions: prev.exhibitions.filter((e) => e.slug !== event.slug) }));
   }, []);
 
   const toggleFeatured = useCallback((index: number, currentFeatured: boolean) => {
@@ -242,13 +197,8 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
       if (!event) return prev;
       const newFeatured = !currentFeatured;
       const updated = prev.exhibitions.map((ev, i) => {
-        // If enabling featured, disable others of the same status
-        if (newFeatured && i !== index && ev.status === event.status && ev.featured) {
-          return { ...ev, featured: false };
-        }
-        if (i === index) {
-          return { ...ev, featured: newFeatured };
-        }
+        if (newFeatured && i !== index && ev.status === event.status && ev.featured) return { ...ev, featured: false };
+        if (i === index) return { ...ev, featured: newFeatured };
         return ev;
       });
       return { ...prev, exhibitions: updated };
@@ -291,23 +241,17 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                 <div className="mb-4 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <h3 className="room-serif text-3xl">{event.title}</h3>
-                    <button
-                      type="button"
-                      onClick={() => toggleFeatured(eventIndex, event.featured)}
-                      className={`flex items-center gap-1 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider border transition ${event.featured ? "bg-yellow-100 border-yellow-400 text-yellow-800" : "border-black/20 text-[#6f6a61] hover:border-black/40"}`}
-                      title={event.featured ? "Featured in hero — click to remove" : "Not in hero — click to feature"}
-                    >
-                      <Star size={12} fill={event.featured ? "currentColor" : "none"} />
-                      {event.featured ? "Hero ★" : "Feature"}
+                    <button type="button" onClick={() => toggleFeatured(eventIndex, event.featured)} className={`flex items-center gap-1 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider border transition ${event.featured ? "bg-yellow-100 border-yellow-400 text-yellow-800" : "border-black/20 text-[#6f6a61] hover:border-black/40"}`} title={event.featured ? "Featured in hero" : "Not in hero"}>
+                      <Star size={12} fill={event.featured ? "currentColor" : "none"} />{event.featured ? "Hero ★" : "Feature"}
                     </button>
                   </div>
                   <button type="button" onClick={() => deleteEvent(event)} className="grid size-10 place-items-center border border-black/40 text-[#11100e] transition hover:border-red-400 hover:text-red-600"><Trash2 size={16} /></button>
                 </div>
                 <Grid>{(["title", "type", "status", "date", "image", "description"] as (keyof Exhibition)[]).map((key) => {
-                  if (key === "image") return <UploadField key={key} label="Image" value={event.image} onChange={(v) => { const u = data.exhibitions.map((e, i) => i === eventIndex ? { ...e, image: v } : e); update("exhibitions", u); }} folder="uploads/events" />;
-                  if (key === "type") return <label key={key} className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Type<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.type} onChange={(e) => { const u = data.exhibitions.map((ev, i) => i === eventIndex ? { ...ev, type: e.target.value as Exhibition["type"] } : ev); update("exhibitions", u); }}><option value="Exhibition">Exhibition</option><option value="Event">Event</option></select></label>;
-                  if (key === "status") return <label key={key} className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Status<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.status} onChange={(e) => { const u = data.exhibitions.map((ev, i) => i === eventIndex ? { ...ev, status: e.target.value as Exhibition["status"] } : ev); update("exhibitions", u); }}><option value="Upcoming">Upcoming</option><option value="Current">Current</option><option value="Past">Past</option></select></label>;
-                  return <Field key={key} multiline={key === "description"} label={key} value={String(event[key])} onChange={(v) => { const u = data.exhibitions.map((e, i) => i === eventIndex ? { ...e, [key]: v } : e); update("exhibitions", u); }} />;
+                  if (key === "image") return <UploadField key={key} label="Image" value={event.image} onChange={(v) => updateExhibitions((prev) => prev.map((e, i) => i === eventIndex ? { ...e, image: v } : e))} folder="uploads/events" />;
+                  if (key === "type") return <label key={key} className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Type<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.type} onChange={(e) => updateExhibitions((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, type: e.target.value as Exhibition["type"] } : ev))}><option value="Exhibition">Exhibition</option><option value="Event">Event</option></select></label>;
+                  if (key === "status") return <label key={key} className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Status<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.status} onChange={(e) => updateExhibitions((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, status: e.target.value as Exhibition["status"] } : ev))}><option value="Upcoming">Upcoming</option><option value="Current">Current</option><option value="Past">Past</option></select></label>;
+                  return <Field key={key} multiline={key === "description"} label={key} value={String(event[key])} onChange={(v) => updateExhibitions((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, [key]: v } : ev))} />;
                 })}</Grid>
                 <div className="mt-5 border-t border-black/10 pt-5">
                   <div className="flex items-center justify-between mb-4">
@@ -315,9 +259,9 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                     <Link href="/events" target="_blank" className="text-[10px] uppercase tracking-wider text-[#6f6a61] underline hover:text-[#11100e]">View site →</Link>
                   </div>
                   <div className="grid gap-5 md:grid-cols-3">
-                    <PreviewBlock label="Hero" event={event} index={eventIndex} data={data} updateExhibitions={(u) => update("exhibitions", u)} previewKey="hero" containerClassName="h-36 bg-[#11100e]" containerStyle={{ clipPath: getHeroClipPath(event.status) }} overlay={true} showOverlayToggle dimmed={!event.featured} />
-                    <PreviewBlock label="Thumbnail" event={event} index={eventIndex} data={data} updateExhibitions={(u) => update("exhibitions", u)} previewKey="thumb" containerClassName="aspect-4/3 bg-[#ebe7df]" />
-                    <PreviewBlock label="Detail" event={event} index={eventIndex} data={data} updateExhibitions={(u) => update("exhibitions", u)} previewKey="detail" containerClassName="aspect-[9/16] h-64 bg-black" />
+                    <PreviewBlock label="Hero" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="hero" containerClassName="h-36 bg-[#11100e]" containerStyle={{ clipPath: getHeroClipPath(event.status) }} overlay={true} showOverlayToggle dimmed={!event.featured} />
+                    <PreviewBlock label="Thumbnail" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="thumb" containerClassName="aspect-4/3 bg-[#ebe7df]" />
+                    <PreviewBlock label="Detail" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="detail" containerClassName="h-64 bg-black" />
                   </div>
                 </div>
               </article>

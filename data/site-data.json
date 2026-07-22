@@ -113,43 +113,17 @@
   ],
   "exhibitions": [
     {
-      "slug": "artist-talk-with-elnur",
-      "title": "Artist Talk with Elnur",
-      "type": "Event",
-      "status": "Upcoming",
-      "date": "15 Jun 2026",
-      "image": "/assets/events/artist-talk.jpg",
-      "heroTransform": "translate(0px, 0px) scale(1)",
-      "thumbTransform": "translate(0px, 0px) scale(1)",
-      "detailTransform": "translate(0px, 0px) scale(1)",
-      "featured": true,
-      "description": "Elnur Babayev discusses his atmospheric painting technique and the rhythm of architectural space."
-    },
-    {
       "slug": "seven-ya",
       "title": "Seven Ya",
       "type": "Exhibition",
       "status": "Current",
       "date": "25 Apr — 25 May 2026",
-      "image": "/uploads/events/1784709114037-etzii9.PNG",
-      "heroTransform": "translate(0px, 0px) scale(1)",
+      "image": "/uploads/events/1784713135392-q4mw5u.PNG",
+      "heroTransform": "translate(-354px, -687px) scale(0.3)",
       "thumbTransform": "translate(0px, 0px) scale(1)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": true,
       "description": "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition."
-    },
-    {
-      "slug": "memories-of-objects",
-      "title": "Memories of Objects",
-      "type": "Exhibition",
-      "status": "Past",
-      "date": "Aug 2024",
-      "image": "/assets/events/memories.jpg",
-      "heroTransform": "translate(0px, 0px) scale(1)",
-      "thumbTransform": "translate(0px, 0px) scale(1)",
-      "detailTransform": "translate(0px, 0px) scale(1)",
-      "featured": true,
-      "description": "A past exhibition exploring sculptural fragments, domestic rituals, and objects as carriers of memory."
     }
   ],
   "about": {
