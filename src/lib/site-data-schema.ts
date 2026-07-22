@@ -36,11 +36,12 @@ const exhibitionSchema = z.object({
   title: z.string().min(1),
   type: z.enum(["Exhibition", "Event"]),
   status: z.enum(["Upcoming", "Current", "Past"]),
-  date: z.string(),
+  date: z.string().min(1, "Date is required"),
   image: z.string(),
   heroTransform: z.string().default("translate(0px, 0px) scale(1)"),
   thumbTransform: z.string().default("translate(0px, 0px) scale(1)"),
   detailTransform: z.string().default("translate(0px, 0px) scale(1)"),
+  featured: z.boolean().default(false),
   description: z.string(),
 });
 

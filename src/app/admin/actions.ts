@@ -123,7 +123,13 @@ export async function deleteArtist(slug: string) {
   const data = await getSiteData();
   const artist = data.artists.find((a) => a.slug === slug);
   if (artist?.portrait) await tryDeleteFile(artist.portrait);
+  // Delete all artworks belonging to this artist (and their image files)
+  const artistArtworks = data.artworks.filter((aw) => aw.artistSlug === slug);
+  for (const aw of artistArtworks) {
+    if (aw.image) await tryDeleteFile(aw.image);
+  }
   data.artists = data.artists.filter((a) => a.slug !== slug);
+  data.artworks = data.artworks.filter((aw) => aw.artistSlug !== slug);
   await saveSiteData(data);
   revalidatePath("/artists");
   revalidatePath("/gallery");

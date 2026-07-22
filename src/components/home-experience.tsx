@@ -26,7 +26,7 @@ const reveal = {
 
 export function HomeExperience({ data }: { data: SiteData }) {
   const { displayed, cursor } = useTypewriter();
-  const current = data.exhibitions.find((item) => item.status === "Current") ?? null;
+  const current = data.exhibitions.find((item) => item.status === "Current" && item.featured) ?? data.exhibitions.find((item) => item.status === "Current") ?? null;
   const featuredArtworks = data.artworks.slice(0, 5);
 
   const slideshowImages = useMemo(() => {

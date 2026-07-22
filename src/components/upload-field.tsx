@@ -26,15 +26,35 @@ export function UploadField({
       formData.append("file", file);
       formData.append("folder", folder);
       const res = await fetch("/api/upload", { method: "POST", body: formData });
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({ error: "Upload failed" }));
+        alert(`Upload failed: ${errData.error ?? res.statusText}`);
+        return;
+      }
       const data = await res.json();
       if (data.path) {
         onChange(data.path);
       }
     } catch (err) {
       console.error("Upload failed", err);
+      alert("Upload failed due to a network error.");
     } finally {
       setUploading(false);
     }
+  }
+
+  async function handleRemove() {
+    if (!value) {
+      onChange("");
+      return;
+    }
+    // Delete file first, then clear path
+    try {
+      await fetch(`/api/upload?path=${encodeURIComponent(value)}`, { method: "DELETE" });
+    } catch {
+      // ignore delete errors
+    }
+    onChange("");
   }
 
   return (
@@ -55,12 +75,7 @@ export function UploadField({
             <span className="max-w-[200px] truncate font-mono text-xs text-[#6f6a61]">{value}</span>
             <button
               type="button"
-              onClick={() => {
-                if (value) {
-                  fetch(`/api/upload?path=${encodeURIComponent(value)}`, { method: "DELETE" }).catch(() => {});
-                }
-                onChange("");
-              }}
+              onClick={handleRemove}
               className="grid size-6 place-items-center border border-black/40 text-[#11100e] transition hover:border-red-400 hover:text-red-600"
               aria-label="Remove file"
               title="Remove file"

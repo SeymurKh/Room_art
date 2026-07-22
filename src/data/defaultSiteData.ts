@@ -124,6 +124,7 @@ export const defaultSiteData: SiteData = {
       heroTransform: "translate(0px, 0px) scale(1)",
       thumbTransform: "translate(0px, 0px) scale(1)",
       detailTransform: "translate(0px, 0px) scale(1)",
+      featured: true,
       description: "Elnur Babayev discusses his atmospheric painting technique and the rhythm of architectural space.",
     },
     {
@@ -136,6 +137,7 @@ export const defaultSiteData: SiteData = {
       heroTransform: "translate(0px, 0px) scale(1)",
       thumbTransform: "translate(0px, 0px) scale(1)",
       detailTransform: "translate(0px, 0px) scale(1)",
+      featured: true,
       description: "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition.",
     },
     {
@@ -148,6 +150,7 @@ export const defaultSiteData: SiteData = {
       heroTransform: "translate(0px, 0px) scale(1)",
       thumbTransform: "translate(0px, 0px) scale(1)",
       detailTransform: "translate(0px, 0px) scale(1)",
+      featured: true,
       description: "A past exhibition exploring sculptural fragments, domestic rituals, and objects as carriers of memory.",
     },
   ],

@@ -6,7 +6,7 @@ import type { Exhibition } from "@/lib/types";
 
 type EventsScrolltellingProps = { exhibitions: Exhibition[] };
 
-const STRIPES = [
+export const STRIPES = [
   { key: "Upcoming" as const, clipPath: "polygon(0 0, 40% 0, 20% 100%, 0 100%)" },
   { key: "Current" as const, clipPath: "polygon(40% 0, 80% 0, 60% 100%, 20% 100%)" },
   { key: "Past" as const, clipPath: "polygon(80% 0, 100% 0, 100% 100%, 60% 100%)" },
@@ -19,9 +19,9 @@ export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   useMotionValueEvent(scrollYProgress, "change", (p) => setActiveIndex(Math.min(Math.floor(p * n + 0.01), n - 1)));
 
-  const upcoming = exhibitions.find((e) => e.status === "Upcoming") ?? null;
-  const current = exhibitions.find((e) => e.status === "Current") ?? null;
-  const past = exhibitions.find((e) => e.status === "Past") ?? null;
+  const upcoming = exhibitions.find((e) => e.status === "Upcoming" && e.featured) ?? exhibitions.find((e) => e.status === "Upcoming") ?? null;
+  const current = exhibitions.find((e) => e.status === "Current" && e.featured) ?? exhibitions.find((e) => e.status === "Current") ?? null;
+  const past = exhibitions.find((e) => e.status === "Past" && e.featured) ?? exhibitions.find((e) => e.status === "Past") ?? null;
   const events = [upcoming, current, past] as const;
 
   return (

@@ -51,8 +51,28 @@ export function ArtworkForm({
       )}
       <Field label="Year" value={data.year} onChange={(v) => updateField("year", v)} />
       <Field label="Dimensions" value={data.dimensions} onChange={(v) => updateField("dimensions", v)} />
-      <Field label="Width (cm)" value={String(data.widthCm)} onChange={(v) => updateField("widthCm", Number(v))} />
-      <Field label="Height (cm)" value={String(data.heightCm)} onChange={(v) => updateField("heightCm", Number(v))} />
+      <label htmlFor="field-width-cm" className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
+        Width (cm)
+        <input
+          id="field-width-cm"
+          type="number"
+          min="1"
+          className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]"
+          value={data.widthCm || ""}
+          onChange={(e) => updateField("widthCm", e.target.value === "" ? 0 : Number(e.target.value))}
+        />
+      </label>
+      <label htmlFor="field-height-cm" className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
+        Height (cm)
+        <input
+          id="field-height-cm"
+          type="number"
+          min="1"
+          className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]"
+          value={data.heightCm || ""}
+          onChange={(e) => updateField("heightCm", e.target.value === "" ? 0 : Number(e.target.value))}
+        />
+      </label>
       <UploadField label="Image" value={data.image} onChange={(v) => updateField("image", v)} folder="uploads/artworks" />
       <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
         Availability

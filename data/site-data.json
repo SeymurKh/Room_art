@@ -113,16 +113,43 @@
   ],
   "exhibitions": [
     {
-      "slug": "event-1784634406431-a0zx",
-      "title": "New Event",
+      "slug": "artist-talk-with-elnur",
+      "title": "Artist Talk with Elnur",
+      "type": "Event",
+      "status": "Upcoming",
+      "date": "15 Jun 2026",
+      "image": "/assets/events/artist-talk.jpg",
+      "heroTransform": "translate(0px, 0px) scale(1)",
+      "thumbTransform": "translate(0px, 0px) scale(1)",
+      "detailTransform": "translate(0px, 0px) scale(1)",
+      "featured": true,
+      "description": "Elnur Babayev discusses his atmospheric painting technique and the rhythm of architectural space."
+    },
+    {
+      "slug": "seven-ya",
+      "title": "Seven Ya",
       "type": "Exhibition",
       "status": "Current",
-      "date": "",
-      "image": "/uploads/events/1784638298939-fm3r3f.PNG",
-      "heroTransform": "translate(-491px, -619px) scale(0.2)",
-      "thumbTransform": "translate(-341px, -624px) scale(0.4)",
-      "detailTransform": "translate(-337px, -547px) scale(0.1)",
-      "description": ""
+      "date": "25 Apr — 25 May 2026",
+      "image": "/uploads/events/1784709114037-etzii9.PNG",
+      "heroTransform": "translate(0px, 0px) scale(1)",
+      "thumbTransform": "translate(0px, 0px) scale(1)",
+      "detailTransform": "translate(0px, 0px) scale(1)",
+      "featured": true,
+      "description": "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition."
+    },
+    {
+      "slug": "memories-of-objects",
+      "title": "Memories of Objects",
+      "type": "Exhibition",
+      "status": "Past",
+      "date": "Aug 2024",
+      "image": "/assets/events/memories.jpg",
+      "heroTransform": "translate(0px, 0px) scale(1)",
+      "thumbTransform": "translate(0px, 0px) scale(1)",
+      "detailTransform": "translate(0px, 0px) scale(1)",
+      "featured": true,
+      "description": "A past exhibition exploring sculptural fragments, domestic rituals, and objects as carriers of memory."
     }
   ],
   "about": {

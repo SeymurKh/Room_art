@@ -39,6 +39,7 @@ export type Exhibition = {
   heroTransform: string;
   thumbTransform: string;
   detailTransform: string;
+  featured: boolean;
   description: string;
 };
 
