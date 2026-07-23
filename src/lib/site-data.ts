@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { unstable_cache as cache } from "next/cache";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { defaultSiteData } from "@/data/defaultSiteData";
 import { siteDataSchema } from "@/lib/site-data-schema";
 import type { SiteData } from "@/lib/types";
@@ -23,7 +23,6 @@ async function readSiteData(): Promise<SiteData> {
 
 export const getSiteData = cache(readSiteData, ["site-data"], {
   tags: [CACHE_TAG],
-  revalidate: 60,
 });
 
 export class SiteDataValidationError extends Error {
@@ -45,7 +44,10 @@ export async function saveSiteData(data: unknown) {
   }
   await fs.mkdir(path.dirname(dataFile), { recursive: true });
   await fs.writeFile(dataFile, JSON.stringify(result.data, null, 2), "utf8");
+  revalidateTag(CACHE_TAG, "max");
   revalidatePath("/", "layout");
+  revalidatePath("/events");
+  revalidatePath("/events/[slug]", "page");
 }
 
 export function artistName(data: SiteData, slug: string) {

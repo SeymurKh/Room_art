@@ -44,36 +44,66 @@ export function PositionedImage({
   draggable = false,
 }: PositionedImageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerSize, setContainerSize] = useState({ w: 0, h: 0 });
-  const [imgSize, setImgSize] = useState<{ w: number; h: number } | null>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [sizes, setSizes] = useState<{
+    container: { w: number; h: number };
+    image: { w: number; h: number } | null;
+    ready: boolean;
+  }>({ container: { w: 0, h: 0 }, image: null, ready: false });
 
   const { tx, ty, scale: userScale } = parseTransform(transform);
 
   const measure = useCallback(() => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
-      setContainerSize({ w: rect.width, h: rect.height });
+      setSizes((prev) => (prev.container.w === rect.width && prev.container.h === rect.height ? prev : { ...prev, container: { w: rect.width, h: rect.height } }));
     }
   }, []);
 
   useEffect(() => {
     measure();
-    const onResize = () => measure();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    const resizeObserver = new ResizeObserver(() => measure());
+    resizeObserver.observe(container);
+
+    window.addEventListener("resize", measure);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, [measure]);
 
-  const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const img = e.currentTarget;
-    setImgSize({ w: img.naturalWidth, h: img.naturalHeight });
-    measure();
-  };
+  useEffect(() => {
+    const img = imgRef.current;
+    if (!img) return;
+
+    function updateSize() {
+      const current = imgRef.current;
+      if (current && current.naturalWidth && current.naturalHeight) {
+        setSizes((prev) => ({
+          ...prev,
+          image: { w: current.naturalWidth, h: current.naturalHeight },
+          ready: true,
+        }));
+      }
+    }
+
+    if (img.complete) {
+      updateSize();
+    }
+
+    img.addEventListener("load", updateSize);
+    return () => img.removeEventListener("load", updateSize);
+  }, [src]);
 
   const baseScale =
-    containerSize.w && containerSize.h && imgSize?.w && imgSize?.h
+    sizes.container.w && sizes.container.h && sizes.image?.w && sizes.image?.h
       ? mode === "cover"
-        ? Math.max(containerSize.w / imgSize.w, containerSize.h / imgSize.h)
-        : Math.min(containerSize.w / imgSize.w, containerSize.h / imgSize.h)
+        ? Math.max(sizes.container.w / sizes.image.w, sizes.container.h / sizes.image.h)
+        : Math.min(sizes.container.w / sizes.image.w, sizes.container.h / sizes.image.h)
       : 1;
 
   const finalScale = baseScale * userScale;
@@ -85,11 +115,11 @@ export function PositionedImage({
     >
       {src ? (
         <img
+          ref={imgRef}
           src={src}
           alt={alt}
-          onLoad={handleLoad}
           draggable={draggable}
-          className={`pointer-events-none absolute left-1/2 top-1/2 max-w-none select-none ${className ?? ""}`}
+          className={`pointer-events-none absolute left-1/2 top-1/2 max-w-none select-none transition-opacity duration-300 ${sizes.ready ? "opacity-100" : "opacity-0"} ${className ?? ""}`}
           style={{
             width: "auto",
             height: "auto",
