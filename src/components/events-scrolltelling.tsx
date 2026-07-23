@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { useScroll, motion, useTransform } from "framer-motion";
+import { useScroll, motion, useTransform, useSpring, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { PositionedImage } from "@/components/positioned-image";
 import type { Exhibition } from "@/lib/types";
 
@@ -27,19 +27,26 @@ export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
     offset: ["start start", "end end"],
   });
 
+  // Spring-smoothed progress for inertial stripe reveals (same feel as gallery).
+  const target = useMotionValue(0);
+  const smoothProgress = useSpring(target, { stiffness: 80, damping: 35 });
+
   // First stripe visible immediately, second fades in over first half of scroll
   // and stays visible, third fades in over second half and stays visible.
-  const secondOpacity = useTransform(scrollYProgress, (p) => {
+  const secondOpacity = useTransform(smoothProgress, (p) => {
     if (p <= 0) return 0;
     if (p >= 0.5) return 1;
     return p * 2;
   });
-  const thirdOpacity = useTransform(scrollYProgress, (p) => {
+  const thirdOpacity = useTransform(smoothProgress, (p) => {
     if (p <= 0.5) return 0;
     if (p >= 1) return 1;
     return (p - 0.5) * 2;
   });
   const opacities = [1, secondOpacity, thirdOpacity];
+
+  // Keep spring target in sync with raw scroll progress.
+  useMotionValueEvent(scrollYProgress, "change", (p) => target.set(p));
 
   const events = [
     findFeaturedEvent(exhibitions, "Upcoming"),
