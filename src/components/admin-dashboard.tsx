@@ -262,9 +262,9 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                     <Link href="/events" target="_blank" className="text-[10px] uppercase tracking-wider text-[#6f6a61] underline hover:text-[#11100e]">View site →</Link>
                   </div>
                   <div className="grid gap-5 md:grid-cols-3">
-                    <PreviewBlock label="Hero" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="hero" containerClassName="h-36 bg-[#11100e]" containerStyle={{ clipPath: getHeroClipPath(event.status) }} overlay={true} showOverlayToggle dimmed={!event.featured} />
+                    <PreviewBlock label="Hero" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="hero" containerClassName="aspect-[16/9] bg-[#11100e]" containerStyle={{ clipPath: getHeroClipPath(event.status) }} overlay={true} showOverlayToggle dimmed={!event.featured} />
                     <PreviewBlock label="Thumbnail" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="thumb" containerClassName="aspect-4/3 bg-[#ebe7df]" />
-                    <PreviewBlock label="Detail" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="detail" containerClassName="h-64 bg-black" />
+                    <PreviewBlock label="Detail" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="detail" containerClassName="aspect-[3/4] bg-black" />
                   </div>
                 </div>
               </article>

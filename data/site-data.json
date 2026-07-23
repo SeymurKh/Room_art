@@ -121,7 +121,7 @@
       "image": "/uploads/events/eac8d63d-7944-478e-9a8e-02904ae2967b.PNG",
       "heroTransform": "translate(0px, -44px) scale(0.6)",
       "thumbTransform": "translate(0px, -79px) scale(1)",
-      "detailTransform": "translate(-1px, -99px) scale(1)",
+      "detailTransform": "translate(3px, 0px) scale(1)",
       "featured": true,
       "description": "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition."
     }
