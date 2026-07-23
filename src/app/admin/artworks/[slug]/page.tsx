@@ -39,6 +39,7 @@ export default async function AdminArtworkPage({
     image: "",
     availability: "Available",
     description: "",
+    displayed: false,
   };
 
   const backHref = artwork?.artistSlug ? `/admin/artists/${artwork.artistSlug}` : "/admin/artists";

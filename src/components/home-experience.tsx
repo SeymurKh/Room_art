@@ -27,7 +27,7 @@ const reveal = {
 export function HomeExperience({ data }: { data: SiteData }) {
   const { displayed, cursor } = useTypewriter();
   const current = data.exhibitions.find((item) => item.status === "Current" && item.featured) ?? data.exhibitions.find((item) => item.status === "Current") ?? null;
-  const featuredArtworks = data.artworks.slice(0, 5);
+  const displayedArtworks = data.artworks.filter((a) => a.displayed).slice(0, 5);
 
   const slideshowImages = useMemo(() => {
     return data.artworks.slice(0, 5).map((a) => a.image);
@@ -72,7 +72,9 @@ export function HomeExperience({ data }: { data: SiteData }) {
         </div>
       </ParallaxWindow>
 
-      <GalleryScrolltelling artworks={featuredArtworks} />
+      {displayedArtworks.length > 0 ? (
+        <GalleryScrolltelling artworks={displayedArtworks} />
+      ) : null}
 
       <section className="room-shell py-24 md:py-32" id="artists">
         <motion.div {...reveal}>

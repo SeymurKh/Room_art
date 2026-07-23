@@ -17,9 +17,10 @@ export function ArtworkForm({
   const [data, setData] = useState<Artwork>({
     ...defaults,
     slug: defaults.slug || `artwork-${crypto.randomUUID()}`,
+    displayed: defaults.displayed ?? false,
   });
 
-  function updateField(key: keyof Artwork, value: string | number) {
+  function updateField(key: keyof Artwork, value: string | number | boolean) {
     const next = { ...data, [key]: value };
     setData(next);
     const el = document.getElementById("payload") as HTMLInputElement;
@@ -88,6 +89,15 @@ export function ArtworkForm({
           <option value="Reserved">Reserved</option>
           <option value="Private collection">Private collection</option>
         </select>
+      </label>
+      <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
+        <input
+          type="checkbox"
+          checked={data.displayed}
+          onChange={(e) => updateField("displayed", e.target.checked)}
+          className="size-4 accent-[#11100e]"
+        />
+        On display
       </label>
       <Field multiline label="Description" value={data.description} onChange={(v) => updateField("description", v)} />
       <button

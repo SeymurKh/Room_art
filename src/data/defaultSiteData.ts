@@ -63,6 +63,7 @@ export const defaultSiteData: SiteData = {
       image: "/assets/artworks/children.jpg",
       availability: "Available",
       description: "A striking composition exploring the interplay of childhood memory and portraiture, rendered in warm earthy tones.",
+      displayed: true,
     },
     {
       slug: "head",
@@ -75,6 +76,7 @@ export const defaultSiteData: SiteData = {
       image: "/assets/artworks/head.jpg",
       availability: "Available",
       description: "An intimate portrait study that captures the essence of human presence through abstracted forms and muted color fields.",
+      displayed: true,
     },
     {
       slug: "ioan",
@@ -87,6 +89,7 @@ export const defaultSiteData: SiteData = {
       image: "/assets/artworks/ioan.jpg",
       availability: "Available",
       description: "A layered mixed-media work that combines delicate textures with bold gestural marks, creating a dialogue between surface and depth.",
+      displayed: true,
     },
     {
       slug: "sea",
@@ -99,6 +102,7 @@ export const defaultSiteData: SiteData = {
       image: "/assets/artworks/sea.jpg",
       availability: "Available",
       description: "A panoramic seascape that captures the horizon as a liminal space between earth and sky, rendered in subtle gradients.",
+      displayed: true,
     },
     {
       slug: "sky",
@@ -111,6 +115,7 @@ export const defaultSiteData: SiteData = {
       image: "/assets/artworks/sky.jpg",
       availability: "Reserved",
       description: "A vertical study of the sky as sculptural form — minimal, atmospheric, and emotionally resonant.",
+      displayed: true,
     },
   ],
   exhibitions: [

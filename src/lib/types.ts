@@ -27,6 +27,7 @@ export type Artwork = {
   image: string;
   availability: "Available" | "Reserved" | "Private collection";
   description: string;
+  displayed: boolean;
 };
 
 export type Exhibition = {
