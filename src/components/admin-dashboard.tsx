@@ -37,8 +37,6 @@ function PreviewBlock({
   previewKey,
   containerClassName,
   containerStyle,
-  overlay: initialOverlay,
-  showOverlayToggle = false,
   dimmed = false,
 }: {
   label: string;
@@ -48,8 +46,6 @@ function PreviewBlock({
   previewKey: PreviewKey;
   containerClassName: string;
   containerStyle?: React.CSSProperties;
-  overlay?: boolean;
-  showOverlayToggle?: boolean;
   dimmed?: boolean;
 }) {
   const field = `${previewKey}Transform` as keyof Exhibition;
@@ -66,7 +62,6 @@ function PreviewBlock({
   })();
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const [overlayOn, setOverlayOn] = useState(initialOverlay ?? false);
 
   const lastMouseRef = useRef({ x: 0, y: 0 });
 
@@ -89,33 +84,22 @@ function PreviewBlock({
     const dx = clientX - lastMouseRef.current.x;
     const dy = clientY - lastMouseRef.current.y;
     lastMouseRef.current = { x: clientX, y: clientY };
-    // user scale only — base scale is handled by PositionedImage
-    const s = parsed.scale || 1;
-    saveTransform(parsed.tx + dx / s, parsed.ty + dy / s, parsed.scale);
+    // translate(...) is applied after scale(...) in the CSS transform, so
+    // 1px of translate equals 1px on screen regardless of scale.
+    saveTransform(parsed.tx + dx, parsed.ty + dy, parsed.scale);
   }
 
   return (
     <div className={`flex flex-col gap-2 ${dimmed ? "opacity-40" : ""}`}>
-      <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between">
         <p className="text-xs text-[#6f6a61]">{label}</p>
-        <div className="flex items-center gap-2">
-          {showOverlayToggle && (
-            <button
-              type="button"
-              onClick={() => setOverlayOn((o) => !o)}
-              className="text-[10px] uppercase tracking-wider px-2 py-0.5 border border-black/20"
-            >
-              Overlay
-            </button>
-          )}
-          <button
-            type="button"
-            onClick={handleReset}
-            className="text-[10px] uppercase tracking-wider px-2 py-0.5 border border-black/20 hover:border-black/40"
-          >
-            Reset
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={handleReset}
+          className="text-[10px] uppercase tracking-wider px-2 py-0.5 border border-black/20 hover:border-black/40"
+        >
+          Reset
+        </button>
       </div>
       <div
         ref={containerRef}
@@ -145,11 +129,12 @@ function PreviewBlock({
             transform={transform}
             containerClassName="h-full w-full"
             draggable={false}
+            clipPath={containerStyle?.clipPath as string | undefined}
+            loading="eager"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-xs text-[#6f6a61]">No image</div>
         )}
-        {overlayOn && event.image && <div className="pointer-events-none absolute inset-0 bg-black/45" />}
       </div>
       <label className="flex items-center gap-2 text-xs text-[#6f6a61]">
         Zoom
@@ -262,7 +247,7 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                     <Link href="/events" target="_blank" className="text-[10px] uppercase tracking-wider text-[#6f6a61] underline hover:text-[#11100e]">View site →</Link>
                   </div>
                   <div className="grid gap-5 md:grid-cols-3">
-                    <PreviewBlock label="Hero" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="hero" containerClassName="aspect-[16/9] bg-[#11100e]" containerStyle={{ clipPath: getHeroClipPath(event.status) }} overlay={true} showOverlayToggle dimmed={!event.featured} />
+                    <PreviewBlock label="Hero" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="hero" containerClassName="h-80 bg-[#11100e]" containerStyle={{ clipPath: getHeroClipPath(event.status) }} dimmed={!event.featured} />
                     <PreviewBlock label="Thumbnail" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="thumb" containerClassName="aspect-4/3 bg-[#ebe7df]" />
                     <PreviewBlock label="Detail" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="detail" containerClassName="aspect-[3/4] bg-black" />
                   </div>

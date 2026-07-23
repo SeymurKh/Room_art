@@ -119,11 +119,37 @@
       "status": "Current",
       "date": "25 Apr — 25 May 2026",
       "image": "/uploads/events/eac8d63d-7944-478e-9a8e-02904ae2967b.PNG",
-      "heroTransform": "translate(0px, -44px) scale(0.6)",
+      "heroTransform": "translate(0px, 0px) scale(1)",
       "thumbTransform": "translate(0px, -79px) scale(1)",
       "detailTransform": "translate(3px, 0px) scale(1)",
       "featured": true,
       "description": "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition."
+    },
+    {
+      "slug": "event-1784801116297-w490",
+      "title": "Event",
+      "type": "Exhibition",
+      "status": "Upcoming",
+      "date": "23.7.2026",
+      "image": "/uploads/events/80a37514-ad9a-4546-b6d3-320453d4efa4.png",
+      "heroTransform": "translate(0px, 0px) scale(1)",
+      "thumbTransform": "translate(-2px, -55px) scale(1)",
+      "detailTransform": "translate(4px, -134px) scale(1.05)",
+      "featured": true,
+      "description": "asd"
+    },
+    {
+      "slug": "event-1784801378935-yl6z",
+      "title": "Past Event",
+      "type": "Exhibition",
+      "status": "Past",
+      "date": "23.7.2026",
+      "image": "/uploads/events/ce0730b7-760c-4a5a-9c0d-e3c83286f257.png",
+      "heroTransform": "translate(0px, 0px) scale(1)",
+      "thumbTransform": "translate(-2px, 71px) scale(1.05)",
+      "detailTransform": "translate(0px, 0px) scale(1)",
+      "featured": true,
+      "description": ""
     }
   ],
   "about": {

@@ -27,9 +27,18 @@ export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
     offset: ["start start", "end end"],
   });
 
-  // First stripe visible immediately, second/third fade in across scroll segments.
-  const secondOpacity = useTransform(scrollYProgress, [0, 0.35, 0.5], [0, 0, 1]);
-  const thirdOpacity = useTransform(scrollYProgress, [0.35, 0.65, 0.8], [0, 0, 1]);
+  // First stripe visible immediately, second fades in over first half of scroll
+  // and stays visible, third fades in over second half and stays visible.
+  const secondOpacity = useTransform(scrollYProgress, (p) => {
+    if (p <= 0) return 0;
+    if (p >= 0.5) return 1;
+    return p * 2;
+  });
+  const thirdOpacity = useTransform(scrollYProgress, (p) => {
+    if (p <= 0.5) return 0;
+    if (p >= 1) return 1;
+    return (p - 0.5) * 2;
+  });
   const opacities = [1, secondOpacity, thirdOpacity];
 
   const events = [
@@ -57,22 +66,20 @@ export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
                 >
                   <div className="absolute inset-0">
                     {event.image ? (
-                      <>
-                        <PositionedImage
-                          src={event.image}
-                          alt={event.title}
-                          transform={event.heroTransform}
-                          containerClassName="h-full w-full"
-                        />
-                        <div className="pointer-events-none absolute inset-0 bg-black/45 transition-colors duration-500 group-hover:bg-black/35" />
-                      </>
+                      <PositionedImage
+                        src={event.image}
+                        alt={event.title}
+                        transform={event.heroTransform}
+                        containerClassName="h-full w-full"
+                        clipPath={stripe.clipPath}
+                      />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-[#11100e]">
                         <p className="room-serif text-sm text-white/30">No image</p>
                       </div>
                     )}
                   </div>
-                  <div className="absolute bottom-12 left-0 right-0 z-10 flex flex-col items-center gap-3 px-6 text-center">
+                  <div className="absolute bottom-12 left-0 right-0 z-10 flex flex-col items-center gap-3 px-6 text-center" style={{ clipPath: stripe.clipPath }}>
                     <p className="room-serif text-2xl leading-tight text-[#f4f1ea] transition-transform duration-500 group-hover:-translate-y-1 md:text-3xl">
                       {event.title}
                     </p>
