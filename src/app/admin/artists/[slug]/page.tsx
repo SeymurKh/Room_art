@@ -28,7 +28,7 @@ export default async function AdminArtistPage({
   if (!isNew && !artist) notFound();
 
   const defaults: Artist = artist ?? {
-    slug: `artist-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    slug: "",
     name: "",
     role: "",
     portrait: "",

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useScroll, motion, useMotionValueEvent } from "framer-motion";
+import { PositionedImage } from "@/components/positioned-image";
 import type { Exhibition } from "@/lib/types";
 
 type EventsScrolltellingProps = { exhibitions: Exhibition[] };
@@ -37,12 +38,11 @@ export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
                   <div className="absolute inset-0">
                     {event.image ? (
                       <>
-                        <img
+                        <PositionedImage
                           src={event.image}
                           alt={event.title}
-                          className="pointer-events-none select-none"
-                          style={{ width: "auto", height: "auto", maxWidth: "none", transform: event.heroTransform }}
-                          draggable={false}
+                          transform={event.heroTransform}
+                          containerClassName="h-full w-full"
                         />
                         <div className="absolute inset-0 bg-black/45" />
                       </>

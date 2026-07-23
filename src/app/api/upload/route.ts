@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
+import { randomUUID } from "crypto";
 import { isAdmin } from "@/lib/auth";
 
 const ALLOWED_MIME = [
@@ -9,12 +10,18 @@ const ALLOWED_MIME = [
   "image/webp",
   "image/avif",
   "image/gif",
-  "image/svg+xml",
-  "video/mp4",
-  "video/webm",
 ];
 
 const MAX_SIZE = 20 * 1024 * 1024; // 20 MB
+
+const UPLOADS_ROOT = path.resolve(process.cwd(), "public", "uploads");
+
+function isUnderUploads(filePath: string): boolean {
+  if (!filePath || !filePath.startsWith("/uploads/")) return false;
+  const normalized = filePath.replace(/^\//, "").replace(/\//g, path.sep);
+  const resolved = path.resolve(process.cwd(), "public", normalized);
+  return resolved.startsWith(UPLOADS_ROOT + path.sep);
+}
 
 export async function POST(request: NextRequest) {
   if (!(await isAdmin())) {
@@ -44,11 +51,11 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const uploadsDir = path.join(process.cwd(), "public", folder);
+  const uploadsDir = path.resolve(process.cwd(), "public", folder.replace(/\//g, path.sep));
   await fs.mkdir(uploadsDir, { recursive: true });
 
   const ext = path.extname(file.name) || ".jpg";
-  const uniqueName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`;
+  const uniqueName = `${randomUUID()}${ext}`;
   const filePath = path.join(uploadsDir, uniqueName);
 
   const buffer = Buffer.from(await file.arrayBuffer());
@@ -69,12 +76,12 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: "No path provided" }, { status: 400 });
   }
 
-  // Prevent path traversal
-  if (filePath.includes("..")) {
+  if (!isUnderUploads(filePath)) {
     return NextResponse.json({ error: "Invalid path" }, { status: 400 });
   }
 
-  const fullPath = path.join(process.cwd(), "public", filePath);
+  const normalized = filePath.replace(/^\//, "").replace(/\//g, path.sep);
+  const fullPath = path.resolve(process.cwd(), "public", normalized);
   try {
     await fs.unlink(fullPath);
     return NextResponse.json({ deleted: true });

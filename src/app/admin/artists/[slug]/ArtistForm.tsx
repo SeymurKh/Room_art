@@ -6,7 +6,10 @@ import { UploadField } from "@/components/upload-field";
 import type { Artist } from "@/lib/types";
 
 export function ArtistForm({ defaults }: { defaults: Artist }) {
-  const [data, setData] = useState<Artist>(defaults);
+  const [data, setData] = useState<Artist>({
+    ...defaults,
+    slug: defaults.slug || `artist-${crypto.randomUUID()}`,
+  });
 
   function updateField(key: keyof Artist, value: string) {
     const next = { ...data, [key]: value };

@@ -6,16 +6,32 @@ import { promises as fs } from "fs";
 import path from "path";
 import { adminPassword, clearAdminSession, isAdmin, setAdminSession } from "@/lib/auth";
 import { getSiteData, saveSiteData, SiteDataValidationError } from "@/lib/site-data";
-import type { Artist, Artwork, Exhibition } from "@/lib/types";
+import type { Artist, Artwork } from "@/lib/types";
+
+const UPLOADS_ROOT = path.resolve(process.cwd(), "public", "uploads");
+
+function isUnderUploads(filePath: string): boolean {
+  if (!filePath || !filePath.startsWith("/uploads/")) return false;
+  const normalized = filePath.replace(/^\//, "").replace(/\//g, path.sep);
+  const resolved = path.resolve(process.cwd(), "public", normalized);
+  return resolved.startsWith(UPLOADS_ROOT + path.sep);
+}
 
 async function tryDeleteFile(filePath: string) {
-  if (!filePath || !filePath.startsWith("/uploads/")) return;
+  if (!isUnderUploads(filePath)) return;
   try {
-    const fullPath = path.join(process.cwd(), "public", filePath);
+    const normalized = filePath.replace(/^\//, "").replace(/\//g, path.sep);
+    const fullPath = path.resolve(process.cwd(), "public", normalized);
     await fs.unlink(fullPath);
   } catch {
     // file doesn't exist or can't be deleted — ignore
   }
+}
+
+function findRemovedImages(current: { image?: string }[], incoming: { image?: string }[]): string[] {
+  const currentImages = new Set(current.map((item) => item.image).filter(Boolean));
+  const incomingImages = new Set(incoming.map((item) => item.image).filter(Boolean));
+  return Array.from(currentImages).filter((img): img is string => !!img && !incomingImages.has(img) && img.startsWith("/uploads/"));
 }
 
 export async function loginAdmin(formData: FormData) {
@@ -40,6 +56,12 @@ export async function saveAdminData(formData: FormData) {
   try {
     const incoming = JSON.parse(payload);
     const current = await getSiteData();
+
+    // Delete images removed from exhibitions (including deleted events and replaced images)
+    const removedExhibitionImages = findRemovedImages(current.exhibitions, incoming.exhibitions ?? []);
+    const pendingDeletions: string[] = Array.isArray(incoming.__pendingDeletions) ? incoming.__pendingDeletions : [];
+    const imagesToDelete = new Set([...removedExhibitionImages, ...pendingDeletions]);
+
     // Dashboard only edits settings/about/exhibitions — preserve current artists/artworks
     // to prevent data loss when editing artist/artwork in another tab.
     const merged = {
@@ -47,7 +69,13 @@ export async function saveAdminData(formData: FormData) {
       artists: current.artists,
       artworks: current.artworks,
     };
+    delete (merged as { __pendingDeletions?: string[] }).__pendingDeletions;
+
     await saveSiteData(merged);
+
+    for (const img of imagesToDelete) {
+      await tryDeleteFile(img);
+    }
   } catch (error) {
     if (error instanceof SiteDataValidationError) {
       redirect(
@@ -75,14 +103,18 @@ export async function saveArtist(formData: FormData) {
     const data = await getSiteData();
     const index = data.artists.findIndex((a) => a.slug === slug);
     if (index === -1) redirect("/admin/artists?error=notfound");
-    const oldSlug = data.artists[index].slug;
-    data.artists[index] = artist;
+    const existing = data.artists[index];
+    // Delete old portrait if replaced
+    if (artist.portrait !== existing.portrait) {
+      await tryDeleteFile(existing.portrait);
+    }
     // If slug changed, update artistSlug in all artworks referencing the old slug
-    if (artist.slug !== oldSlug) {
+    if (artist.slug !== existing.slug) {
       data.artworks = data.artworks.map((aw) =>
-        aw.artistSlug === oldSlug ? { ...aw, artistSlug: artist.slug } : aw
+        aw.artistSlug === existing.slug ? { ...aw, artistSlug: artist.slug } : aw
       );
     }
+    data.artists[index] = artist;
     await saveSiteData(data);
   } catch (error) {
     if (error instanceof SiteDataValidationError) {
@@ -150,6 +182,10 @@ export async function saveArtwork(formData: FormData) {
     }
     const index = data.artworks.findIndex((a) => a.slug === slug);
     if (index === -1) redirect("/admin/artworks?error=notfound");
+    const existing = data.artworks[index];
+    if (artwork.image !== existing.image) {
+      await tryDeleteFile(existing.image);
+    }
     data.artworks[index] = artwork;
     await saveSiteData(data);
   } catch (error) {

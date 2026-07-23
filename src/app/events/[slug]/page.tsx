@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { PositionedImage } from "@/components/positioned-image";
 import { getSiteData } from "@/lib/site-data";
 
 export async function generateStaticParams() {
@@ -37,11 +38,12 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           <Link href="/events" className="mt-10 inline-flex items-center gap-2 border-b border-black/20 pb-1 text-xs font-semibold uppercase tracking-[0.14em] transition hover:border-black/60"><ArrowUpRight size={16} /> All events</Link>
         </div>
         <div className="relative min-h-160 overflow-hidden bg-black">
-          {event.image ? (
-            <img src={event.image} alt={event.title} className="pointer-events-none select-none" style={{ width: "auto", height: "auto", maxWidth: "none", transform: event.detailTransform }} draggable={false} />
-          ) : (
-            <div className="flex h-full items-center justify-center"><p className="text-sm text-white/30">No image</p></div>
-          )}
+          <PositionedImage
+            src={event.image}
+            alt={event.title}
+            transform={event.detailTransform}
+            containerClassName="h-full w-full"
+          />
         </div>
       </section>
       <SiteFooter settings={data.settings} />

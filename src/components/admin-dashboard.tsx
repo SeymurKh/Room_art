@@ -4,6 +4,7 @@ import { useMemo, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { Check, LogOut, Save, Star, Trash2 } from "lucide-react";
 import { UploadField } from "@/components/upload-field";
+import { PositionedImage, buildTransform } from "@/components/positioned-image";
 import { STRIPES } from "@/components/events-scrolltelling";
 import type { SiteData, Exhibition } from "@/lib/types";
 import { logoutAdmin, saveAdminData } from "@/app/admin/actions";
@@ -18,20 +19,14 @@ const tabs: [Tab, string][] = [
   ["events", "Events"],
 ];
 
-function parseTransform(t: string): { tx: number; ty: number; scale: number } {
-  const m = t.match(/translate\(([^)]+)\)\s*scale\(([^)]+)\)/);
-  if (!m) return { tx: 0, ty: 0, scale: 1 };
-  const [x, y] = m[1].split(/,\s*/);
-  return {
-    tx: parseFloat(x) || 0,
-    ty: parseFloat(y) || 0,
-    scale: parseFloat(m[2]) ?? 1,
-  };
-}
 
 function getHeroClipPath(status: Exhibition["status"]): string {
   const stripe = STRIPES.find((s) => s.key === status);
   return stripe?.clipPath ?? STRIPES[0].clipPath;
+}
+
+function clamp(n: number, min: number, max: number) {
+  return Math.min(Math.max(n, min), max);
 }
 
 function PreviewBlock({
@@ -59,33 +54,44 @@ function PreviewBlock({
 }) {
   const field = `${previewKey}Transform` as keyof Exhibition;
   const transform = (event[field] as string) ?? "translate(0px, 0px) scale(1)";
-  const parsed = parseTransform(transform);
+  const parsed = (() => {
+    const m = transform.match(/translate\(([^)]+)\)\s*scale\(([^)]+)\)/);
+    if (!m) return { tx: 0, ty: 0, scale: 1 };
+    const [x, y] = m[1].split(/,\s*/);
+    return {
+      tx: parseFloat(x) || 0,
+      ty: parseFloat(y) || 0,
+      scale: parseFloat(m[2]) ?? 1,
+    };
+  })();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [overlayOn, setOverlayOn] = useState(initialOverlay ?? false);
 
-  const txRef = useRef(parsed.tx);
-  const tyRef = useRef(parsed.ty);
-  const scaleRef = useRef(parsed.scale);
   const lastMouseRef = useRef({ x: 0, y: 0 });
-  const indexRef = useRef(index);
-  indexRef.current = index;
-
-  txRef.current = parsed.tx;
-  tyRef.current = parsed.ty;
-  scaleRef.current = parsed.scale;
 
   function saveTransform(tx: number, ty: number, scale: number) {
-    const value = `translate(${Math.round(tx)}px, ${Math.round(ty)}px) scale(${scale})`;
+    const value = buildTransform(tx, ty, scale);
     updateExhibitions((prev) =>
-      prev.map((ev, i) =>
-        i === indexRef.current ? { ...ev, [field]: value } : ev
-      )
+      prev.map((ev, i) => (i === index ? { ...ev, [field]: value } : ev))
     );
   }
 
   function handleReset() {
     saveTransform(0, 0, 1);
+  }
+
+  function handlePointerDown(clientX: number, clientY: number) {
+    lastMouseRef.current = { x: clientX, y: clientY };
+  }
+
+  function handlePointerMove(clientX: number, clientY: number) {
+    const dx = clientX - lastMouseRef.current.x;
+    const dy = clientY - lastMouseRef.current.y;
+    lastMouseRef.current = { x: clientX, y: clientY };
+    // user scale only — base scale is handled by PositionedImage
+    const s = parsed.scale || 1;
+    saveTransform(parsed.tx + dx / s, parsed.ty + dy / s, parsed.scale);
   }
 
   return (
@@ -115,32 +121,29 @@ function PreviewBlock({
         ref={containerRef}
         className={`relative overflow-hidden ${containerClassName}`}
         style={containerStyle}
-        onMouseDown={(e) => {
-          lastMouseRef.current.x = e.clientX;
-          lastMouseRef.current.y = e.clientY;
-          const current = parseTransform((event[field] as string) ?? "translate(0px, 0px) scale(1)");
-          txRef.current = current.tx;
-          tyRef.current = current.ty;
-          scaleRef.current = current.scale;
-        }}
+        onMouseDown={(e) => handlePointerDown(e.clientX, e.clientY)}
         onMouseMove={(e) => {
           if (e.buttons !== 1) return;
-          const dx = e.clientX - lastMouseRef.current.x;
-          const dy = e.clientY - lastMouseRef.current.y;
-          lastMouseRef.current.x = e.clientX;
-          lastMouseRef.current.y = e.clientY;
-          const s = scaleRef.current || 1;
-          txRef.current += dx / s;
-          tyRef.current += dy / s;
-          saveTransform(txRef.current, tyRef.current, scaleRef.current);
+          handlePointerMove(e.clientX, e.clientY);
+        }}
+        onTouchStart={(e) => {
+          const touch = e.touches[0];
+          if (!touch) return;
+          handlePointerDown(touch.clientX, touch.clientY);
+        }}
+        onTouchMove={(e) => {
+          const touch = e.touches[0];
+          if (!touch) return;
+          e.preventDefault();
+          handlePointerMove(touch.clientX, touch.clientY);
         }}
       >
         {event.image ? (
-          <img
+          <PositionedImage
             src={event.image}
             alt=""
-            className="pointer-events-none select-none"
-            style={{ width: "auto", height: "auto", maxWidth: "none", transform }}
+            transform={transform}
+            containerClassName="h-full w-full"
             draggable={false}
           />
         ) : (
@@ -152,18 +155,17 @@ function PreviewBlock({
         Zoom
         <input
           type="range"
-          min="0.1"
-          max="5"
-          step="0.1"
-          value={parsed.scale}
+          min="0.3"
+          max="3"
+          step="0.05"
+          value={clamp(parsed.scale, 0.3, 3)}
           onChange={(e) => {
             const s = parseFloat(e.target.value);
-            scaleRef.current = s;
-            saveTransform(txRef.current, tyRef.current, s);
+            saveTransform(parsed.tx, parsed.ty, s);
           }}
           className="h-4 w-full accent-[#11100e]"
         />
-        <span className="w-8 text-right tabular-nums">{parsed.scale}x</span>
+        <span className="w-8 text-right tabular-nums">{parsed.scale.toFixed(2)}x</span>
       </label>
     </div>
   );
@@ -173,7 +175,8 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
   const [data, setData] = useState(initialData);
   const [tab, setTab] = useState<Tab>("settings");
   const [eventSection, setEventSection] = useState<EventSection>("current");
-  const payload = useMemo(() => JSON.stringify(data), [data]);
+  const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
+  const payload = useMemo(() => JSON.stringify({ ...data, __pendingDeletions: pendingDeletions }), [data, pendingDeletions]);
 
   function update<K extends keyof SiteData>(key: K, value: SiteData[K]) {
     setData((current) => ({ ...current, [key]: value }));
@@ -183,10 +186,10 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
     setData((prev) => ({ ...prev, exhibitions: fn(prev.exhibitions) }));
   }, []);
 
-  const deleteEvent = useCallback(async (event: Exhibition) => {
+  const deleteEvent = useCallback((event: Exhibition) => {
     if (!window.confirm(`Delete "${event.title}"?`)) return;
-    if (event.image) {
-      try { await fetch(`/api/upload?path=${encodeURIComponent(event.image)}`, { method: "DELETE" }); } catch { /* ignore */ }
+    if (event.image && event.image.startsWith("/uploads/")) {
+      setPendingDeletions((prev) => (prev.includes(event.image) ? prev : [...prev, event.image]));
     }
     setData((prev) => ({ ...prev, exhibitions: prev.exhibitions.filter((e) => e.slug !== event.slug) }));
   }, []);

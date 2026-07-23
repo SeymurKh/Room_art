@@ -118,10 +118,10 @@
       "type": "Exhibition",
       "status": "Current",
       "date": "25 Apr — 25 May 2026",
-      "image": "/uploads/events/1784713135392-q4mw5u.PNG",
-      "heroTransform": "translate(-354px, -687px) scale(0.3)",
-      "thumbTransform": "translate(0px, 0px) scale(1)",
-      "detailTransform": "translate(0px, 0px) scale(1)",
+      "image": "/uploads/events/eac8d63d-7944-478e-9a8e-02904ae2967b.PNG",
+      "heroTransform": "translate(0px, -44px) scale(0.6)",
+      "thumbTransform": "translate(0px, -79px) scale(1)",
+      "detailTransform": "translate(-1px, -99px) scale(1)",
       "featured": true,
       "description": "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition."
     }

@@ -14,7 +14,10 @@ export function ArtworkForm({
   artists: Artist[];
   preselectedArtist?: boolean;
 }) {
-  const [data, setData] = useState<Artwork>(defaults);
+  const [data, setData] = useState<Artwork>({
+    ...defaults,
+    slug: defaults.slug || `artwork-${crypto.randomUUID()}`,
+  });
 
   function updateField(key: keyof Artwork, value: string | number) {
     const next = { ...data, [key]: value };

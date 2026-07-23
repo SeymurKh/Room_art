@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { SiteFooter } from "@/components/site-footer";
+import { PositionedImage } from "@/components/positioned-image";
 import { getSiteData } from "@/lib/site-data";
 
 export default async function EventsPage() {
@@ -28,12 +29,13 @@ function EventGroup({ title, events }: { title: string; events: Awaited<ReturnTy
         {events.map((event) => (
           <Link href={`/events/${event.slug}`} key={event.slug} className="group">
             <article className="bg-[#ebe7df] p-3">
-              <div className="card-img-overlay relative aspect-4/3 overflow-hidden">
-                {event.image ? (
-                  <img src={event.image} alt={event.title} className="pointer-events-none select-none" style={{ width: "auto", height: "auto", maxWidth: "none", transform: event.thumbTransform }} draggable={false} />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-[#e2ded4] text-xs uppercase tracking-[0.14em] text-[#6f6a61]">No image</div>
-                )}
+              <div className="card-img-overlay relative aspect-4/3 overflow-hidden bg-[#e2ded4]">
+                <PositionedImage
+                  src={event.image}
+                  alt={event.title}
+                  transform={event.thumbTransform}
+                  containerClassName="h-full w-full"
+                />
                 <span className="overlay-text">View event</span>
               </div>
               <p className="section-kicker mt-5 text-[#6f6a61]">{event.type}</p>
