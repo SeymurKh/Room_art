@@ -21,12 +21,13 @@ export type Artwork = {
   title: string;
   artistSlug: string;
   year: string;
+  medium: string;
   dimensions: string;
   widthCm: number;
   heightCm: number;
   image: string;
   availability: "Available" | "Reserved" | "Private collection";
-  description: string;
+  description?: string;
   displayed: boolean;
 };
 

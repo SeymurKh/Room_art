@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
 import { randomUUID } from "crypto";
+import sharp from "sharp";
 import { isAdmin } from "@/lib/auth";
 
 const ALLOWED_MIME = [
@@ -12,7 +13,11 @@ const ALLOWED_MIME = [
   "image/gif",
 ];
 
-const MAX_SIZE = 20 * 1024 * 1024; // 20 MB
+const MAX_INPUT_SIZE = 30 * 1024 * 1024; // 30 MB
+const MAX_OUTPUT_SIZE = 2 * 1024 * 1024; // 2 MB
+const MAX_DIMENSION = 2400;
+const DEFAULT_QUALITY = 85;
+const FALLBACK_QUALITY = 75;
 
 const UPLOADS_ROOT = path.resolve(process.cwd(), "public", "uploads");
 
@@ -21,6 +26,42 @@ function isUnderUploads(filePath: string): boolean {
   const normalized = filePath.replace(/^\//, "").replace(/\//g, path.sep);
   const resolved = path.resolve(process.cwd(), "public", normalized);
   return resolved.startsWith(UPLOADS_ROOT + path.sep);
+}
+
+async function optimizeImage(input: Buffer): Promise<Buffer> {
+  let pipeline = sharp(input).rotate().toColorspace("srgb"); // preserve orientation, normalize color space
+
+  const metadata = await pipeline.metadata();
+  const width = metadata.width ?? 0;
+  const height = metadata.height ?? 0;
+
+  if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+    pipeline = pipeline.resize({
+      width: MAX_DIMENSION,
+      height: MAX_DIMENSION,
+      fit: "inside",
+      withoutEnlargement: true,
+    });
+  }
+
+  let output = await pipeline.webp({ quality: DEFAULT_QUALITY }).toBuffer();
+
+  // If still too large, try lower quality without resizing.
+  if (output.length > MAX_OUTPUT_SIZE) {
+    output = await sharp(input)
+      .rotate()
+      .toColorspace("srgb")
+      .resize({
+        width: MAX_DIMENSION,
+        height: MAX_DIMENSION,
+        fit: "inside",
+        withoutEnlargement: true,
+      })
+      .webp({ quality: FALLBACK_QUALITY })
+      .toBuffer();
+  }
+
+  return output;
 }
 
 export async function POST(request: NextRequest) {
@@ -35,7 +76,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "No file provided" }, { status: 400 });
   }
 
-  // Validate MIME type
   if (!ALLOWED_MIME.includes(file.type)) {
     return NextResponse.json(
       { error: `File type "${file.type}" is not allowed. Allowed: ${ALLOWED_MIME.join(", ")}` },
@@ -43,10 +83,9 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Validate size
-  if (file.size > MAX_SIZE) {
+  if (file.size > MAX_INPUT_SIZE) {
     return NextResponse.json(
-      { error: `File size ${(file.size / 1024 / 1024).toFixed(1)}MB exceeds the 20MB limit.` },
+      { error: `File size ${(file.size / 1024 / 1024).toFixed(1)}MB exceeds the 30MB limit.` },
       { status: 400 }
     );
   }
@@ -54,12 +93,12 @@ export async function POST(request: NextRequest) {
   const uploadsDir = path.resolve(process.cwd(), "public", folder.replace(/\//g, path.sep));
   await fs.mkdir(uploadsDir, { recursive: true });
 
-  const ext = path.extname(file.name) || ".jpg";
-  const uniqueName = `${randomUUID()}${ext}`;
+  const uniqueName = `${randomUUID()}.webp`;
   const filePath = path.join(uploadsDir, uniqueName);
 
-  const buffer = Buffer.from(await file.arrayBuffer());
-  await fs.writeFile(filePath, buffer);
+  const inputBuffer = Buffer.from(await file.arrayBuffer());
+  const outputBuffer = await optimizeImage(inputBuffer);
+  await fs.writeFile(filePath, outputBuffer);
 
   const publicPath = `/${folder}/${uniqueName}`;
   return NextResponse.json({ path: publicPath });

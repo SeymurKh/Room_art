@@ -32,13 +32,13 @@ export default async function AdminArtworkPage({
     slug: "",
     title: "",
     artistSlug: preselectedArtistSlug,
-    year: String(new Date().getFullYear()),
+    year: "",
+    medium: "",
     dimensions: "",
     widthCm: 0,
     heightCm: 0,
     image: "",
     availability: "Available",
-    description: "",
     displayed: false,
   };
 

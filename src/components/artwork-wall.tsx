@@ -17,7 +17,7 @@ export function ArtworkWall({
 }) {
   return (
     <section className="wall min-h-fit pt-24 pb-16 md:pt-32 md:pb-24">
-      <div className="room-shell grid items-start gap-10 py-8 md:grid-cols-[1.25fr_0.75fr] md:items-center md:py-16">
+      <div className="room-shell grid items-start gap-10 py-8 md:grid-cols-[1fr_1fr] md:items-center md:py-16">
         <div className="relative flex min-h-[65vh] items-center justify-center md:min-h-[75vh]">
           <motion.div
             initial={{ opacity: 0, y: 120, rotateX: 40, scale: 0.7 }}
@@ -33,13 +33,16 @@ export function ArtworkWall({
           initial={{ opacity: 0, x: 28 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.75, delay: 0.35 }}
-          className="border border-black/12 bg-[#f4f1ea]/72 p-6 backdrop-blur md:p-10"
+          className="min-w-[340px] border border-black/12 bg-[#f4f1ea]/72 p-6 backdrop-blur md:min-w-[400px] md:p-10"
         >
           <p className="section-kicker text-[#6f6a61]">{artist}</p>
           <h1 className="room-serif mt-4 text-6xl font-medium leading-[0.9]">{artwork.title}</h1>
-          <p className="mt-6 text-sm leading-7 text-[#6f6a61]">{artwork.description}</p>
+          {artwork.description ? (
+            <p className="mt-6 text-sm leading-7 text-[#6f6a61]">{artwork.description}</p>
+          ) : null}
           <dl className="mt-8 grid gap-4 border-y border-black/10 py-6 text-sm">
             <Row label="Year" value={artwork.year} />
+            <Row label="Medium" value={artwork.medium} />
             <Row label="Dimensions" value={artwork.dimensions} />
             <Row label="Availability" value={artwork.availability} />
           </dl>

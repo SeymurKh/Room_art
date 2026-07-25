@@ -21,7 +21,17 @@ export function ArtworkForm({
   });
 
   function updateField(key: keyof Artwork, value: string | number | boolean) {
-    const next = { ...data, [key]: value };
+    let next = { ...data, [key]: value };
+
+    // Auto-calculate dimensions when width or height changes
+    if (key === "widthCm" || key === "heightCm") {
+      const width = key === "widthCm" ? (value as number) : data.widthCm;
+      const height = key === "heightCm" ? (value as number) : data.heightCm;
+      if (width > 0 && height > 0) {
+        next = { ...next, dimensions: `${width} × ${height} cm` };
+      }
+    }
+
     setData(next);
     const el = document.getElementById("payload") as HTMLInputElement;
     if (el) el.value = JSON.stringify(next);
@@ -54,7 +64,16 @@ export function ArtworkForm({
         </label>
       )}
       <Field label="Year" value={data.year} onChange={(v) => updateField("year", v)} />
-      <Field label="Dimensions" value={data.dimensions} onChange={(v) => updateField("dimensions", v)} />
+      <Field label="Medium" value={data.medium} onChange={(v) => updateField("medium", v)} placeholder="e.g. Acrylic on canvas" />
+      <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
+        Dimensions
+        <input
+          type="text"
+          readOnly
+          value={data.dimensions}
+          className="admin-input mt-2 cursor-not-allowed bg-black/5 text-sm normal-case tracking-normal text-[#6f6a61]"
+        />
+      </label>
       <label htmlFor="field-width-cm" className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
         Width (cm)
         <input
@@ -99,7 +118,7 @@ export function ArtworkForm({
         />
         On display
       </label>
-      <Field multiline label="Description" value={data.description} onChange={(v) => updateField("description", v)} />
+      <Field multiline label="Description" value={data.description ?? ""} onChange={(v) => updateField("description", v)} />
       <button
         type="submit"
         className="mt-6 inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]"
@@ -115,11 +134,13 @@ function Field({
   value,
   onChange,
   multiline = false,
+  placeholder,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   multiline?: boolean;
+  placeholder?: string;
 }) {
   const id = `field-${label.toLowerCase().replace(/\s+/g, "-")}`;
   return (
@@ -131,6 +152,7 @@ function Field({
           className="admin-input mt-2 min-h-28 resize-y text-sm normal-case tracking-normal text-[#11100e]"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
         />
       ) : (
         <input
@@ -138,6 +160,7 @@ function Field({
           className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
         />
       )}
     </label>

@@ -59,7 +59,7 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
   const progressPercent = Math.round(progress * 100);
 
   return (
-    <div ref={containerRef} style={{ height: `${n * 80}vh` }}>
+    <div ref={containerRef} className="relative" style={{ height: n <= 1 ? "100vh" : `${n * 80}vh` }}>
       <section
         className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden"
         style={{
@@ -118,6 +118,9 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
           </div>
         </div>
       </section>
+
+      {/* Fade to the light section below */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30 h-32 bg-linear-to-b from-transparent to-[#f4f1ea]" />
     </div>
   );
 }

@@ -56,6 +56,9 @@ export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
 
   return (
     <div ref={containerRef} className="relative" style={{ height: "240vh" }}>
+      {/* Fade from the light section above */}
+      <div className="pointer-events-none absolute top-0 left-0 right-0 z-30 h-32 bg-linear-to-b from-[#f4f1ea] to-transparent" />
+
       <section className="sticky top-0 h-screen overflow-hidden bg-[#11100e]">
         {STRIPES.map((stripe, i) => {
           const event = events[i];
@@ -107,6 +110,9 @@ export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
           </p>
         </div>
       </section>
+
+      {/* Fade to the about section below */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30 h-32 bg-linear-to-b from-transparent to-[#ebe7df]" />
     </div>
   );
 }
