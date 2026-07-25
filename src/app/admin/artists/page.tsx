@@ -25,7 +25,7 @@ export default async function AdminArtistsPage() {
             <Link href="/admin" className="border border-white/20 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em]">
               Dashboard
             </Link>
-            <Link href="/admin/artists/new" className="inline-flex items-center gap-2 border border-black/40 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#11100e] transition hover:bg-black/5">
+            <Link href="/admin/artists/new" className="inline-flex items-center gap-2 border border-white/40 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] transition hover:bg-white/10">
               <Plus size={16} /> Add artist
             </Link>
           </div>

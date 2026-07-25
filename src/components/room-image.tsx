@@ -9,11 +9,12 @@ export function RoomImage({
   fill,
   alt,
   sizes,
+  src,
   ...props
 }: ImageProps & { fallbackText?: string }) {
   const [error, setError] = useState(false);
 
-  if (error) {
+  if (!src || error) {
     if (fill) {
       return (
         <div
@@ -30,9 +31,10 @@ export function RoomImage({
     );
   }
 
-  return (
+    return (
     <Image
       {...props}
+      src={src}
       fill={fill}
       sizes={sizes ?? (fill ? "(max-width: 768px) 100vw, 50vw" : undefined)}
       placeholder="blur"

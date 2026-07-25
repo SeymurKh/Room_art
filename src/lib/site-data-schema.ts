@@ -13,7 +13,7 @@ const artistSchema = z.object({
   slug: z.string().min(1),
   name: z.string().min(1),
   role: z.string().min(1),
-  portrait: z.string().min(1),
+  portrait: z.string().default(""),
   bio: z.string().min(1),
   statement: z.string().min(1),
 });
