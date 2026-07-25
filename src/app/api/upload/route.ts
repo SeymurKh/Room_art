@@ -13,7 +13,7 @@ const ALLOWED_MIME = [
   "image/gif",
 ];
 
-const MAX_INPUT_SIZE = 30 * 1024 * 1024; // 30 MB
+const MAX_INPUT_SIZE = 100 * 1024 * 1024; // 100 MB
 const MAX_OUTPUT_SIZE = 2 * 1024 * 1024; // 2 MB
 const MAX_DIMENSION = 2400;
 const DEFAULT_QUALITY = 85;
@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
 
   if (file.size > MAX_INPUT_SIZE) {
     return NextResponse.json(
-      { error: `File size ${(file.size / 1024 / 1024).toFixed(1)}MB exceeds the 30MB limit.` },
+      { error: `File size ${(file.size / 1024 / 1024).toFixed(1)}MB exceeds the 100MB limit.` },
       { status: 400 }
     );
   }

@@ -1,42 +1,40 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import type { Artwork } from "@/lib/types";
 import { RoomImage } from "@/components/room-image";
 
-const ZOOM = 2.5;
-const LENS_SIZE = 180;
+const ZOOM = 4;
+const LENS_SIZE = 350;
 
 /**
- * scaleFactor — масштаб от 0.55 (маленькие) до 1.0 (большие).
- * Референс: макс. размер картины ~140см.
+ * scaleFactor — масштаб от 0.4 (маленькие) до 1.0 (большие).
+ * Референс: площадь картины 140×140 см.
  */
 export function scaleFactor(widthCm: number, heightCm: number): number {
-  const maxDim = Math.max(widthCm, heightCm);
-  const refMax = 140;
-  return Math.min(1, 0.55 + (maxDim / refMax) * 0.45);
+  const area = widthCm * heightCm;
+  const refArea = 140 * 140;
+  return Math.min(1, Math.sqrt(area / refArea));
 }
 
 /**
  * ArtworkFrame — высокореалистичная галерейная рама (CSS-only 3D).
  * Слои: frame-outer (внешняя рама) → frame-mat (паспарту) → изображение.
  *
- * aspectRatio задаётся на самом контейнере картины, чтобы изображение
- * отображалось на 100% без обрезки.
+ * aspectRatio берётся от реального изображения, чтобы не было полей
+ * и обрезки. Масштаб зависит от указанных габаритов в см.
  */
 export function ArtworkFrame({
   artwork,
   priority,
+  enableLens = false,
 }: {
   artwork: Artwork;
   priority?: boolean;
+  enableLens?: boolean;
 }) {
-  const aspect = artwork.widthCm / artwork.heightCm;
-  const isPortrait = aspect < 1;
   const scale = scaleFactor(artwork.widthCm, artwork.heightCm);
 
-  const baseWidth = isPortrait ? `${45 * scale}vw` : `${75 * scale}vw`;
-  const maxWidth = isPortrait ? `${500 * scale}px` : `${800 * scale}px`;
   const outerPadding = `${Math.round(12 + scale * 6)}px`;
   const matPadding = `${Math.round(28 + scale * 16)}px`;
 
@@ -48,13 +46,30 @@ export function ArtworkFrame({
           alt={artwork.title}
           priority={priority}
           fallbackText={artwork.title}
-          aspectRatio={`${artwork.widthCm} / ${artwork.heightCm}`}
-          baseWidth={baseWidth}
-          maxWidth={maxWidth}
+          scale={scale}
+          enableLens={enableLens}
         />
       </div>
     </div>
   );
+}
+
+function useImageAspect(src: string) {
+  const [aspect, setAspect] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!src) return;
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+      if (img.naturalWidth && img.naturalHeight) {
+        setAspect(img.naturalWidth / img.naturalHeight);
+      }
+    };
+    img.onerror = () => setAspect(null);
+  }, [src]);
+
+  return aspect;
 }
 
 function MagnifierLens({
@@ -62,22 +77,24 @@ function MagnifierLens({
   alt,
   priority,
   fallbackText,
-  aspectRatio,
-  baseWidth,
-  maxWidth,
+  scale,
+  enableLens,
 }: {
   src: string;
   alt: string;
   priority?: boolean;
   fallbackText: string;
-  aspectRatio: string;
-  baseWidth: string;
-  maxWidth: string;
+  scale: number;
+  enableLens: boolean;
 }) {
+  const imageAspect = useImageAspect(src);
   const [active, setActive] = useState(false);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [size, setSize] = useState({ w: 0, h: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const baseWidth = `${60 * scale}vw`;
+  const maxWidth = `${700 * scale}px`;
 
   const handleMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const el = containerRef.current;
@@ -104,26 +121,26 @@ function MagnifierLens({
   return (
     <div
       ref={containerRef}
-      className="frame-artwork relative cursor-crosshair"
+      className={`frame-artwork relative ${enableLens ? "cursor-crosshair" : ""}`}
       style={{
         width: `min(${baseWidth}, ${maxWidth})`,
-        aspectRatio,
+        aspectRatio: imageAspect ? `${imageAspect}` : "1 / 1",
       }}
-      onMouseEnter={handleEnter}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
+      onMouseEnter={enableLens ? handleEnter : undefined}
+      onMouseMove={enableLens ? handleMove : undefined}
+      onMouseLeave={enableLens ? handleLeave : undefined}
     >
       <RoomImage
         src={src}
         alt={alt}
         fill
         priority={priority}
-        className="object-contain"
+        className="object-cover"
         fallbackText={fallbackText}
       />
       <div className="frame-artwork-overlay" aria-hidden="true" />
 
-      {active && (
+      {enableLens && active && (
         <div
           className="pointer-events-none fixed z-50 rounded-full border-2 border-white/80 shadow-xl"
           style={{

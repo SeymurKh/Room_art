@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { useScroll, useSpring, useMotionValue, useMotionValueEvent } from "framer-motion";
+import { SkipForward } from "lucide-react";
 import type { Artwork } from "@/lib/types";
 import { ArtworkFrame } from "@/components/artwork-frame";
 
@@ -58,6 +59,14 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
 
   const progressPercent = Math.round(progress * 100);
 
+  const handleSkip = useCallback(() => {
+    if (!containerRef.current || n <= 1) return;
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const targetScroll = window.scrollY + containerRect.bottom - viewportHeight;
+    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+  }, [n]);
+
   return (
     <div ref={containerRef} className="relative" style={{ height: n <= 1 ? "100vh" : `${n * 80}vh` }}>
       <section
@@ -90,6 +99,18 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
 
         {/* Одна общая тень под картиной */}
         <div className="pointer-events-none absolute bottom-10 left-1/2 h-9 w-[62%] -translate-x-1/2 rounded-full bg-black/22 blur-2xl" />
+
+        {/* Skip button */}
+        {n > 1 && (
+          <button
+            type="button"
+            onClick={handleSkip}
+            className="absolute bottom-8 right-20 z-50 flex items-center gap-2 rounded-full border border-white/30 bg-black/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/90 backdrop-blur transition hover:bg-black/40"
+            aria-label="Skip to next artwork"
+          >
+            Skip <SkipForward size={14} />
+          </button>
+        )}
 
         {/* Текст-табличка + индикатор прогресса внизу */}
         <div className="pointer-events-none absolute bottom-8 left-0 right-0 z-30 flex flex-col items-center gap-6 text-center">

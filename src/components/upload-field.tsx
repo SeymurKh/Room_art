@@ -11,7 +11,7 @@ const ALLOWED_MIME = [
   "image/gif",
 ];
 
-const MAX_SIZE = 30 * 1024 * 1024; // 30 MB
+const MAX_SIZE = 100 * 1024 * 1024; // 100 MB
 
 export function UploadField({
   label,
@@ -32,7 +32,7 @@ export function UploadField({
       return `File type "${file.type}" is not allowed. Allowed: ${ALLOWED_MIME.join(", ")}`;
     }
     if (file.size > MAX_SIZE) {
-      return `File size ${(file.size / 1024 / 1024).toFixed(1)}MB exceeds the 30MB limit.`;
+      return `File size ${(file.size / 1024 / 1024).toFixed(1)}MB exceeds the 100MB limit.`;
     }
     return null;
   }

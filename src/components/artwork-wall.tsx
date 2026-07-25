@@ -25,7 +25,7 @@ export function ArtworkWall({
             transition={{ duration: 1.0, ease: "easeOut" }}
             style={{ transformPerspective: 1200 }}
           >
-            <ArtworkFrame artwork={artwork} priority />
+            <ArtworkFrame artwork={artwork} priority enableLens />
           </motion.div>
           <div className="absolute bottom-10 left-1/2 h-9 w-[62%] -translate-x-1/2 rounded-full bg-black/22 blur-2xl" />
         </div>

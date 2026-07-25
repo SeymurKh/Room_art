@@ -25,7 +25,7 @@ export default async function AdminArtworksPage() {
             <Link href="/admin" className="border border-white/20 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em]">
               Dashboard
             </Link>
-            <Link href="/admin/artworks/new" className="inline-flex items-center gap-2 border border-black/40 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#11100e] transition hover:bg-black/5">
+            <Link href="/admin/artworks/new" className="inline-flex items-center gap-2 border border-white/40 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] transition hover:bg-white/10">
               <Plus size={16} /> Add artwork
             </Link>
           </div>
@@ -51,7 +51,7 @@ export default async function AdminArtworksPage() {
                     {artwork.title}
                   </Link>
                 </td>
-                <td className="py-3 pr-4 text-[#6f6a61]">{artwork.artistSlug}</td>
+                <td className="py-3 pr-4 text-[#6f6a61]">{data.artists.find((a) => a.slug === artwork.artistSlug)?.name ?? artwork.artistSlug}</td>
                 <td className="py-3 pr-4 text-[#6f6a61]">{artwork.year}</td>
                 <td className="py-3 pr-4 font-mono text-xs text-[#6f6a61]">{artwork.availability}</td>
                 <td className="py-3">
