@@ -23,13 +23,13 @@ export default async function EventsPage() {
 
 function EventGroup({ title, events }: { title: string; events: Awaited<ReturnType<typeof getSiteData>>["exhibitions"] }) {
   return (
-    <section className="room-shell border-b border-black/10 py-16">
+    <section className="room-shell border-b border-black/10 py-12 md:py-16">
       <p className="section-kicker text-[#6f6a61]">{title}</p>
-      <div className="mt-8 grid gap-5 md:grid-cols-3">
+      <div className="mt-6 grid gap-5 md:mt-8 md:grid-cols-3">
         {events.map((event) => (
           <Link href={`/events/${event.slug}`} key={event.slug} className="group">
             <article className="bg-[#ebe7df] p-3">
-              <div className="card-img-overlay relative aspect-4/3 overflow-hidden bg-[#e2ded4]">
+              <div className="card-img-overlay relative aspect-[4/3] overflow-hidden bg-[#e2ded4]">
                 <PositionedImage
                   src={event.image}
                   alt={event.title}
@@ -39,7 +39,7 @@ function EventGroup({ title, events }: { title: string; events: Awaited<ReturnTy
                 <span className="overlay-text">View event</span>
               </div>
               <p className="section-kicker mt-5 text-[#6f6a61]">{event.type}</p>
-              <div className="mt-2 flex items-start justify-between gap-3"><h2 className="room-serif text-4xl leading-none">{event.title}</h2><ArrowUpRight size={18} className="mt-1 shrink-0 opacity-30 transition group-hover:opacity-100" /></div>
+              <div className="mt-2 flex items-start justify-between gap-3"><h2 className="room-serif text-3xl leading-none md:text-4xl">{event.title}</h2><ArrowUpRight size={18} className="mt-1 shrink-0 opacity-30 transition group-hover:opacity-100" /></div>
               <p className="mt-2 text-sm text-[#6f6a61]">{event.date}</p>
               <p className="mt-5 text-sm leading-7 text-[#6f6a61]">{event.description}</p>
             </article>

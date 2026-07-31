@@ -4,7 +4,7 @@ import type { SiteSettings } from "@/lib/types";
 export function SiteFooter({ settings }: { settings: SiteSettings }) {
   const brand = "ROOM";
   return (
-    <footer className="border-t border-black/10 bg-[#11100e] py-12 text-[#f4f1ea]">
+    <footer className="border-t border-black/10 bg-[#11100e] py-10 text-[#f4f1ea] md:py-12">
       <div className="room-shell grid gap-8 md:grid-cols-[1.1fr_.9fr_.9fr]">
         <div>
           <Link href="/" className="room-serif text-4xl font-semibold">
@@ -19,7 +19,7 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
           <p>{settings.phone}</p>
           <p>{settings.email}</p>
         </div>
-        <div className="flex items-start gap-5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+        <div className="flex flex-wrap items-start gap-5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
           <a href={settings.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href={settings.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
         </div>

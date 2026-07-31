@@ -149,7 +149,7 @@ export function ArtistsCarousel({ artists }: ArtistsCarouselProps) {
         className="relative mx-auto flex items-center justify-center overflow-hidden"
         style={{
           perspective: 1000,
-          height: cardW * 1.9,
+          height: cardW * 1.85,
         }}
       >
         <motion.div
@@ -160,6 +160,7 @@ export function ArtistsCarousel({ artists }: ArtistsCarouselProps) {
             height: cardW * 1.4,
             transformStyle: "preserve-3d",
             cursor: canNavigate ? "grab" : "default",
+            willChange: "transform",
           }}
           drag={canNavigate ? "x" : false}
           dragConstraints={{ left: 0, right: 0 }}

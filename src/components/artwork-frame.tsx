@@ -35,8 +35,9 @@ export function ArtworkFrame({
 }) {
   const scale = scaleFactor(artwork.widthCm, artwork.heightCm);
 
-  const outerPadding = `${Math.round(12 + scale * 6)}px`;
-  const matPadding = `${Math.round(28 + scale * 16)}px`;
+  // Меньшие рамы на мобильном, чтобы картина помещалась на экран
+  const outerPadding = `${Math.round(8 + scale * 4)}px`;
+  const matPadding = `${Math.round(18 + scale * 10)}px`;
 
   return (
     <div className="frame-outer inline-block" style={{ padding: outerPadding }}>
@@ -93,8 +94,9 @@ function MagnifierLens({
   const [size, setSize] = useState({ w: 0, h: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const baseWidth = `${60 * scale}vw`;
-  const maxWidth = `${700 * scale}px`;
+  // На мобильном ограничиваем ширину картины окном
+  const baseWidth = `${Math.min(78, 60 * scale)}vw`;
+  const maxWidth = `${Math.min(420, 700 * scale)}px`;
 
   const handleMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const el = containerRef.current;

@@ -29,15 +29,15 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   return (
     <main>
       <SiteNav />
-      <section className="room-shell grid min-h-screen items-stretch gap-12 pt-28 md:grid-cols-2">
-        <div className="flex flex-col justify-center">
+      <section className="room-shell grid min-h-screen items-stretch gap-10 pt-24 md:grid-cols-2 md:gap-12 md:pt-28">
+        <div className="order-2 flex flex-col justify-center md:order-1">
           <div className="flex items-center gap-3"><p className="section-kicker text-[#6f6a61]">{event.type}</p><span className="border border-black/20 px-3 py-0.5 text-xs font-semibold uppercase tracking-[0.12em]">{event.status}</span></div>
-          <h1 className="room-serif mt-5 text-7xl font-medium leading-[0.88] md:text-9xl">{event.title}</h1>
-          <p className="mt-6 text-sm tracking-[0.08em] text-[#6f6a61]">{event.date}</p>
-          <p className="mt-8 max-w-lg text-sm leading-7 text-[#6f6a61]">{event.description}</p>
-          <Link href="/events" className="mt-10 inline-flex items-center gap-2 border-b border-black/20 pb-1 text-xs font-semibold uppercase tracking-[0.14em] transition hover:border-black/60"><ArrowUpRight size={16} /> All events</Link>
+          <h1 className="room-serif mt-4 text-5xl font-medium leading-[0.88] md:mt-5 md:text-7xl lg:text-9xl">{event.title}</h1>
+          <p className="mt-5 text-sm tracking-[0.08em] text-[#6f6a61] md:mt-6">{event.date}</p>
+          <p className="mt-6 max-w-lg text-sm leading-7 text-[#6f6a61] md:mt-8">{event.description}</p>
+          <Link href="/events" className="mt-8 inline-flex items-center gap-2 border-b border-black/20 pb-1 text-xs font-semibold uppercase tracking-[0.14em] transition hover:border-black/60 md:mt-10"><ArrowUpRight size={16} /> All events</Link>
         </div>
-        <div className="relative flex items-center justify-center">
+        <div className="relative order-1 flex items-center justify-center md:order-2">
           <div className="relative aspect-[3/4] w-full max-w-2xl overflow-hidden bg-black">
             <PositionedImage
               src={event.image}

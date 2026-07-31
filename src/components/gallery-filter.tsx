@@ -40,24 +40,24 @@ export function GalleryFilter({ data }: { data: SiteData }) {
 
   return (
     <>
-      <div className="grid gap-3 border-b border-black/10 pb-8 md:grid-cols-2">
+      <div className="grid gap-4 border-b border-black/10 pb-8 md:grid-cols-2">
         <Filter label="Artist" value={artist} options={artistOptions} getLabel={artistLabel} onChange={setArtist} />
         <Filter label="Format" value={format} options={formatOptions} onChange={setFormat} />
       </div>
-      <div className="mt-10 grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 md:mt-10">
         {filtered.map((artwork) => (
-          <Link href={`/gallery/${artwork.slug}`} key={artwork.slug} className="group block">
-            <div className="card-img-overlay relative aspect-4/5 overflow-hidden bg-[#e2ded4]">
+      <Link href={`/gallery/${artwork.slug}`} key={artwork.slug} className="group block">
+            <div className="card-img-overlay relative aspect-[3/4] overflow-hidden bg-[#e2ded4] sm:aspect-4/5">
               <RoomImage src={artwork.image} alt={artwork.title} fill className="object-cover transition duration-700 group-hover:scale-105" fallbackText={artwork.title} />
               <span className="overlay-text">View artwork</span>
             </div>
-            <div className="mt-4 flex items-start justify-between gap-4">
+              <div className="mt-4 flex items-start justify-between gap-4">
               <div>
                 <p className="section-kicker text-[#6f6a61]">{getFormat(artwork)}</p>
-                <h2 className="room-serif mt-2 text-3xl leading-none">{artwork.title}</h2>
+                <h2 className="room-serif mt-2 text-2xl leading-none md:text-3xl">{artwork.title}</h2>
                 <p className="mt-2 text-sm text-[#6f6a61]">{artistLabel(artwork.artistSlug)}</p>
               </div>
-              <ArrowUpRight size={18} className="opacity-30 transition group-hover:opacity-100" />
+              <ArrowUpRight size={18} className="mt-1 opacity-30 transition group-hover:opacity-100" />
             </div>
           </Link>
         ))}

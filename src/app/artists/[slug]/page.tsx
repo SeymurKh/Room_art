@@ -36,31 +36,31 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   return (
     <main>
       <SiteNav />
-      <section className="room-shell grid min-h-screen gap-12 pt-28 md:grid-cols-[.85fr_1.15fr]">
-        <div>
+      <section className="room-shell grid min-h-screen gap-10 pt-24 md:grid-cols-[.85fr_1.15fr] md:gap-12 md:pt-28">
+        <div className="order-2 md:order-1">
           <p className="section-kicker text-[#6f6a61]">{artist.role}</p>
-          <h1 className="room-serif mt-5 text-7xl font-medium leading-[0.88] md:text-9xl">{artist.name}</h1>
-          <p className="mt-8 max-w-lg text-sm leading-7 text-[#6f6a61]">{artist.bio}</p>
-          <blockquote className="room-serif mt-10 max-w-lg border-l border-black/20 pl-6 text-3xl leading-tight">
+          <h1 className="room-serif mt-3 text-5xl font-medium leading-[0.88] md:mt-5 md:text-7xl lg:text-9xl">{artist.name}</h1>
+          <p className="mt-6 max-w-lg text-sm leading-7 text-[#6f6a61] md:mt-8">{artist.bio}</p>
+          <blockquote className="room-serif mt-8 max-w-lg border-l border-black/20 pl-5 text-2xl leading-tight md:mt-10 md:pl-6 md:text-3xl">
             {artist.statement}
           </blockquote>
         </div>
-        <div className="relative min-h-160 overflow-hidden bg-black">
+        <div className="relative order-1 aspect-[3/4] overflow-hidden bg-black md:order-2 md:aspect-auto md:min-h-160">
           <RoomImage src={artist.portrait} alt={artist.name} fill priority className="object-cover grayscale" fallbackText={artist.name} />
         </div>
       </section>
-      <section className="room-shell py-20">
+      <section className="room-shell py-16 md:py-20">
         <p className="section-kicker text-[#6f6a61]">Artworks</p>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 md:mt-8">
           {artworks.map((artwork) => (
             <Link href={`/gallery/${artwork.slug}`} key={artwork.slug} className="group">
-              <div className="card-img-overlay relative aspect-4/5 overflow-hidden">
+              <div className="card-img-overlay relative aspect-[3/4] overflow-hidden sm:aspect-4/5">
                 <RoomImage src={artwork.image} alt={artwork.title} fill className="object-cover transition duration-700 group-hover:scale-105" fallbackText={artwork.title} />
                 <span className="overlay-text">View artwork</span>
               </div>
               <div className="mt-4 flex justify-between gap-4">
-                <h2 className="room-serif text-3xl">{artwork.title}</h2>
-                <ArrowUpRight size={18} className="opacity-30 transition group-hover:opacity-100" />
+                <h2 className="room-serif text-2xl md:text-3xl">{artwork.title}</h2>
+                <ArrowUpRight size={18} className="mt-0.5 opacity-30 transition group-hover:opacity-100" />
               </div>
             </Link>
           ))}

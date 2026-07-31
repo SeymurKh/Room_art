@@ -8,7 +8,7 @@ export default async function GalleryPage() {
   return (
     <main>
       <PageHero settings={data.settings} kicker="Artworks" title="Gallery" copy="A catalogue of ROOM artworks with filters by artist, medium, category, and availability." />
-      <section className="room-shell py-16">
+      <section className="room-shell py-12 md:py-16">
         <GalleryFilter data={data} />
       </section>
       <SiteFooter settings={data.settings} />

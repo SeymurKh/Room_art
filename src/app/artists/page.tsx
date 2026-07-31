@@ -10,7 +10,7 @@ export default async function ArtistsPage() {
   return (
     <main>
       <PageHero settings={data.settings} kicker="Room artist base" title="Artists" copy="Artists we work with, individual profiles, statements, and portfolios." />
-      <section className="room-shell grid gap-3 py-16 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="room-shell grid gap-4 py-12 sm:grid-cols-2 lg:grid-cols-4 md:py-16">
         {data.artists.map((artist) => (
           <Link href={`/artists/${artist.slug}`} key={artist.slug} className="group">
             <div className="card-img-overlay relative aspect-[3/4] overflow-hidden bg-black">
@@ -22,7 +22,7 @@ export default async function ArtistsPage() {
                 <h2 className="text-sm font-semibold uppercase tracking-[0.12em]">{artist.name}</h2>
                 <p className="mt-1 text-sm text-[#6f6a61]">{artist.role}</p>
               </div>
-              <ArrowUpRight size={18} className="opacity-30 transition group-hover:opacity-100" />
+              <ArrowUpRight size={18} className="mt-0.5 opacity-30 transition group-hover:opacity-100" />
             </div>
           </Link>
         ))}

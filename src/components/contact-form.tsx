@@ -24,7 +24,7 @@ export function ContactForm({ settings }: { settings: SiteSettings }) {
   }
 
   return (
-    <div className="grid gap-4 border border-black/10 bg-white/35 p-6 md:p-10">
+    <div className="grid gap-4 border border-black/10 bg-white/35 p-5 md:p-10">
       <input
         className="admin-input"
         name="name"
@@ -58,7 +58,7 @@ export function ContactForm({ settings }: { settings: SiteSettings }) {
         href={buildWhatsAppUrl()}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex w-fit items-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]"
+        className="inline-flex w-full items-center justify-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea] md:w-fit"
       >
         Send on WhatsApp <ArrowUpRight size={16} />
       </a>
