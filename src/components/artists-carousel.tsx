@@ -110,7 +110,7 @@ export function ArtistsCarousel({ artists }: ArtistsCarouselProps) {
   const cards = [];
   for (let offset = -half; offset <= half; offset++) {
     const idx = ((active + offset) % n + n) % n;
-    cards.push({ artist: artists[idx], offset });
+    cards.push({ artist: artists[idx], offset, key: active + offset });
   }
 
   return (
@@ -173,13 +173,13 @@ export function ArtistsCarousel({ artists }: ArtistsCarouselProps) {
             resumeTimerRef.current = setTimeout(() => setPaused(false), RESUME_DELAY);
           }}
         >
-          {cards.map(({ artist, offset }) => {
+          {cards.map(({ artist, offset, key }) => {
             const pos = slotPosition(offset, VISIBLE_SLOTS, radius);
             const isCenter = offset === 0;
 
             return (
               <motion.div
-                key={artist.slug}
+                key={key}
                 className="absolute left-0 top-0"
                 style={{ width: cardW, transformStyle: "preserve-3d" }}
                 animate={{
