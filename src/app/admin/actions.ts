@@ -57,12 +57,12 @@ export async function saveAdminData(formData: FormData) {
     const incoming = JSON.parse(payload);
     const current = await getSiteData();
 
-    // Delete images removed from exhibitions (including deleted events and replaced images)
-    const removedExhibitionImages = findRemovedImages(current.exhibitions, incoming.exhibitions ?? []);
+    // Delete images removed from events (including deleted events and replaced images)
+    const removedEventImages = findRemovedImages(current.events, incoming.events ?? []);
     const pendingDeletions: string[] = Array.isArray(incoming.__pendingDeletions) ? incoming.__pendingDeletions : [];
-    const imagesToDelete = new Set([...removedExhibitionImages, ...pendingDeletions]);
+    const imagesToDelete = new Set([...removedEventImages, ...pendingDeletions]);
 
-    // Dashboard only edits settings/about/exhibitions — preserve current artists/artworks
+    // Dashboard only edits settings/about/events — preserve current artists/artworks
     // to prevent data loss when editing artist/artwork in another tab.
     const merged = {
       ...incoming,

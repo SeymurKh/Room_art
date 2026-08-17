@@ -27,14 +27,14 @@ const reveal = {
 
 export function HomeExperience({ data }: { data: SiteData }) {
   const { displayed, cursor } = useTypewriter();
-  const current = data.exhibitions.find((item) => item.status === "Current" && item.featured) ?? data.exhibitions.find((item) => item.status === "Current") ?? null;
-  const upcoming = data.exhibitions.find((item) => item.status === "Upcoming" && item.featured) ?? data.exhibitions.find((item) => item.status === "Upcoming") ?? null;
+  const current = data.events.find((item) => item.status === "Current" && item.featured) ?? data.events.find((item) => item.status === "Current") ?? null;
+  const upcoming = data.events.find((item) => item.status === "Upcoming" && item.featured) ?? data.events.find((item) => item.status === "Upcoming") ?? null;
   const displayedArtworks = data.artworks.filter((a) => a.displayed);
 
   const showcase = [
     {
-      kicker: "Current exhibition",
-      title: current?.title ?? "No current exhibition",
+      kicker: "Current event",
+      title: current?.title ?? "No current event",
       meta: current?.date ?? "",
       href: current ? `/events/${current.slug}` : "/events",
     },
@@ -110,9 +110,9 @@ export function HomeExperience({ data }: { data: SiteData }) {
       </section>
 
       <div className="hidden md:block">
-        <EventsScrolltelling exhibitions={data.exhibitions} />
+        <EventsScrolltelling events={data.events} />
       </div>
-      <MobileEventsCarousel exhibitions={data.exhibitions} />
+      <MobileEventsCarousel events={data.events} />
 
       <section className="border-y border-black/10 bg-[#ebe7df] py-20 md:py-32">
         <div className="room-shell grid gap-10 md:grid-cols-[.85fr_1.15fr]">
@@ -125,7 +125,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
 
       <section className="room-shell py-20 md:py-32">
         <motion.div {...reveal} className="grid gap-8 md:grid-cols-[.8fr_1.2fr]">
-          <SectionHeading kicker="Contact / collaboration" title="Let's connect" copy="For collaborations, exhibitions, artist proposals, and private viewings." />
+          <SectionHeading kicker="Contact / collaboration" title="Let's connect" copy="For collaborations, events, artist proposals, and private viewings." />
           <div className="border border-black/10 bg-white/35 p-5 md:p-10">
             <p className="text-sm leading-7 text-[#6f6a61]">{data.settings.address}</p>
             <p className="mt-3 text-sm md:mt-4">{data.settings.email}</p>

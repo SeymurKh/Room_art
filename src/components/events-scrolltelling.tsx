@@ -4,9 +4,9 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useScroll, motion, useTransform, useSpring, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { PositionedImage } from "@/components/positioned-image";
-import type { Exhibition } from "@/lib/types";
+import type { Event } from "@/lib/types";
 
-type EventsScrolltellingProps = { exhibitions: Exhibition[] };
+type EventsScrolltellingProps = { events: Event[] };
 
 export const STRIPES = [
   { key: "Upcoming" as const, clipPath: "polygon(0 0, 40% 0, 20% 100%, 0 100%)" },
@@ -14,12 +14,12 @@ export const STRIPES = [
   { key: "Past" as const, clipPath: "polygon(80% 0, 100% 0, 100% 100%, 60% 100%)" },
 ];
 
-function findFeaturedEvent(exhibitions: Exhibition[], status: Exhibition["status"]) {
-  const matches = exhibitions.filter((e) => e.status === status);
+function findFeaturedEvent(events: Event[], status: Event["status"]) {
+  const matches = events.filter((e) => e.status === status);
   return matches.find((e) => e.featured) ?? matches[0] ?? null;
 }
 
-export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
+export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -48,10 +48,10 @@ export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
   // Keep spring target in sync with raw scroll progress.
   useMotionValueEvent(scrollYProgress, "change", (p) => target.set(p));
 
-  const events = [
-    findFeaturedEvent(exhibitions, "Upcoming"),
-    findFeaturedEvent(exhibitions, "Current"),
-    findFeaturedEvent(exhibitions, "Past"),
+  const scrolled = [
+    findFeaturedEvent(events, "Upcoming"),
+    findFeaturedEvent(events, "Current"),
+    findFeaturedEvent(events, "Past"),
   ] as const;
 
   return (
@@ -61,7 +61,7 @@ export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
 
       <section className="sticky top-0 h-screen overflow-hidden bg-[#11100e]">
         {STRIPES.map((stripe, i) => {
-          const event = events[i];
+          const event = scrolled[i];
           const opacity = opacities[i];
           return (
             <motion.div
@@ -106,7 +106,7 @@ export function EventsScrolltelling({ exhibitions }: EventsScrolltellingProps) {
         })}
         <div className="pointer-events-none absolute bottom-6 left-0 right-0 z-30 text-center">
           <p className="room-serif text-sm italic text-[#f4f1ea]/25 md:text-base">
-            Exhibitions & events at ROOM
+            Events at ROOM
           </p>
         </div>
       </section>

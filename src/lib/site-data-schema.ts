@@ -33,10 +33,9 @@ const artworkSchema = z.object({
   displayed: z.boolean().default(false),
 });
 
-const exhibitionSchema = z.object({
+const eventSchema = z.object({
   slug: z.string().min(1),
   title: z.string().min(1),
-  type: z.enum(["Exhibition", "Event"]),
   status: z.enum(["Upcoming", "Current", "Past"]),
   date: z.string().min(1, "Date is required"),
   image: z.string(),
@@ -59,7 +58,7 @@ export const siteDataSchema = z.object({
   settings: siteSettingsSchema,
   artists: z.array(artistSchema),
   artworks: z.array(artworkSchema),
-  exhibitions: z.array(exhibitionSchema),
+  events: z.array(eventSchema),
   about: aboutContentSchema,
 });
 

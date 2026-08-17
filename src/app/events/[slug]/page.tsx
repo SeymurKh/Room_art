@@ -10,13 +10,13 @@ import { getSiteData } from "@/lib/site-data";
 
 export async function generateStaticParams() {
   const data = await getSiteData();
-  return data.exhibitions.map((event) => ({ slug: event.slug }));
+  return data.events.map((event) => ({ slug: event.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const data = await getSiteData();
-  const event = data.exhibitions.find((item) => item.slug === slug);
+  const event = data.events.find((item) => item.slug === slug);
   if (!event) return { title: "Event not found" };
   return { title: event.title, description: event.description };
 }
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const data = await getSiteData();
-  const event = data.exhibitions.find((item) => item.slug === slug);
+  const event = data.events.find((item) => item.slug === slug);
   if (!event) notFound();
 
   return (
@@ -32,7 +32,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       <SiteNav />
       <section className="room-shell grid min-h-screen items-stretch gap-10 pt-24 md:grid-cols-2 md:gap-12 md:pt-28">
         <div className="order-2 flex flex-col justify-center md:order-1">
-          <div className="flex items-center gap-3"><p className="section-kicker text-[#6f6a61]">{event.type}</p><span className="border border-black/20 px-3 py-0.5 text-xs font-semibold uppercase tracking-[0.12em]">{event.status}</span></div>
+          <div className="flex items-center gap-3"><span className="border border-black/20 px-3 py-0.5 text-xs font-semibold uppercase tracking-[0.12em]">{event.status}</span></div>
           <h1 className="room-serif mt-4 text-5xl font-medium leading-[0.88] md:mt-5 md:text-7xl lg:text-9xl">{event.title}</h1>
           <p className="mt-5 text-sm tracking-[0.08em] text-[#6f6a61] md:mt-6">{event.date}</p>
           <p className="mt-6 max-w-lg text-sm leading-7 text-[#6f6a61] md:mt-8">{event.description}</p>

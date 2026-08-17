@@ -327,11 +327,10 @@
       "displayed": false
     }
   ],
-  "exhibitions": [
+  "events": [
     {
       "slug": "seven-ya",
       "title": "7YA (SevenYouAre)",
-      "type": "Exhibition",
       "status": "Past",
       "date": "8–14 September 2025, Ivanovka",
       "image": "/uploads/events/2b59e2d9-6e78-46d6-9429-ba6683789a93.webp",

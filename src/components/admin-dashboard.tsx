@@ -5,8 +5,9 @@ import Link from "next/link";
 import { Check, LogOut, Save, Star, Trash2 } from "lucide-react";
 import { UploadField } from "@/components/upload-field";
 import { PositionedImage, buildTransform } from "@/components/positioned-image";
+import { EventMediaManager } from "@/components/event-media-manager";
 import { STRIPES } from "@/components/events-scrolltelling";
-import type { SiteData, Exhibition } from "@/lib/types";
+import type { SiteData, Event } from "@/lib/types";
 import { logoutAdmin, saveAdminData } from "@/app/admin/actions";
 
 type Tab = "settings" | "about" | "events";
@@ -19,8 +20,7 @@ const tabs: [Tab, string][] = [
   ["events", "Events"],
 ];
 
-
-function getHeroClipPath(status: Exhibition["status"]): string {
+function getHeroClipPath(status: Event["status"]): string {
   const stripe = STRIPES.find((s) => s.key === status);
   return stripe?.clipPath ?? STRIPES[0].clipPath;
 }
@@ -33,22 +33,22 @@ function PreviewBlock({
   label,
   event,
   index,
-  updateExhibitions,
+  updateEvents,
   previewKey,
   containerClassName,
   containerStyle,
   dimmed = false,
 }: {
   label: string;
-  event: Exhibition;
+  event: Event;
   index: number;
-  updateExhibitions: (fn: (prev: Exhibition[]) => Exhibition[]) => void;
+  updateEvents: (fn: (prev: Event[]) => Event[]) => void;
   previewKey: PreviewKey;
   containerClassName: string;
   containerStyle?: React.CSSProperties;
   dimmed?: boolean;
 }) {
-  const field = `${previewKey}Transform` as keyof Exhibition;
+  const field = `${previewKey}Transform` as keyof Event;
   const transform = (event[field] as string) ?? "translate(0px, 0px) scale(1)";
   const parsed = (() => {
     const m = transform.match(/translate\(([^)]+)\)\s*scale\(([^)]+)\)/);
@@ -62,12 +62,11 @@ function PreviewBlock({
   })();
 
   const containerRef = useRef<HTMLDivElement>(null);
-
   const lastMouseRef = useRef({ x: 0, y: 0 });
 
   function saveTransform(tx: number, ty: number, scale: number) {
     const value = buildTransform(tx, ty, scale);
-    updateExhibitions((prev) =>
+    updateEvents((prev) =>
       prev.map((ev, i) => (i === index ? { ...ev, [field]: value } : ev))
     );
   }
@@ -84,14 +83,12 @@ function PreviewBlock({
     const dx = clientX - lastMouseRef.current.x;
     const dy = clientY - lastMouseRef.current.y;
     lastMouseRef.current = { x: clientX, y: clientY };
-    // translate(...) is applied after scale(...) in the CSS transform, so
-    // 1px of translate equals 1px on screen regardless of scale.
     saveTransform(parsed.tx + dx, parsed.ty + dy, parsed.scale);
   }
 
   return (
     <div className={`flex flex-col gap-2 ${dimmed ? "opacity-40" : ""}`}>
-        <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <p className="text-xs text-[#6f6a61]">{label}</p>
         <button
           type="button"
@@ -167,35 +164,46 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
     setData((current) => ({ ...current, [key]: value }));
   }
 
-  const updateExhibitions = useCallback((fn: (prev: Exhibition[]) => Exhibition[]) => {
-    setData((prev) => ({ ...prev, exhibitions: fn(prev.exhibitions) }));
+  const updateEvents = useCallback((fn: (prev: Event[]) => Event[]) => {
+    setData((prev) => ({ ...prev, events: fn(prev.events) }));
   }, []);
 
-  const deleteEvent = useCallback((event: Exhibition) => {
+  const scheduleDeletion = useCallback((path: string) => {
+    if (!path || !path.startsWith("/uploads/")) return;
+    setPendingDeletions((prev) => (prev.includes(path) ? prev : [...prev, path]));
+  }, []);
+
+  const deleteEvent = useCallback((event: Event) => {
     if (!window.confirm(`Delete "${event.title}"?`)) return;
     if (event.image && event.image.startsWith("/uploads/")) {
-      setPendingDeletions((prev) => (prev.includes(event.image) ? prev : [...prev, event.image]));
+      scheduleDeletion(event.image);
     }
-    setData((prev) => ({ ...prev, exhibitions: prev.exhibitions.filter((e) => e.slug !== event.slug) }));
-  }, []);
+    if (event.video && event.video.startsWith("/uploads/")) {
+      scheduleDeletion(event.video);
+    }
+    (event.gallery ?? []).forEach((p) => {
+      if (p.startsWith("/uploads/")) scheduleDeletion(p);
+    });
+    setData((prev) => ({ ...prev, events: prev.events.filter((e) => e.slug !== event.slug) }));
+  }, [scheduleDeletion]);
 
   const toggleFeatured = useCallback((index: number, currentFeatured: boolean) => {
     setData((prev) => {
-      const event = prev.exhibitions[index];
+      const event = prev.events[index];
       if (!event) return prev;
       const newFeatured = !currentFeatured;
-      const updated = prev.exhibitions.map((ev, i) => {
+      const updated = prev.events.map((ev, i) => {
         if (newFeatured && i !== index && ev.status === event.status && ev.featured) return { ...ev, featured: false };
         if (i === index) return { ...ev, featured: newFeatured };
         return ev;
       });
-      return { ...prev, exhibitions: updated };
+      return { ...prev, events: updated };
     });
   }, []);
 
-  const currentEvents = data.exhibitions.filter((e) => e.status === "Current");
-  const upcomingEvents = data.exhibitions.filter((e) => e.status === "Upcoming");
-  const pastEvents = data.exhibitions.filter((e) => e.status === "Past");
+  const currentEvents = data.events.filter((e) => e.status === "Current");
+  const upcomingEvents = data.events.filter((e) => e.status === "Upcoming");
+  const pastEvents = data.events.filter((e) => e.status === "Past");
   const eventList = eventSection === "current" ? currentEvents : eventSection === "upcoming" ? upcomingEvents : pastEvents;
 
   return (
@@ -223,7 +231,7 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
           <div className="mb-5 flex flex-wrap gap-2">{([["current", `Current (${currentEvents.length})`], ["upcoming", `Upcoming (${upcomingEvents.length})`], ["past", `Past (${pastEvents.length})`]] as [EventSection, string][]).map(([section, label]) => <button key={section} type="button" onClick={() => setEventSection(section)} className={`px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] ${eventSection === section ? "bg-[#11100e] text-[#f4f1ea]" : "border border-black/40 text-[#11100e] transition hover:bg-black/5"}`}>{label}</button>)}</div>
           <Panel title={eventSection.charAt(0).toUpperCase() + eventSection.slice(1)}>
             {eventList.length === 0 ? <p className="py-4 text-sm text-[#6f6a61]">No events in this section.</p> : <div className="grid gap-5">{eventList.map((event) => {
-              const eventIndex = data.exhibitions.findIndex((e) => e.slug === event.slug);
+              const eventIndex = data.events.findIndex((e) => e.slug === event.slug);
               return (
               <article key={event.slug} className="border border-black/10 bg-[#f4f1ea] p-4">
                 <div className="mb-4 flex items-center justify-between gap-4">
@@ -235,11 +243,10 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                   </div>
                   <button type="button" onClick={() => deleteEvent(event)} className="grid size-10 place-items-center border border-black/40 text-[#11100e] transition hover:border-red-400 hover:text-red-600"><Trash2 size={16} /></button>
                 </div>
-                <Grid>{(["title", "type", "status", "date", "image", "description"] as (keyof Exhibition)[]).map((key) => {
-                  if (key === "image") return <UploadField key={key} label="Image" value={event.image} onChange={(v) => updateExhibitions((prev) => prev.map((e, i) => i === eventIndex ? { ...e, image: v } : e))} folder="uploads/events" />;
-                  if (key === "type") return <label key={key} className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Type<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.type} onChange={(e) => updateExhibitions((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, type: e.target.value as Exhibition["type"] } : ev))}><option value="Exhibition">Exhibition</option><option value="Event">Event</option></select></label>;
-                  if (key === "status") return <label key={key} className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Status<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.status} onChange={(e) => updateExhibitions((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, status: e.target.value as Exhibition["status"] } : ev))}><option value="Upcoming">Upcoming</option><option value="Current">Current</option><option value="Past">Past</option></select></label>;
-                  return <Field key={key} multiline={key === "description"} label={key} value={String(event[key])} onChange={(v) => updateExhibitions((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, [key]: v } : ev))} />;
+                <Grid>{(["title", "status", "date", "image", "description"] as (keyof Event)[]).map((key) => {
+                  if (key === "image") return <UploadField key={key} label="Image" value={event.image} onChange={(v) => updateEvents((prev) => prev.map((e, i) => i === eventIndex ? { ...e, image: v } : e))} folder="uploads/events" />;
+                  if (key === "status") return <label key={key} className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Status<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.status} onChange={(e) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, status: e.target.value as Event["status"] } : ev))}><option value="Upcoming">Upcoming</option><option value="Current">Current</option><option value="Past">Past</option></select></label>;
+                  return <Field key={key} multiline={key === "description"} label={key} value={String(event[key])} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, [key]: v } : ev))} />;
                 })}</Grid>
                 <div className="mt-5 border-t border-black/10 pt-5">
                   <div className="flex items-center justify-between mb-4">
@@ -247,15 +254,22 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                     <Link href="/events" target="_blank" className="text-[10px] uppercase tracking-wider text-[#6f6a61] underline hover:text-[#11100e]">View site →</Link>
                   </div>
                   <div className="grid gap-5 md:grid-cols-3">
-                    <PreviewBlock label="Hero" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="hero" containerClassName="h-80 bg-[#11100e]" containerStyle={{ clipPath: getHeroClipPath(event.status) }} dimmed={!event.featured} />
-                    <PreviewBlock label="Thumbnail" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="thumb" containerClassName="aspect-4/3 bg-[#ebe7df]" />
-                    <PreviewBlock label="Detail" event={event} index={eventIndex} updateExhibitions={updateExhibitions} previewKey="detail" containerClassName="aspect-[3/4] bg-black" />
+                    <PreviewBlock label="Hero" event={event} index={eventIndex} updateEvents={updateEvents} previewKey="hero" containerClassName="h-80 bg-[#11100e]" containerStyle={{ clipPath: getHeroClipPath(event.status) }} dimmed={!event.featured} />
+                    <PreviewBlock label="Thumbnail" event={event} index={eventIndex} updateEvents={updateEvents} previewKey="thumb" containerClassName="aspect-4/3 bg-[#ebe7df]" />
+                    <PreviewBlock label="Detail" event={event} index={eventIndex} updateEvents={updateEvents} previewKey="detail" containerClassName="aspect-[3/4] bg-black" />
                   </div>
                 </div>
+                <EventMediaManager
+                  photos={event.gallery ?? []}
+                  video={event.video ?? ""}
+                  onPhotosChange={(photos) => updateEvents((prev) => prev.map((e, i) => i === eventIndex ? { ...e, gallery: photos } : e))}
+                  onVideoChange={(video) => updateEvents((prev) => prev.map((e, i) => i === eventIndex ? { ...e, video } : e))}
+                  scheduleDeletion={scheduleDeletion}
+                />
               </article>
               );
             })}</div>}
-            <button type="button" onClick={() => update("exhibitions", [...data.exhibitions, { slug: `event-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`, title: "New Event", type: "Exhibition" as const, status: eventSection === "current" ? "Current" : eventSection === "upcoming" ? "Upcoming" : "Past", date: "", image: "", heroTransform: "translate(0px, 0px) scale(1)", thumbTransform: "translate(0px, 0px) scale(1)", detailTransform: "translate(0px, 0px) scale(1)", featured: false, description: "" }])} className="mt-5 inline-flex items-center gap-2 border border-black/40 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#11100e] transition hover:bg-black/5">+ Add event</button>
+            <button type="button" onClick={() => update("events", [...data.events, { slug: `event-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`, title: "New Event", status: eventSection === "current" ? "Current" : eventSection === "upcoming" ? "Upcoming" : "Past", date: "", image: "", heroTransform: "translate(0px, 0px) scale(1)", thumbTransform: "translate(0px, 0px) scale(1)", detailTransform: "translate(0px, 0px) scale(1)", featured: false, description: "", gallery: [], video: "" }])} className="mt-5 inline-flex items-center gap-2 border border-black/40 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#11100e] transition hover:bg-black/5">+ Add event</button>
           </Panel>
         </div>}
       </form>

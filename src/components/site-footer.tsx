@@ -11,7 +11,7 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
             {brand}
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-6 text-white/58">
-            Contemporary art, exhibitions, artists, and cultural encounters in Baku.
+            Contemporary art, events, artists, and cultural encounters in Baku.
           </p>
         </div>
         <div className="text-sm leading-7 text-white/70">

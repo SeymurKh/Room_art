@@ -6,10 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:generate": "drizzle-kit generate",
+    "db:seed": "tsx scripts/seed.ts"
   },
   "dependencies": {
     "@react-three/fiber": "^9.6.1",
+    "better-sqlite3": "^13.0.3",
+    "drizzle-orm": "^0.45.2",
     "framer-motion": "^12.42.0",
     "lucide-react": "^1.21.0",
     "next": "16.2.9",
@@ -21,13 +25,16 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.185.1",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
+    "tsx": "^4.23.12",
     "typescript": "^5"
   }
 }

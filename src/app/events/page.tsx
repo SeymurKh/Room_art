@@ -4,15 +4,16 @@ import { PageHero } from "@/components/page-hero";
 import { SiteFooter } from "@/components/site-footer";
 import { PositionedImage } from "@/components/positioned-image";
 import { getSiteData } from "@/lib/site-data";
+import type { Event } from "@/lib/types";
 
 export default async function EventsPage() {
   const data = await getSiteData();
-  const current = data.exhibitions.filter((item) => item.status === "Current");
-  const upcoming = data.exhibitions.filter((item) => item.status === "Upcoming");
-  const past = data.exhibitions.filter((item) => item.status === "Past");
+  const current = data.events.filter((item) => item.status === "Current");
+  const upcoming = data.events.filter((item) => item.status === "Upcoming");
+  const past = data.events.filter((item) => item.status === "Past");
   return (
     <main>
-      <PageHero settings={data.settings} kicker="Exhibitions & events" title="Upcoming and archive" copy="Current exhibitions, artist talks, and past ROOM projects." />
+      <PageHero settings={data.settings} kicker="Events" title="Upcoming and archive" copy="Current events, artist talks, and past ROOM projects." />
       <EventGroup title="Current" events={current} />
       <EventGroup title="Upcoming" events={upcoming} />
       <EventGroup title="Past archive" events={past} />
@@ -21,7 +22,7 @@ export default async function EventsPage() {
   );
 }
 
-function EventGroup({ title, events }: { title: string; events: Awaited<ReturnType<typeof getSiteData>>["exhibitions"] }) {
+function EventGroup({ title, events }: { title: string; events: Event[] }) {
   return (
     <section className="room-shell border-b border-black/10 py-12 md:py-16">
       <p className="section-kicker text-[#6f6a61]">{title}</p>
@@ -38,8 +39,10 @@ function EventGroup({ title, events }: { title: string; events: Awaited<ReturnTy
                 />
                 <span className="overlay-text">View event</span>
               </div>
-              <p className="section-kicker mt-5 text-[#6f6a61]">{event.type}</p>
-              <div className="mt-2 flex items-start justify-between gap-3"><h2 className="room-serif text-3xl leading-none md:text-4xl">{event.title}</h2><ArrowUpRight size={18} className="mt-1 shrink-0 opacity-30 transition group-hover:opacity-100" /></div>
+              <div className="mt-5 flex items-start justify-between gap-3">
+                <h2 className="room-serif text-3xl leading-none md:text-4xl">{event.title}</h2>
+                <ArrowUpRight size={18} className="mt-1 shrink-0 opacity-30 transition group-hover:opacity-100" />
+              </div>
               <p className="mt-2 text-sm text-[#6f6a61]">{event.date}</p>
               <p className="mt-5 text-sm leading-7 text-[#6f6a61]">{event.description}</p>
             </article>

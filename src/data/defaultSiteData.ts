@@ -52,11 +52,10 @@ export const defaultSiteData: SiteData = {
     },
   ],
   artworks: [],
-  exhibitions: [
+  events: [
     {
       slug: "artist-talk-with-elnur",
       title: "Artist Talk with Elnur",
-      type: "Event",
       status: "Upcoming",
       date: "15 Jun 2026",
       image: "/assets/events/artist-talk.jpg",
@@ -69,7 +68,6 @@ export const defaultSiteData: SiteData = {
     {
       slug: "seven-ya",
       title: "7YA (SevenYouAre)",
-      type: "Exhibition",
       status: "Past",
       date: "8–14 September 2025, Ivanovka",
       image: "/assets/events/7ya-artists.webp",
@@ -92,7 +90,6 @@ export const defaultSiteData: SiteData = {
     {
       slug: "memories-of-objects",
       title: "Memories of Objects",
-      type: "Exhibition",
       status: "Past",
       date: "Aug 2024",
       image: "/assets/events/memories.jpg",

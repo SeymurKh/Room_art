@@ -5,7 +5,7 @@ import { randomUUID } from "crypto";
 import sharp from "sharp";
 import { isAdmin } from "@/lib/auth";
 
-const ALLOWED_MIME = [
+const ALLOWED_IMAGE_MIME = [
   "image/jpeg",
   "image/png",
   "image/webp",
@@ -13,7 +13,10 @@ const ALLOWED_MIME = [
   "image/gif",
 ];
 
-const MAX_INPUT_SIZE = 100 * 1024 * 1024; // 100 MB
+const ALLOWED_VIDEO_MIME = ["video/mp4", "video/webm"];
+
+const MAX_INPUT_SIZE = 100 * 1024 * 1024; // 100 MB for images
+const MAX_VIDEO_SIZE = 200 * 1024 * 1024; // 200 MB for video
 const MAX_OUTPUT_SIZE = 2 * 1024 * 1024; // 2 MB
 const MAX_DIMENSION = 2400;
 const DEFAULT_QUALITY = 85;
@@ -29,7 +32,7 @@ function isUnderUploads(filePath: string): boolean {
 }
 
 async function optimizeImage(input: Buffer): Promise<Buffer> {
-  let pipeline = sharp(input).rotate().toColorspace("srgb"); // preserve orientation, normalize color space
+  let pipeline = sharp(input).rotate().toColorspace("srgb");
 
   const metadata = await pipeline.metadata();
   const width = metadata.width ?? 0;
@@ -46,7 +49,6 @@ async function optimizeImage(input: Buffer): Promise<Buffer> {
 
   let output = await pipeline.webp({ quality: DEFAULT_QUALITY }).toBuffer();
 
-  // If still too large, try lower quality without resizing.
   if (output.length > MAX_OUTPUT_SIZE) {
     output = await sharp(input)
       .rotate()
@@ -64,6 +66,16 @@ async function optimizeImage(input: Buffer): Promise<Buffer> {
   return output;
 }
 
+function isAllowed(folder: string, mime: string): boolean {
+  const path_ = folder.replace(/\\/g, "/").toLowerCase();
+  if (path_.includes("video")) return ALLOWED_VIDEO_MIME.includes(mime);
+  return ALLOWED_IMAGE_MIME.includes(mime);
+}
+
+function maxSizeFor(mime: string): number {
+  return ALLOWED_VIDEO_MIME.includes(mime) ? MAX_VIDEO_SIZE : MAX_INPUT_SIZE;
+}
+
 export async function POST(request: NextRequest) {
   if (!(await isAdmin())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -76,16 +88,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "No file provided" }, { status: 400 });
   }
 
-  if (!ALLOWED_MIME.includes(file.type)) {
+  if (!isAllowed(folder, file.type)) {
     return NextResponse.json(
-      { error: `File type "${file.type}" is not allowed. Allowed: ${ALLOWED_MIME.join(", ")}` },
+      { error: `File type "${file.type}" is not allowed for this folder.` },
       { status: 400 }
     );
   }
 
-  if (file.size > MAX_INPUT_SIZE) {
+  const maxSize = maxSizeFor(file.type);
+  if (file.size > maxSize) {
     return NextResponse.json(
-      { error: `File size ${(file.size / 1024 / 1024).toFixed(1)}MB exceeds the 100MB limit.` },
+      { error: `File size ${(file.size / 1024 / 1024).toFixed(1)}MB exceeds the ${maxSize / 1024 / 1024}MB limit.` },
       { status: 400 }
     );
   }
@@ -93,12 +106,23 @@ export async function POST(request: NextRequest) {
   const uploadsDir = path.resolve(process.cwd(), "public", folder.replace(/\//g, path.sep));
   await fs.mkdir(uploadsDir, { recursive: true });
 
-  const uniqueName = `${randomUUID()}.webp`;
+  const isVideo = ALLOWED_VIDEO_MIME.includes(file.type);
+  const ext = isVideo
+    ? file.type === "video/webm"
+      ? "webm"
+      : "mp4"
+    : "webp";
+  const uniqueName = `${randomUUID()}.${ext}`;
   const filePath = path.join(uploadsDir, uniqueName);
 
   const inputBuffer = Buffer.from(await file.arrayBuffer());
-  const outputBuffer = await optimizeImage(inputBuffer);
-  await fs.writeFile(filePath, outputBuffer);
+
+  if (isVideo) {
+    await fs.writeFile(filePath, inputBuffer);
+  } else {
+    const outputBuffer = await optimizeImage(inputBuffer);
+    await fs.writeFile(filePath, outputBuffer);
+  }
 
   const publicPath = `/${folder}/${uniqueName}`;
   return NextResponse.json({ path: publicPath });

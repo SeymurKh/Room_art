@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     template: "%s — ROOM Baku",
   },
   description:
-    "A contemporary art space and gallery platform in Baku, Azerbaijan. Exhibitions, artists, and cultural encounters.",
+    "A contemporary art space and gallery platform in Baku, Azerbaijan. Events, artists, and cultural encounters.",
   openGraph: {
     title: "ROOM Baku",
     description:

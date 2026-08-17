@@ -31,10 +31,9 @@ export type Artwork = {
   displayed: boolean;
 };
 
-export type Exhibition = {
+export type Event = {
   slug: string;
   title: string;
-  type: "Exhibition" | "Event";
   status: "Upcoming" | "Current" | "Past";
   date: string;
   image: string;
@@ -57,6 +56,6 @@ export type SiteData = {
   settings: SiteSettings;
   artists: Artist[];
   artworks: Artwork[];
-  exhibitions: Exhibition[];
+  events: Event[];
   about: AboutContent;
 };

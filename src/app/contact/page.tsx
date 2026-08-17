@@ -7,7 +7,7 @@ export default async function ContactPage() {
   const data = await getSiteData();
   return (
     <main>
-      <PageHero settings={data.settings} kicker="Contact / collaboration" title="Let's connect" copy="For collaborations, exhibitions, artist proposals, partnerships, and private viewings." />
+      <PageHero settings={data.settings} kicker="Contact / collaboration" title="Let's connect" copy="For collaborations, events, artist proposals, partnerships, and private viewings." />
       <section className="room-shell grid gap-10 py-12 md:grid-cols-[.8fr_1.2fr] md:gap-12 md:py-16">
         <aside className="text-sm leading-8 text-[#6f6a61]">
           <h2 className="room-serif text-2xl text-[#11100e]">Visit us</h2>

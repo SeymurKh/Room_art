@@ -4,16 +4,16 @@ import { useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import type { Exhibition } from "@/lib/types";
+import type { Event } from "@/lib/types";
 import { PositionedImage } from "@/components/positioned-image";
 
 const SWIPE_THRESHOLD = 50;
 
-export function MobileEventsCarousel({ exhibitions }: { exhibitions: Exhibition[] }) {
-  const upcoming = exhibitions.find((e) => e.status === "Upcoming") ?? null;
-  const current = exhibitions.find((e) => e.status === "Current") ?? null;
-  const past = exhibitions.find((e) => e.status === "Past") ?? null;
-  const events = [upcoming, current, past].filter(Boolean) as Exhibition[];
+export function MobileEventsCarousel({ events }: { events: Event[] }) {
+  const upcoming = events.find((e) => e.status === "Upcoming") ?? null;
+  const current = events.find((e) => e.status === "Current") ?? null;
+  const past = events.find((e) => e.status === "Past") ?? null;
+  const shown = [upcoming, current, past].filter(Boolean) as Event[];
 
   const [index, setIndex] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -22,7 +22,7 @@ export function MobileEventsCarousel({ exhibitions }: { exhibitions: Exhibition[
   const x = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 260, damping: 30 });
 
-  const n = events.length;
+  const n = shown.length;
   const canSwipe = n > 1;
 
   const goTo = useCallback((next: number) => {
@@ -47,12 +47,12 @@ export function MobileEventsCarousel({ exhibitions }: { exhibitions: Exhibition[
 
   if (n === 0) return null;
 
-  const event = events[index];
+  const event = shown[index];
 
   return (
     <section className="relative bg-[#11100e] py-12 text-[#f4f1ea] md:hidden" ref={containerRef}>
       <div className="room-shell mb-6">
-        <p className="section-kicker text-white/50">Exhibitions & events</p>
+        <p className="section-kicker text-white/50">Events</p>
         <h2 className="room-serif mt-2 text-3xl font-medium leading-none">At ROOM</h2>
       </div>
 
@@ -91,7 +91,6 @@ export function MobileEventsCarousel({ exhibitions }: { exhibitions: Exhibition[
                 <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#11100e]/90 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                   <div className="flex items-center gap-2">
-                    <span className="section-kicker text-white/70">{event.type}</span>
                     <span className="text-xs font-semibold uppercase tracking-[0.12em] text-white/50">
                       {event.status}
                     </span>
@@ -110,7 +109,7 @@ export function MobileEventsCarousel({ exhibitions }: { exhibitions: Exhibition[
       {canSwipe && (
         <div className="room-shell mt-8 flex items-center justify-between">
           <div className="flex gap-2">
-            {events.map((_, i) => (
+            {shown.map((_, i) => (
               <button
                 key={i}
                 type="button"
