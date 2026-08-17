@@ -19,7 +19,7 @@ export function scaleFactor(widthCm: number, heightCm: number): number {
 
 /**
  * ArtworkFrame — высокореалистичная галерейная рама (CSS-only 3D).
- * Слои: frame-outer (внешняя рама) → frame-mat (паспарту) → изображение.
+ * Слой: frame-outer (внешняя рама) → изображение.
  *
  * aspectRatio берётся от реального изображения, чтобы не было полей
  * и обрезки. Масштаб зависит от указанных габаритов в см.
@@ -37,20 +37,17 @@ export function ArtworkFrame({
 
   // Меньшие рамы на мобильном, чтобы картина помещалась на экран
   const outerPadding = `${Math.round(8 + scale * 4)}px`;
-  const matPadding = `${Math.round(18 + scale * 10)}px`;
 
   return (
     <div className="frame-outer inline-block" style={{ padding: outerPadding }}>
-      <div className="frame-mat inline-block" style={{ padding: matPadding }}>
-        <MagnifierLens
-          src={artwork.image}
-          alt={artwork.title}
-          priority={priority}
-          fallbackText={artwork.title}
-          scale={scale}
-          enableLens={enableLens}
-        />
-      </div>
+      <MagnifierLens
+        src={artwork.image}
+        alt={artwork.title}
+        priority={priority}
+        fallbackText={artwork.title}
+        scale={scale}
+        enableLens={enableLens}
+      />
     </div>
   );
 }

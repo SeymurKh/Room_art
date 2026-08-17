@@ -43,6 +43,8 @@ export type Exhibition = {
   detailTransform: string;
   featured: boolean;
   description: string;
+  gallery?: string[];
+  video?: string;
 };
 
 export type AboutContent = {

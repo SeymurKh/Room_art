@@ -45,6 +45,8 @@ const exhibitionSchema = z.object({
   detailTransform: z.string().default("translate(0px, 0px) scale(1)"),
   featured: z.boolean().default(false),
   description: z.string(),
+  gallery: z.array(z.string()).default([]),
+  video: z.string().default(""),
 });
 
 const aboutContentSchema = z.object({

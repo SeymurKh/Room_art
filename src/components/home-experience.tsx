@@ -9,7 +9,6 @@ import { useTypewriter } from "@/lib/use-typewriter";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SectionHeading } from "@/components/section-heading";
-import { RoomImage } from "@/components/room-image";
 import { HeroSlideshowShader } from "@/components/hero-slideshow-shader";
 import { ParallaxWindow } from "@/components/parallax-window";
 import { GalleryScrolltelling } from "@/components/gallery-scrolltelling";
@@ -29,7 +28,29 @@ const reveal = {
 export function HomeExperience({ data }: { data: SiteData }) {
   const { displayed, cursor } = useTypewriter();
   const current = data.exhibitions.find((item) => item.status === "Current" && item.featured) ?? data.exhibitions.find((item) => item.status === "Current") ?? null;
+  const upcoming = data.exhibitions.find((item) => item.status === "Upcoming" && item.featured) ?? data.exhibitions.find((item) => item.status === "Upcoming") ?? null;
   const displayedArtworks = data.artworks.filter((a) => a.displayed);
+
+  const showcase = [
+    {
+      kicker: "Current exhibition",
+      title: current?.title ?? "No current exhibition",
+      meta: current?.date ?? "",
+      href: current ? `/events/${current.slug}` : "/events",
+    },
+    {
+      kicker: "Upcoming event",
+      title: upcoming?.title ?? "No upcoming event",
+      meta: upcoming?.date ?? "",
+      href: upcoming ? `/events/${upcoming.slug}` : "/events",
+    },
+    {
+      kicker: "New artworks",
+      title: "Discover",
+      meta: "The latest additions",
+      href: "/gallery",
+    },
+  ];
 
   const slideshowImages = useMemo(() => {
     return data.artworks.slice(0, 5).map((a) => a.image);
@@ -60,12 +81,8 @@ export function HomeExperience({ data }: { data: SiteData }) {
 
       <ParallaxWindow src="/assets/window-bg.jpg" alt="Room interior">
         <div className="room-shell grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
-          {[
-            ["Current exhibition", current?.title, current?.date],
-            ["Upcoming event", data.exhibitions.find((event) => event.type === "Event")?.title, "8 Jun"],
-            ["New artworks", "Discover", "The latest additions"],
-          ].map(([kicker, title, meta]) => (
-            <Link href={kicker === "New artworks" ? "/gallery" : "/events"} key={kicker} className="group block py-8 md:px-8">
+          {showcase.map(({ kicker, title, meta, href }) => (
+            <Link href={href} key={kicker} className="group block py-8 md:px-8">
               <p className="section-kicker text-white/85">{kicker}</p>
               <p className="room-serif mt-3 text-2xl leading-none text-[#f4f1ea] md:mt-4 md:text-3xl">{title}</p>
               <p className="mt-2 text-sm text-white/80">{meta}</p>

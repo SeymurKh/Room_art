@@ -9,46 +9,6 @@
   },
   "artists": [
     {
-      "slug": "aliyev-farid",
-      "name": "Aliyev Farid",
-      "role": "Painter",
-      "portrait": "/assets/artists/farid.jpg",
-      "bio": "Farid works with layered surfaces, muted pigments, and fragments of urban memory collected around Baku.",
-      "statement": "I treat the canvas as a room where traces can stay visible: touch, silence, distance, and the pressure of time."
-    },
-    {
-      "slug": "gunel-agayeva",
-      "name": "Gunel Agayeva",
-      "role": "Mixed media artist",
-      "portrait": "/assets/artists/gunel.jpg",
-      "bio": "Gunel combines paper, textile, mineral tones, and archival gestures into quiet material compositions.",
-      "statement": "My practice is about fragile systems: the things we keep, cover, fold, and later rediscover."
-    },
-    {
-      "slug": "orxhan-huseynov",
-      "name": "Orxhan Huseynov",
-      "role": "Sculptor",
-      "portrait": "/assets/artists/orxhan.jpg",
-      "bio": "Orxhan explores weight, shadow, and imperfect geometry through compact sculptural forms.",
-      "statement": "I look for the moment when a solid object begins to feel temporary, almost like a thought."
-    },
-    {
-      "slug": "sabina-shikhli",
-      "name": "Sabina Shikhli",
-      "role": "Photographer",
-      "portrait": "/assets/artists/sabina.jpg",
-      "bio": "Sabina creates monochrome studies of interiors, bodies, and transitional city spaces.",
-      "statement": "Photography lets me hold the interval between a place being empty and being remembered."
-    },
-    {
-      "slug": "elnur-babayev",
-      "name": "Elnur Babayev",
-      "role": "Painter",
-      "portrait": "/assets/artists/elnur.jpg",
-      "bio": "Elnur builds dense atmospheric paintings from smoke-like marks, scraped color, and architectural rhythm.",
-      "statement": "A painting should not explain itself immediately. It should make the viewer adjust their eyes."
-    },
-    {
       "slug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "name": "Orkhan Garayev",
       "role": "Artist",
@@ -70,7 +30,7 @@
       "image": "/uploads/artworks/19194051-bc0d-4fa8-8d63-b8a60dc19010.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": false
     },
     {
       "slug": "artwork-2ed002cb-5534-4e96-bdba-307e06db5531",
@@ -154,7 +114,7 @@
       "image": "/uploads/artworks/fc2adb88-d563-4874-89bf-d4e3c35caf3f.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": false
     },
     {
       "slug": "artwork-2c2f1315-8571-4445-b9e5-e8954ad74fac",
@@ -168,7 +128,7 @@
       "image": "/uploads/artworks/ead8d644-be0a-4283-8e5a-ad537981cfc7.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": false
     },
     {
       "slug": "artwork-19ff8982-9582-433d-ae36-a0777187b081",
@@ -182,7 +142,7 @@
       "image": "/uploads/artworks/a32e1472-8b75-40a1-b1d6-d7675b2e1165.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": false
     },
     {
       "slug": "artwork-4a441d05-6620-4c92-805a-2a81d6348f8e",
@@ -196,7 +156,7 @@
       "image": "/uploads/artworks/a0ca72c6-f1c3-459b-8fd6-f69d98ad2557.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": false
     },
     {
       "slug": "artwork-7c44392f-867f-4713-9e14-4ac6208dc51c",
@@ -238,7 +198,7 @@
       "image": "/uploads/artworks/241b4c73-129c-4c7e-a8af-f2f5df2e7b28.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": false
     },
     {
       "slug": "artwork-d6b05032-4324-446a-b3b8-78428feda500",
@@ -252,7 +212,7 @@
       "image": "/uploads/artworks/8f14b71e-5227-4bd3-bec5-fe692299a515.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": false
     },
     {
       "slug": "artwork-f16bbdbd-3587-4267-b8a8-bc0a715c4025",
@@ -370,42 +330,26 @@
   "exhibitions": [
     {
       "slug": "seven-ya",
-      "title": "Seven Ya",
-      "type": "Exhibition",
-      "status": "Current",
-      "date": "25 Apr — 25 May 2026",
-      "image": "/uploads/events/eac8d63d-7944-478e-9a8e-02904ae2967b.PNG",
-      "heroTransform": "translate(0px, 0px) scale(1)",
-      "thumbTransform": "translate(0px, -79px) scale(1)",
-      "detailTransform": "translate(3px, 0px) scale(1)",
-      "featured": true,
-      "description": "A focused exhibition on layered identity, family memory, and the symbolic charge of repetition."
-    },
-    {
-      "slug": "event-1784801116297-w490",
-      "title": "Event",
-      "type": "Exhibition",
-      "status": "Upcoming",
-      "date": "23.7.2026",
-      "image": "/uploads/events/80a37514-ad9a-4546-b6d3-320453d4efa4.png",
-      "heroTransform": "translate(0px, 0px) scale(1)",
-      "thumbTransform": "translate(-2px, -55px) scale(1)",
-      "detailTransform": "translate(4px, -134px) scale(1.05)",
-      "featured": true,
-      "description": "asd"
-    },
-    {
-      "slug": "event-1784801378935-yl6z",
-      "title": "Past Event",
+      "title": "7YA (SevenYouAre)",
       "type": "Exhibition",
       "status": "Past",
-      "date": "23.7.2026",
-      "image": "/uploads/events/ce0730b7-760c-4a5a-9c0d-e3c83286f257.png",
+      "date": "8–14 September 2025, Ivanovka",
+      "image": "/uploads/events/2b59e2d9-6e78-46d6-9429-ba6683789a93.webp",
       "heroTransform": "translate(0px, 0px) scale(1)",
-      "thumbTransform": "translate(-2px, 71px) scale(1.05)",
+      "thumbTransform": "translate(0px, 0px) scale(1)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": true,
-      "description": ""
+      "description": "ROOM Baku and DaMir – House of Imagination present 7-YA (SevenYouAre), an art project held from September 8–14, 2025, in Ivanovka. For one week, seven artists — Vusala Agharaziyeva, Nigar Familsoy, Gunel Akhundlu, Orkhan Garayev, Sarkhan Gadzhiev, Mushfig Heydarov, and Rufana Mamedova — lived and worked together, exploring the multiplicity of the \"Self.\" The name \"7-YA\" reflects the idea that within each person exists a multitude of states and roles. Seven participants, seven days, and seven facets of identity came together in paintings, sketches, and a collective installation shaped through dialogue, workshops, and shared creation. The exhibition is hosted at ROOM Baku — a wine house in the city center where wine culture meets art and gastronomy. Here, the artists' works and a video portrait of the project invite visitors to reflect on identity and the courage to be many at once.",
+      "gallery": [
+        "/assets/events/7ya-group-portraits.webp",
+        "/assets/events/7ya-plener.webp",
+        "/assets/events/7ya-exhibition-outdoor.webp",
+        "/assets/events/7ya-sketches.webp",
+        "/assets/events/7ya-opening-1.webp",
+        "/assets/events/7ya-opening-2.webp",
+        "/assets/events/7ya-opening-3.webp"
+      ],
+      "video": "/assets/events/7ya-video.mp4"
     }
   ],
   "about": {

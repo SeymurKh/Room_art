@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
@@ -48,6 +49,38 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           </div>
         </div>
       </section>
+      {event.video ? (
+        <section className="room-shell border-b border-black/10 py-12 md:py-16">
+          <p className="section-kicker text-[#6f6a61]">Video portrait</p>
+          <div className="mt-6 overflow-hidden bg-black md:mt-8">
+            <video
+              src={event.video}
+              controls
+              playsInline
+              preload="metadata"
+              className="mx-auto max-h-[80vh] w-full"
+            />
+          </div>
+        </section>
+      ) : null}
+      {event.gallery && event.gallery.length > 0 ? (
+        <section className="room-shell border-b border-black/10 py-12 md:py-16">
+          <p className="section-kicker text-[#6f6a61]">Photo report</p>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2 md:mt-8 lg:grid-cols-3">
+            {event.gallery.map((src) => (
+              <div key={src} className="relative aspect-[4/3] overflow-hidden bg-[#e2ded4]">
+                <Image
+                  src={src}
+                  alt={`${event.title} — photo`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
       <SiteFooter settings={data.settings} />
     </main>
   );
