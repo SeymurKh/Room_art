@@ -9,9 +9,8 @@ import type { Event } from "@/lib/types";
 type EventsScrolltellingProps = { events: Event[] };
 
 export const STRIPES = [
-  { key: "Upcoming" as const, clipPath: "polygon(0 0, 40% 0, 20% 100%, 0 100%)" },
-  { key: "Current" as const, clipPath: "polygon(40% 0, 80% 0, 60% 100%, 20% 100%)" },
-  { key: "Past" as const, clipPath: "polygon(80% 0, 100% 0, 100% 100%, 60% 100%)" },
+  { key: "Upcoming" as const, clipPath: "polygon(0 0, 55% 0, 35% 100%, 0 100%)" },
+  { key: "Past" as const, clipPath: "polygon(55% 0, 100% 0, 100% 100%, 35% 100%)" },
 ];
 
 function findFeaturedEvent(events: Event[], status: Event["status"]) {
@@ -31,26 +30,20 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
   const target = useMotionValue(0);
   const smoothProgress = useSpring(target, { stiffness: 80, damping: 35 });
 
-  // First stripe visible immediately, second fades in over first half of scroll
-  // and stays visible, third fades in over second half and stays visible.
-  const secondOpacity = useTransform(smoothProgress, (p) => {
+  // Upcoming stripe is always visible; Past stripe fades in over the first
+  // half of the scroll and stays visible.
+  const pastOpacity = useTransform(smoothProgress, (p) => {
     if (p <= 0) return 0;
     if (p >= 0.5) return 1;
     return p * 2;
   });
-  const thirdOpacity = useTransform(smoothProgress, (p) => {
-    if (p <= 0.5) return 0;
-    if (p >= 1) return 1;
-    return (p - 0.5) * 2;
-  });
-  const opacities = [1, secondOpacity, thirdOpacity];
+  const opacities = [1, pastOpacity];
 
   // Keep spring target in sync with raw scroll progress.
   useMotionValueEvent(scrollYProgress, "change", (p) => target.set(p));
 
   const scrolled = [
     findFeaturedEvent(events, "Upcoming"),
-    findFeaturedEvent(events, "Current"),
     findFeaturedEvent(events, "Past"),
   ] as const;
 
@@ -89,11 +82,13 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
                       </div>
                     )}
                   </div>
-                  <div className="absolute bottom-12 left-0 right-0 z-10 flex flex-col items-center gap-3 px-6 text-center" style={{ clipPath: stripe.clipPath }}>
-                    <p className="room-serif text-2xl leading-tight text-[#f4f1ea] transition-transform duration-500 group-hover:-translate-y-1 md:text-3xl">
-                      {event.title}
-                    </p>
-                    <p className="section-kicker text-[#f4f1ea]/60">{event.date}</p>
+                  <div className="absolute inset-0 z-10 flex items-end px-6 pb-12">
+                    <div className={i === 0 ? "w-1/2 text-center" : "ml-auto w-1/2 text-center"}>
+                      <p className="room-serif text-2xl leading-tight text-[#f4f1ea] transition-transform duration-500 group-hover:-translate-y-1 md:text-3xl">
+                        {event.title}
+                      </p>
+                      <p className="section-kicker mt-3 text-[#f4f1ea]/60">{event.date}</p>
+                    </div>
                   </div>
                 </Link>
               ) : (

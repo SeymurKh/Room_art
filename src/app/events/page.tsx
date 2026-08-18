@@ -13,7 +13,7 @@ export default async function EventsPage() {
   const past = data.events.filter((item) => item.status === "Past");
   return (
     <main>
-      <PageHero settings={data.settings} kicker="Events" title="Upcoming and archive" copy="Current events, artist talks, and past ROOM projects." />
+      <PageHero settings={data.settings} kicker="Events" title="Events at ROOM" />
       <EventGroup title="Current" events={current} />
       <EventGroup title="Upcoming" events={upcoming} />
       <EventGroup title="Past archive" events={past} />

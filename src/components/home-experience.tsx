@@ -8,6 +8,7 @@ import type { SiteData } from "@/lib/types";
 import { useTypewriter } from "@/lib/use-typewriter";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { RoomImage } from "@/components/room-image";
 import { SectionHeading } from "@/components/section-heading";
 import { HeroSlideshowShader } from "@/components/hero-slideshow-shader";
 import { ParallaxWindow } from "@/components/parallax-window";
@@ -77,6 +78,34 @@ export function HomeExperience({ data }: { data: SiteData }) {
             </span>
           </h1>
         </div>
+
+        {current ? (
+          <Link
+            href={`/events/${current.slug}`}
+            className="absolute bottom-6 left-6 z-20 flex max-w-[90vw] items-center gap-4 border border-white/15 bg-black/45 p-3 backdrop-blur-md transition hover:bg-black/65 md:bottom-8 md:left-8"
+          >
+            <div className="relative h-16 w-16 shrink-0 overflow-hidden bg-[#0c0c0b] md:h-20 md:w-20">
+              {current.image ? (
+                <RoomImage
+                  src={current.image}
+                  alt={current.title}
+                  fill
+                  className="object-cover"
+                  fallbackText={current.title}
+                />
+              ) : null}
+            </div>
+            <div className="min-w-0">
+              <p className="section-kicker text-white/60">Now showing</p>
+              <p className="room-serif mt-1 truncate text-lg leading-tight text-[#f4f1ea] md:text-xl">
+                {current.title}
+              </p>
+              {current.date ? (
+                <p className="mt-0.5 truncate text-xs text-white/60">{current.date}</p>
+              ) : null}
+            </div>
+          </Link>
+        ) : null}
       </section>
 
       <ParallaxWindow src="/assets/window-bg.jpg" alt="Room interior">

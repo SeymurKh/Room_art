@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-const words = ["Art", "Wine", "Dine"];
-const prefix = "The Space of ";
+const words = ["Art", "Exhibitions", "Artists"];
+const prefix = "Digital Space For ";
 const typeSpeed = 70; // ms per character typing
 const deleteSpeed = 35; // ms per character deleting
 const pauseAfterType = 2500; // pause after full phrase is typed

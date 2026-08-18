@@ -11,7 +11,6 @@ import type { SiteData, Event } from "@/lib/types";
 import { logoutAdmin, saveAdminData } from "@/app/admin/actions";
 
 type Tab = "settings" | "about" | "events";
-type EventSection = "current" | "upcoming" | "past";
 type PreviewKey = "hero" | "thumb" | "detail";
 
 const tabs: [Tab, string][] = [
@@ -156,7 +155,6 @@ function PreviewBlock({
 export function AdminDashboard({ initialData, saved, saveError }: { initialData: SiteData; saved: boolean; saveError?: string | null }) {
   const [data, setData] = useState(initialData);
   const [tab, setTab] = useState<Tab>("settings");
-  const [eventSection, setEventSection] = useState<EventSection>("current");
   const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
   const payload = useMemo(() => JSON.stringify({ ...data, __pendingDeletions: pendingDeletions }), [data, pendingDeletions]);
 
@@ -201,11 +199,6 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
     });
   }, []);
 
-  const currentEvents = data.events.filter((e) => e.status === "Current");
-  const upcomingEvents = data.events.filter((e) => e.status === "Upcoming");
-  const pastEvents = data.events.filter((e) => e.status === "Past");
-  const eventList = eventSection === "current" ? currentEvents : eventSection === "upcoming" ? upcomingEvents : pastEvents;
-
   return (
     <main className="min-h-screen bg-[#f4f1ea]">
       <header className="border-b border-black/10 bg-[#11100e] py-5 text-[#f4f1ea]">
@@ -228,9 +221,8 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
         {tab === "settings" && <Panel title="Global settings"><Grid>{Object.entries(data.settings).map(([key, value]) => <Field key={key} label={key} value={String(value)} onChange={(next) => update("settings", { ...data.settings, [key]: next })} />)}</Grid></Panel>}
         {tab === "about" && <Panel title="About"><Field multiline label="Concept" value={data.about.concept} onChange={(v) => update("about", { ...data.about, concept: v })} /><Field multiline label="Vision" value={data.about.vision} onChange={(v) => update("about", { ...data.about, vision: v })} /><Field multiline label="Identity" value={data.about.identity} onChange={(v) => update("about", { ...data.about, identity: v })} /></Panel>}
         {tab === "events" && <div>
-          <div className="mb-5 flex flex-wrap gap-2">{([["current", `Current (${currentEvents.length})`], ["upcoming", `Upcoming (${upcomingEvents.length})`], ["past", `Past (${pastEvents.length})`]] as [EventSection, string][]).map(([section, label]) => <button key={section} type="button" onClick={() => setEventSection(section)} className={`px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] ${eventSection === section ? "bg-[#11100e] text-[#f4f1ea]" : "border border-black/40 text-[#11100e] transition hover:bg-black/5"}`}>{label}</button>)}</div>
-          <Panel title={eventSection.charAt(0).toUpperCase() + eventSection.slice(1)}>
-            {eventList.length === 0 ? <p className="py-4 text-sm text-[#6f6a61]">No events in this section.</p> : <div className="grid gap-5">{eventList.map((event) => {
+          <Panel title="Events">
+            {data.events.length === 0 ? <p className="py-4 text-sm text-[#6f6a61]">No events yet.</p> : <div className="grid gap-5">{data.events.map((event) => {
               const eventIndex = data.events.findIndex((e) => e.slug === event.slug);
               return (
               <article key={event.slug} className="border border-black/10 bg-[#f4f1ea] p-4">
@@ -269,7 +261,7 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
               </article>
               );
             })}</div>}
-            <button type="button" onClick={() => update("events", [...data.events, { slug: `event-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`, title: "New Event", status: eventSection === "current" ? "Current" : eventSection === "upcoming" ? "Upcoming" : "Past", date: "", image: "", heroTransform: "translate(0px, 0px) scale(1)", thumbTransform: "translate(0px, 0px) scale(1)", detailTransform: "translate(0px, 0px) scale(1)", featured: false, description: "", gallery: [], video: "" }])} className="mt-5 inline-flex items-center gap-2 border border-black/40 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#11100e] transition hover:bg-black/5">+ Add event</button>
+            <button type="button" onClick={() => update("events", [...data.events, { slug: `event-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`, title: "New Event", status: "Upcoming", date: "", image: "", heroTransform: "translate(0px, 0px) scale(1)", thumbTransform: "translate(0px, 0px) scale(1)", detailTransform: "translate(0px, 0px) scale(1)", featured: false, description: "", gallery: [], video: "" }])} className="mt-5 inline-flex items-center gap-2 border border-black/40 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#11100e] transition hover:bg-black/5">+ Add event</button>
           </Panel>
         </div>}
       </form>
