@@ -28,7 +28,7 @@ export type Artwork = {
   image: string;
   availability: "Available" | "Reserved" | "Private collection";
   description?: string;
-  price: string;
+  priceAzn: number | null;
   displayed: boolean;
 };
 

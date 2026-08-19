@@ -10,19 +10,28 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
     ...defaults,
     slug: defaults.slug || `artist-${crypto.randomUUID()}`,
   });
+  const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
 
   function updateField(key: keyof Artist, value: string) {
     const next = { ...data, [key]: value };
     setData(next);
     const el = document.getElementById("payload") as HTMLInputElement;
-    if (el) el.value = JSON.stringify(next);
+    if (el) el.value = JSON.stringify({ ...next, __pendingDeletions: pendingDeletions });
+  }
+
+  function handlePortraitChange(path: string, pendingDeletion?: string) {
+    updateField("portrait", path);
+    if (pendingDeletion) {
+      setPendingDeletions((prev) => (prev.includes(pendingDeletion) ? prev : [...prev, pendingDeletion]));
+    }
   }
 
   return (
     <div className="max-w-2xl space-y-5">
       <Field label="Name" value={data.name} onChange={(v) => updateField("name", v)} />
       <Field label="Role" value={data.role} onChange={(v) => updateField("role", v)} />
-      <UploadField label="Portrait" value={data.portrait} onChange={(v) => updateField("portrait", v)} folder="uploads/artists" />
+      <UploadField label="Portrait" value={data.portrait} onChange={handlePortraitChange} folder="uploads/artists" />
+      <input type="hidden" name="pendingDeletions" value={JSON.stringify(pendingDeletions)} />
       <Field multiline label="Bio" value={data.bio} onChange={(v) => updateField("bio", v)} />
       <Field multiline label="Statement" value={data.statement} onChange={(v) => updateField("statement", v)} />
       <button

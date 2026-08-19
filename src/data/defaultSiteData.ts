@@ -52,6 +52,7 @@ export const defaultSiteData: SiteData = {
     },
   ],
   artworks: [],
+  // Note: Artwork objects must also include priceAzn: number | null and no longer include price
   events: [
     {
       slug: "artist-talk-with-elnur",

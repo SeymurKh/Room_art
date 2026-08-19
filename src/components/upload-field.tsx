@@ -13,17 +13,19 @@ const ALLOWED_MIME = [
 
 const MAX_SIZE = 100 * 1024 * 1024; // 100 MB
 
+export type UploadFieldProps = {
+  label: string;
+  value: string;
+  onChange: (path: string, pendingDeletion?: string) => void;
+  folder: string;
+};
+
 export function UploadField({
   label,
   value,
   onChange,
   folder,
-}: {
-  label: string;
-  value: string;
-  onChange: (path: string) => void;
-  folder: string;
-}) {
+}: UploadFieldProps) {
   const [uploading, setUploading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,15 +37,6 @@ export function UploadField({
       return `File size ${(file.size / 1024 / 1024).toFixed(1)}MB exceeds the 100MB limit.`;
     }
     return null;
-  }
-
-  async function deleteUpload(path: string) {
-    if (!path || !path.startsWith("/uploads/")) return;
-    try {
-      await fetch(`/api/upload?path=${encodeURIComponent(path)}`, { method: "DELETE" });
-    } catch {
-      // ignore delete errors
-    }
   }
 
   async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
@@ -71,10 +64,8 @@ export function UploadField({
       const data = await res.json();
       if (data.path) {
         const oldPath = value;
-        onChange(data.path);
-        if (oldPath && oldPath !== data.path) {
-          await deleteUpload(oldPath);
-        }
+        // Pass old path as pending deletion; actual deletion happens on form save.
+        onChange(data.path, oldPath && oldPath !== data.path ? oldPath : undefined);
       }
     } catch (err) {
       console.error("Upload failed", err);
@@ -90,8 +81,8 @@ export function UploadField({
       onChange("");
       return;
     }
-    await deleteUpload(value);
-    onChange("");
+    // Schedule current file for deletion on save instead of deleting immediately.
+    onChange("", value);
   }
 
   const isImage = value && ALLOWED_MIME.some((type) => value.toLowerCase().endsWith(`.${type.split("/")[1]}`));

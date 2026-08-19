@@ -39,7 +39,7 @@ export default async function AdminArtworkPage({
     heightCm: 0,
     image: "",
     availability: "Available",
-    price: "",
+    priceAzn: null,
     displayed: false,
   };
 

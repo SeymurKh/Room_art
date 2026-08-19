@@ -30,50 +30,65 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   return (
     <main>
       <SiteNav />
-      <section className="room-shell grid min-h-screen items-stretch gap-10 pt-24 md:grid-cols-2 md:gap-12 md:pt-28">
+      <section className="room-shell grid gap-10 pt-24 md:grid-cols-2 md:gap-16 md:pt-28">
         <div className="order-2 flex flex-col justify-center md:order-1">
-          <div className="flex items-center gap-3"><span className="border border-black/20 px-3 py-0.5 text-xs font-semibold uppercase tracking-[0.12em]">{event.status}</span></div>
-          <h1 className="room-serif mt-4 text-5xl font-medium leading-[0.88] md:mt-5 md:text-7xl lg:text-9xl">{event.title}</h1>
-          <p className="mt-5 text-sm tracking-[0.08em] text-[#6f6a61] md:mt-6">{event.date}</p>
-          <p className="mt-6 max-w-lg text-sm leading-7 text-[#6f6a61] md:mt-8">{event.description}</p>
-          <Link href="/events" className="mt-8 inline-flex items-center gap-2 border-b border-black/20 pb-1 text-xs font-semibold uppercase tracking-[0.14em] transition hover:border-black/60 md:mt-10"><ArrowUpRight size={16} /> All events</Link>
-        </div>
-        <div className="relative order-1 flex items-center justify-center md:order-2">
-          <div className="relative aspect-[3/4] w-full max-w-2xl overflow-hidden bg-black">
-            <PositionedImage
-              src={event.image}
-              alt={event.title}
-              transform={event.detailTransform}
-              containerClassName="h-full w-full"
-            />
+          <div className="flex items-center gap-3">
+            <span className="border border-black/20 px-3 py-0.5 text-xs font-semibold uppercase tracking-[0.12em]">
+              {event.status}
+            </span>
           </div>
+          <h1 className="room-serif mt-4 text-4xl font-medium leading-[0.92] md:mt-5 md:text-6xl lg:text-7xl">
+            {event.title}
+          </h1>
+          <p className="mt-5 text-sm tracking-[0.08em] text-[#6f6a61] md:mt-6">{event.date}</p>
+          <div className="mt-6 max-w-lg text-sm leading-7 text-[#6f6a61] md:mt-8">
+            <p>{event.description}</p>
+          </div>
+          <Link
+            href="/events"
+            className="mt-8 inline-flex w-fit items-center gap-2 border-b border-black/20 pb-1 text-xs font-semibold uppercase tracking-[0.14em] transition hover:border-black/60 md:mt-10"
+          >
+            <ArrowUpRight size={16} /> All events
+          </Link>
+        </div>
+        <div className="relative order-1 aspect-[4/5] w-full overflow-hidden bg-black md:order-2 md:aspect-auto md:max-h-[75vh]">
+          <PositionedImage
+            src={event.image}
+            alt={event.title}
+            transform={event.detailTransform}
+            containerClassName="h-full w-full"
+          />
         </div>
       </section>
+
       {event.video ? (
         <section className="room-shell border-b border-black/10 py-12 md:py-16">
           <p className="section-kicker text-[#6f6a61]">Video portrait</p>
           <div className="mt-6 overflow-hidden bg-black md:mt-8">
-            <video
-              src={event.video}
-              controls
-              playsInline
-              preload="metadata"
-              className="mx-auto max-h-[80vh] w-full"
-            />
+            <div className="relative aspect-video w-full">
+              <video
+                src={event.video}
+                controls
+                playsInline
+                preload="metadata"
+                className="absolute inset-0 h-full w-full"
+              />
+            </div>
           </div>
         </section>
       ) : null}
+
       {event.gallery && event.gallery.length > 0 ? (
         <section className="room-shell border-b border-black/10 py-12 md:py-16">
           <p className="section-kicker text-[#6f6a61]">Photo report</p>
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 md:mt-8 lg:grid-cols-3">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 md:mt-8 lg:grid-cols-4">
             {event.gallery.map((src) => (
-              <div key={src} className="relative aspect-[4/3] overflow-hidden bg-[#e2ded4]">
+              <div key={src} className="relative aspect-square overflow-hidden bg-[#e2ded4]">
                 <Image
                   src={src}
                   alt={`${event.title} — photo`}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover"
                 />
               </div>

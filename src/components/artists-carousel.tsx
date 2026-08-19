@@ -12,10 +12,10 @@ type ArtistsCarouselProps = {
 };
 
 const CARD_W = 280;
-const CARD_W_MOBILE = 220;
+const CARD_W_MOBILE = 200;
 const RADIUS = 760;
-const RADIUS_MOBILE = 460;
-const TOTAL_ARC_DEG = 130; // полукруглая дуга
+const RADIUS_MOBILE = 340;
+const TOTAL_ARC_DEG = 110;
 const AUTOPLAY_DELAY = 4000;
 const RESUME_DELAY = 5000;
 const VISIBLE_SLOTS = 5;
@@ -83,7 +83,10 @@ export function ArtistsCarousel({ artists }: ArtistsCarouselProps) {
       setActive((a) => (a + 1) % n);
     }, AUTOPLAY_DELAY);
     return () => {
-      if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
+      if (autoplayTimerRef.current) {
+        clearInterval(autoplayTimerRef.current);
+        autoplayTimerRef.current = null;
+      }
     };
   }, [canNavigate, paused, n]);
 
@@ -115,7 +118,23 @@ export function ArtistsCarousel({ artists }: ArtistsCarouselProps) {
 
   return (
     <div
-      className="relative mx-auto select-none"
+      className="relative mx-auto select-none focus:outline-none"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Artists carousel"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (!canNavigate) return;
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          prev();
+          pause();
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          next();
+          pause();
+        }
+      }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => {
         if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
@@ -201,6 +220,8 @@ export function ArtistsCarousel({ artists }: ArtistsCarouselProps) {
                   href={`/artists/${artist.slug}`}
                   className="group block"
                   tabIndex={isCenter ? 0 : -1}
+                  aria-label={isCenter ? `${artist.name}, ${artist.role}` : undefined}
+                  aria-hidden={!isCenter}
                 >
                   <div
                     className="relative aspect-3/4 overflow-hidden bg-black shadow-2xl"

@@ -15,6 +15,20 @@
       "when": 1787072431113,
       "tag": "0001_long_forgotten_one",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1787140498255,
+      "tag": "0002_add_price_azn_to_artworks",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1787151246000,
+      "tag": "0003_remove_price_from_artworks",
+      "breakpoints": true
     }
   ]
 }

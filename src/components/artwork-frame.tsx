@@ -141,7 +141,7 @@ function MagnifierLens({
 
       {enableLens && active && (
         <div
-          className="pointer-events-none fixed z-50 rounded-full border-2 border-white/80 shadow-xl"
+          className="pointer-events-none absolute z-50 rounded-full border-2 border-white/80 shadow-xl"
           style={{
             width: LENS_SIZE,
             height: LENS_SIZE,

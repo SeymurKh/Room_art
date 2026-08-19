@@ -148,11 +148,14 @@ export function PositionedImage({
         cy: sizes.container.h / 2,
       };
 
+  const hasImage = sizes.image && sizes.image.w > 0 && sizes.image.h > 0;
+  const hasTarget = target.w > 0 && target.h > 0;
+
   const baseScale =
-    target.w && target.h && sizes.image?.w && sizes.image?.h
+    hasImage && hasTarget
       ? mode === "cover"
-        ? Math.max(target.w / sizes.image.w, target.h / sizes.image.h)
-        : Math.min(target.w / sizes.image.w, target.h / sizes.image.h)
+        ? Math.max(target.w / sizes.image!.w, target.h / sizes.image!.h)
+        : Math.min(target.w / sizes.image!.w, target.h / sizes.image!.h)
       : 1;
 
   const finalScale = baseScale * userScale;

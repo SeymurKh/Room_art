@@ -1,0 +1,1 @@
+ALTER TABLE `artworks` ADD `price_azn` integer;

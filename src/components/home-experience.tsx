@@ -30,21 +30,30 @@ export function HomeExperience({ data }: { data: SiteData }) {
   const { displayed, cursor } = useTypewriter();
   const current = data.events.find((item) => item.status === "Current" && item.featured) ?? data.events.find((item) => item.status === "Current") ?? null;
   const upcoming = data.events.find((item) => item.status === "Upcoming" && item.featured) ?? data.events.find((item) => item.status === "Upcoming") ?? null;
+  const pastFallback = current
+    ? null
+    : data.events
+        .filter((item) => item.status === "Past")
+        .sort((a, b) => Number(b.featured) - Number(a.featured) || data.events.indexOf(a) - data.events.indexOf(b))[0] ?? null;
   const displayedArtworks = data.artworks.filter((a) => a.displayed);
 
   const showcase = [
     {
-      kicker: "Current event",
-      title: current?.title ?? "No current event",
-      meta: current?.date ?? "",
-      href: current ? `/events/${current.slug}` : "/events",
+      kicker: current ? "Current event" : pastFallback ? "Past event" : "Events",
+      title: current?.title ?? pastFallback?.title ?? "All events",
+      meta: current?.date ?? pastFallback?.date ?? "",
+      href: current ? `/events/${current.slug}` : pastFallback ? `/events/${pastFallback.slug}` : "/events",
     },
-    {
-      kicker: "Upcoming event",
-      title: upcoming?.title ?? "No upcoming event",
-      meta: upcoming?.date ?? "",
-      href: upcoming ? `/events/${upcoming.slug}` : "/events",
-    },
+    ...(upcoming
+      ? [
+          {
+            kicker: "Upcoming event" as const,
+            title: upcoming.title,
+            meta: upcoming.date,
+            href: `/events/${upcoming.slug}`,
+          },
+        ]
+      : []),
     {
       kicker: "New artworks",
       title: "Discover",
@@ -109,7 +118,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
       </section>
 
       <ParallaxWindow src="/assets/window-bg.jpg" alt="Room interior">
-        <div className="room-shell grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
+        <div className={`room-shell grid divide-y divide-white/10 md:divide-x md:divide-y-0 ${showcase.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
           {showcase.map(({ kicker, title, meta, href }) => (
             <Link href={href} key={kicker} className="group block py-8 md:px-8">
               <p className="section-kicker text-white/85">{kicker}</p>

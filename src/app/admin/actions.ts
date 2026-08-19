@@ -98,15 +98,22 @@ export async function saveArtist(formData: FormData) {
   if (!(await isAdmin())) redirect("/admin");
   const slug = String(formData.get("slug") ?? "");
   const payload = String(formData.get("payload") ?? "");
+  const pendingDeletionsRaw = String(formData.get("pendingDeletions") ?? "[]");
   try {
-    const artist = JSON.parse(payload) as Artist;
+    const parsed = JSON.parse(payload);
+    const artist = parsed as Artist;
+    const pendingDeletions: string[] = JSON.parse(pendingDeletionsRaw);
     const data = await getSiteData();
     const index = data.artists.findIndex((a) => a.slug === slug);
     if (index === -1) redirect("/admin/artists?error=notfound");
     const existing = data.artists[index];
-    // Delete old portrait if replaced
+    // Delete old portrait if replaced (prefer pendingDeletions from UploadField)
     if (artist.portrait !== existing.portrait) {
-      await tryDeleteFile(existing.portrait);
+      const oldPortrait = pendingDeletions.find((p) => p === existing.portrait) ?? existing.portrait;
+      await tryDeleteFile(oldPortrait);
+    }
+    for (const p of pendingDeletions) {
+      await tryDeleteFile(p);
     }
     // If slug changed, update artistSlug in all artworks referencing the old slug
     if (artist.slug !== existing.slug) {
@@ -174,8 +181,11 @@ export async function saveArtwork(formData: FormData) {
   if (!(await isAdmin())) redirect("/admin");
   const slug = String(formData.get("slug") ?? "");
   const payload = String(formData.get("payload") ?? "");
+  const pendingDeletionsRaw = String(formData.get("pendingDeletions") ?? "[]");
   try {
-    const artwork = JSON.parse(payload) as Artwork;
+    const parsed = JSON.parse(payload);
+    const artwork = parsed as Artwork;
+    const pendingDeletions: string[] = JSON.parse(pendingDeletionsRaw);
     const data = await getSiteData();
     if (!data.artists.some((a) => a.slug === artwork.artistSlug)) {
       redirect(`/admin/artworks/${slug}?error=validation&details=${encodeURIComponent(`Artist with slug "${artwork.artistSlug}" does not exist`)}`);
@@ -184,7 +194,11 @@ export async function saveArtwork(formData: FormData) {
     if (index === -1) redirect("/admin/artworks?error=notfound");
     const existing = data.artworks[index];
     if (artwork.image !== existing.image) {
-      await tryDeleteFile(existing.image);
+      const oldImage = pendingDeletions.find((p) => p === existing.image) ?? existing.image;
+      await tryDeleteFile(oldImage);
+    }
+    for (const p of pendingDeletions) {
+      await tryDeleteFile(p);
     }
     data.artworks[index] = artwork;
     await saveSiteData(data);

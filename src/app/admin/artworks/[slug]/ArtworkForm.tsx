@@ -19,8 +19,9 @@ export function ArtworkForm({
     slug: defaults.slug || `artwork-${crypto.randomUUID()}`,
     displayed: defaults.displayed ?? false,
   });
+  const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
 
-  function updateField(key: keyof Artwork, value: string | number | boolean) {
+  function updateField(key: keyof Artwork, value: string | number | boolean | null) {
     let next = { ...data, [key]: value };
 
     // Auto-calculate dimensions when width or height changes
@@ -34,7 +35,14 @@ export function ArtworkForm({
 
     setData(next);
     const el = document.getElementById("payload") as HTMLInputElement;
-    if (el) el.value = JSON.stringify(next);
+    if (el) el.value = JSON.stringify({ ...next, __pendingDeletions: pendingDeletions });
+  }
+
+  function handleImageChange(path: string, pendingDeletion?: string) {
+    updateField("image", path);
+    if (pendingDeletion) {
+      setPendingDeletions((prev) => (prev.includes(pendingDeletion) ? prev : [...prev, pendingDeletion]));
+    }
   }
 
   const selectedArtistName = artists.find((a) => a.slug === defaults.artistSlug)?.name ?? defaults.artistSlug;
@@ -96,7 +104,8 @@ export function ArtworkForm({
           onChange={(e) => updateField("heightCm", e.target.value === "" ? 0 : Number(e.target.value))}
         />
       </label>
-      <UploadField label="Image" value={data.image} onChange={(v) => updateField("image", v)} folder="uploads/artworks" />
+      <UploadField label="Image" value={data.image} onChange={handleImageChange} folder="uploads/artworks" />
+      <input type="hidden" name="pendingDeletions" value={JSON.stringify(pendingDeletions)} />
       <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
         Availability
         <select
@@ -118,7 +127,19 @@ export function ArtworkForm({
         />
         On display
       </label>
-      <Field label="Price" value={data.price ?? ""} onChange={(v) => updateField("price", v)} placeholder="e.g. AZN 2500 / € 1900" />
+      <label htmlFor="field-price-azn" className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
+        Price (AZN)
+        <input
+          id="field-price-azn"
+          type="number"
+          min="0"
+          step="1"
+          placeholder="e.g. 2500"
+          className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]"
+          value={data.priceAzn ?? ""}
+          onChange={(e) => updateField("priceAzn", e.target.value === "" ? null : Number(e.target.value))}
+        />
+      </label>
       <Field multiline label="Description" value={data.description ?? ""} onChange={(v) => updateField("description", v)} />
       <button
         type="submit"

@@ -28,6 +28,13 @@ function clamp(n: number, min: number, max: number) {
   return Math.min(Math.max(n, min), max);
 }
 
+function parseTransform(t: string | undefined): { tx: number; ty: number; scale: number } {
+  const m = t?.match(/translate\(([^)]+)\)\s*scale\(([^)]+)\)/);
+  if (!m) return { tx: 0, ty: 0, scale: 1 };
+  const [x, y] = m[1].split(/,\s*/);
+  return { tx: parseFloat(x) || 0, ty: parseFloat(y) || 0, scale: parseFloat(m[2]) ?? 1 };
+}
+
 function PreviewBlock({
   label,
   event,
@@ -49,19 +56,12 @@ function PreviewBlock({
 }) {
   const field = `${previewKey}Transform` as keyof Event;
   const transform = (event[field] as string) ?? "translate(0px, 0px) scale(1)";
-  const parsed = (() => {
-    const m = transform.match(/translate\(([^)]+)\)\s*scale\(([^)]+)\)/);
-    if (!m) return { tx: 0, ty: 0, scale: 1 };
-    const [x, y] = m[1].split(/,\s*/);
-    return {
-      tx: parseFloat(x) || 0,
-      ty: parseFloat(y) || 0,
-      scale: parseFloat(m[2]) ?? 1,
-    };
-  })();
+  const parsed = parseTransform(transform);
+  const [live, setLive] = useState(parsed);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const lastMouseRef = useRef({ x: 0, y: 0 });
+  const draggingRef = useRef(false);
 
   function saveTransform(tx: number, ty: number, scale: number) {
     const value = buildTransform(tx, ty, scale);
@@ -72,17 +72,31 @@ function PreviewBlock({
 
   function handleReset() {
     saveTransform(0, 0, 1);
+    setLive({ tx: 0, ty: 0, scale: 1 });
   }
 
-  function handlePointerDown(clientX: number, clientY: number) {
+  function beginDrag(clientX: number, clientY: number) {
+    draggingRef.current = true;
     lastMouseRef.current = { x: clientX, y: clientY };
   }
 
-  function handlePointerMove(clientX: number, clientY: number) {
+  function moveDrag(clientX: number, clientY: number) {
+    if (!draggingRef.current) return;
     const dx = clientX - lastMouseRef.current.x;
     const dy = clientY - lastMouseRef.current.y;
     lastMouseRef.current = { x: clientX, y: clientY };
-    saveTransform(parsed.tx + dx, parsed.ty + dy, parsed.scale);
+    setLive((prev) => ({ tx: prev.tx + dx, ty: prev.ty + dy, scale: prev.scale }));
+  }
+
+  function endDrag() {
+    if (!draggingRef.current) return;
+    draggingRef.current = false;
+    saveTransform(live.tx, live.ty, live.scale);
+  }
+
+  // Keep live transform in sync with saved value when not dragging (e.g. reset/zoom).
+  if (!draggingRef.current && (live.tx !== parsed.tx || live.ty !== parsed.ty || live.scale !== parsed.scale)) {
+    setLive(parsed);
   }
 
   return (
@@ -99,30 +113,30 @@ function PreviewBlock({
       </div>
       <div
         ref={containerRef}
-        className={`relative overflow-hidden ${containerClassName}`}
+        className={`relative overflow-hidden cursor-move ${containerClassName}`}
         style={containerStyle}
-        onMouseDown={(e) => handlePointerDown(e.clientX, e.clientY)}
-        onMouseMove={(e) => {
-          if (e.buttons !== 1) return;
-          handlePointerMove(e.clientX, e.clientY);
-        }}
+        onMouseDown={(e) => beginDrag(e.clientX, e.clientY)}
+        onMouseMove={(e) => moveDrag(e.clientX, e.clientY)}
+        onMouseUp={endDrag}
+        onMouseLeave={endDrag}
         onTouchStart={(e) => {
           const touch = e.touches[0];
           if (!touch) return;
-          handlePointerDown(touch.clientX, touch.clientY);
+          beginDrag(touch.clientX, touch.clientY);
         }}
         onTouchMove={(e) => {
           const touch = e.touches[0];
           if (!touch) return;
           e.preventDefault();
-          handlePointerMove(touch.clientX, touch.clientY);
+          moveDrag(touch.clientX, touch.clientY);
         }}
+        onTouchEnd={endDrag}
       >
         {event.image ? (
           <PositionedImage
             src={event.image}
             alt=""
-            transform={transform}
+            transform={buildTransform(live.tx, live.ty, live.scale)}
             containerClassName="h-full w-full"
             draggable={false}
             clipPath={containerStyle?.clipPath as string | undefined}
@@ -139,14 +153,15 @@ function PreviewBlock({
           min="0.3"
           max="3"
           step="0.05"
-          value={clamp(parsed.scale, 0.3, 3)}
+          value={clamp(live.scale, 0.3, 3)}
           onChange={(e) => {
             const s = parseFloat(e.target.value);
-            saveTransform(parsed.tx, parsed.ty, s);
+            setLive((prev) => ({ ...prev, scale: s }));
+            saveTransform(live.tx, live.ty, s);
           }}
           className="h-4 w-full accent-[#11100e]"
         />
-        <span className="w-8 text-right tabular-nums">{parsed.scale.toFixed(2)}x</span>
+        <span className="w-8 text-right tabular-nums">{live.scale.toFixed(2)}x</span>
       </label>
     </div>
   );
@@ -170,6 +185,11 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
     if (!path || !path.startsWith("/uploads/")) return;
     setPendingDeletions((prev) => (prev.includes(path) ? prev : [...prev, path]));
   }, []);
+
+  const handleImageChange = useCallback((eventIndex: number, path: string, pendingDeletion?: string) => {
+    updateEvents((prev) => prev.map((e, i) => (i === eventIndex ? { ...e, image: path } : e)));
+    if (pendingDeletion) scheduleDeletion(pendingDeletion);
+  }, [updateEvents, scheduleDeletion]);
 
   const deleteEvent = useCallback((event: Event) => {
     if (!window.confirm(`Delete "${event.title}"?`)) return;
@@ -236,7 +256,7 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                   <button type="button" onClick={() => deleteEvent(event)} className="grid size-10 place-items-center border border-black/40 text-[#11100e] transition hover:border-red-400 hover:text-red-600"><Trash2 size={16} /></button>
                 </div>
                 <Grid>{(["title", "status", "date", "image", "description"] as (keyof Event)[]).map((key) => {
-                  if (key === "image") return <UploadField key={key} label="Image" value={event.image} onChange={(v) => updateEvents((prev) => prev.map((e, i) => i === eventIndex ? { ...e, image: v } : e))} folder="uploads/events" />;
+                  if (key === "image") return <UploadField key={key} label="Image" value={event.image} onChange={(v, pending) => handleImageChange(eventIndex, v, pending)} folder="uploads/events" />;
                   if (key === "status") return <label key={key} className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Status<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.status} onChange={(e) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, status: e.target.value as Event["status"] } : ev))}><option value="Upcoming">Upcoming</option><option value="Current">Current</option><option value="Past">Past</option></select></label>;
                   return <Field key={key} multiline={key === "description"} label={key} value={String(event[key])} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, [key]: v } : ev))} />;
                 })}</Grid>
