@@ -73,6 +73,7 @@ const siteData = {
     image: row.image,
     availability: row.availability,
     description: row.description,
+    price: row.price,
     displayed: row.displayed,
   })),
   events: eventRows.map((row) => ({

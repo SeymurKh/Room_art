@@ -41,6 +41,7 @@ type JsonArtwork = {
   image: string;
   availability: string;
   description?: string;
+  price?: string;
   displayed: boolean;
 };
 
@@ -117,6 +118,7 @@ db.transaction((tx) => {
         image: artwork.image,
         availability: artwork.availability,
         description: artwork.description ?? "",
+        price: artwork.price ?? "",
         displayed: artwork.displayed,
       })
       .run();

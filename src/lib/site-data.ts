@@ -103,6 +103,7 @@ export async function getSiteData(): Promise<SiteData> {
     image: row.image,
     availability: row.availability as Artwork["availability"],
     description: row.description,
+    price: row.price,
     displayed: row.displayed,
   }));
 
@@ -189,6 +190,7 @@ export async function saveSiteData(data: unknown) {
           image: artwork.image,
           availability: artwork.availability,
           description: artwork.description ?? "",
+          price: artwork.price ?? "",
           displayed: artwork.displayed,
         })
         .run();

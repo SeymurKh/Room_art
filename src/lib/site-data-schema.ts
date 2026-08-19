@@ -30,6 +30,7 @@ const artworkSchema = z.object({
   image: z.string().min(1),
   availability: z.enum(["Available", "Reserved", "Private collection"]),
   description: z.string().default(""),
+  price: z.string().default(""),
   displayed: z.boolean().default(false),
 });
 

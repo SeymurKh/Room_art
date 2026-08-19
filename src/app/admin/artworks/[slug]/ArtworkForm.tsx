@@ -118,6 +118,7 @@ export function ArtworkForm({
         />
         On display
       </label>
+      <Field label="Price" value={data.price ?? ""} onChange={(v) => updateField("price", v)} placeholder="e.g. AZN 2500 / € 1900" />
       <Field multiline label="Description" value={data.description ?? ""} onChange={(v) => updateField("description", v)} />
       <button
         type="submit"

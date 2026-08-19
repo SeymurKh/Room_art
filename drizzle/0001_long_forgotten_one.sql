@@ -1,0 +1,1 @@
+ALTER TABLE `artworks` ADD `price` text DEFAULT '' NOT NULL;

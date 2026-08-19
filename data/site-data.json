@@ -38,7 +38,8 @@
       "image": "/uploads/artworks/19194051-bc0d-4fa8-8d63-b8a60dc19010.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-2ed002cb-5534-4e96-bdba-307e06db5531",
@@ -52,7 +53,8 @@
       "image": "/uploads/artworks/5d854561-0d28-4eee-a026-561fc7362ae7.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": true,
+      "price": ""
     },
     {
       "slug": "artwork-8ed3bec5-d977-4bd4-b652-960b78d97e84",
@@ -66,7 +68,8 @@
       "image": "/uploads/artworks/c5ae1be5-dd5a-4cac-80fb-f3d6df17ec2b.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": true,
+      "price": ""
     },
     {
       "slug": "artwork-e69b6333-f099-44f9-98a5-00b920c542a5",
@@ -80,7 +83,8 @@
       "image": "/uploads/artworks/b9960711-7a86-4bbc-8d7d-1cd3e6f78592.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": true,
+      "price": ""
     },
     {
       "slug": "artwork-d8062ed5-a568-45ec-be4c-5fbb5640e558",
@@ -94,7 +98,8 @@
       "image": "/uploads/artworks/11286692-0d54-4967-921a-8f1e8f1d2230.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": true,
+      "price": ""
     },
     {
       "slug": "artwork-c91ae925-d6d4-4ff3-bdab-3f5679fc6f48",
@@ -108,7 +113,8 @@
       "image": "/uploads/artworks/125afff3-7c39-4491-964b-4b168cc9fde6.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": true,
+      "price": ""
     },
     {
       "slug": "artwork-bdce776a-63d1-404b-8202-12eef088a7c2",
@@ -122,7 +128,8 @@
       "image": "/uploads/artworks/fc2adb88-d563-4874-89bf-d4e3c35caf3f.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-2c2f1315-8571-4445-b9e5-e8954ad74fac",
@@ -136,7 +143,8 @@
       "image": "/uploads/artworks/ead8d644-be0a-4283-8e5a-ad537981cfc7.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-19ff8982-9582-433d-ae36-a0777187b081",
@@ -150,7 +158,8 @@
       "image": "/uploads/artworks/a32e1472-8b75-40a1-b1d6-d7675b2e1165.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-4a441d05-6620-4c92-805a-2a81d6348f8e",
@@ -164,7 +173,8 @@
       "image": "/uploads/artworks/a0ca72c6-f1c3-459b-8fd6-f69d98ad2557.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-7c44392f-867f-4713-9e14-4ac6208dc51c",
@@ -178,7 +188,8 @@
       "image": "/uploads/artworks/8111b701-e37e-489e-ac96-05a8d25e9f91.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": true,
+      "price": ""
     },
     {
       "slug": "artwork-7ce9024a-6b4a-4398-9faf-0dabf9e49a88",
@@ -192,7 +203,8 @@
       "image": "/uploads/artworks/aacd49ed-a2f1-45bf-ba3e-80dfbb78c1b9.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": true,
+      "price": ""
     },
     {
       "slug": "artwork-35481a68-698f-46ab-a859-073718d990d4",
@@ -206,7 +218,8 @@
       "image": "/uploads/artworks/241b4c73-129c-4c7e-a8af-f2f5df2e7b28.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-d6b05032-4324-446a-b3b8-78428feda500",
@@ -220,7 +233,8 @@
       "image": "/uploads/artworks/8f14b71e-5227-4bd3-bec5-fe692299a515.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-f16bbdbd-3587-4267-b8a8-bc0a715c4025",
@@ -234,7 +248,8 @@
       "image": "/uploads/artworks/cca3e33d-b0cf-4d26-b00b-0761161e43d7.webp",
       "availability": "Available",
       "description": "",
-      "displayed": true
+      "displayed": true,
+      "price": ""
     },
     {
       "slug": "artwork-25874b80-a55d-4453-96cc-f2b23a114d95",
@@ -248,7 +263,8 @@
       "image": "/uploads/artworks/408d9022-aa81-41a5-8778-14116c6b4ec2.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-aef16e66-cd42-4e95-bdf2-36b1e21fc46e",
@@ -262,7 +278,8 @@
       "image": "/uploads/artworks/fcdaa798-3daf-4d25-a0c9-8198dc19c1ea.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-f95bc1eb-f8b7-4e84-b6d9-ed28522666ab",
@@ -276,7 +293,8 @@
       "image": "/uploads/artworks/32b108a3-3ee7-49d1-acd4-13081ab3e406.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-d8a16b9f-8b3a-463e-b1a7-85247bb329fd",
@@ -290,7 +308,8 @@
       "image": "/uploads/artworks/21894c3f-ba35-4845-ad3a-d8f1b7d28468.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-d147488f-1ec3-4e50-ad63-92cf8ff5e9ad",
@@ -304,7 +323,8 @@
       "image": "/uploads/artworks/5a21efcb-96ba-4703-8208-4c573b3025da.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-3528b9f8-6a5a-4d3d-9952-c634e210e2db",
@@ -318,7 +338,8 @@
       "image": "/uploads/artworks/08cd8658-e737-4f70-b945-c8cd4b99365e.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
       "slug": "artwork-e825380b-c620-4db2-9d6e-320ef2a38d96",
@@ -332,132 +353,487 @@
       "image": "/uploads/artworks/898e5cee-fbe1-4fb3-aa0e-cdba5c0638b1.webp",
       "availability": "Available",
       "description": "",
-      "displayed": false
+      "displayed": false,
+      "price": ""
     },
     {
-      "slug": "artwork-6afde54d-9587-4d00-ab0f-59ec7395831f",
-      "title": "Abc",
+      "slug": "artwork-f16bb252-0ab4-4bfc-82d8-2a154872d91c",
+      "title": "Untitled 1",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "2026",
       "medium": "Acrylic on canvas",
-      "dimensions": "50 × 100 cm",
-      "widthCm": 50,
+      "dimensions": "86 × 100 cm",
+      "widthCm": 86,
       "heightCm": 100,
-      "image": "/uploads/artworks/57112db3-19cd-4c05-b43d-18dcfccc4f6a.webp",
+      "image": "/uploads/artworks/f16bb252-0ab4-4bfc-82d8-2a154872d91c.webp",
       "availability": "Available",
-      "description": "Abc",
+      "description": "",
+      "price": "",
       "displayed": false
     },
     {
-      "slug": "artwork-65b0f50c-b202-431a-9d1f-74c83849ac26",
-      "title": "Abc",
+      "slug": "artwork-0d8caed9-3bdf-4e14-af20-8b2dff8b17d7",
+      "title": "Untitled 2",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "2026",
       "medium": "Acrylic on canvas",
-      "dimensions": "70 × 110 cm",
-      "widthCm": 70,
-      "heightCm": 110,
-      "image": "/uploads/artworks/8991950a-520d-45ad-9caf-05ece84b46d9.webp",
-      "availability": "Available",
-      "description": "Abc",
-      "displayed": false
-    },
-    {
-      "slug": "artwork-7414e5d9-79c7-4907-a37e-063c31bee81e",
-      "title": "Abc",
-      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
-      "year": "2026",
-      "medium": "Acrylic on canvas",
-      "dimensions": "60 × 100 cm",
-      "widthCm": 60,
+      "dimensions": "72 × 100 cm",
+      "widthCm": 72,
       "heightCm": 100,
-      "image": "/uploads/artworks/b5154d57-cf35-4e60-a13c-677452d38378.webp",
+      "image": "/uploads/artworks/0d8caed9-3bdf-4e14-af20-8b2dff8b17d7.webp",
       "availability": "Available",
-      "description": "Abc",
+      "description": "",
+      "price": "",
       "displayed": false
     },
     {
-      "slug": "artwork-c92e4d67-bf9f-4994-92ac-9ec42827eef1",
-      "title": "Abc",
+      "slug": "artwork-9330c297-3e43-4734-b11c-9941c66d45f2",
+      "title": "Untitled 3",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "2026",
       "medium": "Acrylic on canvas",
-      "dimensions": "80 × 80 cm",
-      "widthCm": 80,
-      "heightCm": 80,
-      "image": "/uploads/artworks/1b487bcb-1f4f-4a39-bfc2-fb7e1c99b4b4.webp",
-      "availability": "Available",
-      "description": "Abc",
-      "displayed": false
-    },
-    {
-      "slug": "artwork-51645123-f703-4409-a191-761b7a13ace5",
-      "title": "Abc",
-      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
-      "year": "2026",
-      "medium": "Acrylic on canvas",
-      "dimensions": "70 × 70 cm",
-      "widthCm": 70,
-      "heightCm": 70,
-      "image": "/uploads/artworks/4a5ecfa3-f826-4a6c-bec1-b68a7d7fe64c.webp",
-      "availability": "Available",
-      "description": "Abc",
-      "displayed": false
-    },
-    {
-      "slug": "artwork-7419ca92-8fb8-4f9d-a3f0-3466d1d936cf",
-      "title": "Abc",
-      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
-      "year": "2026",
-      "medium": "Acrylic on canvas",
-      "dimensions": "75 × 75 cm",
+      "dimensions": "75 × 100 cm",
       "widthCm": 75,
-      "heightCm": 75,
-      "image": "/uploads/artworks/9dbb8472-5ef0-44ca-bef6-6522f328ac6d.webp",
+      "heightCm": 100,
+      "image": "/uploads/artworks/9330c297-3e43-4734-b11c-9941c66d45f2.webp",
       "availability": "Available",
-      "description": "Abc",
+      "description": "",
+      "price": "",
       "displayed": false
     },
     {
-      "slug": "artwork-bb1b1a33-f8ee-4ed1-ba44-b807757c0718",
-      "title": "Abc",
+      "slug": "artwork-5c514aa3-78b7-4bea-a7ff-8168b854067d",
+      "title": "Untitled 4",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "2026",
       "medium": "Acrylic on canvas",
-      "dimensions": "100 × 118 cm",
+      "dimensions": "100 × 99 cm",
       "widthCm": 100,
-      "heightCm": 118,
-      "image": "/uploads/artworks/3227f997-c454-4a38-9482-dd87d01e5d46.webp",
+      "heightCm": 99,
+      "image": "/uploads/artworks/5c514aa3-78b7-4bea-a7ff-8168b854067d.webp",
       "availability": "Available",
-      "description": "Abc",
+      "description": "",
+      "price": "",
       "displayed": false
     },
     {
-      "slug": "artwork-db7ce34d-e5ca-478d-a5e9-19d85f078ee7",
-      "title": "Abc",
+      "slug": "artwork-851bbd78-8a37-4b31-bfb1-241ac52c3d8f",
+      "title": "Untitled 5",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "2026",
       "medium": "Acrylic on canvas",
-      "dimensions": "80 × 110 cm",
-      "widthCm": 80,
-      "heightCm": 110,
-      "image": "/uploads/artworks/3daeaa0b-6510-4089-8738-8a69c1c140e8.webp",
+      "dimensions": "63 × 100 cm",
+      "widthCm": 63,
+      "heightCm": 100,
+      "image": "/uploads/artworks/851bbd78-8a37-4b31-bfb1-241ac52c3d8f.webp",
       "availability": "Available",
-      "description": "Abc",
+      "description": "",
+      "price": "",
       "displayed": false
     },
     {
-      "slug": "artwork-76f6366f-3869-4fbc-8e74-2d17601f2904",
-      "title": "Abc",
+      "slug": "artwork-82d6776f-355e-4893-bebc-858afa5e3a77",
+      "title": "Untitled 6",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "2026",
       "medium": "Acrylic on canvas",
-      "dimensions": "100 × 70 cm",
+      "dimensions": "79 × 100 cm",
+      "widthCm": 79,
+      "heightCm": 100,
+      "image": "/uploads/artworks/82d6776f-355e-4893-bebc-858afa5e3a77.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-e749ca89-8b7d-4172-88dc-193d973c86d3",
+      "title": "Untitled 7",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "67 × 100 cm",
+      "widthCm": 67,
+      "heightCm": 100,
+      "image": "/uploads/artworks/e749ca89-8b7d-4172-88dc-193d973c86d3.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-678c7c75-db91-4f90-ae8f-7428dde55b4c",
+      "title": "Untitled 8",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "71 × 100 cm",
+      "widthCm": 71,
+      "heightCm": 100,
+      "image": "/uploads/artworks/678c7c75-db91-4f90-ae8f-7428dde55b4c.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-601532f7-fb13-4860-9812-3bbd6638c25f",
+      "title": "Untitled 9",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 69 cm",
       "widthCm": 100,
-      "heightCm": 70,
-      "image": "/uploads/artworks/bf22f722-6f28-4d1f-9848-ec012fa2d22a.webp",
+      "heightCm": 69,
+      "image": "/uploads/artworks/601532f7-fb13-4860-9812-3bbd6638c25f.webp",
       "availability": "Available",
-      "description": "Abc",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-7c9baae6-6aee-4101-9307-964d64f83e6a",
+      "title": "Untitled 10",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "90 × 100 cm",
+      "widthCm": 90,
+      "heightCm": 100,
+      "image": "/uploads/artworks/7c9baae6-6aee-4101-9307-964d64f83e6a.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-00151cd3-3cef-428f-8d69-022afbae369a",
+      "title": "Untitled 11",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "90 × 100 cm",
+      "widthCm": 90,
+      "heightCm": 100,
+      "image": "/uploads/artworks/00151cd3-3cef-428f-8d69-022afbae369a.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-6ea40b07-3400-4ca0-8364-463832ae6343",
+      "title": "Untitled 12",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/6ea40b07-3400-4ca0-8364-463832ae6343.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-033665cb-2174-4a67-a440-5955fc05a2ad",
+      "title": "Untitled 13",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 92 cm",
+      "widthCm": 100,
+      "heightCm": 92,
+      "image": "/uploads/artworks/033665cb-2174-4a67-a440-5955fc05a2ad.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-e4abdc18-c80a-4db2-9b22-7cc664f0ba98",
+      "title": "Untitled 14",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "83 × 100 cm",
+      "widthCm": 83,
+      "heightCm": 100,
+      "image": "/uploads/artworks/e4abdc18-c80a-4db2-9b22-7cc664f0ba98.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-23b37b81-a74c-4d14-8afd-617cde4be46b",
+      "title": "Untitled 15",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 65 cm",
+      "widthCm": 100,
+      "heightCm": 65,
+      "image": "/uploads/artworks/23b37b81-a74c-4d14-8afd-617cde4be46b.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-f0c52672-72c6-410e-8491-5546ba9da30e",
+      "title": "Untitled 16",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 85 cm",
+      "widthCm": 100,
+      "heightCm": 85,
+      "image": "/uploads/artworks/f0c52672-72c6-410e-8491-5546ba9da30e.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-b6ba2247-4d4f-4256-b32c-4ee09ef2421e",
+      "title": "Untitled 17",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 82 cm",
+      "widthCm": 100,
+      "heightCm": 82,
+      "image": "/uploads/artworks/b6ba2247-4d4f-4256-b32c-4ee09ef2421e.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-e0aa0b7f-aacd-49ba-bb52-7d34dd5674d6",
+      "title": "Untitled 18",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 74 cm",
+      "widthCm": 100,
+      "heightCm": 74,
+      "image": "/uploads/artworks/e0aa0b7f-aacd-49ba-bb52-7d34dd5674d6.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-597d71ec-2a58-4103-b2a7-2f4b62942ed9",
+      "title": "Untitled 19",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "75 × 100 cm",
+      "widthCm": 75,
+      "heightCm": 100,
+      "image": "/uploads/artworks/597d71ec-2a58-4103-b2a7-2f4b62942ed9.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-c7d18090-a600-4afa-87fd-dd6ccbab038a",
+      "title": "Untitled 20",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "76 × 100 cm",
+      "widthCm": 76,
+      "heightCm": 100,
+      "image": "/uploads/artworks/c7d18090-a600-4afa-87fd-dd6ccbab038a.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-418bf9ed-a3eb-47d3-9bed-e5f7abd4a4c0",
+      "title": "Untitled 21",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "75 × 100 cm",
+      "widthCm": 75,
+      "heightCm": 100,
+      "image": "/uploads/artworks/418bf9ed-a3eb-47d3-9bed-e5f7abd4a4c0.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-2fa7f63c-517c-47a0-bd68-d6e69e54dd06",
+      "title": "Untitled 22",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "74 × 100 cm",
+      "widthCm": 74,
+      "heightCm": 100,
+      "image": "/uploads/artworks/2fa7f63c-517c-47a0-bd68-d6e69e54dd06.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-f184938c-adfe-4bda-8376-b18a3ca69636",
+      "title": "Untitled 23",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "69 × 100 cm",
+      "widthCm": 69,
+      "heightCm": 100,
+      "image": "/uploads/artworks/f184938c-adfe-4bda-8376-b18a3ca69636.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-ed2948ff-8514-4ee1-a761-a0ddda3c9035",
+      "title": "Untitled 24",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "74 × 100 cm",
+      "widthCm": 74,
+      "heightCm": 100,
+      "image": "/uploads/artworks/ed2948ff-8514-4ee1-a761-a0ddda3c9035.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-6195ff5d-0058-485f-9560-33de6783b81b",
+      "title": "Untitled 25",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/6195ff5d-0058-485f-9560-33de6783b81b.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-a5fce684-dfeb-42e6-b959-4586dac3af8c",
+      "title": "Untitled 26",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "92 × 100 cm",
+      "widthCm": 92,
+      "heightCm": 100,
+      "image": "/uploads/artworks/a5fce684-dfeb-42e6-b959-4586dac3af8c.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-5bbf318b-0b76-4d20-8155-be3094725a11",
+      "title": "Untitled 27",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 97 cm",
+      "widthCm": 100,
+      "heightCm": 97,
+      "image": "/uploads/artworks/5bbf318b-0b76-4d20-8155-be3094725a11.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-d168e5ad-299d-4d58-9924-1380253a822f",
+      "title": "Untitled 28",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "92 × 100 cm",
+      "widthCm": 92,
+      "heightCm": 100,
+      "image": "/uploads/artworks/d168e5ad-299d-4d58-9924-1380253a822f.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-46d5e92d-1929-46bb-bcb5-3bf5f6bea2a0",
+      "title": "Untitled 29",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 73 cm",
+      "widthCm": 100,
+      "heightCm": 73,
+      "image": "/uploads/artworks/46d5e92d-1929-46bb-bcb5-3bf5f6bea2a0.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-372e7b45-49a3-44d4-aeb4-82a157f5ac04",
+      "title": "Untitled 30",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 97 cm",
+      "widthCm": 100,
+      "heightCm": 97,
+      "image": "/uploads/artworks/372e7b45-49a3-44d4-aeb4-82a157f5ac04.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-c985d11c-e27b-438d-ba8a-983230b9205f",
+      "title": "Untitled 31",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 72 cm",
+      "widthCm": 100,
+      "heightCm": 72,
+      "image": "/uploads/artworks/c985d11c-e27b-438d-ba8a-983230b9205f.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
+      "displayed": false
+    },
+    {
+      "slug": "artwork-207c5122-4725-4fe9-b97d-be90d717980e",
+      "title": "Untitled 32",
+      "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
+      "year": "2026",
+      "medium": "Acrylic on canvas",
+      "dimensions": "100 × 78 cm",
+      "widthCm": 100,
+      "heightCm": 78,
+      "image": "/uploads/artworks/207c5122-4725-4fe9-b97d-be90d717980e.webp",
+      "availability": "Available",
+      "description": "",
+      "price": "",
       "displayed": false
     }
   ],

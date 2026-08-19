@@ -40,6 +40,7 @@ export const artworks = sqliteTable("artworks", {
   image: text("image").notNull(),
   availability: text("availability").notNull(),
   description: text("description").notNull().default(""),
+  price: text("price").notNull().default(""),
   displayed: integer("displayed", { mode: "boolean" }).notNull().default(false),
 });
 

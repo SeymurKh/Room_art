@@ -143,7 +143,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
       </div>
       <MobileEventsCarousel events={data.events} />
 
-      <section className="border-y border-black/10 bg-[#ebe7df] py-20 md:py-32">
+      <section className="bg-[#ebe7df] py-20 md:py-32">
         <div className="room-shell grid gap-10 md:grid-cols-[.85fr_1.15fr]">
           <motion.div {...reveal}>
             <SectionHeading kicker="About Room" title="A Baku space for precise encounters" copy={data.about.concept} />

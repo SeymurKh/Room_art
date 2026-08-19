@@ -45,6 +45,7 @@ export function ArtworkWall({
             <Row label="Medium" value={artwork.medium} />
             <Row label="Dimensions" value={artwork.dimensions} />
             <Row label="Availability" value={artwork.availability} />
+            {artwork.price ? <Row label="Price" value={artwork.price} /> : null}
           </dl>
           <a
             href={whatsappArtworkUrl(settings, artwork)}
