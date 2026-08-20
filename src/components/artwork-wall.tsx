@@ -52,7 +52,7 @@ export function ArtworkWall({
   const priceLabel = artwork.priceAzn != null ? `AZN ${artwork.priceAzn.toLocaleString()}` : null;
 
   return (
-    <section className="wall grid min-h-screen grid-rows-[auto_1fr_auto] bg-[#f4f1ea] pt-16">
+    <section className="wall grid min-h-screen grid-rows-[auto_1fr_auto] pt-16">
       {/* Top header info */}
       <motion.header
         variants={staggerContainer}
@@ -61,14 +61,14 @@ export function ArtworkWall({
         className="room-shell flex flex-wrap items-start justify-between gap-6 py-5 md:py-6"
       >
         <motion.div variants={fadeUp}>
-          <p className="section-kicker text-[#6f6a61]">{artist}</p>
-          <h1 className="room-serif mt-2 max-w-md text-3xl font-medium leading-[0.95] md:text-5xl">
+          <p className="section-kicker text-white/60">{artist}</p>
+          <h1 className="room-serif mt-2 max-w-md text-3xl font-medium leading-[0.95] text-[#f4f1ea] md:text-5xl">
             {artwork.title}
           </h1>
         </motion.div>
         <motion.div variants={fadeUp} className="text-right">
-          <p className="text-sm text-[#6f6a61]">{artwork.year}</p>
-          <p className="mt-1 text-sm text-[#6f6a61]">{artwork.medium}</p>
+          <p className="text-sm text-white/60">{artwork.year}</p>
+          <p className="mt-1 text-sm text-white/60">{artwork.medium}</p>
         </motion.div>
       </motion.header>
 
@@ -112,23 +112,23 @@ export function ArtworkWall({
         <motion.div variants={fadeUp}>
           <dl className="grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2 md:grid-cols-4">
             <div>
-              <dt className="text-[#6f6a61]">Dimensions</dt>
-              <dd className="mt-0.5 text-[#11100e]">{artwork.dimensions}</dd>
+              <dt className="text-white/50">Dimensions</dt>
+              <dd className="mt-0.5 text-[#f4f1ea]">{artwork.dimensions}</dd>
             </div>
             <div>
-              <dt className="text-[#6f6a61]">Availability</dt>
-              <dd className="mt-0.5 text-[#11100e]">{artwork.availability}</dd>
+              <dt className="text-white/50">Availability</dt>
+              <dd className="mt-0.5 text-[#f4f1ea]">{artwork.availability}</dd>
             </div>
             {priceLabel ? (
               <div>
-                <dt className="text-[#6f6a61]">Price</dt>
-                <dd className="mt-0.5 text-[#11100e]">{priceLabel}</dd>
+                <dt className="text-white/50">Price</dt>
+                <dd className="mt-0.5 text-[#f4f1ea]">{priceLabel}</dd>
               </div>
             ) : null}
             {artwork.description ? (
               <div className="sm:col-span-2 md:col-span-1">
-                <dt className="text-[#6f6a61]">About</dt>
-                <dd className="mt-0.5 max-w-xs text-[#11100e]">{artwork.description}</dd>
+                <dt className="text-white/50">About</dt>
+                <dd className="mt-0.5 max-w-xs text-[#f4f1ea]">{artwork.description}</dd>
               </div>
             ) : null}
           </dl>

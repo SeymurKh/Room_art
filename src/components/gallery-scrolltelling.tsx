@@ -72,11 +72,14 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
       <section
         className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden"
         style={{
-          backgroundImage: "url('/assets/wall-interior.png')",
+          backgroundImage: "url('/assets/room-wall.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
+        {/* Затемняющий оверлей поверх фона, под картинами */}
+        <div className="pointer-events-none absolute inset-0 bg-black/45" aria-hidden="true" />
+
         {/* Картины — непрерывный кроссфейд */}
         {artworks.map((artwork, i) => {
           // Центр картины i: от 0 (первая) до 1 (последняя), равномерно

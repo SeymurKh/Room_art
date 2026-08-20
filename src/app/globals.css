@@ -100,6 +100,8 @@ select {
   background:
     radial-gradient(circle at 45% 14%, rgba(255,255,255,.34), transparent 18rem),
     linear-gradient(90deg, rgba(0,0,0,.05), transparent 18%, transparent 82%, rgba(0,0,0,.08)),
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url("/assets/room-wall.png") center / cover no-repeat,
     #ded8cc;
 }
 

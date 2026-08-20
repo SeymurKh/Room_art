@@ -3,39 +3,16 @@
 import { useState, useRef, useCallback } from "react";
 import type { Artwork } from "@/lib/types";
 import { RoomImage } from "@/components/room-image";
+import { computeArtworkSize, useViewportSize } from "@/lib/artwork-scale";
 
 const ZOOM = 4;
 const LENS_SIZE = 350;
 
-// Размеры заданы в процентах вьюпорта:
-// - референс 140×140 см занимает BASE_WIDTH_VW ширины экрана;
-// - дальше размер растёт суб-линейно (степень COMPRESSION_POW < 1),
-//   поэтому крупные работы крупнее, но рост постепенно насыщается;
-// - окончательно ширина ограничена MAX_WIDTH_VW по ширине и MAX_HEIGHT_VH
-//   по высоте (пересчитанной в ширину через соотношение сторон).
-const BASE_WIDTH_VW = 56;
-const MAX_WIDTH_VW = 72;
-const MAX_HEIGHT_VH = 68;
-const COMPRESSION_POW = 0.42;
-const REFERENCE_CM = 140;
-
-/**
- * compression — «сжатый» масштаб по площади относительно референса 140×140 см.
- *
- * Возвращает коэффициент >= 1 для работ крупнее референса и < 1 для меньших,
- * но со степенью меньше 1: рост нелинейный и не раздувает большие полотна.
- */
-export function compressionFactor(widthCm: number, heightCm: number): number {
-  const area = widthCm * heightCm;
-  const refArea = REFERENCE_CM * REFERENCE_CM;
-  return Math.pow(area / refArea, COMPRESSION_POW);
-}
-
 /**
  * ArtworkFrame — высокореалистичная галерейная рама (CSS-only 3D).
  *
- * Пропорции берутся из заявленных габаритов (widthCm/heightCm), чтобы размер
- * на экране совпадал с dimensions и не «скакал» после загрузки изображения.
+ * Пропорции берутся из заявленных габаритов (widthCm/heightCm); фактический
+ * размер считает единая функция computeArtworkSize, общая для всех секций.
  *
  * Круглые работы (tondo) рендерятся без рамы и тёмной подложки — только
  * круглое изображение (лупа на детальной странице сохраняется).
@@ -49,9 +26,14 @@ export function ArtworkFrame({
   priority?: boolean;
   enableLens?: boolean;
 }) {
-  const compression = compressionFactor(artwork.widthCm, artwork.heightCm);
-  const ratio = artwork.widthCm / artwork.heightCm;
   const tondo = artwork.tondo ?? false;
+  const viewport = useViewportSize();
+  const size = computeArtworkSize(
+    artwork.widthCm,
+    artwork.heightCm,
+    viewport,
+    tondo
+  );
 
   if (tondo) {
     return (
@@ -60,26 +42,26 @@ export function ArtworkFrame({
         alt={artwork.title}
         priority={priority}
         fallbackText={artwork.title}
-        compression={compression}
-        aspectRatio={1}
+        widthPx={size.width}
+        heightPx={size.height}
         enableLens={enableLens}
         tondo
       />
     );
   }
 
-  // Меньшие рамы на мобильном, чтобы картина помещалась на экран
-  const outerPadding = `${Math.round(8 + compression * 4)}px`;
-
   return (
-    <div className="frame-outer inline-block" style={{ padding: outerPadding }}>
+    <div
+      className="frame-outer inline-block"
+      style={{ padding: `${Math.round(8 + size.width * 0.02)}px` }}
+    >
       <MagnifierLens
         src={artwork.image}
         alt={artwork.title}
         priority={priority}
         fallbackText={artwork.title}
-        compression={compression}
-        aspectRatio={ratio}
+        widthPx={size.width}
+        heightPx={size.height}
         enableLens={enableLens}
       />
     </div>
@@ -91,8 +73,8 @@ function MagnifierLens({
   alt,
   priority,
   fallbackText,
-  compression,
-  aspectRatio,
+  widthPx,
+  heightPx,
   enableLens,
   tondo = false,
 }: {
@@ -100,8 +82,8 @@ function MagnifierLens({
   alt: string;
   priority?: boolean;
   fallbackText: string;
-  compression: number;
-  aspectRatio: number;
+  widthPx: number;
+  heightPx: number;
   enableLens: boolean;
   tondo?: boolean;
 }) {
@@ -109,11 +91,6 @@ function MagnifierLens({
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [size, setSize] = useState({ w: 0, h: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-
-  // Итоговая ширина: базовый размер по сжатию, ограниченный шириной и высотой
-  // вьюпорта (высотный лимит пересчитан в ширину через aspect ratio).
-  const desiredVw = BASE_WIDTH_VW * compression;
-  const heightCappedVh = MAX_HEIGHT_VH * aspectRatio;
 
   const handleMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const el = containerRef.current;
@@ -142,8 +119,8 @@ function MagnifierLens({
       ref={containerRef}
       className={`frame-artwork relative ${enableLens ? "cursor-crosshair" : ""} ${tondo ? "overflow-hidden rounded-full" : ""}`}
       style={{
-        width: `min(${desiredVw}vw, ${MAX_WIDTH_VW}vw, ${heightCappedVh}vh)`,
-        aspectRatio: tondo ? "1 / 1" : `${aspectRatio}`,
+        width: `${widthPx}px`,
+        height: tondo ? `${heightPx}px` : `${heightPx}px`,
       }}
       onMouseEnter={enableLens ? handleEnter : undefined}
       onMouseMove={enableLens ? handleMove : undefined}

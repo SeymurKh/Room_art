@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
@@ -62,9 +61,13 @@ export function HomeExperience({ data }: { data: SiteData }) {
     },
   ];
 
-  const slideshowImages = useMemo(() => {
-    return data.artworks.slice(0, 5).map((a) => a.image);
-  }, [data.artworks]);
+  // Фон — 4 фото заведения из public/assets/hero.
+  const slideshowImages = [
+    "/assets/hero/hero-1.png",
+    "/assets/hero/hero-2.png",
+    "/assets/hero/hero-3.png",
+    "/assets/hero/hero-4.png",
+  ];
 
   return (
     <main className="bg-[#f4f1ea]">
