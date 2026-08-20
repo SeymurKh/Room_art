@@ -49,7 +49,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
             {artist.statement}
           </blockquote>
         </div>
-        <div className="relative order-1 aspect-[3/4] w-full max-h-[70vh] overflow-hidden bg-black md:order-2 md:aspect-auto md:max-h-[75vh]">
+        <div className="relative order-1 aspect-[4/5] w-full max-h-[45vh] overflow-hidden bg-black md:order-2 md:aspect-[3/4] md:max-h-[75vh]">
           <RoomImage
             src={artist.portrait}
             alt={artist.name}

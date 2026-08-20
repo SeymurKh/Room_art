@@ -10,9 +10,9 @@ import { PositionedImage } from "@/components/positioned-image";
 const SWIPE_THRESHOLD = 50;
 
 export function MobileEventsCarousel({ events }: { events: Event[] }) {
-  const upcoming = events.find((e) => e.status === "Upcoming") ?? null;
-  const past = events.find((e) => e.status === "Past") ?? null;
-  const shown = [upcoming, past].filter(Boolean) as Event[];
+  const shown = events.filter(
+    (e) => e.status === "Upcoming" || e.status === "Past"
+  );
 
   const [index, setIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);

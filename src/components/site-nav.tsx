@@ -22,7 +22,10 @@ export function SiteNav({ dark = false, fixed = true }: { dark?: boolean; fixed?
   useMotionValueEvent(scrollY, "change", (current) => {
     const diff = current - lastY;
     if (Math.abs(diff) < 8) return;
-    setHidden(diff > 0 && current > 80);
+    const nextHidden = diff > 0 && current > 80;
+    setHidden(nextHidden);
+    // Закрываем мобильное меню, когда шапка скрывается или начинается скролл.
+    if (nextHidden) setOpen(false);
     setLastY(current);
   });
 
@@ -66,7 +69,7 @@ export function SiteNav({ dark = false, fixed = true }: { dark?: boolean; fixed?
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="overflow-hidden border-t border-current/10 md:hidden"
+            className="max-h-[calc(100vh-4rem)] overflow-y-auto overflow-hidden border-t border-current/10 md:hidden"
           >
             <div className="room-shell flex flex-col gap-5 py-8 text-xs font-semibold uppercase tracking-[0.22em]">
               {links.map(([label, href]) => (

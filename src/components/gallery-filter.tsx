@@ -64,6 +64,27 @@ const formatOptions: string[] = [all, "Landscape", "Square", "Portrait"];
 const sizeOptions: string[] = [all, "Small", "Medium", "Large"];
 const priceOptions: string[] = [all, "under-1000", "1000-3000", "3000-5000", "over-5000"];
 
+/**
+ * Возвращает страницы для пагинации с «окном» вокруг текущей и многоточиями,
+ * чтобы на мобильном не выводились все кнопки подряд.
+ * Формат: число страницы или null (многоточие).
+ */
+function getPaginationItems(current: number, total: number): (number | null)[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+
+  const items: (number | null)[] = [1];
+
+  const left = Math.max(2, current - 1);
+  const right = Math.min(total - 1, current + 1);
+
+  if (left > 2) items.push(null);
+  for (let p = left; p <= right; p++) items.push(p);
+  if (right < total - 1) items.push(null);
+
+  items.push(total);
+  return items;
+}
+
 export function GalleryFilter({ data }: { data: SiteData }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -146,22 +167,28 @@ export function GalleryFilter({ data }: { data: SiteData }) {
           >
             <ChevronLeft size={18} />
           </button>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-            <button
-              key={p}
-              type="button"
-              onClick={() => setParam("page", String(p))}
-              className={`flex h-10 w-10 items-center justify-center border text-xs font-semibold transition ${
-                p === safePage
-                  ? "border-[#f4f1ea] bg-[#f4f1ea] text-[#11100e]"
-                  : "border-white/20 text-[#f4f1ea] hover:bg-white/10"
-              }`}
-              aria-label={`Page ${p}`}
-              aria-current={p === safePage ? "page" : undefined}
-            >
-              {p}
-            </button>
-          ))}
+          {getPaginationItems(safePage, totalPages).map((p, i) =>
+            p === null ? (
+              <span key={`ellipsis-${i}`} className="px-1 text-xs text-white/40">
+                …
+              </span>
+            ) : (
+              <button
+                key={p}
+                type="button"
+                onClick={() => setParam("page", String(p))}
+                className={`flex h-10 w-10 items-center justify-center border text-xs font-semibold transition ${
+                  p === safePage
+                    ? "border-[#f4f1ea] bg-[#f4f1ea] text-[#11100e]"
+                    : "border-white/20 text-[#f4f1ea] hover:bg-white/10"
+                }`}
+                aria-label={`Page ${p}`}
+                aria-current={p === safePage ? "page" : undefined}
+              >
+                {p}
+              </button>
+            )
+          )}
           <button
             type="button"
             onClick={() => setParam("page", String(safePage + 1))}
