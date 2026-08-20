@@ -39,7 +39,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-2ed002cb-5534-4e96-bdba-307e06db5531",
@@ -54,7 +55,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": true
+      "displayed": true,
+      "tondo": false
     },
     {
       "slug": "artwork-8ed3bec5-d977-4bd4-b652-960b78d97e84",
@@ -69,7 +71,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": true
+      "displayed": true,
+      "tondo": false
     },
     {
       "slug": "artwork-e69b6333-f099-44f9-98a5-00b920c542a5",
@@ -84,7 +87,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": true
+      "displayed": true,
+      "tondo": false
     },
     {
       "slug": "artwork-d8062ed5-a568-45ec-be4c-5fbb5640e558",
@@ -99,7 +103,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": true
+      "displayed": true,
+      "tondo": false
     },
     {
       "slug": "artwork-c91ae925-d6d4-4ff3-bdab-3f5679fc6f48",
@@ -114,7 +119,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": true
+      "displayed": true,
+      "tondo": false
     },
     {
       "slug": "artwork-bdce776a-63d1-404b-8202-12eef088a7c2",
@@ -129,7 +135,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-2c2f1315-8571-4445-b9e5-e8954ad74fac",
@@ -144,7 +151,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-19ff8982-9582-433d-ae36-a0777187b081",
@@ -159,7 +167,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-4a441d05-6620-4c92-805a-2a81d6348f8e",
@@ -174,7 +183,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-7c44392f-867f-4713-9e14-4ac6208dc51c",
@@ -189,7 +199,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": true
+      "displayed": true,
+      "tondo": false
     },
     {
       "slug": "artwork-7ce9024a-6b4a-4398-9faf-0dabf9e49a88",
@@ -204,7 +215,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": true
+      "displayed": true,
+      "tondo": false
     },
     {
       "slug": "artwork-35481a68-698f-46ab-a859-073718d990d4",
@@ -219,7 +231,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-d6b05032-4324-446a-b3b8-78428feda500",
@@ -234,7 +247,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-f16bbdbd-3587-4267-b8a8-bc0a715c4025",
@@ -249,7 +263,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": true
+      "displayed": true,
+      "tondo": false
     },
     {
       "slug": "artwork-25874b80-a55d-4453-96cc-f2b23a114d95",
@@ -264,7 +279,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-aef16e66-cd42-4e95-bdf2-36b1e21fc46e",
@@ -279,7 +295,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-f95bc1eb-f8b7-4e84-b6d9-ed28522666ab",
@@ -294,7 +311,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-d8a16b9f-8b3a-463e-b1a7-85247bb329fd",
@@ -309,7 +327,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-d147488f-1ec3-4e50-ad63-92cf8ff5e9ad",
@@ -324,7 +343,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-3528b9f8-6a5a-4d3d-9952-c634e210e2db",
@@ -339,7 +359,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-e825380b-c620-4db2-9d6e-320ef2a38d96",
@@ -354,7 +375,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-f16bb252-0ab4-4bfc-82d8-2a154872d91c",
@@ -369,7 +391,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-0d8caed9-3bdf-4e14-af20-8b2dff8b17d7",
@@ -384,7 +407,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-9330c297-3e43-4734-b11c-9941c66d45f2",
@@ -399,7 +423,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-5c514aa3-78b7-4bea-a7ff-8168b854067d",
@@ -414,7 +439,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-851bbd78-8a37-4b31-bfb1-241ac52c3d8f",
@@ -429,7 +455,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-82d6776f-355e-4893-bebc-858afa5e3a77",
@@ -444,7 +471,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-e749ca89-8b7d-4172-88dc-193d973c86d3",
@@ -459,7 +487,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-678c7c75-db91-4f90-ae8f-7428dde55b4c",
@@ -474,7 +503,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-601532f7-fb13-4860-9812-3bbd6638c25f",
@@ -489,7 +519,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-7c9baae6-6aee-4101-9307-964d64f83e6a",
@@ -504,7 +535,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-00151cd3-3cef-428f-8d69-022afbae369a",
@@ -519,7 +551,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-6ea40b07-3400-4ca0-8364-463832ae6343",
@@ -534,7 +567,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-033665cb-2174-4a67-a440-5955fc05a2ad",
@@ -549,7 +583,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-e4abdc18-c80a-4db2-9b22-7cc664f0ba98",
@@ -564,7 +599,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-23b37b81-a74c-4d14-8afd-617cde4be46b",
@@ -579,7 +615,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-f0c52672-72c6-410e-8491-5546ba9da30e",
@@ -594,7 +631,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-b6ba2247-4d4f-4256-b32c-4ee09ef2421e",
@@ -609,7 +647,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-e0aa0b7f-aacd-49ba-bb52-7d34dd5674d6",
@@ -624,7 +663,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-597d71ec-2a58-4103-b2a7-2f4b62942ed9",
@@ -639,7 +679,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-c7d18090-a600-4afa-87fd-dd6ccbab038a",
@@ -654,7 +695,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-418bf9ed-a3eb-47d3-9bed-e5f7abd4a4c0",
@@ -669,7 +711,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-2fa7f63c-517c-47a0-bd68-d6e69e54dd06",
@@ -684,7 +727,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-f184938c-adfe-4bda-8376-b18a3ca69636",
@@ -699,7 +743,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-ed2948ff-8514-4ee1-a761-a0ddda3c9035",
@@ -714,7 +759,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-6195ff5d-0058-485f-9560-33de6783b81b",
@@ -729,7 +775,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-a5fce684-dfeb-42e6-b959-4586dac3af8c",
@@ -744,7 +791,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-5bbf318b-0b76-4d20-8155-be3094725a11",
@@ -755,11 +803,12 @@
       "dimensions": "100 × 97 cm",
       "widthCm": 100,
       "heightCm": 97,
-      "image": "/uploads/artworks/5bbf318b-0b76-4d20-8155-be3094725a11.webp",
+      "image": "/uploads/artworks/1ea89fbc-fb61-483c-b9d7-4d5dd623aaf7.webp",
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": true,
+      "tondo": true
     },
     {
       "slug": "artwork-d168e5ad-299d-4d58-9924-1380253a822f",
@@ -774,7 +823,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-46d5e92d-1929-46bb-bcb5-3bf5f6bea2a0",
@@ -789,7 +839,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-372e7b45-49a3-44d4-aeb4-82a157f5ac04",
@@ -804,7 +855,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-c985d11c-e27b-438d-ba8a-983230b9205f",
@@ -819,7 +871,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     },
     {
       "slug": "artwork-207c5122-4725-4fe9-b97d-be90d717980e",
@@ -834,7 +887,8 @@
       "availability": "Available",
       "description": "",
       "priceAzn": null,
-      "displayed": false
+      "displayed": false,
+      "tondo": false
     }
   ],
   "events": [

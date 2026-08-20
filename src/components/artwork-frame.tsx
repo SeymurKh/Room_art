@@ -1,28 +1,44 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import type { Artwork } from "@/lib/types";
 import { RoomImage } from "@/components/room-image";
 
 const ZOOM = 4;
 const LENS_SIZE = 350;
 
+// Размеры заданы в процентах вьюпорта:
+// - референс 140×140 см занимает BASE_WIDTH_VW ширины экрана;
+// - дальше размер растёт суб-линейно (степень COMPRESSION_POW < 1),
+//   поэтому крупные работы крупнее, но рост постепенно насыщается;
+// - окончательно ширина ограничена MAX_WIDTH_VW по ширине и MAX_HEIGHT_VH
+//   по высоте (пересчитанной в ширину через соотношение сторон).
+const BASE_WIDTH_VW = 56;
+const MAX_WIDTH_VW = 72;
+const MAX_HEIGHT_VH = 68;
+const COMPRESSION_POW = 0.42;
+const REFERENCE_CM = 140;
+
 /**
- * scaleFactor — масштаб от 0.4 (маленькие) до 1.0 (большие).
- * Референс: площадь картины 140×140 см.
+ * compression — «сжатый» масштаб по площади относительно референса 140×140 см.
+ *
+ * Возвращает коэффициент >= 1 для работ крупнее референса и < 1 для меньших,
+ * но со степенью меньше 1: рост нелинейный и не раздувает большие полотна.
  */
-export function scaleFactor(widthCm: number, heightCm: number): number {
+export function compressionFactor(widthCm: number, heightCm: number): number {
   const area = widthCm * heightCm;
-  const refArea = 140 * 140;
-  return Math.min(1, Math.sqrt(area / refArea));
+  const refArea = REFERENCE_CM * REFERENCE_CM;
+  return Math.pow(area / refArea, COMPRESSION_POW);
 }
 
 /**
  * ArtworkFrame — высокореалистичная галерейная рама (CSS-only 3D).
- * Слой: frame-outer (внешняя рама) → изображение.
  *
- * aspectRatio берётся от реального изображения, чтобы не было полей
- * и обрезки. Масштаб зависит от указанных габаритов в см.
+ * Пропорции берутся из заявленных габаритов (widthCm/heightCm), чтобы размер
+ * на экране совпадал с dimensions и не «скакал» после загрузки изображения.
+ *
+ * Круглые работы (tondo) рендерятся без рамы и тёмной подложки — только
+ * круглое изображение (лупа на детальной странице сохраняется).
  */
 export function ArtworkFrame({
   artwork,
@@ -33,46 +49,41 @@ export function ArtworkFrame({
   priority?: boolean;
   enableLens?: boolean;
 }) {
-  const scale = scaleFactor(artwork.widthCm, artwork.heightCm);
+  const compression = compressionFactor(artwork.widthCm, artwork.heightCm);
+  const ratio = artwork.widthCm / artwork.heightCm;
   const tondo = artwork.tondo ?? false;
 
-  // Меньшие рамы на мобильном, чтобы картина помещалась на экран
-  const outerPadding = `${Math.round(8 + scale * 4)}px`;
-
-  return (
-    <div
-      className="frame-outer inline-block"
-      style={{ padding: outerPadding, borderRadius: tondo ? "50%" : 0 }}
-    >
+  if (tondo) {
+    return (
       <MagnifierLens
         src={artwork.image}
         alt={artwork.title}
         priority={priority}
         fallbackText={artwork.title}
-        scale={scale}
+        compression={compression}
+        aspectRatio={1}
         enableLens={enableLens}
-        tondo={tondo}
+        tondo
+      />
+    );
+  }
+
+  // Меньшие рамы на мобильном, чтобы картина помещалась на экран
+  const outerPadding = `${Math.round(8 + compression * 4)}px`;
+
+  return (
+    <div className="frame-outer inline-block" style={{ padding: outerPadding }}>
+      <MagnifierLens
+        src={artwork.image}
+        alt={artwork.title}
+        priority={priority}
+        fallbackText={artwork.title}
+        compression={compression}
+        aspectRatio={ratio}
+        enableLens={enableLens}
       />
     </div>
   );
-}
-
-function useImageAspect(src: string) {
-  const [aspect, setAspect] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (!src) return;
-    const img = new Image();
-    img.src = src;
-    img.onload = () => {
-      if (img.naturalWidth && img.naturalHeight) {
-        setAspect(img.naturalWidth / img.naturalHeight);
-      }
-    };
-    img.onerror = () => setAspect(null);
-  }, [src]);
-
-  return aspect;
 }
 
 function MagnifierLens({
@@ -80,7 +91,8 @@ function MagnifierLens({
   alt,
   priority,
   fallbackText,
-  scale,
+  compression,
+  aspectRatio,
   enableLens,
   tondo = false,
 }: {
@@ -88,19 +100,20 @@ function MagnifierLens({
   alt: string;
   priority?: boolean;
   fallbackText: string;
-  scale: number;
+  compression: number;
+  aspectRatio: number;
   enableLens: boolean;
   tondo?: boolean;
 }) {
-  const imageAspect = useImageAspect(src);
   const [active, setActive] = useState(false);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [size, setSize] = useState({ w: 0, h: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // На мобильном ограничиваем ширину картины окном
-  const baseWidth = `${Math.min(78, 60 * scale)}vw`;
-  const maxWidth = `${Math.min(420, 700 * scale)}px`;
+  // Итоговая ширина: базовый размер по сжатию, ограниченный шириной и высотой
+  // вьюпорта (высотный лимит пересчитан в ширину через aspect ratio).
+  const desiredVw = BASE_WIDTH_VW * compression;
+  const heightCappedVh = MAX_HEIGHT_VH * aspectRatio;
 
   const handleMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const el = containerRef.current;
@@ -129,8 +142,8 @@ function MagnifierLens({
       ref={containerRef}
       className={`frame-artwork relative ${enableLens ? "cursor-crosshair" : ""} ${tondo ? "overflow-hidden rounded-full" : ""}`}
       style={{
-        width: `min(${baseWidth}, ${maxWidth})`,
-        aspectRatio: tondo ? "1 / 1" : imageAspect ? `${imageAspect}` : "1 / 1",
+        width: `min(${desiredVw}vw, ${MAX_WIDTH_VW}vw, ${heightCappedVh}vh)`,
+        aspectRatio: tondo ? "1 / 1" : `${aspectRatio}`,
       }}
       onMouseEnter={enableLens ? handleEnter : undefined}
       onMouseMove={enableLens ? handleMove : undefined}
@@ -144,11 +157,7 @@ function MagnifierLens({
         className="object-cover"
         fallbackText={fallbackText}
       />
-      <div
-        className="frame-artwork-overlay"
-        aria-hidden="true"
-        style={tondo ? { borderRadius: "50%" } : undefined}
-      />
+      {!tondo ? <div className="frame-artwork-overlay" aria-hidden="true" /> : null}
 
       {enableLens && active && (
         <div

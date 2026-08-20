@@ -32,11 +32,18 @@ function isUnderUploads(filePath: string): boolean {
 }
 
 async function optimizeImage(input: Buffer): Promise<Buffer> {
-  let pipeline = sharp(input).rotate().toColorspace("srgb");
-
-  const metadata = await pipeline.metadata();
+  const metadata = await sharp(input).metadata();
   const width = metadata.width ?? 0;
   const height = metadata.height ?? 0;
+
+  let pipeline = sharp(input).rotate();
+
+  // Convert to sRGB only when the source is in another color space.
+  // Already-sRGB images (the common case) are left untouched, which avoids
+  // noisy libvips warnings from unusual/exotic embedded ICC profiles.
+  if (metadata.space && metadata.space !== "srgb") {
+    pipeline = pipeline.toColorspace("srgb");
+  }
 
   if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
     pipeline = pipeline.resize({
@@ -50,17 +57,20 @@ async function optimizeImage(input: Buffer): Promise<Buffer> {
   let output = await pipeline.webp({ quality: DEFAULT_QUALITY }).toBuffer();
 
   if (output.length > MAX_OUTPUT_SIZE) {
-    output = await sharp(input)
+    let fallback = sharp(input)
       .rotate()
-      .toColorspace("srgb")
       .resize({
         width: MAX_DIMENSION,
         height: MAX_DIMENSION,
         fit: "inside",
         withoutEnlargement: true,
-      })
-      .webp({ quality: FALLBACK_QUALITY })
-      .toBuffer();
+      });
+
+    if (metadata.space && metadata.space !== "srgb") {
+      fallback = fallback.toColorspace("srgb");
+    }
+
+    output = await fallback.webp({ quality: FALLBACK_QUALITY }).toBuffer();
   }
 
   return output;
