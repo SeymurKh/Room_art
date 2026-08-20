@@ -32,6 +32,7 @@ const artworkSchema = z.object({
   description: z.string().default(""),
   priceAzn: z.number().nullable().default(null),
   displayed: z.boolean().default(false),
+  tondo: z.boolean().default(false),
 });
 
 const eventSchema = z.object({

@@ -127,6 +127,15 @@ export function ArtworkForm({
         />
         On display
       </label>
+      <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
+        <input
+          type="checkbox"
+          checked={data.tondo ?? false}
+          onChange={(e) => updateField("tondo", e.target.checked)}
+          className="size-4 accent-[#11100e]"
+        />
+        Tondo (circular artwork)
+      </label>
       <label htmlFor="field-price-azn" className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
         Price (AZN)
         <input

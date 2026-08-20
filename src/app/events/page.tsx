@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
+import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { PositionedImage } from "@/components/positioned-image";
 import { getSiteData } from "@/lib/site-data";
@@ -13,7 +14,8 @@ export default async function EventsPage() {
   const past = data.events.filter((item) => item.status === "Past");
   return (
     <main>
-      <PageHero settings={data.settings} kicker="Events" title="Events at ROOM" />
+      <SiteNav dark />
+      <PageHero kicker="Events" title="Events at ROOM" />
       <EventGroup title="Current" events={current} />
       <EventGroup title="Upcoming" events={upcoming} />
       <EventGroup title="Past archive" events={past} />

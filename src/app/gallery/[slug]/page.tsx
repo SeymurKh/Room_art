@@ -33,7 +33,7 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
   const artist = data.artists.find((item) => item.slug === artwork.artistSlug)?.name ?? "ROOM artist";
   return (
     <main>
-      <SiteNav fixed={false} />
+      <SiteNav dark />
       <ArtworkWall artwork={artwork} artist={artist} settings={data.settings} />
       <SiteFooter settings={data.settings} />
     </main>

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { RoomImage } from "@/components/room-image";
+import { ArtworkSalon } from "@/components/artwork-salon";
 import { getSiteData } from "@/lib/site-data";
 
 export async function generateStaticParams() {
@@ -36,7 +35,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
   return (
     <main>
-      <SiteNav />
+      <SiteNav dark />
       <section className="room-shell grid gap-10 pt-24 md:grid-cols-[1fr_1.05fr] md:gap-16 md:pt-28">
         <div className="order-2 md:order-1">
           <p className="section-kicker text-[#6f6a61]">{artist.role}</p>
@@ -64,33 +63,8 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
       <section className="room-shell py-16 md:py-24">
         <p className="section-kicker text-[#6f6a61]">Artworks</p>
-        <div className="mt-6 columns-1 gap-5 sm:columns-2 lg:columns-3 md:mt-8">
-          {artworks.map((artwork) => (
-            <Link href={`/gallery/${artwork.slug}`} key={artwork.slug} className="group mb-5 block break-inside-avoid">
-              <div
-                className="card-img-overlay relative overflow-hidden bg-[#e2ded4]"
-                style={{ aspectRatio: `${artwork.widthCm} / ${artwork.heightCm}` }}
-              >
-                <RoomImage
-                  src={artwork.image}
-                  alt={artwork.title}
-                  fill
-                  className="object-cover transition duration-700 group-hover:scale-105"
-                  fallbackText={artwork.title}
-                />
-                <span className="overlay-text">View artwork</span>
-              </div>
-              <div className="mt-4 flex justify-between gap-4">
-                <div>
-                  <h2 className="room-serif text-2xl md:text-3xl">{artwork.title}</h2>
-                  <p className="mt-1 text-sm text-[#6f6a61]">
-                    {artwork.medium}, {artwork.year} · {artwork.dimensions}
-                  </p>
-                </div>
-                <ArrowUpRight size={18} className="mt-0.5 shrink-0 opacity-30 transition group-hover:opacity-100" />
-              </div>
-            </Link>
-          ))}
+        <div className="mt-8 md:mt-10">
+          <ArtworkSalon artworks={artworks} />
         </div>
       </section>
       <SiteFooter settings={data.settings} />

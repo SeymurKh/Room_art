@@ -34,12 +34,16 @@ export function ArtworkFrame({
   enableLens?: boolean;
 }) {
   const scale = scaleFactor(artwork.widthCm, artwork.heightCm);
+  const tondo = artwork.tondo ?? false;
 
   // Меньшие рамы на мобильном, чтобы картина помещалась на экран
   const outerPadding = `${Math.round(8 + scale * 4)}px`;
 
   return (
-    <div className="frame-outer inline-block" style={{ padding: outerPadding }}>
+    <div
+      className="frame-outer inline-block"
+      style={{ padding: outerPadding, borderRadius: tondo ? "50%" : 0 }}
+    >
       <MagnifierLens
         src={artwork.image}
         alt={artwork.title}
@@ -47,6 +51,7 @@ export function ArtworkFrame({
         fallbackText={artwork.title}
         scale={scale}
         enableLens={enableLens}
+        tondo={tondo}
       />
     </div>
   );
@@ -77,6 +82,7 @@ function MagnifierLens({
   fallbackText,
   scale,
   enableLens,
+  tondo = false,
 }: {
   src: string;
   alt: string;
@@ -84,6 +90,7 @@ function MagnifierLens({
   fallbackText: string;
   scale: number;
   enableLens: boolean;
+  tondo?: boolean;
 }) {
   const imageAspect = useImageAspect(src);
   const [active, setActive] = useState(false);
@@ -120,10 +127,10 @@ function MagnifierLens({
   return (
     <div
       ref={containerRef}
-      className={`frame-artwork relative ${enableLens ? "cursor-crosshair" : ""}`}
+      className={`frame-artwork relative ${enableLens ? "cursor-crosshair" : ""} ${tondo ? "overflow-hidden rounded-full" : ""}`}
       style={{
         width: `min(${baseWidth}, ${maxWidth})`,
-        aspectRatio: imageAspect ? `${imageAspect}` : "1 / 1",
+        aspectRatio: tondo ? "1 / 1" : imageAspect ? `${imageAspect}` : "1 / 1",
       }}
       onMouseEnter={enableLens ? handleEnter : undefined}
       onMouseMove={enableLens ? handleMove : undefined}
@@ -137,7 +144,11 @@ function MagnifierLens({
         className="object-cover"
         fallbackText={fallbackText}
       />
-      <div className="frame-artwork-overlay" aria-hidden="true" />
+      <div
+        className="frame-artwork-overlay"
+        aria-hidden="true"
+        style={tondo ? { borderRadius: "50%" } : undefined}
+      />
 
       {enableLens && active && (
         <div

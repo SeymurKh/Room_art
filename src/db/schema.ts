@@ -42,6 +42,7 @@ export const artworks = sqliteTable("artworks", {
   description: text("description").notNull().default(""),
   priceAzn: integer("price_azn"),
   displayed: integer("displayed", { mode: "boolean" }).notNull().default(false),
+  tondo: integer("tondo", { mode: "boolean" }).notNull().default(false),
 });
 
 export const events = sqliteTable("events", {

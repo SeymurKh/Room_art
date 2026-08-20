@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState, useCallback } from "react";
+import { useMemo, useRef, useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { Check, LogOut, Save, Star, Trash2 } from "lucide-react";
 import { UploadField } from "@/components/upload-field";
@@ -95,9 +95,14 @@ function PreviewBlock({
   }
 
   // Keep live transform in sync with saved value when not dragging (e.g. reset/zoom).
-  if (!draggingRef.current && (live.tx !== parsed.tx || live.ty !== parsed.ty || live.scale !== parsed.scale)) {
-    setLive(parsed);
-  }
+  useEffect(() => {
+    if (draggingRef.current) return;
+    setLive((prev) =>
+      prev.tx === parsed.tx && prev.ty === parsed.ty && prev.scale === parsed.scale
+        ? prev
+        : parsed
+    );
+  }, [parsed]);
 
   return (
     <div className={`flex flex-col gap-2 ${dimmed ? "opacity-40" : ""}`}>

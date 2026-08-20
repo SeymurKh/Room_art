@@ -105,6 +105,7 @@ export async function getSiteData(): Promise<SiteData> {
     description: row.description,
     priceAzn: row.priceAzn ?? null,
     displayed: row.displayed,
+    tondo: row.tondo,
   }));
 
   const events: Event[] = eventRows.map((row) => ({
@@ -192,6 +193,7 @@ export async function saveSiteData(data: unknown) {
           description: artwork.description ?? "",
           priceAzn: artwork.priceAzn ?? null,
           displayed: artwork.displayed,
+          tondo: artwork.tondo ?? false,
         })
         .run();
     }
@@ -229,6 +231,3 @@ export async function saveSiteData(data: unknown) {
   revalidatePath("/events/[slug]", "page");
 }
 
-export function artistName(data: SiteData, slug: string) {
-  return data.artists.find((artist) => artist.slug === slug)?.name ?? "ROOM artist";
-}

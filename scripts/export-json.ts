@@ -75,6 +75,7 @@ const siteData = {
     description: row.description,
     priceAzn: row.priceAzn ?? null,
     displayed: row.displayed,
+    tondo: row.tondo,
   })),
   events: eventRows.map((row) => ({
     slug: row.slug,

@@ -37,7 +37,6 @@ const created =
     : createDb();
 
 export const db: DB | null = created.db;
-export const dbAvailable: boolean = created.available;
 
 if (process.env.NODE_ENV !== "production") {
   globalForDb.roomDb = created.db;

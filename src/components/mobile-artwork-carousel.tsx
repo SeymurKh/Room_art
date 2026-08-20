@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import Link from "next/link";
-import { motion, useMotionValue, useSpring, useMotionValueEvent } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Artwork } from "@/lib/types";
 import { ArtworkFrame } from "@/components/artwork-frame";
@@ -11,7 +11,6 @@ const SWIPE_THRESHOLD = 50;
 
 export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
   const [index, setIndex] = useState(0);
-  const [dragging, setDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
@@ -28,9 +27,7 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
   const prev = useCallback(() => goTo(index - 1), [goTo, index]);
 
-  const handleDragStart = useCallback(() => setDragging(true), []);
   const handleDragEnd = useCallback((_: unknown, info: { offset: { x: number } }) => {
-    setDragging(false);
     const offset = info.offset.x;
     if (offset < -SWIPE_THRESHOLD) {
       next();
@@ -39,10 +36,6 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
     }
     x.set(0);
   }, [next, prev, x]);
-
-  useMotionValueEvent(springX, "change", () => {
-    // keep track for potential side effects
-  });
 
   if (n === 0) return null;
 
@@ -60,7 +53,6 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
           drag={canSwipe ? "x" : false}
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.1}
-          onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
           style={{ x: springX }}
           className="flex items-center justify-center"

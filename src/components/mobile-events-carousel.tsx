@@ -11,12 +11,10 @@ const SWIPE_THRESHOLD = 50;
 
 export function MobileEventsCarousel({ events }: { events: Event[] }) {
   const upcoming = events.find((e) => e.status === "Upcoming") ?? null;
-  const current = events.find((e) => e.status === "Current") ?? null;
   const past = events.find((e) => e.status === "Past") ?? null;
-  const shown = [upcoming, current, past].filter(Boolean) as Event[];
+  const shown = [upcoming, past].filter(Boolean) as Event[];
 
   const [index, setIndex] = useState(0);
-  const [dragging, setDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
@@ -33,9 +31,7 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
   const prev = useCallback(() => goTo(index - 1), [goTo, index]);
 
-  const handleDragStart = useCallback(() => setDragging(true), []);
   const handleDragEnd = useCallback((_: unknown, info: { offset: { x: number } }) => {
-    setDragging(false);
     const offset = info.offset.x;
     if (offset < -SWIPE_THRESHOLD) {
       next();
@@ -61,7 +57,6 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
           drag={canSwipe ? "x" : false}
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.1}
-          onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
           style={{ x: springX }}
           className="flex items-center justify-center"

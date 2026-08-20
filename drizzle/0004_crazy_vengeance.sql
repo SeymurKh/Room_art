@@ -1,0 +1,1 @@
+ALTER TABLE `artworks` ADD `tondo` integer DEFAULT false NOT NULL;

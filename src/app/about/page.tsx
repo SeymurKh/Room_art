@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/page-hero";
+import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { getSiteData } from "@/lib/site-data";
 
@@ -6,7 +7,8 @@ export default async function AboutPage() {
   const data = await getSiteData();
   return (
     <main>
-      <PageHero settings={data.settings} kicker="About Room" title="Concept, vision, identity" copy="A contemporary art and wine bar space in the heart of Baku." />
+      <SiteNav dark />
+      <PageHero kicker="About Room" title="Concept, vision, identity" copy="A contemporary art and wine bar space in the heart of Baku." />
       <section className="room-shell max-w-2xl space-y-10 py-12 md:py-16">
         <Block title="Concept" copy={data.about.concept} />
         <Block title="Vision" copy={data.about.vision} />

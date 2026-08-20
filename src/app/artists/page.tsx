@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
+import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { RoomImage } from "@/components/room-image";
 import { getSiteData } from "@/lib/site-data";
@@ -9,7 +10,8 @@ export default async function ArtistsPage() {
   const data = await getSiteData();
   return (
     <main>
-      <PageHero settings={data.settings} kicker="Room artist base" title="Artists" copy="Artists we work with, individual profiles, statements, and portfolios." />
+      <SiteNav dark />
+      <PageHero kicker="Room artist base" title="Artists" copy="Artists we work with, individual profiles, statements, and portfolios." />
       <section className="room-shell grid gap-4 py-12 sm:grid-cols-2 lg:grid-cols-4 md:py-16">
         {data.artists.map((artist) => (
           <Link href={`/artists/${artist.slug}`} key={artist.slug} className="group">

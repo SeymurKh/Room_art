@@ -29,7 +29,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
   return (
     <main>
-      <SiteNav />
+      <SiteNav dark />
       <section className="room-shell grid gap-10 pt-24 md:grid-cols-2 md:gap-16 md:pt-28">
         <div className="order-2 flex flex-col justify-center md:order-1">
           <div className="flex items-center gap-3">

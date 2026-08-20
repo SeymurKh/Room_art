@@ -30,6 +30,7 @@ export type Artwork = {
   description?: string;
   priceAzn: number | null;
   displayed: boolean;
+  tondo?: boolean;
 };
 
 export type Event = {

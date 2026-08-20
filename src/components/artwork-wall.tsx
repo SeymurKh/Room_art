@@ -6,11 +6,31 @@ import type { Artwork, SiteSettings } from "@/lib/types";
 import { whatsappArtworkUrl } from "@/lib/whatsapp";
 import { ArtworkFrame } from "@/components/artwork-frame";
 
+// Акт 1 — картина «поднимается со спины на ноги»:
+// из положения лёжа (rotateX) встаёт вертикально на своё место на стене
+const frameVariants: Variants = {
+  initial: { opacity: 0, rotateX: 50, y: 48 },
+  animate: {
+    opacity: 1,
+    rotateX: 0,
+    y: 0,
+    transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+// Акт 2 — на стене за рамой разгорается софитный свет.
+// Слой строго ПОД рамой: на само изображение свет не падает.
+const glowVariants: Variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { delay: 0.7, duration: 1.6, ease: "easeOut" } },
+};
+
+// Акт 3 — надписи появляются последними
 const staggerContainer: Variants = {
   animate: {
     transition: {
       staggerChildren: 0.12,
-      delayChildren: 0.2,
+      delayChildren: 1.1,
     },
   },
 };
@@ -18,11 +38,6 @@ const staggerContainer: Variants = {
 const fadeUp: Variants = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
-};
-
-const fadeIn: Variants = {
-  initial: { opacity: 0, scale: 0.96 },
-  animate: { opacity: 1, scale: 1, transition: { duration: 1, ease: "easeOut" as const } },
 };
 
 export function ArtworkWall({
@@ -37,7 +52,7 @@ export function ArtworkWall({
   const priceLabel = artwork.priceAzn != null ? `AZN ${artwork.priceAzn.toLocaleString()}` : null;
 
   return (
-    <section className="wall grid h-[calc(100vh-4rem)] grid-rows-[auto_1fr_auto] bg-[#f4f1ea]">
+    <section className="wall grid min-h-screen grid-rows-[auto_1fr_auto] bg-[#f4f1ea] pt-16">
       {/* Top header info */}
       <motion.header
         variants={staggerContainer}
@@ -57,15 +72,35 @@ export function ArtworkWall({
         </motion.div>
       </motion.header>
 
-      {/* Center artwork */}
-      <motion.div
-        variants={fadeIn}
-        initial="initial"
-        animate="animate"
-        className="flex items-center justify-center overflow-hidden px-4 py-2"
-      >
-        <ArtworkFrame artwork={artwork} priority enableLens />
-      </motion.div>
+      {/* Center artwork on the venue wall */}
+      <div className="flex items-center justify-center overflow-hidden px-4 py-2">
+        <div className="relative w-fit" style={{ perspective: 1200 }}>
+          {/* Софитная подсветка на стене вокруг рамы — за картиной, не на ней */}
+          <motion.div
+            variants={glowVariants}
+            initial="initial"
+            animate="animate"
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2"
+            style={{
+              width: "165%",
+              height: "150%",
+              background:
+                "radial-gradient(ellipse 62% 58% at 50% 34%, rgba(255, 243, 220, 0.55), rgba(255, 243, 220, 0.16) 52%, transparent 72%)",
+              filter: "blur(6px)",
+            }}
+          />
+          <motion.div
+            variants={frameVariants}
+            initial="initial"
+            animate="animate"
+            className="relative z-10"
+            style={{ transformOrigin: "center bottom" }}
+          >
+            <ArtworkFrame artwork={artwork} priority enableLens />
+          </motion.div>
+        </div>
+      </div>
 
       {/* Bottom / side details */}
       <motion.footer

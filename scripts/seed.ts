@@ -43,6 +43,7 @@ type JsonArtwork = {
   description?: string;
   priceAzn?: number | null;
   displayed: boolean;
+  tondo?: boolean;
 };
 
 type JsonEvent = {
@@ -120,6 +121,7 @@ db.transaction((tx) => {
         description: artwork.description ?? "",
         priceAzn: artwork.priceAzn ?? null,
         displayed: artwork.displayed,
+        tondo: artwork.tondo ?? false,
       })
       .run();
   }

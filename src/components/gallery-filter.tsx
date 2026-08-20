@@ -1,11 +1,10 @@
 "use client";
 
 import { useMemo } from "react";
-import Link from "next/link";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { ArrowUpRight, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import type { SiteData, Artwork } from "@/lib/types";
-import { RoomImage } from "@/components/room-image";
+import { ArtworkSalon } from "@/components/artwork-salon";
 
 const all = "All";
 const PAGE_SIZE = 24;
@@ -27,11 +26,6 @@ function getSizeCategory(artwork: { widthCm: number; heightCm: number }): SizeCa
   if (max < 50) return "Small";
   if (max <= 100) return "Medium";
   return "Large";
-}
-
-function formatPrice(artwork: Artwork): string | null {
-  if (artwork.priceAzn != null) return `AZN ${artwork.priceAzn.toLocaleString()}`;
-  return null;
 }
 
 function priceRangeLabel(value: string): string {
@@ -95,12 +89,14 @@ export function GalleryFilter({ data }: { data: SiteData }) {
     if (key !== "page") {
       params.delete("page");
     }
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    // Page changes jump to the top; filter changes keep scroll position
+    router.push(`${pathname}?${params.toString()}`, { scroll: key === "page" });
   }
 
+  // Newest added first (admin appends new artworks to the end of the list)
   const filtered = useMemo(
     () =>
-      data.artworks.filter((item) => {
+      [...data.artworks].reverse().filter((item) => {
         return (
           (artist === all || item.artistSlug === artist) &&
           (format === all || getFormat(item) === format) &&
@@ -134,47 +130,8 @@ export function GalleryFilter({ data }: { data: SiteData }) {
           No artworks match the selected filters.
         </p>
       ) : (
-        <div className="mt-8 grid grid-cols-1 gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {pageItems.map((artwork) => (
-            <Link href={`/gallery/${artwork.slug}`} key={artwork.slug} className="group block">
-              <div
-                className="card-img-overlay relative w-full bg-[#e2ded4]"
-                style={{ aspectRatio: `${artwork.widthCm} / ${artwork.heightCm}` }}
-              >
-                <RoomImage
-                  src={artwork.image}
-                  alt={artwork.title}
-                  fill
-                  className="object-cover transition duration-700 group-hover:scale-[1.03]"
-                  fallbackText={artwork.title}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-                <span className="overlay-text">View artwork</span>
-              </div>
-              <div className="mt-4 flex items-start justify-between gap-4">
-                <div className="min-w-0">
-                  <p className="room-serif truncate text-xl leading-tight text-[#f4f1ea]">
-                    {artwork.title}
-                  </p>
-                  <p className="mt-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-white/55">
-                    {artistLabel(artwork.artistSlug)} · {artwork.year}
-                  </p>
-                  <p className="mt-1 text-xs text-white/40">{artwork.dimensions}</p>
-                </div>
-                <div className="shrink-0 text-right">
-                  {formatPrice(artwork) ? (
-                    <p className="text-xs font-semibold tracking-[0.06em] text-[#f4f1ea]">
-                      {formatPrice(artwork)}
-                    </p>
-                  ) : null}
-                  <ArrowUpRight
-                    size={16}
-                    className="ml-auto mt-2 text-white/25 transition group-hover:text-[#f4f1ea]"
-                  />
-                </div>
-              </div>
-            </Link>
-          ))}
+        <div className="mt-10">
+          <ArtworkSalon artworks={pageItems} dark artistLabel={artistLabel} showPrice />
         </div>
       )}
 
