@@ -22,7 +22,7 @@ const artworkSchema = z.object({
   slug: z.string().min(1),
   title: z.string().min(1),
   artistSlug: z.string().min(1),
-  year: z.string().min(1),
+  year: z.string().default(""),
   medium: z.string().min(1),
   dimensions: z.string().min(1),
   widthCm: z.number().positive(),

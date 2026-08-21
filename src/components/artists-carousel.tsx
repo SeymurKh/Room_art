@@ -9,6 +9,7 @@ import { RoomImage } from "@/components/room-image";
 
 type ArtistsCarouselProps = {
   artists: Artist[];
+  dark?: boolean;
 };
 
 const CARD_W = 280;
@@ -47,7 +48,7 @@ function slotPosition(offset: number, totalSlots: number, radius: number) {
   return { translateX, translateZ, rotateY, scale, opacity };
 }
 
-export function ArtistsCarousel({ artists }: ArtistsCarouselProps) {
+export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps) {
   const width = useWindowWidth();
   const isMobile = width < 640;
   const cardW = isMobile ? CARD_W_MOBILE : CARD_W;
@@ -249,10 +250,10 @@ export function ArtistsCarousel({ artists }: ArtistsCarouselProps) {
                       className="mt-5 flex items-start justify-between gap-4 px-1"
                     >
                       <div>
-                        <p className="text-sm font-semibold uppercase tracking-[0.12em]">
+                        <p className={`text-sm font-semibold uppercase tracking-[0.12em] ${dark ? "text-[#f4f1ea]" : ""}`}>
                           {artist.name}
                         </p>
-                        <p className="mt-1 text-sm text-[#6f6a61]">{artist.role}</p>
+                        <p className={`mt-1 text-sm ${dark ? "text-white/60" : "text-[#6f6a61]"}`}>{artist.role}</p>
                       </div>
                       <ArrowUpRight
                         size={18}
@@ -275,9 +276,15 @@ export function ArtistsCarousel({ artists }: ArtistsCarouselProps) {
               key={artist.slug}
               type="button"
               onClick={() => { goTo(i); pause(); }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === active ? "w-6 bg-[#11100e]" : "w-1.5 bg-[#11100e]/20"
-              }`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === active
+                    ? dark
+                      ? "w-6 bg-[#f4f1ea]"
+                      : "w-6 bg-[#11100e]"
+                    : dark
+                      ? "w-1.5 bg-[#f4f1ea]/30"
+                      : "w-1.5 bg-[#11100e]/20"
+                }`}
               aria-label={`Go to ${artist.name}`}
             />
           ))}

@@ -77,13 +77,13 @@ export function ArtworkSalon({
                 </p>
                 <p className={`mt-1 text-[0.68rem] font-semibold uppercase tracking-[0.14em] ${subColor}`}>
                   {artistLabel
-                    ? `${artistLabel(artwork.artistSlug)} · ${artwork.year}`
-                    : `${artwork.medium}, ${artwork.year}`}
+                    ? `${artistLabel(artwork.artistSlug)}${artwork.year ? ` · ${artwork.year}` : ""}`
+                    : `${artwork.medium}${artwork.year ? `, ${artwork.year}` : ""}`}
                 </p>
                 <p className={`mt-1 text-xs ${dimColor}`}>{artwork.dimensions}</p>
                 {showPrice && artwork.priceAzn != null ? (
                   <p className={`mt-1 text-xs font-semibold tracking-[0.06em] ${titleColor}`}>
-                    AZN {artwork.priceAzn.toLocaleString()}
+                    {artwork.priceAzn.toLocaleString("en-US")} AZN
                   </p>
                 ) : null}
               </div>

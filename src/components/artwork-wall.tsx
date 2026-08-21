@@ -49,7 +49,7 @@ export function ArtworkWall({
   artist: string;
   settings: SiteSettings;
 }) {
-  const priceLabel = artwork.priceAzn != null ? `AZN ${artwork.priceAzn.toLocaleString()}` : null;
+  const priceLabel = artwork.priceAzn != null ? `${artwork.priceAzn.toLocaleString("en-US")} AZN` : null;
 
   return (
     <section className="wall grid min-h-screen grid-rows-[auto_1fr_auto] pt-16">
@@ -67,7 +67,7 @@ export function ArtworkWall({
           </h1>
         </motion.div>
         <motion.div variants={fadeUp} className="text-right">
-          <p className="text-sm text-white/60">{artwork.year}</p>
+          {artwork.year ? <p className="text-sm text-white/60">{artwork.year}</p> : null}
           <p className="mt-1 text-sm text-white/60">{artwork.medium}</p>
         </motion.div>
       </motion.header>

@@ -1,7 +1,8 @@
 import type { Artwork, SiteSettings } from "@/lib/types";
 
 export function whatsappArtworkUrl(settings: SiteSettings, artwork: Artwork) {
-  const text = `Hello ROOM, I would like to inquire about "${artwork.title}" (${artwork.year}).`;
+  const yearPart = artwork.year ? ` (${artwork.year})` : "";
+  const text = `Hello ROOM, I would like to inquire about "${artwork.title}"${yearPart}.`;
   return `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent(text)}`;
 }
 

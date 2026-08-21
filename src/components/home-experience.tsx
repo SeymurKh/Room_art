@@ -141,12 +141,19 @@ export function HomeExperience({ data }: { data: SiteData }) {
         </>
       ) : null}
 
-      <section className="room-shell py-20 md:py-32" id="artists">
-        <motion.div {...reveal}>
-          <SectionHeading kicker="Room artist base" title="Our artists" copy="Individual practices with biographies, statements, and connected portfolios." />
-        </motion.div>
-        <div className="mt-10 md:mt-12">
-          <ArtistsCarousel artists={data.artists} />
+      <section className="relative overflow-hidden py-20 md:py-32" id="artists">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/assets/artists-bg.png')" }}
+        />
+        <div className="pointer-events-none absolute inset-0 z-0 bg-black/40" />
+        <div className="room-shell relative z-10">
+          <motion.div {...reveal}>
+            <SectionHeading light kicker="Room artist base" title="Our artists" copy="Individual practices with biographies, statements, and connected portfolios." />
+          </motion.div>
+          <div className="mt-10 md:mt-12">
+            <ArtistsCarousel artists={data.artists} dark />
+          </div>
         </div>
       </section>
 

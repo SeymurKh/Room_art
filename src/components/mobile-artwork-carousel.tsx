@@ -73,7 +73,7 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
               <div>
                 <h3 className="room-serif text-3xl leading-none">{artwork.title}</h3>
                 <p className="mt-2 text-sm text-[#6f6a61]">
-                  {artwork.medium}, {artwork.year}
+                  {artwork.medium}{artwork.year ? `, ${artwork.year}` : ""}
                 </p>
               </div>
               <ArrowUpRight size={18} className="mt-1 shrink-0 opacity-40" />
