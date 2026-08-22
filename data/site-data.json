@@ -1,11 +1,11 @@
 {
   "settings": {
-    "whatsappNumber": "",
-    "email": "",
-    "phone": "",
-    "address": "",
-    "instagram": "",
-    "facebook": ""
+    "whatsappNumber": "994501234567",
+    "email": "info@roombaku.com",
+    "phone": "+994 50 123 45 67",
+    "address": "Baku, Azerbaijan",
+    "instagram": "https://instagram.com/roombaku",
+    "facebook": "https://facebook.com/roombaku"
   },
   "artists": [
     {
@@ -29,8 +29,8 @@
       "name": "Roza Muradova",
       "role": "Artist",
       "portrait": "/uploads/artists/9197d0dc-df70-4c69-8de5-639e902a0ac0.webp",
-      "bio": "",
-      "statement": ""
+      "bio": "Roza Muradova is a contemporary Azerbaijani artist working in painting and mixed media.",
+      "statement": "My work explores the intersection of color, texture, and emotion, drawing inspiration from the landscapes and cultural heritage of Azerbaijan."
     }
   ],
   "artworks": [
