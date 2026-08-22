@@ -149,7 +149,18 @@ export function HomeExperience({ data }: { data: SiteData }) {
         <div className="pointer-events-none absolute inset-0 z-0 bg-black/40" />
         <div className="room-shell relative z-10">
           <motion.div {...reveal}>
-            <SectionHeading light kicker="Room artist base" title="Our artists" copy="Individual practices with biographies, statements, and connected portfolios." />
+            <div className="flex flex-wrap items-start justify-between gap-6">
+              <div className="max-w-3xl">
+                <h2 className="room-serif text-4xl font-medium leading-[0.96] text-[#f4f1ea] sm:text-5xl md:text-7xl">Our artists</h2>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-white/62">Individual practices with biographies, statements, and portfolios.</p>
+              </div>
+              <Link
+                href="/artists"
+                className="inline-flex shrink-0 items-center gap-2 border border-white/20 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] transition hover:bg-white/10"
+              >
+                All artists <ArrowUpRight size={14} />
+              </Link>
+            </div>
           </motion.div>
           <div className="mt-10 md:mt-12">
             <ArtistsCarousel artists={data.artists} dark />

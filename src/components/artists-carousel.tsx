@@ -1,25 +1,16 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef, useMemo } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, useMotionValue, useSpring, PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import type { Artist } from "@/lib/types";
 import { RoomImage } from "@/components/room-image";
 
-type ArtistsCarouselProps = {
-  artists: Artist[];
-  dark?: boolean;
-};
-
 const CARD_W = 280;
 const CARD_W_MOBILE = 200;
-const RADIUS = 760;
-const RADIUS_MOBILE = 340;
-const TOTAL_ARC_DEG = 110;
+const GAP = 24;
 const AUTOPLAY_DELAY = 4000;
 const RESUME_DELAY = 5000;
-const VISIBLE_SLOTS = 5;
 
 function useWindowWidth() {
   const [width, setWidth] = useState(1440);
@@ -39,46 +30,36 @@ function useWindowWidth() {
   return width;
 }
 
-function slotPosition(offset: number, totalSlots: number, radius: number) {
-  const angleStep = totalSlots > 1 ? TOTAL_ARC_DEG / (totalSlots - 1) : 0;
-  const deg = offset * angleStep;
-  const rad = (deg * Math.PI) / 180;
-
-  const translateX = radius * Math.sin(rad);
-  const translateZ = -radius * (1 - Math.cos(rad));
-  const rotateY = deg;
-
-  const absFrac = totalSlots > 1 ? Math.abs(offset) / ((totalSlots - 1) / 2) : 0;
-  const scale = 1.0 - absFrac * 0.35;
-  const opacity = 1.0 - absFrac * 0.65;
-
-  return { translateX, translateZ, rotateY, scale, opacity };
-}
-
-export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps) {
+export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; dark?: boolean }) {
   const width = useWindowWidth();
   const isMobile = width < 640;
   const cardW = isMobile ? CARD_W_MOBILE : CARD_W;
-  const radius = isMobile ? RADIUS_MOBILE : RADIUS;
+  const gap = isMobile ? 16 : GAP;
+  const n = artists.length;
+  const canNavigate = n > 1;
 
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const autoplayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const n = artists.length;
-  const canNavigate = n > 1;
-  const half = Math.floor(VISIBLE_SLOTS / 2);
+  const goTo = useCallback(
+    (index: number) => {
+      if (!canNavigate) return;
+      setActive(((index % n) + n) % n);
+    },
+    [canNavigate, n],
+  );
 
-  const goTo = useCallback((nextActive: number) => {
+  const goNext = useCallback(() => {
     if (!canNavigate) return;
-    setActive((nextActive % n + n) % n);
+    setActive((prev) => (prev + 1) % n);
   }, [canNavigate, n]);
 
-  const activeRef = useRef(active);
-  activeRef.current = active;
-  const next = useCallback(() => goTo(activeRef.current + 1), [goTo]);
-  const prev = useCallback(() => goTo(activeRef.current - 1), [goTo]);
+  const goPrev = useCallback(() => {
+    if (!canNavigate) return;
+    setActive((prev) => (prev - 1 + n) % n);
+  }, [canNavigate, n]);
 
   const pause = useCallback(() => {
     setPaused(true);
@@ -86,11 +67,10 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
     resumeTimerRef.current = setTimeout(() => setPaused(false), RESUME_DELAY);
   }, []);
 
-  // Autoplay
   useEffect(() => {
     if (!canNavigate || paused) return;
     autoplayTimerRef.current = setInterval(() => {
-      setActive((a) => (a + 1) % n);
+      setActive((prev) => (prev + 1) % n);
     }, AUTOPLAY_DELAY);
     return () => {
       if (autoplayTimerRef.current) {
@@ -100,34 +80,37 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
     };
   }, [canNavigate, paused, n]);
 
-  // Drag handling
-  const x = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 140, damping: 24, mass: 0.8 });
+  const dragStartRef = useRef<{ x: number; id: number } | null>(null);
 
-  const handleDragEnd = (_: unknown, info: PanInfo) => {
-    const threshold = cardW / 3;
-    if (info.offset.x < -threshold) {
-      next();
-    } else if (info.offset.x > threshold) {
-      prev();
-    }
-    x.set(0);
-    pause();
-  };
+  const handlePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      if (!canNavigate) return;
+      dragStartRef.current = { x: e.clientX, id: e.pointerId };
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    },
+    [canNavigate],
+  );
 
-  const handleDrag = (_: unknown, info: PanInfo) => {
-    x.set(info.offset.x * 0.4);
-  };
+  const handlePointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      if (!dragStartRef.current || dragStartRef.current.id !== e.pointerId) return;
+      const dx = e.clientX - dragStartRef.current.x;
+      dragStartRef.current = null;
+      const threshold = cardW / 3;
+      if (dx < -threshold) goNext();
+      else if (dx > threshold) goPrev();
+      pause();
+    },
+    [cardW, goNext, goPrev, pause],
+  );
 
-  // Build visible cards around active index
-  const cards = useMemo(() => {
-    const result = [];
-    for (let offset = -half; offset <= half; offset++) {
-      const idx = ((active + offset) % n + n) % n;
-      result.push({ artist: artists[idx], offset, key: `${artists[idx].slug}-${offset}` });
-    }
-    return result;
-  }, [active, artists, half, n]);
+  if (n === 0) return null;
+
+  const viewportW = isMobile ? width - 32 : Math.min(width - 64, 1320);
+  const trackOffset = viewportW / 2 - cardW / 2 - active * (cardW + gap);
+
+  const titleColor = dark ? "text-[#f4f1ea]" : "text-[#11100e]";
+  const subColor = dark ? "text-white/60" : "text-[#6f6a61]";
 
   return (
     <div
@@ -140,11 +123,11 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
         if (!canNavigate) return;
         if (e.key === "ArrowLeft") {
           e.preventDefault();
-          prev();
+          goPrev();
           pause();
         } else if (e.key === "ArrowRight") {
           e.preventDefault();
-          next();
+          goNext();
           pause();
         }
       }}
@@ -154,12 +137,14 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
         resumeTimerRef.current = setTimeout(() => setPaused(false), RESUME_DELAY);
       }}
     >
-      {/* Navigation arrows */}
       {canNavigate && (
         <>
           <button
             type="button"
-            onClick={() => { prev(); pause(); }}
+            onClick={() => {
+              goPrev();
+              pause();
+            }}
             className="absolute -left-2 top-1/2 z-30 -translate-y-1/2 rounded-full border border-black/12 bg-white/80 p-3 shadow-md backdrop-blur transition hover:bg-white md:-left-12"
             aria-label="Previous artist"
           >
@@ -167,7 +152,10 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
           </button>
           <button
             type="button"
-            onClick={() => { next(); pause(); }}
+            onClick={() => {
+              goNext();
+              pause();
+            }}
             className="absolute -right-2 top-1/2 z-30 -translate-y-1/2 rounded-full border border-black/12 bg-white/80 p-3 shadow-md backdrop-blur transition hover:bg-white md:-right-12"
             aria-label="Next artist"
           >
@@ -176,57 +164,43 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
         </>
       )}
 
-      {/* 3D stage */}
-      <div
-        className="relative mx-auto flex items-center justify-center overflow-hidden"
-        style={{
-          perspective: 1000,
-          height: cardW * 1.85,
-        }}
-      >
-        <motion.div
-          className="relative flex items-center justify-center"
+      <div className="overflow-hidden" style={{ height: cardW * 1.85, perspective: 1200 }}>
+        <div
+          className="flex items-center"
           style={{
-            x: springX,
-            width: cardW,
-            height: cardW * 1.4,
+            gap: `${gap}px`,
+            transform: `translateX(${trackOffset}px)`,
             transformStyle: "preserve-3d",
-            cursor: canNavigate ? "grab" : "default",
+            transition: "transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)",
             willChange: "transform",
+            cursor: canNavigate ? "grab" : "default",
+            touchAction: "pan-y",
+            userSelect: "none",
           }}
-          drag={canNavigate ? "x" : false}
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.12}
-          onDrag={handleDrag}
-          onDragEnd={handleDragEnd}
-          onPointerDown={() => setPaused(true)}
-          onPointerUp={() => {
-            if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-            resumeTimerRef.current = setTimeout(() => setPaused(false), RESUME_DELAY);
-          }}
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerUp}
         >
-          {cards.map(({ artist, offset, key }) => {
-            const pos = slotPosition(offset, VISIBLE_SLOTS, radius);
-            const isCenter = offset === 0;
+          {artists.map((artist, i) => {
+            const offset = i - active;
+            const dist = Math.abs(offset);
+            const isCenter = dist === 0;
+            const clampedDist = Math.min(dist, 3);
+            const scale = 1 - clampedDist * 0.1;
+            const opacity = 1 - clampedDist * 0.3;
+            const rotateY = -offset * 18;
+            const translateZ = -clampedDist * 40;
 
             return (
-              <motion.div
-                key={key}
-                className="absolute left-0 top-0"
-                style={{ width: cardW, transformStyle: "preserve-3d" }}
-                animate={{
-                  x: pos.translateX,
-                  z: pos.translateZ,
-                  rotateY: pos.rotateY,
-                  scale: pos.scale,
-                  opacity: pos.opacity,
-                  zIndex: 10 - Math.abs(offset),
-                }}
-                  transition={{
-                  type: "spring",
-                  stiffness: 110,
-                  damping: 22,
-                  mass: 0.9,
+              <div
+                key={artist.slug}
+                className="shrink-0"
+                style={{
+                  width: `${cardW}px`,
+                  transform: `scale(${scale}) rotateY(${rotateY}deg) translateZ(${translateZ}px)`,
+                  opacity,
+                  transition:
+                    "transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)",
+                  zIndex: 10 - clampedDist,
                 }}
               >
                 <Link
@@ -256,48 +230,42 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
                     )}
                   </div>
                   {isCenter && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: 0.1 }}
-                      className="mt-5 flex items-start justify-between gap-4 px-1"
-                    >
+                    <div className="mt-5 flex items-start justify-between gap-4 px-1">
                       <div>
-                        <p className={`text-sm font-semibold uppercase tracking-[0.12em] ${dark ? "text-[#f4f1ea]" : ""}`}>
+                        <p className={`text-sm font-semibold uppercase tracking-[0.12em] ${titleColor}`}>
                           {artist.name}
                         </p>
-                        <p className={`mt-1 text-sm ${dark ? "text-white/60" : "text-[#6f6a61]"}`}>{artist.role}</p>
+                        <p className={`mt-1 text-sm ${subColor}`}>{artist.role}</p>
                       </div>
-                      <ArrowUpRight
-                        size={18}
-                        className="opacity-30 transition group-hover:opacity-100"
-                      />
-                    </motion.div>
+                      <ArrowUpRight size={18} className="opacity-30 transition group-hover:opacity-100" />
+                    </div>
                   )}
                 </Link>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
 
-      {/* Dots indicator */}
       {canNavigate && (
         <div className="mt-4 flex items-center justify-center gap-2">
           {artists.map((artist, i) => (
             <button
               key={artist.slug}
               type="button"
-              onClick={() => { goTo(i); pause(); }}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === active
-                    ? dark
-                      ? "w-6 bg-[#f4f1ea]"
-                      : "w-6 bg-[#11100e]"
-                    : dark
-                      ? "w-1.5 bg-[#f4f1ea]/30"
-                      : "w-1.5 bg-[#11100e]/20"
-                }`}
+              onClick={() => {
+                goTo(i);
+                pause();
+              }}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === active
+                  ? dark
+                    ? "w-6 bg-[#f4f1ea]"
+                    : "w-6 bg-[#11100e]"
+                  : dark
+                    ? "w-1.5 bg-[#f4f1ea]/30"
+                    : "w-1.5 bg-[#11100e]/20"
+              }`}
               aria-label={`Go to ${artist.name}`}
             />
           ))}
