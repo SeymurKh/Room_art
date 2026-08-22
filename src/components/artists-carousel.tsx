@@ -86,7 +86,6 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
     (e: React.PointerEvent) => {
       if (!canNavigate) return;
       dragStartRef.current = { x: e.clientX, id: e.pointerId };
-      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     },
     [canNavigate],
   );
@@ -103,6 +102,10 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
     },
     [cardW, goNext, goPrev, pause],
   );
+
+  const handlePointerLeave = useCallback(() => {
+    dragStartRef.current = null;
+  }, []);
 
   if (n === 0) return null;
 
@@ -179,6 +182,7 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
           }}
           onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
+          onPointerLeave={handlePointerLeave}
         >
           {artists.map((artist, i) => {
             const offset = i - active;
