@@ -142,7 +142,7 @@ export async function createArtist(formData: FormData) {
   try {
     const artist = JSON.parse(payload) as Artist;
     const data = await getSiteData();
-    data.artists.push(artist);
+    data.artists.unshift(artist);
     await saveSiteData(data);
   } catch (error) {
     if (error instanceof SiteDataValidationError) {
@@ -224,7 +224,7 @@ export async function createArtwork(formData: FormData) {
     if (!data.artists.some((a) => a.slug === artwork.artistSlug)) {
       redirect(`/admin/artworks/new?error=validation&details=${encodeURIComponent(`Artist with slug "${artwork.artistSlug}" does not exist`)}`);
     }
-    data.artworks.push(artwork);
+    data.artworks.unshift(artwork);
     await saveSiteData(data);
   } catch (error) {
     if (error instanceof SiteDataValidationError) {

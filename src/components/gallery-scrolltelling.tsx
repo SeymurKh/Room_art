@@ -144,7 +144,7 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
       </section>
 
       {/* Fade to the light section below */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30 h-32 bg-linear-to-b from-transparent to-[#f4f1ea]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30 h-32 bg-linear-to-b from-transparent to-[#837D73]" />
     </div>
   );
 }

@@ -114,10 +114,9 @@ export function GalleryFilter({ data }: { data: SiteData }) {
     router.push(`${pathname}?${params.toString()}`, { scroll: key === "page" });
   }
 
-  // Newest added first (admin appends new artworks to the end of the list)
   const filtered = useMemo(
     () =>
-      [...data.artworks].reverse().filter((item) => {
+      data.artworks.filter((item) => {
         return (
           (artist === all || item.artistSlug === artist) &&
           (format === all || getFormat(item) === format) &&
