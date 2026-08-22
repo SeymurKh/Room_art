@@ -40,6 +40,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans-room), Arial, Helvetica, sans-serif;
+  font-weight: 200;
 }
 
 a:not([class*="text-"]) {

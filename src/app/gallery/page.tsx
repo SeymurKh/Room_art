@@ -34,12 +34,6 @@ export default async function GalleryPage() {
         copy={`${count} ${count === 1 ? "artwork" : "artworks"} in the collection`}
       />
 
-      {/* Плавный переход от тёмного героя к фото-фону */}
-      <div
-        aria-hidden="true"
-        className="relative z-0 h-32 bg-gradient-to-b from-[#0c0c0b] to-transparent md:h-40"
-      />
-
       <section className="room-shell py-12 md:py-16">
         <GalleryFilter data={data} />
       </section>
