@@ -26,12 +26,12 @@ export default async function ArtistsPage() {
       <section className="room-shell grid gap-4 py-12 sm:grid-cols-2 lg:grid-cols-4 md:py-16">
         {data.artists.map((artist) => (
           <Link href={`/artists/${artist.slug}`} key={artist.slug} className="group">
-            <div className="card-img-overlay relative aspect-[3/4] overflow-hidden bg-black">
+            <div className="card-img-overlay relative aspect-[3/4] overflow-hidden rounded-3xl bg-black">
               <RoomImage
                 src={artist.portrait}
                 alt={artist.name}
                 fill
-                className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                className="object-cover transition duration-700 group-hover:scale-105"
                 fallbackText={artist.name}
               />
               <span className="overlay-text">View artist</span>

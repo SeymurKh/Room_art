@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
@@ -22,12 +22,19 @@ const RESUME_DELAY = 5000;
 const VISIBLE_SLOTS = 5;
 
 function useWindowWidth() {
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(1440);
   useEffect(() => {
-    const update = () => setWidth(window.innerWidth);
+    let timer: ReturnType<typeof setTimeout>;
+    const update = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => setWidth(window.innerWidth), 150);
+    };
     update();
     window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    return () => {
+      window.removeEventListener("resize", update);
+      clearTimeout(timer);
+    };
   }, []);
   return width;
 }
@@ -68,8 +75,10 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
     setActive((nextActive % n + n) % n);
   }, [canNavigate, n]);
 
-  const next = useCallback(() => goTo(active + 1), [goTo, active]);
-  const prev = useCallback(() => goTo(active - 1), [goTo, active]);
+  const activeRef = useRef(active);
+  activeRef.current = active;
+  const next = useCallback(() => goTo(activeRef.current + 1), [goTo]);
+  const prev = useCallback(() => goTo(activeRef.current - 1), [goTo]);
 
   const pause = useCallback(() => {
     setPaused(true);
@@ -111,11 +120,14 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
   };
 
   // Build visible cards around active index
-  const cards = [];
-  for (let offset = -half; offset <= half; offset++) {
-    const idx = ((active + offset) % n + n) % n;
-    cards.push({ artist: artists[idx], offset, key: active + offset });
-  }
+  const cards = useMemo(() => {
+    const result = [];
+    for (let offset = -half; offset <= half; offset++) {
+      const idx = ((active + offset) % n + n) % n;
+      result.push({ artist: artists[idx], offset, key: `${artists[idx].slug}-${offset}` });
+    }
+    return result;
+  }, [active, artists, half, n]);
 
   return (
     <div
@@ -225,7 +237,7 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
                   aria-hidden={!isCenter}
                 >
                   <div
-                    className="relative aspect-3/4 overflow-hidden bg-black shadow-2xl"
+                    className="relative aspect-3/4 overflow-hidden rounded-3xl bg-black shadow-2xl"
                     style={{ transform: "translateZ(0)" }}
                   >
                     <RoomImage
@@ -233,6 +245,7 @@ export function ArtistsCarousel({ artists, dark = false }: ArtistsCarouselProps)
                       alt={artist.name}
                       fill
                       className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                      style={{ willChange: "filter" }}
                       fallbackText={artist.name}
                       sizes="(max-width: 640px) 70vw, 280px"
                     />

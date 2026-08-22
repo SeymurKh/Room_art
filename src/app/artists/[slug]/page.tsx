@@ -55,7 +55,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
             alt={artist.name}
             fill
             priority
-            className="object-cover grayscale"
+            className="object-cover"
             fallbackText={artist.name}
           />
         </div>
