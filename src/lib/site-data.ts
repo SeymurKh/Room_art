@@ -87,6 +87,7 @@ export async function getSiteData(): Promise<SiteData> {
     name: row.name,
     role: row.role,
     portrait: row.portrait,
+    photos: (() => { try { return JSON.parse(row.photos); } catch { return []; } })(),
     bio: row.bio,
     statement: row.statement,
   }));
@@ -174,7 +175,10 @@ export async function saveSiteData(data: unknown) {
       .run();
 
     for (const artist of parsed.artists) {
-      tx.insert(artistsTable).values(artist).run();
+      tx.insert(artistsTable).values({
+        ...artist,
+        photos: JSON.stringify(artist.photos ?? []),
+      }).run();
     }
 
     for (const artwork of parsed.artworks) {

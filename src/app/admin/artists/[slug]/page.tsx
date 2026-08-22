@@ -32,6 +32,7 @@ export default async function AdminArtistPage({
     name: "",
     role: "",
     portrait: "",
+    photos: [],
     bio: "",
     statement: "",
   };

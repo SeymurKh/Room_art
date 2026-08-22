@@ -25,6 +25,7 @@ type JsonArtist = {
   name: string;
   role: string;
   portrait: string;
+  photos?: string[];
   bio: string;
   statement: string;
 };
@@ -102,7 +103,10 @@ db.transaction((tx) => {
   tx.insert(schema.about).values({ id: 1, ...siteData.about }).run();
 
   for (const artist of siteData.artists) {
-    tx.insert(schema.artists).values(artist).run();
+    tx.insert(schema.artists).values({
+      ...artist,
+      photos: JSON.stringify(artist.photos ?? []),
+    }).run();
   }
 
   for (const artwork of siteData.artworks) {

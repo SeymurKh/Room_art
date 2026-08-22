@@ -13,24 +13,42 @@
       "name": "Orkhan Garayev",
       "role": "Artist",
       "portrait": "/assets/artists/orxan.png",
+      "photos": [
+        "/uploads/artists/20bf92e7-12e7-4ddd-af96-141c6336a799.webp",
+        "/uploads/artists/97009ff4-3a05-4a8f-96de-a9176fec9fc9.webp",
+        "/uploads/artists/25348d80-035a-41d1-a40b-6b34525fc8f0.webp"
+      ],
       "bio": "Orkhan Garayev (b. 1991, Ganja, Azerbaijan) is a contemporary Azerbaijani artist based in Baku. Working\nacross painting, graphic art, sculpture, installation, and book illustration, he explores the intersection of\ncultural heritage and contemporary visual language. His practice is distinguished by symbolic imagery,\nexpressive color, and poetic narratives that reflect themes of memory, identity, and place. Garayev is a\nmember of the Union of Artists of Azerbaijan, the designer of official Azerbaijani postage stamps, and has\nexhibited internationally. His works are held in public and private collections.",
-      "statement": "«Red», «Trapped Earth», and «Hope» are part of the permanent collection of the Museum of\nModern Art in Baku.\nHis works have been showcased at international exhibitions in countries such as Turkey, Germany,\nRussia, Georgia, Switzerland, France, the UAE, Luxembourg, and Belgium."
+      "statement": "My works, including *Red*, *Trapped Earth*, and *Hope*, are part of the permanent collection of the Museum of Modern Art in Baku. I have presented my work at international exhibitions in Turkey, Germany, Russia, Georgia, Switzerland, France, the UAE, Luxembourg, and Belgium, connecting my artistic practice with audiences across different cultural contexts."
     },
     {
       "slug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "name": "Nigar Kerimova",
       "role": "Artist",
       "portrait": "/assets/artists/nigar.png",
-      "bio": "bio",
-      "statement": "At the core of my artistic practice is an exploration of memory, time, and the invisible connections that shape human experience. Through symbolism, metaphor, and associative imagery, I seek to reveal not events themselves, but the emotions, memories, and hidden forces that influence the way we perceive the world.Working primarily in painting and mixed media, I create works in which reality intertwines with symbolic space. I am interested in the moment when familiar images acquire new meanings, allowing everyday objects and figures to become metaphors for inner experience.My projects explore different aspects of this ongoing investigation. In the Memory series, memory is presented as a living space where the past continues to exist within the present, shaping identity and perception. In Behind the Scenes of Fate, I reflect on choice, chance, and the unseen circumstances that quietly influence the course of our lives. My paintings inspired by Baku express a personal connection to the city, exploring the memory of place and the relationship between cultural heritage and individual identity. For me, art is a space for dialogue where symbols become a universal language. Rather than offering definitive answers, I create works that invite viewers to form their own interpretations, encouraging them to discover personal memories, emotions, and meanings within each piece."
+      "photos": [
+        "/uploads/artists/5a1e039c-dbb0-48a7-9978-984014580802.webp",
+        "/uploads/artists/2a34ec97-57bd-46a8-985a-e044b375420f.webp",
+        "/uploads/artists/25b06123-7393-4767-b46c-75b329b01081.webp"
+      ],
+      "bio": "Nigar Karimova is a Baku-born Azerbaijani artist, founder of Benu Art Studio by Karimova and a member of the Union of Artists of Azerbaijan since 2017. She began drawing in childhood and held her first solo exhibition at the age of nine.\n\nHer artistic practice combines Impressionism and Symbolism, focusing on inner psychological states, memory, instinct, identity, and the subconscious. She works primarily with oil and acrylic, as well as watercolor and mixed media.\n\nKarimova has participated in numerous local and international exhibitions, including showcases in Barcelona and exhibitions at the Azerbaijan State Museum. Her works are held in private collections in Azerbaijan, Canada, the USA, Germany, Sweden, Russia, and Turkey.\n\nShe currently continues her artistic practice while directing Benu Art Studio by Karimova.",
+      "statement": "My artistic practice explores memory, time, identity, and the invisible forces shaping human experience. Through painting and mixed media, I use symbolism and metaphor to transform familiar images into reflections of emotion, the subconscious, and personal memory.\n\nInspired by Baku and its cultural heritage, my work explores the connection between place, identity, and experience. I see art as a space for dialogue, inviting each viewer to discover their own meanings and emotions."
     },
     {
       "slug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "name": "Roza Muradova",
       "role": "Artist",
       "portrait": "/uploads/artists/9197d0dc-df70-4c69-8de5-639e902a0ac0.webp",
-      "bio": "Roza Muradova is a contemporary Azerbaijani artist working in painting and mixed media.",
-      "statement": "My work explores the intersection of color, texture, and emotion, drawing inspiration from the landscapes and cultural heritage of Azerbaijan."
+      "photos": [
+        "/uploads/artists/fff4724f-55c1-445b-9bf9-72b539d39145.webp",
+        "/uploads/artists/d659bf76-effa-4e41-8aa4-fac1e5ea7c99.webp",
+        "/uploads/artists/59388d95-b5ea-4f7e-96f3-ccf0adbd2f8f.webp",
+        "/uploads/artists/330e2754-a43c-4f77-aeab-2b1f5ecbf8ed.webp",
+        "/uploads/artists/9187297f-7cb9-4d95-b4c4-acbd60efcc79.webp",
+        "/uploads/artists/c3c393c7-4fdf-48dc-85be-7a2adc16af2d.webp"
+      ],
+      "bio": "Roza Muradova is a contemporary painter based in Baku, Azerbaijan, working across oil, acrylic, ink, and watercolor. Her practice explores the relationship between movement, emotion, and the shifting boundary between abstraction and figuration.\n\nThrough expressive gestures, layered brushwork, and subtle use of texture, Muradova creates atmospheric compositions that evoke inner psychological states and fragmented memories. Her work often draws from nature as a source of rhythm and transformation, translating organic forms into intuitive visual language.\n\nHer paintings have been exhibited internationally and are held in private collections worldwide.",
+      "statement": "I approach painting as an intuitive process, allowing form and meaning to emerge through movement and spontaneity. Working in layers, I explore transformation, where forms appear, dissolve, and change, reflecting shifting emotions and perception.\n\nThrough minimal, deliberate gestures, I create open compositions that invite personal interpretation."
     }
   ],
   "artworks": [

@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
-import { RoomImage } from "@/components/room-image";
+import { ArtistPhotoBlock } from "@/components/artist-photo-block";
 import { ArtworkSalon } from "@/components/artwork-salon";
 import { getSiteData } from "@/lib/site-data";
+
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
   const data = await getSiteData();
@@ -34,37 +36,47 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   const artworks = data.artworks.filter((item) => item.artistSlug === artist.slug);
 
   return (
-    <main>
+    <main className="relative">
+      {/* Same background as artists listing page */}
+      <div
+        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/assets/artists-bg.png')" }}
+      />
+      <div className="fixed inset-0 -z-10 bg-black/40" />
+
       <SiteNav dark />
-      <section className="room-shell grid gap-10 pt-24 md:grid-cols-[1fr_1.05fr] md:gap-16 md:pt-28">
-        <div className="order-2 md:order-1">
-          <p className="section-kicker text-[#6f6a61]">{artist.role}</p>
-          <h1 className="room-serif mt-3 text-5xl font-medium leading-[0.88] md:mt-5 md:text-7xl lg:text-8xl">
-            {artist.name}
-          </h1>
-          <div className="mt-6 grid max-w-2xl gap-8 text-sm leading-7 text-[#6f6a61] md:mt-10 md:grid-cols-2">
-            <p className="md:col-span-2">{artist.bio}</p>
+
+      {/* Hero — 100vh: bio + statement + photos */}
+      <section className="room-shell flex min-h-screen items-center pt-20 pb-12 md:pt-24 md:pb-16">
+        <div className="grid w-full gap-10 md:grid-cols-[1fr_1.1fr] md:gap-16">
+          {/* Left: text */}
+          <div className="flex flex-col justify-center order-2 md:order-1">
+            <p className="section-kicker text-white/50">{artist.role}</p>
+            <h1 className="room-serif mt-3 text-5xl font-medium leading-[0.88] text-[#f4f1ea] md:mt-5 md:text-7xl lg:text-8xl">
+              {artist.name}
+            </h1>
+            <div className="mt-6 max-w-lg text-sm leading-7 text-white/62 md:mt-8">
+              <p>{artist.bio}</p>
+            </div>
+            {artist.statement ? (
+              <blockquote className="room-serif mt-6 max-w-lg border-l border-white/20 pl-5 text-lg leading-snug text-[#f4f1ea]/80 md:mt-8 md:pl-6 md:text-xl">
+                {artist.statement}
+              </blockquote>
+            ) : null}
           </div>
-          <blockquote className="room-serif mt-8 max-w-xl border-l border-black/20 pl-5 text-xl leading-snug md:mt-10 md:pl-6 md:text-2xl">
-            {artist.statement}
-          </blockquote>
-        </div>
-        <div className="relative order-1 aspect-[4/5] w-full max-h-[45vh] overflow-hidden bg-black md:order-2 md:aspect-[3/4] md:max-h-[75vh]">
-          <RoomImage
-            src={artist.portrait}
-            alt={artist.name}
-            fill
-            priority
-            className="object-cover"
-            fallbackText={artist.name}
-          />
+
+          {/* Right: creative photo block */}
+          <div className="order-1 md:order-2">
+            <ArtistPhotoBlock portrait={artist.portrait} name={artist.name} photos={artist.photos} />
+          </div>
         </div>
       </section>
 
+      {/* Artworks section */}
       <section className="room-shell py-16 md:py-24">
-        <p className="section-kicker text-[#6f6a61]">Artworks</p>
+        <p className="section-kicker text-white/50">Artworks</p>
         <div className="mt-8 md:mt-10">
-          <ArtworkSalon artworks={artworks} />
+          <ArtworkSalon artworks={artworks} dark />
         </div>
       </section>
       <SiteFooter settings={data.settings} />

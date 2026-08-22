@@ -12,6 +12,7 @@ export type Artist = {
   name: string;
   role: string;
   portrait: string;
+  photos: string[];
   bio: string;
   statement: string;
 };

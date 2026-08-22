@@ -58,6 +58,7 @@ const siteData = {
     name: row.name,
     role: row.role,
     portrait: row.portrait,
+    photos: (() => { try { return JSON.parse(row.photos); } catch { return []; } })(),
     bio: row.bio,
     statement: row.statement,
   })),

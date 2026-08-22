@@ -14,6 +14,7 @@ const artistSchema = z.object({
   name: z.string().min(1),
   role: z.string().min(1),
   portrait: z.string().default(""),
+  photos: z.array(z.string()).default([]),
   bio: z.string().default(""),
   statement: z.string().default(""),
 });

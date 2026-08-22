@@ -130,6 +130,7 @@ export async function saveArtist(formData: FormData) {
     redirect(`/admin/artists/${slug}?error=json`);
   }
   revalidatePath("/artists");
+  revalidatePath("/artists/[slug]", "page");
   revalidatePath("/gallery");
   revalidatePath("/admin");
   revalidatePath("/admin/artists");
@@ -151,6 +152,7 @@ export async function createArtist(formData: FormData) {
     redirect("/admin/artists/new?error=json");
   }
   revalidatePath("/artists");
+  revalidatePath("/artists/[slug]", "page");
   revalidatePath("/gallery");
   revalidatePath("/admin");
   revalidatePath("/admin/artists");

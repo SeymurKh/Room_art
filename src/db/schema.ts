@@ -23,6 +23,7 @@ export const artists = sqliteTable("artists", {
   name: text("name").notNull(),
   role: text("role").notNull(),
   portrait: text("portrait").notNull().default(""),
+  photos: text("photos").notNull().default("[]"),
   bio: text("bio").notNull(),
   statement: text("statement").notNull(),
 });
