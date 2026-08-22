@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { PositionedImage } from "@/components/positioned-image";
 import { MediaLightbox, type MediaItem } from "@/components/media-lightbox";
 import { getSiteData } from "@/lib/site-data";
 
@@ -69,18 +70,15 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       {hasMedia ? (
         <section className="room-shell pb-16 md:pb-24">
           <div className="columns-2 gap-3 space-y-3 md:columns-3 lg:columns-4">
-            {/* Main event image — first item, larger */}
+            {/* Main event image — first item, uses detailTransform from admin */}
             {event.image ? (
               <MediaLightbox items={mediaItems} index={0}>
-                <div className="relative break-inside-avoid overflow-hidden rounded-2xl bg-black shadow-2xl">
-                  <Image
+                <div className="relative break-inside-avoid overflow-hidden rounded-2xl bg-black shadow-2xl" style={{ aspectRatio: "3/4" }}>
+                  <PositionedImage
                     src={event.image}
                     alt={event.title}
-                    width={800}
-                    height={1000}
-                    priority
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="h-auto w-full object-cover"
+                    transform={event.detailTransform}
+                    containerClassName="h-full w-full"
                   />
                 </div>
               </MediaLightbox>

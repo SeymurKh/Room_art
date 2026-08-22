@@ -114,8 +114,8 @@ select {
 
 .dark-room {
   background:
-    radial-gradient(circle at 68% 18%, rgba(164, 142, 102, 0.24), transparent 24rem),
-    radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.08), transparent 18rem),
+    radial-gradient(circle at 68% 18%, rgba(164, 142, 102, 0.15), transparent 16rem),
+    radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.05), transparent 12rem),
     #0c0c0b;
 }
 
@@ -170,4 +170,20 @@ select {
 
 .card-img-overlay:hover .overlay-text {
   opacity: 1;
+}
+
+/* Pulsing live indicator for current events */
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+.live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+  animation: pulse-live 2s ease-in-out infinite;
 }

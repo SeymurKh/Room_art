@@ -94,26 +94,26 @@ export function HomeExperience({ data }: { data: SiteData }) {
         {current ? (
           <Link
             href={`/events/${current.slug}`}
-            className="absolute bottom-6 left-6 z-20 flex max-w-[90vw] items-center gap-4 border border-white/15 bg-black/45 p-3 backdrop-blur-md transition hover:bg-black/65 md:bottom-8 md:left-8"
+            className="absolute bottom-6 left-6 z-20 flex max-w-[90vw] items-center gap-5 border border-white/15 bg-black/50 p-4 backdrop-blur-md transition hover:bg-black/70 md:bottom-8 md:left-8 md:p-5"
           >
-            <div className="relative h-16 w-16 shrink-0 overflow-hidden bg-[#0c0c0b] md:h-20 md:w-20">
+            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-[#0c0c0b] md:h-28 md:w-28">
               {current.image ? (
                 <RoomImage
                   src={current.image}
                   alt={current.title}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   fallbackText={current.title}
                 />
               ) : null}
             </div>
             <div className="min-w-0">
-              <p className="section-kicker text-white/60">Now showing</p>
-              <p className="room-serif mt-1 truncate text-lg leading-tight text-[#f4f1ea] md:text-xl">
+              <p className="section-kicker flex items-center gap-2 text-white/60"><span className="live-dot" /> Now showing</p>
+              <p className="room-serif mt-1 truncate text-xl leading-tight text-[#f4f1ea] md:text-2xl">
                 {current.title}
               </p>
               {current.date ? (
-                <p className="mt-0.5 truncate text-xs text-white/60">{current.date}</p>
+                <p className="mt-1 truncate text-sm text-white/60">{current.date}</p>
               ) : null}
             </div>
           </Link>

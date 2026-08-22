@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { PositionedImage } from "@/components/positioned-image";
 import { getSiteData } from "@/lib/site-data";
 import type { Event } from "@/lib/types";
 
@@ -63,16 +63,14 @@ function EventCard({ event, featured = false }: { event: Event; featured?: boole
   return (
     <Link href={`/events/${event.slug}`} className="group">
       <article className="bg-[#ebe7df] p-3">
-        <div className="card-img-overlay relative overflow-hidden bg-[#e2ded4]" style={{ aspectRatio: featured ? "16/9" : "4/3" }}>
-          {event.image ? (
-            <Image
-              src={event.image}
-              alt={event.title}
-              fill
-              className="object-cover transition duration-700 group-hover:scale-[1.03]"
-              sizes={featured ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 100vw, 33vw"}
-            />
-          ) : null}
+        <div className="card-img-overlay relative overflow-hidden rounded-xl bg-[#e2ded4]" style={{ aspectRatio: "3/2" }}>
+          <PositionedImage
+            src={event.image}
+            alt={event.title}
+            transform={event.thumbTransform}
+            mode="contain"
+            containerClassName="h-full w-full"
+          />
           <span className="overlay-text">View event</span>
         </div>
         <div className="mt-5 flex items-start justify-between gap-3">

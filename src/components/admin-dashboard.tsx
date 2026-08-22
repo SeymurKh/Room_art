@@ -44,6 +44,7 @@ function PreviewBlock({
   containerClassName,
   containerStyle,
   dimmed = false,
+  imageMode = "cover",
 }: {
   label: string;
   event: Event;
@@ -53,6 +54,7 @@ function PreviewBlock({
   containerClassName: string;
   containerStyle?: React.CSSProperties;
   dimmed?: boolean;
+  imageMode?: "cover" | "contain";
 }) {
   const field = `${previewKey}Transform` as keyof Event;
   const transform = (event[field] as string) ?? "translate(0px, 0px) scale(1)";
@@ -142,6 +144,7 @@ function PreviewBlock({
             src={event.image}
             alt=""
             transform={buildTransform(live.tx, live.ty, live.scale)}
+            mode={imageMode}
             containerClassName="h-full w-full"
             draggable={false}
             clipPath={containerStyle?.clipPath as string | undefined}
@@ -271,8 +274,10 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
                     <Link href="/events" target="_blank" className="text-[10px] uppercase tracking-wider text-[#6f6a61] underline hover:text-[#11100e]">View site →</Link>
                   </div>
                   <div className="grid gap-5 md:grid-cols-3">
-                    <PreviewBlock label="Hero" event={event} index={eventIndex} updateEvents={updateEvents} previewKey="hero" containerClassName="h-80 bg-[#11100e]" containerStyle={{ clipPath: getHeroClipPath(event.status) }} dimmed={!event.featured} />
-                    <PreviewBlock label="Thumbnail" event={event} index={eventIndex} updateEvents={updateEvents} previewKey="thumb" containerClassName="aspect-4/3 bg-[#ebe7df]" />
+                    {event.status !== "Current" ? (
+                      <PreviewBlock label="Hero" event={event} index={eventIndex} updateEvents={updateEvents} previewKey="hero" containerClassName="h-80 bg-[#11100e]" containerStyle={{ clipPath: getHeroClipPath(event.status) }} dimmed={!event.featured} />
+                    ) : null}
+                    <PreviewBlock label="Thumbnail" event={event} index={eventIndex} updateEvents={updateEvents} previewKey="thumb" containerClassName="aspect-3/2 bg-[#e2ded4] rounded-xl" imageMode="contain" />
                     <PreviewBlock label="Detail" event={event} index={eventIndex} updateEvents={updateEvents} previewKey="detail" containerClassName="aspect-[3/4] bg-black" />
                   </div>
                 </div>
