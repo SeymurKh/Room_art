@@ -3,14 +3,13 @@
 import { useState, useEffect, useCallback } from "react";
 
 const words = ["Art", "Exhibitions", "Artists"];
-const prefix = "Digital Space For ";
-const typeSpeed = 70; // ms per character typing
-const deleteSpeed = 35; // ms per character deleting
-const pauseAfterType = 2500; // pause after full phrase is typed
-const pauseAfterDelete = 350; // pause before typing next word
+const typeSpeed = 50; // ms per character typing
+const deleteSpeed = 20; // ms per character deleting
+const pauseAfterType = 1800; // pause after full phrase is typed
+const pauseAfterDelete = 200; // pause before typing next word
 
 export function useTypewriter() {
-  const [displayed, setDisplayed] = useState("");
+  const [word, setWord] = useState("");
   const [cursor, setCursor] = useState(true);
 
   // Blinking cursor
@@ -22,27 +21,13 @@ export function useTypewriter() {
   const animate = useCallback(() => {
     let wordIndex = 0;
     let charIndex = 0;
-    // phases: "typePrefix" (first time type everything) | "typeWord" (type just the word) | "pause" | "delete" | "wait"
-    let phase: "typePrefix" | "typeWord" | "pause" | "delete" | "wait" = "typePrefix";
+    let phase: "type" | "pause" | "delete" | "wait" = "type";
     let timeout: ReturnType<typeof setTimeout>;
 
     function tick() {
-      const fullPhrase = prefix + words[wordIndex];
-
-      if (phase === "typePrefix") {
-        // First time: type the entire prefix + word
-        if (charIndex <= fullPhrase.length) {
-          setDisplayed(fullPhrase.slice(0, charIndex));
-          charIndex++;
-          timeout = setTimeout(tick, typeSpeed);
-        } else {
-          phase = "pause";
-          timeout = setTimeout(tick, pauseAfterType);
-        }
-      } else if (phase === "typeWord") {
-        // Subsequent cycles: prefix is already there, just type the word
+      if (phase === "type") {
         if (charIndex <= words[wordIndex].length) {
-          setDisplayed(prefix + words[wordIndex].slice(0, charIndex));
+          setWord(words[wordIndex].slice(0, charIndex));
           charIndex++;
           timeout = setTimeout(tick, typeSpeed);
         } else {
@@ -56,7 +41,7 @@ export function useTypewriter() {
       } else if (phase === "delete") {
         if (charIndex > 0) {
           charIndex--;
-          setDisplayed(prefix + words[wordIndex].slice(0, charIndex));
+          setWord(words[wordIndex].slice(0, charIndex));
           timeout = setTimeout(tick, deleteSpeed);
         } else {
           phase = "wait";
@@ -64,7 +49,7 @@ export function useTypewriter() {
           timeout = setTimeout(tick, pauseAfterDelete);
         }
       } else if (phase === "wait") {
-        phase = "typeWord";
+        phase = "type";
         charIndex = 0;
         timeout = setTimeout(tick, typeSpeed);
       }
@@ -79,5 +64,5 @@ export function useTypewriter() {
     return cleanup;
   }, [animate]);
 
-  return { displayed, cursor };
+  return { prefix: "Digital Space For", word, cursor };
 }

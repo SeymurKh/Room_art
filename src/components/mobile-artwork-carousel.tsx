@@ -78,13 +78,19 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
         </motion.div>
       </motion.div>
 
-      {/* Bottom: link + dots */}
-      <div className="room-shell relative z-10 mt-2 flex items-center justify-between">
+      {/* Bottom: title, all gallery, dots */}
+      <div className="room-shell absolute bottom-4 left-0 right-0 z-10 flex flex-col items-center gap-2">
         <Link
           href={`/gallery/${artwork.slug}`}
-          className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]/70"
+          className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]/80"
         >
           {artwork.title} <ArrowUpRight size={14} />
+        </Link>
+        <Link
+          href="/gallery"
+          className="flex items-center gap-2 border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] transition hover:bg-white/10"
+        >
+          All gallery <ArrowUpRight size={12} />
         </Link>
 
         {canSwipe && (

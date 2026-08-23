@@ -27,7 +27,7 @@ const reveal = {
 } as const;
 
 export function HomeExperience({ data }: { data: SiteData }) {
-  const { displayed, cursor } = useTypewriter();
+  const { prefix, word, cursor } = useTypewriter();
   const current = data.events.find((item) => item.status === "Current" && item.featured) ?? data.events.find((item) => item.status === "Current") ?? null;
   const upcoming = data.events.find((item) => item.status === "Upcoming" && item.featured) ?? data.events.find((item) => item.status === "Upcoming") ?? null;
   const pastFallback = current
@@ -79,15 +79,18 @@ export function HomeExperience({ data }: { data: SiteData }) {
         <HeroSlideshowShader images={slideshowImages} />
         <div className="absolute inset-0 bg-black/25 pointer-events-none" />
         <div className="room-shell relative z-10 px-4 text-center">
-          <h1 className="room-serif text-[clamp(2.75rem,11vw,4.5rem)] font-medium leading-[0.9] md:text-[clamp(2.5rem,6vw,5rem)]">
-            <span>{displayed}</span>
-            <span
-              className={`ml-1 inline-block w-[0.05em] align-middle font-light ${
-                cursor ? "opacity-100" : "opacity-0"
-              } transition-opacity duration-75`}
-              style={{ backgroundColor: "currentColor", height: "0.75em" }}
-            >
-              &nbsp;
+          <h1 className="room-serif overflow-visible text-[clamp(2.75rem,11vw,4.5rem)] font-medium leading-[1.1] md:text-[clamp(2.5rem,6vw,5rem)] md:leading-[0.9]">
+            <span className="block">{prefix}</span>
+            <span className="block min-h-[1.2em]">
+              {word}
+              <span
+                className={`ml-1 inline-block w-[0.05em] align-middle font-light ${
+                  cursor ? "opacity-100" : "opacity-0"
+                } transition-opacity duration-75`}
+                style={{ backgroundColor: "currentColor", height: "0.75em" }}
+              >
+                &nbsp;
+              </span>
             </span>
           </h1>
         </div>

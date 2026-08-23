@@ -82,17 +82,15 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
                     <p className="room-serif text-sm text-white/30">No image</p>
                   </div>
                 )}
-                {/* Gradient overlay with title at bottom */}
-                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">
-                    {event.status}
-                  </span>
-                  <h3 className="room-serif mt-1 text-2xl leading-tight text-[#f4f1ea]">
-                    {event.title}
-                  </h3>
-                  <p className="mt-1 text-xs text-white/50">{event.date}</p>
-                </div>
+              </div>
+              <div className="mt-3 text-center">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">
+                  {event.status}
+                </span>
+                <h3 className="room-serif mt-1 text-2xl leading-tight text-[#f4f1ea]">
+                  {event.title}
+                </h3>
+                <p className="mt-1 text-xs text-white/50">{event.date}</p>
               </div>
             </Link>
           </motion.div>
