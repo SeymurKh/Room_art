@@ -22,12 +22,12 @@ import { useEffect, useState } from "react";
 
 const REFERENCE_CM = 140;
 const REFERENCE_VW = 0.34; // 140 см → 34% ширины экрана
-const REFERENCE_VW_MOBILE = 0.6; // на мобилке — крупнее
+const REFERENCE_VW_MOBILE = 0.75; // на мобилке — крупнее
 const MIN_WIDTH_FRACTION = 0.25; // нижний порог длинной стороны
 const MAX_WIDTH_FRACTION = 0.44; // потолок длинной стороны по ширине
-const MAX_WIDTH_FRACTION_MOBILE = 0.8; // потолок на мобилке
+const MAX_WIDTH_FRACTION_MOBILE = 0.92; // потолок на мобилке
 const MAX_HEIGHT_FRACTION = 0.42; // потолок по высоте экрана
-const MAX_HEIGHT_FRACTION_MOBILE = 0.65; // потолок по высоте на мобилке
+const MAX_HEIGHT_FRACTION_MOBILE = 0.75; // потолок по высоте на мобилке
 
 function clamp(v: number, min: number, max: number) {
   return Math.min(Math.max(v, min), max);

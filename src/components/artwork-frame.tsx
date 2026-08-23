@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import type { Artwork } from "@/lib/types";
 import { RoomImage } from "@/components/room-image";
 import { computeArtworkSize, useViewportSize } from "@/lib/artwork-scale";
@@ -87,44 +87,64 @@ function MagnifierLens({
   enableLens: boolean;
   tondo?: boolean;
 }) {
-  const [active, setActive] = useState(false);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [size, setSize] = useState({ w: 0, h: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
-  const handleMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  /* ======== Shared: container size ======== */
+  const [size, setSize] = useState({ w: 0, h: 0 });
+
+  useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setSize({ w: rect.width, h: rect.height });
+  }, []);
+
+  /* ======== Desktop: hover lens ======== */
+  const [active, setActive] = useState(false);
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  const updatePos = useCallback((clientX: number, clientY: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width) * 100;
+    const y = ((clientY - rect.top) / rect.height) * 100;
     setPos({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });
     setSize({ w: rect.width, h: rect.height });
   }, []);
 
-  const handleEnter = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      handleMove(e);
-      setActive(true);
-    },
-    [handleMove]
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => updatePos(e.clientX, e.clientY),
+    [updatePos]
   );
 
-  const handleLeave = useCallback(() => {
-    setActive(false);
-  }, []);
+  const handleMouseEnter = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      updatePos(e.clientX, e.clientY);
+      setActive(true);
+    },
+    [updatePos]
+  );
+
+  const handleMouseLeave = useCallback(() => setActive(false), []);
 
   return (
     <div
       ref={containerRef}
-      className={`frame-artwork relative ${enableLens ? "cursor-crosshair" : ""} ${tondo ? "overflow-hidden rounded-full" : ""}`}
+      className={`frame-artwork relative ${
+        enableLens && !isMobile ? "cursor-crosshair" : ""
+      } ${tondo ? "overflow-hidden rounded-full" : ""}`}
       style={{
         width: `${widthPx}px`,
         height: `${heightPx}px`,
       }}
-      onMouseEnter={enableLens ? handleEnter : undefined}
-      onMouseMove={enableLens ? handleMove : undefined}
-      onMouseLeave={enableLens ? handleLeave : undefined}
+      onMouseEnter={enableLens && !isMobile ? handleMouseEnter : undefined}
+      onMouseMove={enableLens && !isMobile ? handleMouseMove : undefined}
+      onMouseLeave={enableLens ? handleMouseLeave : undefined}
     >
       <RoomImage
         src={src}

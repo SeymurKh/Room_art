@@ -1,10 +1,12 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Artwork, SiteSettings } from "@/lib/types";
 import { whatsappArtworkUrl } from "@/lib/whatsapp";
 import { ArtworkFrame } from "@/components/artwork-frame";
+import { MobileMagnifier } from "@/components/mobile-magnifier";
 
 // Акт 1 — картина «поднимается со спины на ноги»:
 // из положения лёжа (rotateX) встаёт вертикально на своё место на стене
@@ -50,9 +52,16 @@ export function ArtworkWall({
   settings: SiteSettings;
 }) {
   const priceLabel = artwork.priceAzn != null ? `${artwork.priceAzn.toLocaleString("en-US")} AZN` : null;
+  const wallRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   return (
-    <section className="wall grid min-h-screen grid-rows-[auto_1fr_auto] pt-16">
+    <section ref={wallRef} className="wall grid min-h-screen grid-rows-[auto_1fr_auto] pt-16">
       {/* Top header info */}
       <motion.header
         variants={staggerContainer}
@@ -91,6 +100,7 @@ export function ArtworkWall({
             }}
           />
           <motion.div
+            ref={imageRef}
             variants={frameVariants}
             initial="initial"
             animate="animate"
@@ -101,6 +111,14 @@ export function ArtworkWall({
           </motion.div>
         </div>
       </div>
+
+      {isMobile && wallRef.current && (
+        <MobileMagnifier
+          imageUrl={artwork.image}
+          imageRef={imageRef}
+          containerRef={wallRef}
+        />
+      )}
 
       {/* Bottom / side details */}
       <motion.footer
