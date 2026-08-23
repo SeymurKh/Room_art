@@ -136,9 +136,9 @@
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
       "medium": "Mixed medium",
-      "dimensions": "28 × 47 cm",
-      "widthCm": 28,
-      "heightCm": 47,
+      "dimensions": "47 × 28 cm",
+      "widthCm": 47,
+      "heightCm": 28,
       "image": "/uploads/artworks/e727bcd8-7069-485f-be9a-76b9cd5ee609.webp",
       "availability": "Available",
       "description": "",
@@ -1108,7 +1108,7 @@
       "thumbTransform": "translate(0px, 6px) scale(2.65)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": true,
-      "description": "My artistic practice is built around an exploration of form, lettering, character, and the visual languages of contemporary urban culture. Graffiti, street culture, graphic design, popular culture, vintage comics, CD covers, magazines, books, and other forms of visual media become materials that I rethink and combine into new visual structures.\n\nAt the center of my artistic practice is a recurring character - a recognizable male figure caught between a traditional way of life and contemporary urban life.\n\nThis character emerged in 2014-2015, during my university studies, as an extension of my practice of graffiti and lettering. Over time, he developed his own character and became an independent protagonist within my artistic practice.\n\nHe carries traditional ideas, social expectations, and behavioral patterns within him, while living in a rapidly changing urban environment. His body belongs to the present, while his mind, in many ways, belongs to the past. This internal contradiction forms the emotional core of my work.\n\nI continuously reinterpret the character through different techniques, colors, styles, abstract forms, and lettering. His image remains recognizable while constantly transforming, as a result, he exists simultaneously as an individual protagonist, a cultural archetype, and a reflection of a particular psychological state.\n\nThe exhibition explores the space between tradition and modernity, heritage and change, collective expectations and individual freedom.\n\nWhat happens to a person when the world around them changes faster than the ideas they have relied on to understand themselves?",
+      "description": "My artistic practice explores form, lettering, character, and the visual language of contemporary urban culture. Drawing from graffiti, street culture, graphic design, comics, and popular media, I combine familiar visual elements into new structures.\n\nAt the center of my work is a recurring male character, developed from my graffiti practice in 2014–2015. He embodies the tension between traditional values and contemporary urban life — a person whose body belongs to the present, while his mindset remains rooted in the past.\n\nThrough constantly changing techniques, colors, and styles, I use this character to explore identity, cultural heritage, social expectations, and the conflict between tradition and change.",
       "gallery": [],
       "video": ""
     }
