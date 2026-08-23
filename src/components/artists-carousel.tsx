@@ -148,7 +148,7 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
               goPrev();
               pause();
             }}
-            className="absolute -left-2 top-1/2 z-30 -translate-y-1/2 rounded-full border border-black/12 bg-white/80 p-3 shadow-md backdrop-blur transition hover:bg-white md:-left-12"
+            className="absolute -left-2 top-1/2 z-30 hidden -translate-y-1/2 rounded-full border border-black/12 bg-white/80 p-3 shadow-md backdrop-blur transition hover:bg-white md:-left-12 md:block"
             aria-label="Previous artist"
           >
             <ChevronLeft size={20} />
@@ -159,7 +159,7 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
               goNext();
               pause();
             }}
-            className="absolute -right-2 top-1/2 z-30 -translate-y-1/2 rounded-full border border-black/12 bg-white/80 p-3 shadow-md backdrop-blur transition hover:bg-white md:-right-12"
+            className="absolute -right-2 top-1/2 z-30 hidden -translate-y-1/2 rounded-full border border-black/12 bg-white/80 p-3 shadow-md backdrop-blur transition hover:bg-white md:-right-12 md:block"
             aria-label="Next artist"
           >
             <ChevronRight size={20} />

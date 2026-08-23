@@ -121,7 +121,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
         ) : null}
       </section>
 
-      <ParallaxWindow src="/assets/window-bg.jpg" alt="Room interior">
+      <ParallaxWindow src="/assets/window-bg.jpg" alt="Room interior" className="hidden md:block">
         <div className={`room-shell grid divide-y divide-white/10 md:divide-x md:divide-y-0 ${showcase.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
           {showcase.map(({ kicker, title, meta, href }) => (
             <Link href={href} key={kicker} className="group block py-8 md:px-8">

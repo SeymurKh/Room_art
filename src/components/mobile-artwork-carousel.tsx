@@ -42,13 +42,24 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
   const artwork = artworks[index];
 
   return (
-    <section className="relative bg-[#ded8cc] py-12 md:hidden" ref={containerRef}>
-      <div className="room-shell mb-6">
-        <p className="section-kicker text-[#6f6a61]">On display</p>
-        <h2 className="room-serif mt-2 text-3xl font-medium leading-none">Works in the room</h2>
+    <section
+      className="relative flex h-[70vh] flex-col items-center justify-center overflow-hidden md:hidden"
+      ref={containerRef}
+    >
+      {/* Wall background — same as desktop scrolltelling */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/assets/room-wall.png')" }}
+      />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-black/45" aria-hidden="true" />
+
+      {/* Title */}
+      <div className="room-shell relative z-10 mb-6 text-center">
+        <p className="room-serif text-lg italic text-[#6f6a61]">Currently on display in Room</p>
       </div>
 
-      <div className="relative overflow-hidden">
+      {/* Artwork — changes on swipe, section stays fixed */}
+      <div className="relative z-10 flex flex-1 items-center justify-center overflow-hidden">
         <motion.div
           drag={canSwipe ? "x" : false}
           dragConstraints={{ left: 0, right: 0 }}
@@ -63,27 +74,22 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="flex w-full flex-col items-center"
           >
             <ArtworkFrame artwork={artwork} priority />
-            <Link
-              href={`/gallery/${artwork.slug}`}
-              className="room-shell mt-6 flex w-full items-start justify-between gap-4"
-            >
-              <div>
-                <h3 className="room-serif text-3xl leading-none">{artwork.title}</h3>
-                <p className="mt-2 text-sm text-[#6f6a61]">
-                  {artwork.medium}{artwork.year ? `, ${artwork.year}` : ""}
-                </p>
-              </div>
-              <ArrowUpRight size={18} className="mt-1 shrink-0 opacity-40" />
-            </Link>
           </motion.div>
         </motion.div>
       </div>
 
-      {canSwipe && (
-        <div className="room-shell mt-8 flex items-center justify-between">
+      {/* Bottom: link + dots */}
+      <div className="room-shell relative z-10 mt-6 flex items-center justify-between">
+        <Link
+          href={`/gallery/${artwork.slug}`}
+          className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]/70"
+        >
+          {artwork.title} <ArrowUpRight size={12} />
+        </Link>
+
+        {canSwipe && (
           <div className="flex gap-2">
             {artworks.map((_, i) => (
               <button
@@ -91,17 +97,14 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
                 type="button"
                 onClick={() => goTo(i)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === index ? "w-6 bg-[#11100e]" : "w-1.5 bg-[#11100e]/20"
+                  i === index ? "w-6 bg-[#f4f1ea]" : "w-1.5 bg-[#f4f1ea]/20"
                 }`}
                 aria-label={`Go to artwork ${i + 1}`}
               />
             ))}
           </div>
-          <p className="text-xs text-[#6f6a61]">
-            {index + 1} / {n}
-          </p>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 }

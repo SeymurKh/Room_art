@@ -9,9 +9,11 @@ import type { Event } from "@/lib/types";
 const SWIPE_THRESHOLD = 50;
 
 export function MobileEventsCarousel({ events }: { events: Event[] }) {
-  const shown = events.filter(
-    (e) => e.status === "Upcoming" || e.status === "Past"
-  );
+  // Order: current first, then upcoming, then past
+  const sorted = [...events].sort((a, b) => {
+    const order: Record<string, number> = { Current: 0, Upcoming: 1, Past: 2 };
+    return (order[a.status] ?? 3) - (order[b.status] ?? 3);
+  });
 
   const [index, setIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,7 +21,7 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
   const x = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 260, damping: 30 });
 
-  const n = shown.length;
+  const n = sorted.length;
   const canSwipe = n > 1;
 
   const goTo = useCallback((next: number) => {
@@ -42,13 +44,12 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
 
   if (n === 0) return null;
 
-  const event = shown[index];
+  const event = sorted[index];
 
   return (
-    <section className="relative bg-[#11100e] py-12 text-[#f4f1ea] md:hidden" ref={containerRef}>
-      <div className="room-shell mb-6">
-        <p className="section-kicker text-white/50">Events</p>
-        <h2 className="room-serif mt-2 text-3xl font-medium leading-none">At ROOM</h2>
+    <section className="relative bg-[#11100e] py-10 text-[#f4f1ea] md:hidden" ref={containerRef}>
+      <div className="room-shell mb-5">
+        <p className="room-serif text-3xl font-medium leading-none">Events</p>
       </div>
 
       <div className="relative overflow-hidden">
@@ -69,29 +70,28 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
             className="w-full"
           >
             <Link href={`/events/${event.slug}`} className="group block">
-              <div className="relative aspect-[3/4] overflow-hidden bg-[#0c0c0b]">
+              <div className="relative aspect-[4/5] overflow-hidden bg-[#0c0c0b]">
                 {event.image ? (
                   <img
                     src={event.image}
                     alt={event.title}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">
                     <p className="room-serif text-sm text-white/30">No image</p>
                   </div>
                 )}
-                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#11100e]/90 via-transparent to-transparent" />
+                {/* Gradient overlay with title at bottom */}
+                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-white/50">
-                      {event.status}
-                    </span>
-                  </div>
-                  <h3 className="room-serif mt-2 text-3xl leading-tight text-[#f4f1ea]">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">
+                    {event.status}
+                  </span>
+                  <h3 className="room-serif mt-1 text-2xl leading-tight text-[#f4f1ea]">
                     {event.title}
                   </h3>
-                  <p className="mt-1 text-sm text-white/60">{event.date}</p>
+                  <p className="mt-1 text-xs text-white/50">{event.date}</p>
                 </div>
               </div>
             </Link>
@@ -100,9 +100,9 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
       </div>
 
       {canSwipe && (
-        <div className="room-shell mt-8 flex items-center justify-between">
+        <div className="room-shell mt-5 flex items-center justify-between">
           <div className="flex gap-2">
-            {shown.map((_, i) => (
+            {sorted.map((_, i) => (
               <button
                 key={i}
                 type="button"
@@ -114,20 +114,14 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
               />
             ))}
           </div>
-          <p className="text-xs text-white/50">
-            {index + 1} / {n}
-          </p>
+          <Link
+            href="/events"
+            className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50"
+          >
+            All events <ArrowUpRight size={12} />
+          </Link>
         </div>
       )}
-
-      <div className="room-shell mt-8">
-        <Link
-          href="/events"
-          className="inline-flex items-center gap-2 border border-white/20 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] transition hover:bg-white/10"
-        >
-          All events <ArrowUpRight size={14} />
-        </Link>
-      </div>
     </section>
   );
 }
