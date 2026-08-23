@@ -40,12 +40,10 @@
       "role": "Artist",
       "portrait": "/uploads/artists/9197d0dc-df70-4c69-8de5-639e902a0ac0.webp",
       "photos": [
-        "/uploads/artists/fff4724f-55c1-445b-9bf9-72b539d39145.webp",
         "/uploads/artists/d659bf76-effa-4e41-8aa4-fac1e5ea7c99.webp",
         "/uploads/artists/59388d95-b5ea-4f7e-96f3-ccf0adbd2f8f.webp",
         "/uploads/artists/330e2754-a43c-4f77-aeab-2b1f5ecbf8ed.webp",
-        "/uploads/artists/9187297f-7cb9-4d95-b4c4-acbd60efcc79.webp",
-        "/uploads/artists/c3c393c7-4fdf-48dc-85be-7a2adc16af2d.webp"
+        "/uploads/artists/9187297f-7cb9-4d95-b4c4-acbd60efcc79.webp"
       ],
       "bio": "Roza Muradova is a contemporary painter based in Baku, Azerbaijan, working across oil, acrylic, ink, and watercolor. Her practice explores the relationship between movement, emotion, and the shifting boundary between abstraction and figuration.\n\nThrough expressive gestures, layered brushwork, and subtle use of texture, Muradova creates atmospheric compositions that evoke inner psychological states and fragmented memories. Her work often draws from nature as a source of rhythm and transformation, translating organic forms into intuitive visual language.\n\nHer paintings have been exhibited internationally and are held in private collections worldwide.",
       "statement": "I approach painting as an intuitive process, allowing form and meaning to emerge through movement and spontaneity. Working in layers, I explore transformation, where forms appear, dissolve, and change, reflecting shifting emotions and perception.\n\nThrough minimal, deliberate gestures, I create open compositions that invite personal interpretation."
@@ -1085,7 +1083,7 @@
       "date": "8–14 September 2025, Ivanovka",
       "image": "/uploads/events/2b59e2d9-6e78-46d6-9429-ba6683789a93.webp",
       "heroTransform": "translate(0px, 0px) scale(1)",
-      "thumbTransform": "translate(0px, 0px) scale(1)",
+      "thumbTransform": "translate(-3px, -68px) scale(2)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": true,
       "description": "ROOM Baku and DaMir – House of Imagination present 7-YA (SevenYouAre), an art project held from September 8–14, 2025, in Ivanovka. For one week, seven artists — Vusala Agharaziyeva, Nigar Familsoy, Gunel Akhundlu, Orkhan Garayev, Sarkhan Gadzhiev, Mushfig Heydarov, and Rufana Mamedova — lived and worked together, exploring the multiplicity of the \"Self.\" The name \"7-YA\" reflects the idea that within each person exists a multitude of states and roles. Seven participants, seven days, and seven facets of identity came together in paintings, sketches, and a collective installation shaped through dialogue, workshops, and shared creation. The exhibition is hosted at ROOM Baku — a wine house in the city center where wine culture meets art and gastronomy. Here, the artists' works and a video portrait of the project invite visitors to reflect on identity and the courage to be many at once.",
