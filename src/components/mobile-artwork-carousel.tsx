@@ -43,7 +43,7 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
 
   return (
     <section
-      className="relative flex h-[70vh] flex-col items-center justify-center overflow-hidden md:hidden"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden md:hidden"
       ref={containerRef}
     >
       {/* Wall background — same as desktop scrolltelling */}

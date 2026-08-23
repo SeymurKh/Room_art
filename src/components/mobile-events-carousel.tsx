@@ -47,7 +47,7 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
   const event = sorted[index];
 
   return (
-    <section className="relative bg-[#11100e] py-10 text-[#f4f1ea] md:hidden" ref={containerRef}>
+    <section className="relative flex min-h-screen flex-col justify-center bg-[#11100e] py-12 text-[#f4f1ea] md:hidden" ref={containerRef}>
       <div className="room-shell mb-5">
         <p className="room-serif text-3xl font-medium leading-none">Events</p>
       </div>
