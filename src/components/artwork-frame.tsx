@@ -90,7 +90,7 @@ function MagnifierLens({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
+    setIsMobile(window.innerWidth < 1024);
   }, []);
 
   /* ======== Shared: container size ======== */

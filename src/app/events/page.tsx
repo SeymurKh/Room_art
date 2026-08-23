@@ -22,7 +22,7 @@ export default async function EventsPage() {
       {current.length > 0 ? (
         <section className="room-shell py-8 md:py-16">
           <p className="section-kicker text-[#a58e63]">Now showing</p>
-          <div className="mt-4 grid grid-cols-2 gap-3 md:mt-8 md:gap-5 md:grid-cols-2">
+          <div className="mt-4 grid grid-cols-2 gap-3 md:mt-8 md:gap-5 md:grid-cols-3">
             {current.map((event) => (
               <EventCard key={event.slug} event={event} featured />
             ))}
@@ -74,13 +74,13 @@ function EventCard({ event, featured = false }: { event: Event; featured?: boole
           <span className="overlay-text">View event</span>
         </div>
         <div className="mt-3 flex items-start justify-between gap-2 md:mt-5 md:gap-3">
-          <h2 className={`room-serif text-lg leading-none md:text-4xl ${featured ? "md:text-5xl" : "md:text-4xl"}`}>
+          <h2 className="room-serif text-lg leading-none md:text-2xl">
             {event.title}
           </h2>
           <ArrowUpRight size={18} className="mt-1 shrink-0 opacity-30 transition group-hover:opacity-100" />
         </div>
-        <p className="mt-1 text-xs text-[#6f6a61] md:mt-2 md:text-sm">{event.date}</p>
-        <p className="mt-3 hidden text-sm leading-7 text-[#6f6a61] line-clamp-3 md:mt-5 md:block">{event.description}</p>
+        <p className="mt-1 text-xs text-[#6f6a61] md:mt-2 md:text-xs">{event.date}</p>
+
       </article>
     </Link>
   );

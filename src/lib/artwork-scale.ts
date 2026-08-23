@@ -21,13 +21,18 @@ import { useEffect, useState } from "react";
  */
 
 const REFERENCE_CM = 140;
-const REFERENCE_VW = 0.34; // 140 см → 34% ширины экрана
-const REFERENCE_VW_MOBILE = 0.75; // на мобилке — крупнее
-const MIN_WIDTH_FRACTION = 0.25; // нижний порог длинной стороны
-const MAX_WIDTH_FRACTION = 0.44; // потолок длинной стороны по ширине
-const MAX_WIDTH_FRACTION_MOBILE = 0.92; // потолок на мобилке
-const MAX_HEIGHT_FRACTION = 0.42; // потолок по высоте экрана
-const MAX_HEIGHT_FRACTION_MOBILE = 0.75; // потолок по высоте на мобилке
+const REFERENCE_VW = 0.34; // 140 см → 34% ширины экрана (десктоп)
+const REFERENCE_VW_TABLET = 0.50; // планшет
+const REFERENCE_VW_MOBILE = 0.75; // мобилка
+const MIN_WIDTH_FRACTION = 0.12; // нижний порог (десктоп)
+const MIN_WIDTH_FRACTION_TABLET = 0.15; // планшет
+const MIN_WIDTH_FRACTION_MOBILE = 0.25; // мобилка
+const MAX_WIDTH_FRACTION = 0.44; // потолок по ширине (десктоп)
+const MAX_WIDTH_FRACTION_TABLET = 0.60; // планшет
+const MAX_WIDTH_FRACTION_MOBILE = 0.92; // мобилка
+const MAX_HEIGHT_FRACTION = 0.42; // потолок по высоте (десктоп)
+const MAX_HEIGHT_FRACTION_TABLET = 0.55; // планшет
+const MAX_HEIGHT_FRACTION_MOBILE = 0.75; // мобилка
 
 function clamp(v: number, min: number, max: number) {
   return Math.min(Math.max(v, min), max);
@@ -42,9 +47,11 @@ export function computeArtworkSize(
   square = false
 ): { width: number; height: number } {
   const isMobile = viewport.width < 640;
-  const refVw = isMobile ? REFERENCE_VW_MOBILE : REFERENCE_VW;
-  const maxWFrac = isMobile ? MAX_WIDTH_FRACTION_MOBILE : MAX_WIDTH_FRACTION;
-  const maxHFrac = isMobile ? MAX_HEIGHT_FRACTION_MOBILE : MAX_HEIGHT_FRACTION;
+  const isTablet = !isMobile && viewport.width < 1024;
+  const refVw = isMobile ? REFERENCE_VW_MOBILE : isTablet ? REFERENCE_VW_TABLET : REFERENCE_VW;
+  const minWFrac = isMobile ? MIN_WIDTH_FRACTION_MOBILE : isTablet ? MIN_WIDTH_FRACTION_TABLET : MIN_WIDTH_FRACTION;
+  const maxWFrac = isMobile ? MAX_WIDTH_FRACTION_MOBILE : isTablet ? MAX_WIDTH_FRACTION_TABLET : MAX_WIDTH_FRACTION;
+  const maxHFrac = isMobile ? MAX_HEIGHT_FRACTION_MOBILE : isTablet ? MAX_HEIGHT_FRACTION_TABLET : MAX_HEIGHT_FRACTION;
 
   const safeW = widthCm > 0 ? widthCm : 1;
   const safeH = heightCm > 0 ? heightCm : 1;
@@ -57,7 +64,7 @@ export function computeArtworkSize(
   // Ограничиваем длинную сторону в пределах ширины экрана.
   longPx = clamp(
     longPx,
-    viewport.width * MIN_WIDTH_FRACTION,
+    viewport.width * minWFrac,
     viewport.width * maxWFrac
   );
 

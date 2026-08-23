@@ -57,7 +57,7 @@ export function ArtworkWall({
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
+    setIsMobile(window.innerWidth < 1024);
   }, []);
 
   return (
@@ -128,7 +128,7 @@ export function ArtworkWall({
         className="room-shell flex flex-col justify-between gap-6 py-5 md:flex-row md:items-end md:py-6"
       >
         <motion.div variants={fadeUp}>
-          <dl className="grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2 md:grid-cols-4">
+          <dl className="grid grid-cols-3 gap-x-3 gap-y-2 text-xs sm:gap-x-8 sm:text-sm md:grid-cols-3">
             <div>
               <dt className="text-white/50">Dimensions</dt>
               <dd className="mt-0.5 text-[#f4f1ea]">{artwork.dimensions}</dd>
@@ -141,12 +141,6 @@ export function ArtworkWall({
               <div>
                 <dt className="text-white/50">Price</dt>
                 <dd className="mt-0.5 text-[#f4f1ea]">{priceLabel}</dd>
-              </div>
-            ) : null}
-            {artwork.description ? (
-              <div className="sm:col-span-2 md:col-span-1">
-                <dt className="text-white/50">About</dt>
-                <dd className="mt-0.5 max-w-xs text-[#f4f1ea]">{artwork.description}</dd>
               </div>
             ) : null}
           </dl>

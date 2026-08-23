@@ -149,7 +149,6 @@ export function ArtworkForm({
           onChange={(e) => updateField("priceAzn", e.target.value === "" ? null : Number(e.target.value))}
         />
       </label>
-      <Field multiline label="Description" value={data.description ?? ""} onChange={(v) => updateField("description", v)} />
       <button
         type="submit"
         className="mt-6 inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]"

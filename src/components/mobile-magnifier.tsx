@@ -92,12 +92,7 @@ export function MobileMagnifier({
       const newX = dragStartRef.current.posX + (touch.clientX - dragStartRef.current.touchX);
       const newY = dragStartRef.current.posY + (touch.clientY - dragStartRef.current.touchY);
 
-      // Clamp within container
-      const margin = LENS_SIZE / 2;
-      setPos({
-        x: Math.max(margin, Math.min(containerSize.w - margin, newX)),
-        y: Math.max(margin, Math.min(containerSize.h - margin - HANDLE_HEIGHT, newY)),
-      });
+      setPos({ x: newX, y: newY });
     };
 
     const handleEnd = () => setDragging(false);

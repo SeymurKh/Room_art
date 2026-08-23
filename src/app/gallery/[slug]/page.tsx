@@ -21,7 +21,7 @@ export async function generateMetadata({
   if (!artwork) return { title: "Artwork not found" };
   return {
     title: artwork.title,
-    description: artwork.description,
+    description: `${artwork.title} — ${artwork.dimensions}, ${artwork.medium}`,
   };
 }
 
