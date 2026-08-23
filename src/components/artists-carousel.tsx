@@ -7,7 +7,7 @@ import type { Artist } from "@/lib/types";
 import { RoomImage } from "@/components/room-image";
 
 const CARD_W = 280;
-const CARD_W_MOBILE = 200;
+const CARD_W_MOBILE = 260;
 const GAP = 24;
 const AUTOPLAY_DELAY = 4000;
 const RESUME_DELAY = 5000;
@@ -222,7 +222,7 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
                       src={artist.portrait}
                       alt={artist.name}
                       fill
-                      className="object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                      className={`object-cover transition duration-700 group-hover:scale-105 ${isCenter ? "" : "grayscale group-hover:grayscale-0"}`}
                       style={{ willChange: "filter" }}
                       fallbackText={artist.name}
                       sizes="(max-width: 640px) 70vw, 280px"

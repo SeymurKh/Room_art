@@ -48,7 +48,7 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
 
   return (
     <section className="relative flex min-h-screen flex-col justify-center bg-[#11100e] py-12 text-[#f4f1ea] md:hidden" ref={containerRef}>
-      <div className="room-shell mb-5">
+      <div className="room-shell mb-2">
         <p className="room-serif text-3xl font-medium leading-none">Events</p>
       </div>
 
@@ -116,9 +116,9 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
           </div>
           <Link
             href="/events"
-            className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50"
+            className="flex items-center gap-2 border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea] transition hover:bg-white/10"
           >
-            All events <ArrowUpRight size={12} />
+            All events <ArrowUpRight size={14} />
           </Link>
         </div>
       )}

@@ -22,9 +22,12 @@ import { useEffect, useState } from "react";
 
 const REFERENCE_CM = 140;
 const REFERENCE_VW = 0.34; // 140 см → 34% ширины экрана
+const REFERENCE_VW_MOBILE = 0.5; // на мобилке — крупнее
 const MIN_WIDTH_FRACTION = 0.1; // нижний порог длинной стороны
 const MAX_WIDTH_FRACTION = 0.44; // потолок длинной стороны по ширине
+const MAX_WIDTH_FRACTION_MOBILE = 0.7; // потолок на мобилке
 const MAX_HEIGHT_FRACTION = 0.42; // потолок по высоте экрана
+const MAX_HEIGHT_FRACTION_MOBILE = 0.55; // потолок по высоте на мобилке
 
 function clamp(v: number, min: number, max: number) {
   return Math.min(Math.max(v, min), max);
@@ -38,19 +41,24 @@ export function computeArtworkSize(
   viewport: ViewportSize,
   square = false
 ): { width: number; height: number } {
+  const isMobile = viewport.width < 640;
+  const refVw = isMobile ? REFERENCE_VW_MOBILE : REFERENCE_VW;
+  const maxWFrac = isMobile ? MAX_WIDTH_FRACTION_MOBILE : MAX_WIDTH_FRACTION;
+  const maxHFrac = isMobile ? MAX_HEIGHT_FRACTION_MOBILE : MAX_HEIGHT_FRACTION;
+
   const safeW = widthCm > 0 ? widthCm : 1;
   const safeH = heightCm > 0 ? heightCm : 1;
   const longSide = Math.max(safeW, safeH);
 
-  // Линейный масштаб: 140 см длинной стороны → REFERENCE_VW ширины экрана.
-  const pxPerCm = (viewport.width * REFERENCE_VW) / REFERENCE_CM;
+  // Линейный масштаб: 140 см длинной стороны → refVw ширины экрана.
+  const pxPerCm = (viewport.width * refVw) / REFERENCE_CM;
   let longPx = longSide * pxPerCm;
 
   // Ограничиваем длинную сторону в пределах ширины экрана.
   longPx = clamp(
     longPx,
     viewport.width * MIN_WIDTH_FRACTION,
-    viewport.width * MAX_WIDTH_FRACTION
+    viewport.width * maxWFrac
   );
 
   let widthPx: number;
@@ -64,8 +72,8 @@ export function computeArtworkSize(
   }
 
   // Потолок по высоте — в реальных пикселях высоты экрана.
-  if (heightPx > viewport.height * MAX_HEIGHT_FRACTION) {
-    heightPx = viewport.height * MAX_HEIGHT_FRACTION;
+  if (heightPx > viewport.height * maxHFrac) {
+    heightPx = viewport.height * maxHFrac;
     widthPx = square ? heightPx : heightPx * (safeW / safeH);
   }
 

@@ -59,34 +59,32 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
       </div>
 
       {/* Artwork — changes on swipe, section stays fixed */}
-      <div className="relative z-10 flex flex-1 items-center justify-center overflow-hidden">
+      <motion.div
+        drag={canSwipe ? "x" : false}
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.1}
+        onDragEnd={handleDragEnd}
+        style={{ x: springX }}
+        className="relative z-10 flex flex-1 items-center justify-center overflow-hidden"
+      >
         <motion.div
-          drag={canSwipe ? "x" : false}
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.1}
-          onDragEnd={handleDragEnd}
-          style={{ x: springX }}
-          className="flex items-center justify-center"
+          key={artwork.slug}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <motion.div
-            key={artwork.slug}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-          >
-            <ArtworkFrame artwork={artwork} priority />
-          </motion.div>
+          <ArtworkFrame artwork={artwork} priority />
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Bottom: link + dots */}
-      <div className="room-shell relative z-10 mt-6 flex items-center justify-between">
+      <div className="room-shell relative z-10 mt-2 flex items-center justify-between">
         <Link
           href={`/gallery/${artwork.slug}`}
-          className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]/70"
+          className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]/70"
         >
-          {artwork.title} <ArrowUpRight size={12} />
+          {artwork.title} <ArrowUpRight size={14} />
         </Link>
 
         {canSwipe && (
