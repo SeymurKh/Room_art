@@ -160,6 +160,10 @@ export function PositionedImage({
 
   const finalScale = baseScale * userScale;
 
+  // Convert percentage-based tx/ty to pixels relative to container size
+  const txPx = (tx / 100) * sizes.container.w;
+  const tyPx = (ty / 100) * sizes.container.h;
+
   return (
     <div
       ref={containerRef}
@@ -178,7 +182,7 @@ export function PositionedImage({
             height: "auto",
             left: target.cx,
             top: target.cy,
-            transform: `translate(-50%, -50%) translate(${tx}px, ${ty}px) scale(${finalScale})`,
+            transform: `translate(-50%, -50%) translate(${txPx}px, ${tyPx}px) scale(${finalScale})`,
           }}
         />
       ) : (

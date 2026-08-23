@@ -6,7 +6,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import { adminPassword, clearAdminSession, isAdmin, setAdminSession } from "@/lib/auth";
 import { getSiteData, saveSiteData, SiteDataValidationError } from "@/lib/site-data";
-import type { Artist, Artwork } from "@/lib/types";
+import type { Artist, Artwork, Event } from "@/lib/types";
 
 const UPLOADS_ROOT = path.resolve(process.cwd(), "public", "uploads");
 
@@ -99,36 +99,49 @@ export async function saveArtist(formData: FormData) {
   const slug = String(formData.get("slug") ?? "");
   const payload = String(formData.get("payload") ?? "");
   const pendingDeletionsRaw = String(formData.get("pendingDeletions") ?? "[]");
+
+  let parsed: Artist;
+  let pendingDeletions: string[];
+  let data;
   try {
-    const parsed = JSON.parse(payload);
-    const artist = parsed as Artist;
-    const pendingDeletions: string[] = JSON.parse(pendingDeletionsRaw);
-    const data = await getSiteData();
-    const index = data.artists.findIndex((a) => a.slug === slug);
-    if (index === -1) redirect("/admin/artists?error=notfound");
-    const existing = data.artists[index];
-    // Delete old portrait if replaced (prefer pendingDeletions from UploadField)
-    if (artist.portrait !== existing.portrait) {
-      const oldPortrait = pendingDeletions.find((p) => p === existing.portrait) ?? existing.portrait;
-      await tryDeleteFile(oldPortrait);
+    parsed = JSON.parse(payload);
+    pendingDeletions = JSON.parse(pendingDeletionsRaw);
+    data = await getSiteData();
+  } catch (error) {
+    if (error instanceof SiteDataValidationError) {
+      redirect(`/admin/artists/${slug}?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
     }
-    for (const p of pendingDeletions) {
-      await tryDeleteFile(p);
-    }
-    // If slug changed, update artistSlug in all artworks referencing the old slug
-    if (artist.slug !== existing.slug) {
-      data.artworks = data.artworks.map((aw) =>
-        aw.artistSlug === existing.slug ? { ...aw, artistSlug: artist.slug } : aw
-      );
-    }
-    data.artists[index] = artist;
+    redirect(`/admin/artists/${slug}?error=json`);
+    return;
+  }
+
+  const index = data.artists.findIndex((a) => a.slug === slug);
+  if (index === -1) redirect("/admin/artists?error=notfound");
+  const existing = data.artists[index];
+  if (parsed.portrait !== existing.portrait) {
+    const oldPortrait = pendingDeletions.find((p) => p === existing.portrait) ?? existing.portrait;
+    await tryDeleteFile(oldPortrait);
+  }
+  for (const p of pendingDeletions) {
+    await tryDeleteFile(p);
+  }
+  if (parsed.slug !== existing.slug) {
+    data.artworks = data.artworks.map((aw) =>
+      aw.artistSlug === existing.slug ? { ...aw, artistSlug: parsed.slug } : aw
+    );
+  }
+  data.artists[index] = parsed;
+
+  try {
     await saveSiteData(data);
   } catch (error) {
     if (error instanceof SiteDataValidationError) {
       redirect(`/admin/artists/${slug}?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
     }
     redirect(`/admin/artists/${slug}?error=json`);
+    return;
   }
+
   revalidatePath("/artists");
   revalidatePath("/artists/[slug]", "page");
   revalidatePath("/gallery");
@@ -140,17 +153,32 @@ export async function saveArtist(formData: FormData) {
 export async function createArtist(formData: FormData) {
   if (!(await isAdmin())) redirect("/admin");
   const payload = String(formData.get("payload") ?? "");
+
+  let artist: Artist;
+  let data;
   try {
-    const artist = JSON.parse(payload) as Artist;
-    const data = await getSiteData();
-    data.artists.unshift(artist);
+    artist = JSON.parse(payload);
+    data = await getSiteData();
+  } catch (error) {
+    if (error instanceof SiteDataValidationError) {
+      redirect(`/admin/artists/new?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
+    }
+    redirect("/admin/artists/new?error=json");
+    return;
+  }
+
+  data.artists.unshift(artist);
+
+  try {
     await saveSiteData(data);
   } catch (error) {
     if (error instanceof SiteDataValidationError) {
       redirect(`/admin/artists/new?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
     }
     redirect("/admin/artists/new?error=json");
+    return;
   }
+
   revalidatePath("/artists");
   revalidatePath("/artists/[slug]", "page");
   revalidatePath("/gallery");
@@ -184,32 +212,47 @@ export async function saveArtwork(formData: FormData) {
   const slug = String(formData.get("slug") ?? "");
   const payload = String(formData.get("payload") ?? "");
   const pendingDeletionsRaw = String(formData.get("pendingDeletions") ?? "[]");
+
+  let artwork: Artwork;
+  let pendingDeletions: string[];
+  let data;
   try {
-    const parsed = JSON.parse(payload);
-    const artwork = parsed as Artwork;
-    const pendingDeletions: string[] = JSON.parse(pendingDeletionsRaw);
-    const data = await getSiteData();
-    if (!data.artists.some((a) => a.slug === artwork.artistSlug)) {
-      redirect(`/admin/artworks/${slug}?error=validation&details=${encodeURIComponent(`Artist with slug "${artwork.artistSlug}" does not exist`)}`);
+    artwork = JSON.parse(payload);
+    pendingDeletions = JSON.parse(pendingDeletionsRaw);
+    data = await getSiteData();
+  } catch (error) {
+    if (error instanceof SiteDataValidationError) {
+      redirect(`/admin/artworks/${slug}?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
     }
-    const index = data.artworks.findIndex((a) => a.slug === slug);
-    if (index === -1) redirect("/admin/artworks?error=notfound");
-    const existing = data.artworks[index];
-    if (artwork.image !== existing.image) {
-      const oldImage = pendingDeletions.find((p) => p === existing.image) ?? existing.image;
-      await tryDeleteFile(oldImage);
-    }
-    for (const p of pendingDeletions) {
-      await tryDeleteFile(p);
-    }
-    data.artworks[index] = artwork;
+    redirect(`/admin/artworks/${slug}?error=json`);
+    return;
+  }
+
+  if (!data.artists.some((a) => a.slug === artwork.artistSlug)) {
+    redirect(`/admin/artworks/${slug}?error=validation&details=${encodeURIComponent(`Artist with slug "${artwork.artistSlug}" does not exist`)}`);
+  }
+  const index = data.artworks.findIndex((a) => a.slug === slug);
+  if (index === -1) redirect("/admin/artworks?error=notfound");
+  const existing = data.artworks[index];
+  if (artwork.image !== existing.image) {
+    const oldImage = pendingDeletions.find((p) => p === existing.image) ?? existing.image;
+    await tryDeleteFile(oldImage);
+  }
+  for (const p of pendingDeletions) {
+    await tryDeleteFile(p);
+  }
+  data.artworks[index] = artwork;
+
+  try {
     await saveSiteData(data);
   } catch (error) {
     if (error instanceof SiteDataValidationError) {
       redirect(`/admin/artworks/${slug}?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
     }
     redirect(`/admin/artworks/${slug}?error=json`);
+    return;
   }
+
   revalidatePath("/artists");
   revalidatePath("/gallery");
   revalidatePath("/admin");
@@ -220,20 +263,35 @@ export async function saveArtwork(formData: FormData) {
 export async function createArtwork(formData: FormData) {
   if (!(await isAdmin())) redirect("/admin");
   const payload = String(formData.get("payload") ?? "");
+
+  let artwork: Artwork;
+  let data;
   try {
-    const artwork = JSON.parse(payload) as Artwork;
-    const data = await getSiteData();
-    if (!data.artists.some((a) => a.slug === artwork.artistSlug)) {
-      redirect(`/admin/artworks/new?error=validation&details=${encodeURIComponent(`Artist with slug "${artwork.artistSlug}" does not exist`)}`);
+    artwork = JSON.parse(payload);
+    data = await getSiteData();
+  } catch (error) {
+    if (error instanceof SiteDataValidationError) {
+      redirect(`/admin/artworks/new?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
     }
-    data.artworks.unshift(artwork);
+    redirect("/admin/artworks/new?error=json");
+    return;
+  }
+
+  if (!data.artists.some((a) => a.slug === artwork.artistSlug)) {
+    redirect(`/admin/artworks/new?error=validation&details=${encodeURIComponent(`Artist with slug "${artwork.artistSlug}" does not exist`)}`);
+  }
+  data.artworks.unshift(artwork);
+
+  try {
     await saveSiteData(data);
   } catch (error) {
     if (error instanceof SiteDataValidationError) {
       redirect(`/admin/artworks/new?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
     }
     redirect("/admin/artworks/new?error=json");
+    return;
   }
+
   revalidatePath("/artists");
   revalidatePath("/gallery");
   revalidatePath("/admin");
@@ -253,4 +311,62 @@ export async function deleteArtwork(slug: string) {
   revalidatePath("/admin");
   revalidatePath("/admin/artworks");
   redirect("/admin/artworks");
+}
+
+export async function saveSingleEvent(formData: FormData) {
+  if (!(await isAdmin())) redirect("/admin");
+  const slug = String(formData.get("slug") ?? "");
+  const payload = String(formData.get("payload") ?? "");
+  const pendingDeletionsRaw = String(formData.get("pendingDeletions") ?? "[]");
+
+  let event: Event;
+  let pendingDeletions: string[];
+  let data;
+  try {
+    event = JSON.parse(payload) as Event;
+    pendingDeletions = JSON.parse(pendingDeletionsRaw);
+    data = await getSiteData();
+  } catch (error) {
+    if (error instanceof SiteDataValidationError) {
+      redirect(`/admin?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
+    }
+    redirect("/admin?error=json");
+    return;
+  }
+
+  const index = data.events.findIndex((e) => e.slug === slug);
+
+  if (index === -1) {
+    // New event — add to the list
+    for (const p of pendingDeletions) {
+      await tryDeleteFile(p);
+    }
+    data.events.push(event);
+  } else {
+    // Existing event — update
+    const existing = data.events[index];
+    if (event.image !== existing.image && existing.image?.startsWith("/uploads/")) {
+      await tryDeleteFile(existing.image);
+    }
+    for (const p of pendingDeletions) {
+      await tryDeleteFile(p);
+    }
+    data.events[index] = event;
+  }
+
+  try {
+    await saveSiteData(data);
+  } catch (error) {
+    if (error instanceof SiteDataValidationError) {
+      redirect(`/admin?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
+    }
+    redirect("/admin?error=json");
+    return;
+  }
+
+  revalidatePath("/");
+  revalidatePath("/events");
+  revalidatePath("/events/[slug]", "page");
+  revalidatePath("/admin");
+  redirect("/admin?saved=1");
 }

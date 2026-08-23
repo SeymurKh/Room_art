@@ -9,7 +9,7 @@ import type { Event } from "@/lib/types";
 type EventsScrolltellingProps = { events: Event[] };
 
 export const STRIPES: { key: "Upcoming" | "Past"; clipPath: string; align: "left" | "right" }[] = [
-  { key: "Upcoming", clipPath: "polygon(0 0, 45% 0, 55% 100%, 0 100%)", align: "left" },
+  { key: "Upcoming", clipPath: "polygon(0 0, 55% 0, 45% 100%, 0 100%)", align: "left" },
   { key: "Past", clipPath: "polygon(55% 0, 100% 0, 100% 100%, 45% 100%)", align: "right" },
 ];
 

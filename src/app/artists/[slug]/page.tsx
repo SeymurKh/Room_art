@@ -8,11 +8,6 @@ import { getSiteData } from "@/lib/site-data";
 
 export const dynamic = "force-dynamic";
 
-export async function generateStaticParams() {
-  const data = await getSiteData();
-  return data.artists.map((artist) => ({ slug: artist.slug }));
-}
-
 export async function generateMetadata({
   params,
 }: {

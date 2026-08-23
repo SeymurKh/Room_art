@@ -48,7 +48,7 @@ export function MediaLightbox({
 
   return (
     <>
-      <div onClick={() => { setCurrent(initialIndex); setOpen(true); }} className="cursor-pointer">
+      <div onClick={() => { setCurrent(initialIndex); setOpen(true); }} className="cursor-pointer h-full w-full">
         {children}
       </div>
 
@@ -124,26 +124,5 @@ export function MediaLightbox({
         </div>
       ) : null}
     </>
-  );
-}
-
-/**
- * Single-item wrapper for convenience.
- */
-export function MediaLightboxSingle({
-  src,
-  alt,
-  type = "image",
-  children,
-}: {
-  src: string;
-  alt?: string;
-  type?: "image" | "video";
-  children: React.ReactNode;
-}) {
-  return (
-    <MediaLightbox items={[{ src, alt, type }]}>
-      {children}
-    </MediaLightbox>
   );
 }

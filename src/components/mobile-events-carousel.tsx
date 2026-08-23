@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Event } from "@/lib/types";
-import { PositionedImage } from "@/components/positioned-image";
 
 const SWIPE_THRESHOLD = 50;
 
@@ -72,11 +71,10 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
             <Link href={`/events/${event.slug}`} className="group block">
               <div className="relative aspect-[3/4] overflow-hidden bg-[#0c0c0b]">
                 {event.image ? (
-                  <PositionedImage
+                  <img
                     src={event.image}
                     alt={event.title}
-                    transform={event.heroTransform}
-                    containerClassName="h-full w-full"
+                    className="h-full w-full object-cover"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">

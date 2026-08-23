@@ -12,10 +12,10 @@ export function ContactForm({ settings }: { settings: SiteSettings }) {
 
   function buildWhatsAppUrl() {
     const parts = [];
-    if (name) parts.push(`Name: ${name}`);
-    if (email) parts.push(`Email: ${email}`);
-    if (subject) parts.push(`Subject: ${subject}`);
-    if (message) parts.push(`Message: ${message}`);
+    if (name) parts.push(`Name: ${encodeURIComponent(name)}`);
+    if (email) parts.push(`Email: ${encodeURIComponent(email)}`);
+    if (subject) parts.push(`Subject: ${encodeURIComponent(subject)}`);
+    if (message) parts.push(`Message: ${encodeURIComponent(message)}`);
     const body =
       parts.length > 0
         ? `Hello ROOM,%0A%0A${parts.join("%0A")}`

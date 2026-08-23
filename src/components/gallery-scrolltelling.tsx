@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { useScroll, useSpring, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { SkipForward } from "lucide-react";
 import type { Artwork } from "@/lib/types";
@@ -58,6 +58,13 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
   });
 
   const progressPercent = Math.round(progress * 100);
+
+  // Cleanup snap timer on unmount
+  useEffect(() => {
+    return () => {
+      if (snapTimerRef.current) clearTimeout(snapTimerRef.current);
+    };
+  }, []);
 
   const handleSkip = useCallback(() => {
     if (!containerRef.current || n <= 1) return;

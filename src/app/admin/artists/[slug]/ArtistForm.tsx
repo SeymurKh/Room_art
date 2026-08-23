@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Plus, Save, Trash2, Upload } from "lucide-react";
+import { Plus, Save, Trash2 } from "lucide-react";
 import { UploadField } from "@/components/upload-field";
 import type { Artist } from "@/lib/types";
 
@@ -16,15 +16,15 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
   });
   const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
 
-  function syncPayload(next: Artist, deletions: string[]) {
+  function syncPayload(next: Artist) {
     const el = document.getElementById("payload") as HTMLInputElement;
-    if (el) el.value = JSON.stringify({ ...next, __pendingDeletions: deletions });
+    if (el) el.value = JSON.stringify(next);
   }
 
   function updateField(key: keyof Artist, value: string) {
     const next = { ...data, [key]: value };
     setData(next);
-    syncPayload(next, pendingDeletions);
+    syncPayload(next);
   }
 
   function handlePortraitChange(path: string, pendingDeletion?: string) {
@@ -32,14 +32,13 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
     if (pendingDeletion) {
       const next = [...pendingDeletions, pendingDeletion];
       setPendingDeletions(next);
-      syncPayload(data, next);
     }
   }
 
   function addPhoto(path: string) {
     const next = { ...data, photos: [...data.photos, path] };
     setData(next);
-    syncPayload(next, pendingDeletions);
+    syncPayload(next);
   }
 
   function removePhoto(index: number) {
@@ -50,10 +49,8 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
     if (removed && removed.startsWith("/uploads/")) {
       const nextDel = [...pendingDeletions, removed];
       setPendingDeletions(nextDel);
-      syncPayload(next, nextDel);
-    } else {
-      syncPayload(next, pendingDeletions);
     }
+    syncPayload(next);
   }
 
   return (

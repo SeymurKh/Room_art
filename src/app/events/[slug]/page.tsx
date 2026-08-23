@@ -43,47 +43,47 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   return (
     <main className="relative">
       {/* Dark background */}
-      <div
-        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/assets/artists-bg.png')" }}
-      />
-      <div className="fixed inset-0 -z-10 bg-black/40" />
+      <div className="fixed inset-0 -z-10 bg-[#0c0c0b]" />
 
       <SiteNav dark />
 
-      {/* Header — centered title and description */}
-      <section className="room-shell flex flex-col items-center justify-center pt-28 pb-12 text-center md:pt-32 md:pb-16">
-        <h1 className="room-serif text-4xl font-medium leading-[0.92] text-[#f4f1ea] md:text-6xl lg:text-7xl">
-          {event.title}
-        </h1>
-        <p className="mt-4 text-sm tracking-[0.08em] text-white/60">{event.date}</p>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85" style={{ fontWeight: 100, WebkitFontSmoothing: "antialiased" }}>{event.description}</p>
-        <Link
-          href="/events"
-          className="mt-8 inline-flex items-center gap-2 border border-white/20 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] transition hover:bg-white/10"
-        >
-          <ArrowUpRight size={14} /> All events
-        </Link>
+      {/* Hero — text left, main photo right */}
+      <section className="room-shell grid min-h-[70vh] items-center gap-8 pt-28 pb-12 md:grid-cols-[1fr_1.1fr] md:gap-16 md:pt-32 md:pb-16">
+        {/* Left: text */}
+        <div className="flex flex-col justify-center">
+          <p className="section-kicker text-white/50">{event.status}</p>
+          <h1 className="room-serif mt-3 text-4xl font-medium leading-[0.92] text-[#f4f1ea] md:text-6xl lg:text-7xl">
+            {event.title}
+          </h1>
+          <p className="mt-4 text-sm tracking-[0.08em] text-white/60">{event.date}</p>
+          <p className="mt-6 max-w-lg text-lg leading-8 text-white/85" style={{ fontWeight: 100, WebkitFontSmoothing: "antialiased" }}>{event.description}</p>
+          <Link
+            href="/events"
+            className="mt-8 inline-flex w-fit items-center gap-2 border border-white/20 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] transition hover:bg-white/10"
+          >
+            <ArrowUpRight size={14} /> All events
+          </Link>
+        </div>
+
+        {/* Right: main event photo — fills container */}
+        {event.image ? (
+          <div className="relative max-h-[60vh] max-w-[500px] aspect-[2/3] overflow-hidden rounded-2xl bg-black shadow-2xl">
+            <MediaLightbox items={mediaItems} index={0}>
+              <PositionedImage
+                src={event.image}
+                alt={event.title}
+                transform={event.heroTransform}
+                containerClassName="h-full w-full"
+              />
+            </MediaLightbox>
+          </div>
+        ) : null}
       </section>
 
       {/* Media grid — masonry columns, all items in one flow */}
       {hasMedia ? (
         <section className="room-shell pb-16 md:pb-24">
           <div className="columns-2 gap-3 space-y-3 md:columns-3 lg:columns-4">
-            {/* Main event image — first item, uses detailTransform from admin */}
-            {event.image ? (
-              <MediaLightbox items={mediaItems} index={0}>
-                <div className="relative break-inside-avoid overflow-hidden rounded-2xl bg-black shadow-2xl" style={{ aspectRatio: "3/4" }}>
-                  <PositionedImage
-                    src={event.image}
-                    alt={event.title}
-                    transform={event.detailTransform}
-                    containerClassName="h-full w-full"
-                  />
-                </div>
-              </MediaLightbox>
-            ) : null}
-
             {/* Video — 9:16 */}
             {event.video ? (
               <MediaLightbox items={mediaItems} index={1}>

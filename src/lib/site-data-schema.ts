@@ -65,4 +65,3 @@ export const siteDataSchema = z.object({
   about: aboutContentSchema,
 });
 
-export type SiteDataValidated = z.infer<typeof siteDataSchema>;

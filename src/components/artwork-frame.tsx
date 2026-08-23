@@ -120,7 +120,7 @@ function MagnifierLens({
       className={`frame-artwork relative ${enableLens ? "cursor-crosshair" : ""} ${tondo ? "overflow-hidden rounded-full" : ""}`}
       style={{
         width: `${widthPx}px`,
-        height: tondo ? `${heightPx}px` : `${heightPx}px`,
+        height: `${heightPx}px`,
       }}
       onMouseEnter={enableLens ? handleEnter : undefined}
       onMouseMove={enableLens ? handleMove : undefined}

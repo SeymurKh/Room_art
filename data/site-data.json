@@ -1083,7 +1083,7 @@
       "date": "8–14 September 2025, Ivanovka",
       "image": "/uploads/events/2b59e2d9-6e78-46d6-9429-ba6683789a93.webp",
       "heroTransform": "translate(0px, 0px) scale(1)",
-      "thumbTransform": "translate(-3px, -68px) scale(2)",
+      "thumbTransform": "translate(-1px, -24px) scale(1.9)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": true,
       "description": "ROOM Baku and DaMir – House of Imagination present 7-YA (SevenYouAre), an art project held from September 8–14, 2025, in Ivanovka. For one week, seven artists — Vusala Agharaziyeva, Nigar Familsoy, Gunel Akhundlu, Orkhan Garayev, Sarkhan Gadzhiev, Mushfig Heydarov, and Rufana Mamedova — lived and worked together, exploring the multiplicity of the \"Self.\" The name \"7-YA\" reflects the idea that within each person exists a multitude of states and roles. Seven participants, seven days, and seven facets of identity came together in paintings, sketches, and a collective installation shaped through dialogue, workshops, and shared creation. The exhibition is hosted at ROOM Baku — a wine house in the city center where wine culture meets art and gastronomy. Here, the artists' works and a video portrait of the project invite visitors to reflect on identity and the courage to be many at once.",
@@ -1097,6 +1097,20 @@
         "/assets/events/7ya-opening-3.webp"
       ],
       "video": "/assets/events/7ya-video.mp4"
+    },
+    {
+      "slug": "event-1787482539601-jlxl",
+      "title": "A Person Between Two Worlds",
+      "status": "Upcoming",
+      "date": "20-25 of September 2026, Room, Baku",
+      "image": "/uploads/events/f9994ae8-041c-46fe-9a9e-417c17f9f81f.webp",
+      "heroTransform": "translate(-1px, 0px) scale(1.05)",
+      "thumbTransform": "translate(0px, 6px) scale(2.65)",
+      "detailTransform": "translate(0px, 0px) scale(1)",
+      "featured": true,
+      "description": "My artistic practice is built around an exploration of form, lettering, character, and the visual languages of contemporary urban culture. Graffiti, street culture, graphic design, popular culture, vintage comics, CD covers, magazines, books, and other forms of visual media become materials that I rethink and combine into new visual structures.\n\nAt the center of my artistic practice is a recurring character - a recognizable male figure caught between a traditional way of life and contemporary urban life.\n\nThis character emerged in 2014-2015, during my university studies, as an extension of my practice of graffiti and lettering. Over time, he developed his own character and became an independent protagonist within my artistic practice.\n\nHe carries traditional ideas, social expectations, and behavioral patterns within him, while living in a rapidly changing urban environment. His body belongs to the present, while his mind, in many ways, belongs to the past. This internal contradiction forms the emotional core of my work.\n\nI continuously reinterpret the character through different techniques, colors, styles, abstract forms, and lettering. His image remains recognizable while constantly transforming, as a result, he exists simultaneously as an individual protagonist, a cultural archetype, and a reflection of a particular psychological state.\n\nThe exhibition explores the space between tradition and modernity, heritage and change, collective expectations and individual freedom.\n\nWhat happens to a person when the world around them changes faster than the ideas they have relied on to understand themselves?",
+      "gallery": [],
+      "video": ""
     }
   ],
   "about": {
