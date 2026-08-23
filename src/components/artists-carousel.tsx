@@ -222,7 +222,7 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
                       src={artist.portrait}
                       alt={artist.name}
                       fill
-                      className={`object-cover transition duration-700 group-hover:scale-105 ${isCenter ? "" : "grayscale group-hover:grayscale-0"}`}
+                      className={`object-cover transition duration-700 group-hover:scale-105 ${isMobile ? (isCenter ? "" : "grayscale") : "grayscale group-hover:grayscale-0"}`}
                       style={{ willChange: "filter" }}
                       fallbackText={artist.name}
                       sizes="(max-width: 640px) 70vw, 280px"

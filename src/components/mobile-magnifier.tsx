@@ -3,8 +3,8 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { GripVertical } from "lucide-react";
 
-const ZOOM = 3;
-const LENS_SIZE = 150;
+const ZOOM = 4;
+const LENS_SIZE = 180;
 const HANDLE_WIDTH = 40;
 const HANDLE_HEIGHT = 44;
 
