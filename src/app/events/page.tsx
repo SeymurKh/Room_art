@@ -20,9 +20,9 @@ export default async function EventsPage() {
 
       {/* Current — only shown when exists */}
       {current.length > 0 ? (
-        <section className="room-shell py-12 md:py-16">
+        <section className="room-shell py-8 md:py-16">
           <p className="section-kicker text-[#a58e63]">Now showing</p>
-          <div className="mt-6 grid gap-5 md:mt-8 md:grid-cols-2">
+          <div className="mt-4 grid grid-cols-2 gap-3 md:mt-8 md:gap-5 md:grid-cols-2">
             {current.map((event) => (
               <EventCard key={event.slug} event={event} featured />
             ))}
@@ -32,9 +32,9 @@ export default async function EventsPage() {
 
       {/* Upcoming */}
       {upcoming.length > 0 ? (
-        <section className="room-shell border-t border-black/10 py-12 md:py-16">
+        <section className="room-shell border-t border-black/10 py-8 md:py-16">
           <p className="section-kicker text-[#6f6a61]">Upcoming</p>
-          <div className="mt-6 grid gap-5 md:mt-8 md:grid-cols-3">
+          <div className="mt-4 grid grid-cols-2 gap-3 md:mt-8 md:gap-5 md:grid-cols-3">
             {upcoming.map((event) => (
               <EventCard key={event.slug} event={event} />
             ))}
@@ -44,9 +44,9 @@ export default async function EventsPage() {
 
       {/* Past */}
       {past.length > 0 ? (
-        <section className="room-shell border-t border-black/10 py-12 md:py-16">
+        <section className="room-shell border-t border-black/10 py-8 md:py-16">
           <p className="section-kicker text-[#6f6a61]">Past archive</p>
-          <div className="mt-6 grid gap-5 md:mt-8 md:grid-cols-3">
+          <div className="mt-4 grid grid-cols-2 gap-3 md:mt-8 md:gap-5 md:grid-cols-3">
             {past.map((event) => (
               <EventCard key={event.slug} event={event} />
             ))}
@@ -73,14 +73,14 @@ function EventCard({ event, featured = false }: { event: Event; featured?: boole
           />
           <span className="overlay-text">View event</span>
         </div>
-        <div className="mt-5 flex items-start justify-between gap-3">
-          <h2 className={`room-serif leading-none ${featured ? "text-4xl md:text-5xl" : "text-3xl md:text-4xl"}`}>
+        <div className="mt-3 flex items-start justify-between gap-2 md:mt-5 md:gap-3">
+          <h2 className={`room-serif text-lg leading-none md:text-4xl ${featured ? "md:text-5xl" : "md:text-4xl"}`}>
             {event.title}
           </h2>
           <ArrowUpRight size={18} className="mt-1 shrink-0 opacity-30 transition group-hover:opacity-100" />
         </div>
-        <p className="mt-2 text-sm text-[#6f6a61]">{event.date}</p>
-        <p className="mt-5 text-sm leading-7 text-[#6f6a61] line-clamp-3">{event.description}</p>
+        <p className="mt-1 text-xs text-[#6f6a61] md:mt-2 md:text-sm">{event.date}</p>
+        <p className="mt-3 hidden text-sm leading-7 text-[#6f6a61] line-clamp-3 md:mt-5 md:block">{event.description}</p>
       </article>
     </Link>
   );

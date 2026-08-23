@@ -21,10 +21,10 @@ export function PageHero({
       {/* Gradient fade — absolute, doesn't push content */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 right-0 h-48 md:h-64"
+        className="pointer-events-none absolute left-0 right-0 h-24 md:h-40"
         style={{
           top: "100%",
-          background: "linear-gradient(to bottom, #0c0c0b, rgba(12,12,11,0.7) 30%, rgba(12,12,11,0.3) 60%, transparent)",
+          background: "linear-gradient(to bottom, #0c0c0b, rgba(12,12,11,0.4) 40%, transparent)",
         }}
       />
     </section>

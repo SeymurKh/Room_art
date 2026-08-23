@@ -133,7 +133,7 @@ export function GalleryFilter({ data }: { data: SiteData }) {
 
   return (
     <>
-      <div className="grid gap-4 border-b border-white/10 pb-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 border-b border-white/10 pb-6 lg:grid-cols-4">
         <Filter label="Artist" value={artist} options={artistOptions} getLabel={artistLabel} onChange={(v) => setParam("artist", v)} />
         <Filter label="Format" value={format} options={formatOptions} onChange={(v) => setParam("format", v)} />
         <Filter label="Size" value={size} options={sizeOptions} onChange={(v) => setParam("size", v)} />
