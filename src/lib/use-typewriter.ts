@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 const words = ["Art", "Exhibitions", "Artists"];
+const prefix = "Digital Space For ";
 const typeSpeed = 50; // ms per character typing
 const deleteSpeed = 20; // ms per character deleting
 const pauseAfterType = 1800; // pause after full phrase is typed
@@ -10,6 +11,7 @@ const pauseAfterDelete = 200; // pause before typing next word
 
 export function useTypewriter() {
   const [word, setWord] = useState("");
+  const [displayed, setDisplayed] = useState("");
   const [cursor, setCursor] = useState(true);
 
   // Blinking cursor
@@ -21,13 +23,31 @@ export function useTypewriter() {
   const animate = useCallback(() => {
     let wordIndex = 0;
     let charIndex = 0;
-    let phase: "type" | "pause" | "delete" | "wait" = "type";
+    let firstCycle = true;
+    let phase: "typePrefix" | "typeWord" | "pause" | "delete" | "wait" = "typePrefix";
     let timeout: ReturnType<typeof setTimeout>;
 
     function tick() {
-      if (phase === "type") {
+      const fullPhrase = prefix + words[wordIndex];
+
+      if (phase === "typePrefix") {
+        // First cycle: type the full phrase character by character
+        if (charIndex <= fullPhrase.length) {
+          const text = fullPhrase.slice(0, charIndex);
+          setDisplayed(text);
+          setWord("");
+          charIndex++;
+          timeout = setTimeout(tick, typeSpeed);
+        } else {
+          phase = "pause";
+          timeout = setTimeout(tick, pauseAfterType);
+        }
+      } else if (phase === "typeWord") {
+        // Subsequent cycles: only type the word
         if (charIndex <= words[wordIndex].length) {
-          setWord(words[wordIndex].slice(0, charIndex));
+          const w = words[wordIndex].slice(0, charIndex);
+          setWord(w);
+          setDisplayed(prefix + w);
           charIndex++;
           timeout = setTimeout(tick, typeSpeed);
         } else {
@@ -41,15 +61,18 @@ export function useTypewriter() {
       } else if (phase === "delete") {
         if (charIndex > 0) {
           charIndex--;
-          setWord(words[wordIndex].slice(0, charIndex));
+          const w = words[wordIndex].slice(0, charIndex);
+          setWord(w);
+          setDisplayed(prefix + w);
           timeout = setTimeout(tick, deleteSpeed);
         } else {
           phase = "wait";
           wordIndex = (wordIndex + 1) % words.length;
+          if (firstCycle) firstCycle = false;
           timeout = setTimeout(tick, pauseAfterDelete);
         }
       } else if (phase === "wait") {
-        phase = "type";
+        phase = "typeWord";
         charIndex = 0;
         timeout = setTimeout(tick, typeSpeed);
       }
@@ -64,5 +87,5 @@ export function useTypewriter() {
     return cleanup;
   }, [animate]);
 
-  return { prefix: "Digital Space For", word, cursor };
+  return { prefix: "Digital Space For", word, cursor, displayed };
 }

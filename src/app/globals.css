@@ -114,8 +114,8 @@ select {
 
 .dark-room {
   background:
-    radial-gradient(circle at 68% 18%, rgba(164, 142, 102, 0.15), transparent 16rem),
-    radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.05), transparent 12rem),
+    radial-gradient(circle at 68% 18%, rgba(164, 142, 102, 0.08), transparent 10rem),
+    radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.02), transparent 8rem),
     #0c0c0b;
 }
 
