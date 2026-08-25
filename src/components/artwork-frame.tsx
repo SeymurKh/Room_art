@@ -143,7 +143,7 @@ function MagnifierLens({
       ref={containerRef}
       className={`frame-artwork relative ${
         enableLens && !isMobile ? "cursor-crosshair" : ""
-      } ${tondo ? "overflow-hidden rounded-full" : ""}`}
+      }`}
       style={{
         width: `${widthPx}px`,
         height: `${heightPx}px`,
@@ -152,14 +152,16 @@ function MagnifierLens({
       onMouseMove={enableLens && !isMobile ? handleMouseMove : undefined}
       onMouseLeave={enableLens ? handleMouseLeave : undefined}
     >
-      <RoomImage
-        src={src}
-        alt={alt}
-        fill
-        priority={priority}
-        className="object-cover"
-        fallbackText={fallbackText}
-      />
+      <div className={tondo ? "overflow-hidden rounded-full absolute inset-0" : ""}>
+        <RoomImage
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          className="object-cover"
+          fallbackText={fallbackText}
+        />
+      </div>
       {!tondo ? <div className="frame-artwork-overlay" aria-hidden="true" /> : null}
 
       {enableLens && active && (

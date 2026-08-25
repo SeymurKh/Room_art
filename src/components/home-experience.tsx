@@ -186,8 +186,13 @@ export function HomeExperience({ data }: { data: SiteData }) {
       <section className="flex min-h-[50vh] items-center bg-[#ebe7df] py-12 md:py-32">
         <div className="room-shell grid gap-10 md:grid-cols-[.85fr_1.15fr]">
           <motion.div {...reveal}>
-            <SectionHeading kicker="About Room" title="A Baku space for precise encounters" copy={data.about.concept} />
-            <p className="mt-8 text-sm leading-7 text-[#6f6a61]">{data.about.vision}</p>
+            <h2 className="room-serif text-4xl font-medium leading-[0.96] sm:text-5xl md:text-7xl">About us</h2>
+            <div className="mt-5 max-w-2xl space-y-4 text-sm leading-7 text-[#6f6a61]">
+              <p>ROOM is a contemporary art and cultural space where art, people, ideas, and experiences come together.</p>
+              <p>ROOM brings together artists, exhibitions, events, and a constantly evolving selection of artworks within a space that connects contemporary art with everyday life.</p>
+              <p>Rather than functioning as a traditional gallery, ROOM creates an open environment for artists and audiences to meet, discover new perspectives, and engage with art in different ways.</p>
+              <p>Through exhibitions, artist collaborations, talks, and cultural events, ROOM aims to create a dynamic platform for artistic exchange and meaningful connections.</p>
+            </div>
           </motion.div>
         </div>
       </section>
