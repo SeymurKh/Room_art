@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 
@@ -41,8 +42,8 @@ export function SiteNav({ dark = false, fixed = true }: { dark?: boolean; fixed?
       }`}
     >
       <div className="room-shell flex h-16 items-center justify-between gap-6">
-        <Link href="/" className="room-serif text-2xl font-semibold leading-none">
-          ROOM
+        <Link href="/" className="relative h-12 w-64">
+          <Image src="/assets/logo.png" alt="ROOM" fill className="object-contain" priority />
         </Link>
         <nav className="hidden items-center gap-7 text-[0.68rem] font-semibold uppercase tracking-[0.18em] md:flex">
           {links.map(([label, href]) => (

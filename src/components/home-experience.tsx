@@ -184,7 +184,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
       <MobileEventsCarousel events={data.events} />
 
       <section className="flex min-h-[50vh] items-center bg-[#ebe7df] py-12 md:py-32">
-        <div className="room-shell grid gap-10 md:grid-cols-[.85fr_1.15fr]">
+        <div className="room-shell grid gap-10 md:grid-cols-2 md:gap-16">
           <motion.div {...reveal}>
             <h2 className="room-serif text-4xl font-medium leading-[0.96] sm:text-5xl md:text-7xl">About us</h2>
             <div className="mt-5 max-w-2xl space-y-4 text-sm leading-7 text-[#6f6a61]">
@@ -194,21 +194,23 @@ export function HomeExperience({ data }: { data: SiteData }) {
               <p>Through exhibitions, artist collaborations, talks, and cultural events, ROOM aims to create a dynamic platform for artistic exchange and meaningful connections.</p>
             </div>
           </motion.div>
+          <motion.div {...reveal}>
+            <h2 className="room-serif text-4xl font-medium leading-[0.96] sm:text-5xl md:text-7xl">Let&apos;s connect</h2>
+            <div className="mt-6 border border-black/10 bg-white/35 p-5 md:p-10">
+              <p className="text-sm leading-7 text-[#6f6a61]">{data.settings.address}</p>
+              <p className="mt-3 text-sm md:mt-4">{data.settings.email}</p>
+              <p className="text-sm">{data.settings.phone}</p>
+              <div className="mt-6 flex flex-wrap gap-3 md:mt-8">
+                <a href={whatsappContactUrl(data.settings)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
+                  Write on WhatsApp <ArrowUpRight size={16} />
+                </a>
+                <Link href="/contact" className="inline-flex items-center justify-center gap-2 border border-black/14 px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em]">
+                  Contact <ArrowUpRight size={14} />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </section>
-
-      <section className="room-shell flex min-h-[50vh] items-center py-12 md:py-32">
-        <motion.div {...reveal} className="grid gap-8 md:grid-cols-[.8fr_1.2fr]">
-          <SectionHeading kicker="Contact / collaboration" title="Let's connect" copy="For collaborations, events, artist proposals, and private viewings." />
-          <div className="border border-black/10 bg-white/35 p-5 md:p-10">
-            <p className="text-sm leading-7 text-[#6f6a61]">{data.settings.address}</p>
-            <p className="mt-3 text-sm md:mt-4">{data.settings.email}</p>
-            <p className="text-sm">{data.settings.phone}</p>
-            <a href={whatsappContactUrl(data.settings)} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex w-full items-center justify-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea] md:mt-8 md:w-auto">
-              Write on WhatsApp <ArrowUpRight size={16} />
-            </a>
-          </div>
-        </motion.div>
       </section>
       <SiteFooter settings={data.settings} />
     </main>

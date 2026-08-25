@@ -4,30 +4,9 @@ import { PageTransition } from "@/components/page-transition";
 import { ScrollTools } from "@/components/scroll-tools";
 import "./globals.css";
 
-const editorialNew = localFont({
-  src: [
-    {
-      path: "../../public/fonts/PPEditorialNew-Ultralight.otf",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/PPEditorialNew-UltralightItalic.otf",
-      weight: "200",
-      style: "italic",
-    },
-    {
-      path: "../../public/fonts/PPEditorialNew-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/PPEditorialNew-Italic.otf",
-      weight: "400",
-      style: "italic",
-    },
-  ],
-  variable: "--font-editorial-new",
+const inter = localFont({
+  src: "../../public/fonts/Inter-VariableFont.ttf",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -53,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={editorialNew.variable}>
+    <html lang="en" data-scroll-behavior="smooth" className={inter.variable}>
       <body>
         <ScrollTools />
         <PageTransition>{children}</PageTransition>

@@ -10,8 +10,8 @@
   --muted: #6f6a61;
   --line: rgba(17, 16, 14, 0.14);
   --gold: #a58e63;
-  --font-sans-room: var(--font-editorial-new), ui-serif, Georgia, serif;
-  --font-serif-room: var(--font-editorial-new), ui-serif, Georgia, serif;
+  --font-sans-room: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif-room: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme inline {
@@ -19,12 +19,15 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans-room);
   --font-serif: var(--font-serif-room);
-  /* В проекте нет настоящих жирных начертаний Editorial New (есть 200 и 400),
-     поэтому сводим heavy-веса к Ultralight (200), чтобы акценты были
-     максимально лёгкими и браузер не утолщал их синтетически (faux bold). */
-  --font-weight-medium: 200;
-  --font-weight-semibold: 200;
-  --font-weight-bold: 200;
+  /* Inter weight mapping:
+     300 Light    — body text, descriptions
+     400 Regular  — navigation, labels, kickers
+     500 Medium   — subheadings, buttons
+     600 SemiBold — main headings
+     Tailwind's font-medium/semibold/bold map to these. */
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 }
 
 * {
@@ -40,7 +43,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans-room), Arial, Helvetica, sans-serif;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 a:not([class*="text-"]) {
@@ -63,7 +66,7 @@ select {
 }
 
 .room-serif {
-  font-family: var(--font-serif-room), Georgia, serif;
+  font-family: var(--font-serif-room), system-ui, sans-serif;
 }
 
 .room-shell {
@@ -156,7 +159,7 @@ select {
   justify-content: center;
   color: #fff;
   font-size: 0.72rem;
-  font-weight: 200;
+  font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   opacity: 0;

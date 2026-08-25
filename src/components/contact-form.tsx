@@ -2,65 +2,66 @@
 
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
-import type { SiteSettings } from "@/lib/types";
+import { sendContactEmail } from "@/app/contact/actions";
 
-export function ContactForm({ settings }: { settings: SiteSettings }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
+export function ContactForm() {
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState(false);
 
-  function buildWhatsAppUrl() {
-    const lines = ["Hello ROOM,"];
-    if (name) lines.push(`Name: ${name}`);
-    if (email) lines.push(`Email: ${email}`);
-    if (subject) lines.push(`Subject: ${subject}`);
-    if (message) lines.push(`Message: ${message}`);
-    const body = lines.length > 1
-      ? lines.join("\n")
-      : "Hello ROOM, I would like to discuss a collaboration.";
-    return `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent(body)}`;
+  async function handleSubmit(formData: FormData) {
+    setError(false);
+    try {
+      await sendContactEmail(formData);
+      setSent(true);
+    } catch {
+      setError(true);
+    }
+  }
+
+  if (sent) {
+    return (
+      <div className="grid gap-4 border border-black/10 bg-white/35 p-5 md:p-10">
+        <p className="room-serif text-2xl">Thank you!</p>
+        <p className="text-sm leading-7 text-[#6f6a61]">Your message has been sent. We will get back to you soon.</p>
+      </div>
+    );
   }
 
   return (
-    <div className="grid gap-4 border border-black/10 bg-white/35 p-5 md:p-10">
+    <form action={handleSubmit} className="grid gap-4 border border-black/10 bg-white/35 p-5 md:p-10">
       <input
         className="admin-input"
         name="name"
         placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        required
       />
       <input
         className="admin-input"
         name="email"
         type="email"
         placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        required
       />
       <input
         className="admin-input"
         name="subject"
         placeholder="Subject"
-        value={subject}
-        onChange={(e) => setSubject(e.target.value)}
       />
       <textarea
         className="admin-input min-h-40 resize-none"
         name="message"
         placeholder="Message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        required
       />
-      <a
-        href={buildWhatsAppUrl()}
-        target="_blank"
-        rel="noopener noreferrer"
+      {error ? (
+        <p className="text-sm text-red-600">Something went wrong. Please try again.</p>
+      ) : null}
+      <button
+        type="submit"
         className="inline-flex w-full items-center justify-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea] md:w-fit"
       >
-        Send on WhatsApp <ArrowUpRight size={16} />
-      </a>
-    </div>
+        Send message <ArrowUpRight size={16} />
+      </button>
+    </form>
   );
 }
