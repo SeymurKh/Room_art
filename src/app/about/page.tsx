@@ -6,10 +6,10 @@ import { getSiteData } from "@/lib/site-data";
 export default async function AboutPage() {
   const data = await getSiteData();
   return (
-    <main>
+    <main className="flex min-h-screen flex-col">
       <SiteNav dark />
       <PageHero kicker="About Room" title="Concept, vision, identity" copy="A contemporary art and wine bar space in the heart of Baku." />
-      <section className="room-shell grid gap-10 py-12 md:grid-cols-3 md:gap-12 md:py-16">
+      <section className="room-shell flex-1 grid gap-10 py-12 md:grid-cols-3 md:gap-12 md:py-16">
         <Block title="Concept" copy={data.about.concept} />
         <Block title="Vision" copy={data.about.vision} />
         <Block title="Identity" copy={data.about.identity} />

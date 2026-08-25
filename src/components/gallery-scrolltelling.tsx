@@ -89,26 +89,6 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
         {/* Затемняющий оверлей поверх фона, под картинами */}
         <div className="pointer-events-none absolute inset-0 bg-black/45" aria-hidden="true" />
 
-        {/* Переключатель масштаба */}
-        {onScaleChange ? (
-          <div className="absolute top-6 right-6 z-40 flex items-center gap-2 md:top-8 md:right-20">
-            {([1, 1.4, 1.8] as const).map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => onScaleChange(s)}
-                className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] transition ${
-                  scale === s
-                    ? "bg-[#f4f1ea] text-[#11100e]"
-                    : "bg-white/10 text-white/60 hover:bg-white/15"
-                }`}
-              >
-                x{s === 1 ? "1" : s === 1.4 ? "2" : "3"}
-              </button>
-            ))}
-          </div>
-        ) : null}
-
         {/* Картины — непрерывный кроссфейд */}
         {artworks.map((artwork, i) => {
           // Центр картины i: от 0 (первая) до 1 (последняя), равномерно
@@ -132,20 +112,8 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
         {/* Одна общая тень под картиной */}
         <div className="pointer-events-none absolute bottom-10 left-1/2 h-9 w-[62%] -translate-x-1/2 rounded-full bg-black/22 blur-2xl" />
 
-        {/* Skip button */}
-        {n > 1 && (
-          <button
-            type="button"
-            onClick={handleSkip}
-            className="absolute bottom-8 right-20 z-50 flex items-center gap-2 rounded-full border border-white/30 bg-black/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/90 backdrop-blur transition hover:bg-black/40"
-            aria-label="Skip to next artwork"
-          >
-            Skip <SkipForward size={14} />
-          </button>
-        )}
-
-        {/* Текст-табличка + индикатор прогресса внизу */}
-        <div className="pointer-events-none absolute bottom-8 left-0 right-0 z-30 flex flex-col items-center gap-6 text-center">
+        {/* Текст-табличка + индикатор прогресса + переключатели внизу */}
+        <div className="pointer-events-none absolute bottom-4 left-0 right-0 z-30 flex flex-col items-center gap-3 text-center">
           <p className="room-serif text-base italic text-[#6f6a61] md:text-lg">
             What{"'"}s currently on display at ROOM
           </p>
@@ -169,6 +137,35 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
               })}
             </div>
           </div>
+          {/* Переключатель масштаба + Skip */}
+          {onScaleChange ? (
+            <div className="pointer-events-auto flex items-center gap-2">
+              {([1, 1.4, 1.8] as const).map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => onScaleChange(s)}
+                  className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] transition ${
+                    scale === s
+                      ? "bg-[#f4f1ea] text-[#11100e]"
+                      : "bg-white/10 text-white/60 hover:bg-white/15"
+                  }`}
+                >
+                  x{s === 1 ? "1" : s === 1.4 ? "2" : "3"}
+                </button>
+              ))}
+              {n > 1 && (
+                <button
+                  type="button"
+                  onClick={handleSkip}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/60 transition hover:bg-white/10 hover:text-white/80"
+                  aria-label="Skip to next artwork"
+                >
+                  Skip <SkipForward size={12} />
+                </button>
+              )}
+            </div>
+          ) : null}
         </div>
       </section>
 

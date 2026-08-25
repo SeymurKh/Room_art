@@ -183,7 +183,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
       </div>
       <MobileEventsCarousel events={data.events} />
 
-      <section className="flex min-h-[50vh] items-center bg-[#ebe7df] py-12 md:min-h-0 md:py-32">
+      <section className="flex min-h-[50vh] items-center bg-[#ebe7df] py-12 md:py-32">
         <div className="room-shell grid gap-10 md:grid-cols-[.85fr_1.15fr]">
           <motion.div {...reveal}>
             <SectionHeading kicker="About Room" title="A Baku space for precise encounters" copy={data.about.concept} />
@@ -192,7 +192,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
         </div>
       </section>
 
-      <section className="room-shell flex min-h-[50vh] items-center py-12 md:min-h-0 md:py-32">
+      <section className="room-shell flex min-h-[50vh] items-center py-12 md:py-32">
         <motion.div {...reveal} className="grid gap-8 md:grid-cols-[.8fr_1.2fr]">
           <SectionHeading kicker="Contact / collaboration" title="Let's connect" copy="For collaborations, events, artist proposals, and private viewings." />
           <div className="border border-black/10 bg-white/35 p-5 md:p-10">

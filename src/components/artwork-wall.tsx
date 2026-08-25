@@ -57,23 +57,23 @@ export function ArtworkWall({
   return (
     <section
       ref={wallRef}
-      className="grid min-h-screen grid-rows-[auto_1fr_auto] pt-16"
+      className="relative grid min-h-screen grid-rows-[auto_1fr_auto] pt-16"
       style={{
         backgroundImage: "url('/assets/room-wall.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-black/45" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-black/45" aria-hidden="true" />
       {/* Top header info */}
       <motion.header
         variants={staggerContainer}
         initial="initial"
         animate="animate"
-        className="room-shell flex flex-col items-center gap-4 py-5 text-center md:flex-row md:items-start md:justify-between md:gap-6 md:py-6 md:text-left"
+        className="room-shell relative z-10 flex flex-col items-center gap-4 py-5 text-center md:flex-row md:items-start md:justify-between md:gap-6 md:py-6 md:text-left"
       >
         <motion.div variants={fadeUp}>
-          <p className="section-kicker text-white/60">{artist}</p>
+          <p className="section-kicker text-[#f4f1ea]">{artist}</p>
           <h1 className="room-serif mt-2 max-w-md text-3xl font-medium leading-[0.95] text-[#f4f1ea] md:text-5xl">
             {artwork.title}
           </h1>
@@ -88,7 +88,7 @@ export function ArtworkWall({
                 className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] transition ${
                   scale === s
                     ? "bg-[#f4f1ea] text-[#11100e]"
-                    : "bg-white/10 text-white/60 hover:bg-white/15"
+                    : "bg-white/10 text-[#f4f1ea] hover:bg-white/15"
                 }`}
               >
                 x{s === 1 ? "1" : s === 1.4 ? "2" : "3"}
@@ -96,8 +96,8 @@ export function ArtworkWall({
             ))}
           </div>
           <div className="text-right">
-            {artwork.year ? <p className="text-sm text-white/60">{artwork.year}</p> : null}
-            <p className="mt-1 text-sm text-white/60">{artwork.medium}</p>
+            {artwork.year ? <p className="text-sm text-[#f4f1ea]">{artwork.year}</p> : null}
+            <p className="mt-1 text-sm text-[#f4f1ea]">{artwork.medium}</p>
           </div>
         </motion.div>
       </motion.header>
@@ -132,21 +132,21 @@ export function ArtworkWall({
         variants={staggerContainer}
         initial="initial"
         animate="animate"
-        className="room-shell flex flex-col items-center justify-center gap-6 py-5 text-center md:flex-row md:items-end md:justify-between md:py-6 md:text-left"
+        className="room-shell relative z-10 flex flex-col items-center justify-center gap-6 py-5 text-center md:flex-row md:items-end md:justify-between md:py-6 md:text-left"
       >
         <motion.div variants={fadeUp}>
           <dl className="grid grid-cols-3 gap-x-3 gap-y-2 justify-items-center text-xs sm:gap-x-8 sm:text-sm md:justify-items-start">
             <div>
-              <dt className="text-white/50">Dimensions</dt>
+              <dt className="text-[#f4f1ea]">Dimensions</dt>
               <dd className="mt-0.5 text-[#f4f1ea]">{artwork.dimensions}</dd>
             </div>
             <div>
-              <dt className="text-white/50">Availability</dt>
+              <dt className="text-[#f4f1ea]">Availability</dt>
               <dd className="mt-0.5 text-[#f4f1ea]">{artwork.availability}</dd>
             </div>
             {priceLabel ? (
               <div>
-                <dt className="text-white/50">Price</dt>
+                <dt className="text-[#f4f1ea]">Price</dt>
                 <dd className="mt-0.5 text-[#f4f1ea]">{priceLabel}</dd>
               </div>
             ) : null}
