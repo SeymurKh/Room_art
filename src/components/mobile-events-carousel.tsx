@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Event } from "@/lib/types";
@@ -72,10 +73,12 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
             <Link href={`/events/${event.slug}`} className="group block">
               <div className="relative aspect-[4/5] overflow-hidden bg-[#0c0c0b]">
                 {event.image ? (
-                  <img
+                  <Image
                     src={event.image}
                     alt={event.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    sizes="100vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">

@@ -165,6 +165,7 @@ export function HeroSlideshowShader({ images }: { images: string[] }) {
   }, [images.length]);
 
   const [textures, setTextures] = useState<THREE.Texture[]>([]);
+  const texturesRef = useRef<THREE.Texture[]>([]);
 
   useEffect(() => {
     const loader = new THREE.TextureLoader();
@@ -181,11 +182,19 @@ export function HeroSlideshowShader({ images }: { images: string[] }) {
           })
       )
     ).then((texs) => {
-      if (!cancelled) setTextures(texs);
+      if (!cancelled) {
+        texturesRef.current = texs;
+        setTextures(texs);
+      }
     });
 
     return () => {
       cancelled = true;
+      // Dispose GPU textures to prevent memory leak
+      for (const tex of texturesRef.current) {
+        tex.dispose();
+      }
+      texturesRef.current = [];
     };
   }, [images]);
 

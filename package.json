@@ -12,7 +12,7 @@
     "db:export": "tsx scripts/export-json.ts"
   },
   "dependencies": {
-    "@react-three/fiber": "^9.6.1",
+    "@react-three/fiber": "^9.7.0",
     "better-sqlite3": "^13.0.3",
     "drizzle-orm": "^0.45.2",
     "framer-motion": "^12.42.0",

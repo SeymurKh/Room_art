@@ -9,6 +9,7 @@ import { EventMediaManager } from "@/components/event-media-manager";
 import { STRIPES } from "@/components/events-scrolltelling";
 import type { SiteData, Event } from "@/lib/types";
 import { logoutAdmin, saveAdminData, saveSingleEvent } from "@/app/admin/actions";
+import { clamp } from "@/lib/utils";
 
 type Tab = "settings" | "about" | "events";
 type PreviewKey = "hero" | "thumb" | "detail";
@@ -22,10 +23,6 @@ const tabs: [Tab, string][] = [
 function getHeroClipPath(status: Event["status"]): string {
   const stripe = STRIPES.find((s) => s.key === status);
   return stripe?.clipPath ?? STRIPES[0].clipPath;
-}
-
-function clamp(n: number, min: number, max: number) {
-  return Math.min(Math.max(n, min), max);
 }
 
 function PreviewBlock({

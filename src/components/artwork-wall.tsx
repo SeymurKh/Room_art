@@ -51,7 +51,10 @@ export function ArtworkWall({
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 1024);
+    const update = () => setIsMobile(window.innerWidth < 1024);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
   return (

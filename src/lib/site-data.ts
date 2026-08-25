@@ -232,6 +232,5 @@ export async function saveSiteData(data: unknown) {
 
   revalidatePath("/", "layout");
   revalidatePath("/events");
-  revalidatePath("/events/[slug]", "page");
 }
 

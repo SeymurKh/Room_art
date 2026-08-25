@@ -11,16 +11,15 @@ export function ContactForm({ settings }: { settings: SiteSettings }) {
   const [message, setMessage] = useState("");
 
   function buildWhatsAppUrl() {
-    const parts = [];
-    if (name) parts.push(`Name: ${encodeURIComponent(name)}`);
-    if (email) parts.push(`Email: ${encodeURIComponent(email)}`);
-    if (subject) parts.push(`Subject: ${encodeURIComponent(subject)}`);
-    if (message) parts.push(`Message: ${encodeURIComponent(message)}`);
-    const body =
-      parts.length > 0
-        ? `Hello ROOM,%0A%0A${parts.join("%0A")}`
-        : "Hello ROOM, I would like to discuss a collaboration.";
-    return `https://wa.me/${settings.whatsappNumber}?text=${body}`;
+    const lines = ["Hello ROOM,"];
+    if (name) lines.push(`Name: ${name}`);
+    if (email) lines.push(`Email: ${email}`);
+    if (subject) lines.push(`Subject: ${subject}`);
+    if (message) lines.push(`Message: ${message}`);
+    const body = lines.length > 1
+      ? lines.join("\n")
+      : "Hello ROOM, I would like to discuss a collaboration.";
+    return `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent(body)}`;
   }
 
   return (

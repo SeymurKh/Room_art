@@ -5,16 +5,13 @@ import { useScroll, useSpring, useMotionValue, useMotionValueEvent } from "frame
 import { SkipForward } from "lucide-react";
 import type { Artwork } from "@/lib/types";
 import { ArtworkFrame } from "@/components/artwork-frame";
+import { clamp } from "@/lib/utils";
 
 type GalleryScrolltellingProps = {
   artworks: Artwork[];
   scale?: number;
   onScaleChange?: (scale: number) => void;
 };
-
-function clamp(v: number, min: number, max: number) {
-  return Math.min(Math.max(v, min), max);
-}
 
 /**
  * Scrolltelling gallery — сцена-стена.

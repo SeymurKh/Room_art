@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { clamp } from "@/lib/utils";
 
 /**
  * Единый, линейный расчёт размера картины на экране.
@@ -33,10 +34,6 @@ const MAX_WIDTH_FRACTION_MOBILE = 0.65; // мобилка
 const MAX_HEIGHT_FRACTION = 0.42; // потолок по высоте (десктоп)
 const MAX_HEIGHT_FRACTION_TABLET = 0.55; // планшет
 const MAX_HEIGHT_FRACTION_MOBILE = 0.75; // мобилка
-
-function clamp(v: number, min: number, max: number) {
-  return Math.min(Math.max(v, min), max);
-}
 
 export type ViewportSize = { width: number; height: number };
 

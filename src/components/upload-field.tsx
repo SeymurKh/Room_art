@@ -85,7 +85,7 @@ export function UploadField({
     onChange("", value);
   }
 
-  const isImage = value && ALLOWED_MIME.some((type) => value.toLowerCase().endsWith(`.${type.split("/")[1]}`));
+  const isImage = value && /\.(jpe?g|png|webp|avif|gif)$/i.test(value.split("?")[0]);
 
   return (
     <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
