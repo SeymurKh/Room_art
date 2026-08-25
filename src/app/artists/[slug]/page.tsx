@@ -32,12 +32,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
   return (
     <main className="relative">
-      {/* Same background as artists listing page */}
-      <div
-        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/assets/artists-bg.png')" }}
-      />
-      <div className="fixed inset-0 -z-10 bg-black/40" />
+      <div className="fixed inset-0 -z-10 bg-[#0c0c0b]" />
 
       <SiteNav dark />
 

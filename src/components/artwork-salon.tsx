@@ -20,11 +20,13 @@ export function ArtworkSalon({
   dark = false,
   artistLabel,
   showPrice = false,
+  scale = 1,
 }: {
   artworks: Artwork[];
   dark?: boolean;
   artistLabel?: (slug: string) => string;
   showPrice?: boolean;
+  scale?: number;
 }) {
   const viewport = useViewportSize();
 
@@ -42,7 +44,8 @@ export function ArtworkSalon({
           artwork.widthCm,
           artwork.heightCm,
           viewport,
-          artwork.tondo
+          artwork.tondo,
+          scale
         );
 
         return (

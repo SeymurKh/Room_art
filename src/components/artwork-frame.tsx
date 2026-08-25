@@ -21,10 +21,12 @@ export function ArtworkFrame({
   artwork,
   priority,
   enableLens = false,
+  scale = 1,
 }: {
   artwork: Artwork;
   priority?: boolean;
   enableLens?: boolean;
+  scale?: number;
 }) {
   const tondo = artwork.tondo ?? false;
   const viewport = useViewportSize();
@@ -32,7 +34,8 @@ export function ArtworkFrame({
     artwork.widthCm,
     artwork.heightCm,
     viewport,
-    tondo
+    tondo,
+    scale
   );
 
   if (tondo) {
@@ -53,7 +56,7 @@ export function ArtworkFrame({
   return (
     <div
       className="frame-outer inline-block"
-      style={{ padding: `${Math.round(8 + size.width * 0.02)}px` }}
+      style={{ padding: `${Math.round(3 + size.width * 0.012)}px` }}
     >
       <MagnifierLens
         src={artwork.image}

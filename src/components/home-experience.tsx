@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
@@ -27,7 +27,7 @@ const reveal = {
 } as const;
 
 export function HomeExperience({ data }: { data: SiteData }) {
-  const { prefix, word, cursor, displayed } = useTypewriter();
+  const { word, cursor } = useTypewriter();
   const current = data.events.find((item) => item.status === "Current" && item.featured) ?? data.events.find((item) => item.status === "Current") ?? null;
   const upcoming = data.events.find((item) => item.status === "Upcoming" && item.featured) ?? data.events.find((item) => item.status === "Upcoming") ?? null;
   const pastFallback = current
@@ -36,6 +36,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
         .filter((item) => item.status === "Past")
         .sort((a, b) => Number(b.featured) - Number(a.featured) || data.events.indexOf(a) - data.events.indexOf(b))[0] ?? null;
   const displayedArtworks = data.artworks.filter((a) => a.displayed);
+  const [galleryScale, setGalleryScale] = useState(1);
 
   const showcase = [
     {
@@ -79,9 +80,9 @@ export function HomeExperience({ data }: { data: SiteData }) {
         <HeroSlideshowShader images={slideshowImages} />
         <div className="absolute inset-0 bg-black/25 pointer-events-none" />
         <div className="room-shell relative z-10 px-4 text-center">
-          {/* Desktop — one line, original behavior */}
+          {/* Desktop — one line */}
           <h1 className="room-serif hidden overflow-visible text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[0.9] md:block">
-            <span>{displayed}</span>
+            <span>{word}</span>
             <span
               className={`ml-1 inline-block w-[0.05em] align-middle font-light ${
                 cursor ? "opacity-100" : "opacity-0"
@@ -91,19 +92,16 @@ export function HomeExperience({ data }: { data: SiteData }) {
               &nbsp;
             </span>
           </h1>
-          {/* Mobile — two lines */}
+          {/* Mobile — same single line */}
           <h1 className="room-serif overflow-visible text-[clamp(2.75rem,11vw,4.5rem)] font-medium leading-[1.1] md:hidden">
-            <span className="block">{prefix}</span>
-            <span className="block min-h-[1.2em]">
-              {word}
-              <span
-                className={`ml-1 inline-block w-[0.05em] align-middle font-light ${
-                  cursor ? "opacity-100" : "opacity-0"
-                } transition-opacity duration-75`}
-                style={{ backgroundColor: "currentColor", height: "0.75em" }}
-              >
-                &nbsp;
-              </span>
+            <span>{word}</span>
+            <span
+              className={`ml-1 inline-block w-[0.05em] align-middle font-light ${
+                cursor ? "opacity-100" : "opacity-0"
+              } transition-opacity duration-75`}
+              style={{ backgroundColor: "currentColor", height: "0.75em" }}
+            >
+              &nbsp;
             </span>
           </h1>
         </div>
@@ -152,23 +150,18 @@ export function HomeExperience({ data }: { data: SiteData }) {
       {displayedArtworks.length > 0 ? (
         <>
           <div className="hidden md:block">
-            <GalleryScrolltelling artworks={displayedArtworks} />
+            <GalleryScrolltelling artworks={displayedArtworks} scale={galleryScale} onScaleChange={setGalleryScale} />
           </div>
-          <MobileArtworkCarousel artworks={displayedArtworks} />
+          <MobileArtworkCarousel artworks={displayedArtworks} scale={galleryScale} onScaleChange={setGalleryScale} />
         </>
       ) : null}
 
-      <section className="relative flex min-h-screen flex-col justify-center overflow-hidden py-12 md:min-h-0 md:py-32" id="artists">
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/assets/artists-bg.png')" }}
-        />
-        <div className="pointer-events-none absolute inset-0 z-0 bg-black/40" />
+      <section className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[#0c0c0b] py-12 md:min-h-0 md:py-32" id="artists">
         <div className="room-shell relative z-10">
           <motion.div {...reveal}>
             <div className="flex flex-wrap items-start justify-between gap-6">
               <div className="max-w-3xl">
-                <h2 className="room-serif text-4xl font-medium leading-[0.96] text-[#f4f1ea] sm:text-5xl md:text-7xl">Our artists</h2>
+                <h2 className="room-serif text-4xl font-medium leading-[0.96] text-[#f4f1ea] sm:text-5xl md:text-7xl">Artists</h2>
                 <p className="mt-5 max-w-xl text-sm leading-7 text-white/62">Individual practices with biographies, statements, and portfolios.</p>
               </div>
               <Link

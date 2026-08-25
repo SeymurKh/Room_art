@@ -8,6 +8,8 @@ import { ArtworkFrame } from "@/components/artwork-frame";
 
 type GalleryScrolltellingProps = {
   artworks: Artwork[];
+  scale?: number;
+  onScaleChange?: (scale: number) => void;
 };
 
 function clamp(v: number, min: number, max: number) {
@@ -18,7 +20,7 @@ function clamp(v: number, min: number, max: number) {
  * Scrolltelling gallery — сцена-стена.
  * Инерционный скролл с кроссфейдом и снапом к ближайшей картине при остановке.
  */
-export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
+export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: GalleryScrolltellingProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const snapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -87,6 +89,26 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
         {/* Затемняющий оверлей поверх фона, под картинами */}
         <div className="pointer-events-none absolute inset-0 bg-black/45" aria-hidden="true" />
 
+        {/* Переключатель масштаба */}
+        {onScaleChange ? (
+          <div className="absolute top-6 right-6 z-40 flex items-center gap-2 md:top-8 md:right-20">
+            {([1, 1.4, 1.8] as const).map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => onScaleChange(s)}
+                className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] transition ${
+                  scale === s
+                    ? "bg-[#f4f1ea] text-[#11100e]"
+                    : "bg-white/10 text-white/60 hover:bg-white/15"
+                }`}
+              >
+                x{s === 1 ? "1" : s === 1.4 ? "2" : "3"}
+              </button>
+            ))}
+          </div>
+        ) : null}
+
         {/* Картины — непрерывный кроссфейд */}
         {artworks.map((artwork, i) => {
           // Центр картины i: от 0 (первая) до 1 (последняя), равномерно
@@ -102,7 +124,7 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
               className="absolute inset-0 flex items-center justify-center overflow-hidden"
               style={{ opacity }}
             >
-              <ArtworkFrame artwork={artwork} priority={i === 0} />
+              <ArtworkFrame artwork={artwork} priority={i === 0} scale={scale} />
             </div>
           );
         })}
@@ -150,8 +172,8 @@ export function GalleryScrolltelling({ artworks }: GalleryScrolltellingProps) {
         </div>
       </section>
 
-      {/* Fade to the light section below */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30 h-32 bg-linear-to-b from-transparent to-[#837D73]" />
+      {/* Fade to the section below */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-30 h-32 bg-linear-to-b from-transparent to-[#0c0c0b]" />
     </div>
   );
 }

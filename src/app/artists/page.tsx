@@ -10,12 +10,7 @@ export default async function ArtistsPage() {
   const data = await getSiteData();
   return (
     <main className="relative">
-      {/* Fixed photo backdrop + light overlay */}
-      <div
-        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/assets/artists-bg.png')" }}
-      />
-      <div className="fixed inset-0 -z-10 bg-black/40" />
+      <div className="fixed inset-0 -z-10 bg-[#0c0c0b]" />
 
       <SiteNav dark />
       <PageHero
@@ -31,7 +26,7 @@ export default async function ArtistsPage() {
                 src={artist.portrait}
                 alt={artist.name}
                 fill
-                className="object-cover transition duration-700 group-hover:scale-105"
+                className="object-cover transition duration-700 group-hover:scale-105 grayscale"
                 fallbackText={artist.name}
               />
               <span className="overlay-text">View artist</span>

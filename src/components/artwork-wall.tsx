@@ -20,13 +20,6 @@ const frameVariants: Variants = {
   },
 };
 
-// Акт 2 — на стене за рамой разгорается софитный свет.
-// Слой строго ПОД рамой: на само изображение свет не падает.
-const glowVariants: Variants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { delay: 0.7, duration: 1.6, ease: "easeOut" } },
-};
-
 // Акт 3 — надписи появляются последними
 const staggerContainer: Variants = {
   animate: {
@@ -55,19 +48,29 @@ export function ArtworkWall({
   const wallRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 1024);
   }, []);
 
   return (
-    <section ref={wallRef} className="wall grid min-h-screen grid-rows-[auto_1fr_auto] pt-16">
+    <section
+      ref={wallRef}
+      className="grid min-h-screen grid-rows-[auto_1fr_auto] pt-16"
+      style={{
+        backgroundImage: "url('/assets/room-wall.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="pointer-events-none absolute inset-0 bg-black/45" aria-hidden="true" />
       {/* Top header info */}
       <motion.header
         variants={staggerContainer}
         initial="initial"
         animate="animate"
-        className="room-shell flex flex-wrap items-start justify-between gap-6 py-5 md:py-6"
+        className="room-shell flex flex-col items-center gap-4 py-5 text-center md:flex-row md:items-start md:justify-between md:gap-6 md:py-6 md:text-left"
       >
         <motion.div variants={fadeUp}>
           <p className="section-kicker text-white/60">{artist}</p>
@@ -75,30 +78,33 @@ export function ArtworkWall({
             {artwork.title}
           </h1>
         </motion.div>
-        <motion.div variants={fadeUp} className="text-right">
-          {artwork.year ? <p className="text-sm text-white/60">{artwork.year}</p> : null}
-          <p className="mt-1 text-sm text-white/60">{artwork.medium}</p>
+        <motion.div variants={fadeUp} className="flex flex-col items-center gap-3 md:flex-row md:items-start md:gap-6">
+          <div className="flex items-center gap-2">
+            {([1, 1.4, 1.8] as const).map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => setScale(s)}
+                className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] transition ${
+                  scale === s
+                    ? "bg-[#f4f1ea] text-[#11100e]"
+                    : "bg-white/10 text-white/60 hover:bg-white/15"
+                }`}
+              >
+                x{s === 1 ? "1" : s === 1.4 ? "2" : "3"}
+              </button>
+            ))}
+          </div>
+          <div className="text-right">
+            {artwork.year ? <p className="text-sm text-white/60">{artwork.year}</p> : null}
+            <p className="mt-1 text-sm text-white/60">{artwork.medium}</p>
+          </div>
         </motion.div>
       </motion.header>
 
       {/* Center artwork on the venue wall */}
       <div className="flex items-center justify-center overflow-hidden px-4 py-2">
-        <div className="relative w-fit" style={{ perspective: 1200 }}>
-          {/* Софитная подсветка на стене вокруг рамы — за картиной, не на ней */}
-          <motion.div
-            variants={glowVariants}
-            initial="initial"
-            animate="animate"
-            aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2"
-            style={{
-              width: "165%",
-              height: "150%",
-              background:
-                "radial-gradient(ellipse 62% 58% at 50% 34%, rgba(255, 243, 220, 0.55), rgba(255, 243, 220, 0.16) 52%, transparent 72%)",
-              filter: "blur(6px)",
-            }}
-          />
+        <div className="relative w-fit">
           <motion.div
             ref={imageRef}
             variants={frameVariants}
@@ -107,7 +113,7 @@ export function ArtworkWall({
             className="relative z-10"
             style={{ transformOrigin: "center bottom" }}
           >
-            <ArtworkFrame artwork={artwork} priority enableLens />
+            <ArtworkFrame artwork={artwork} priority enableLens scale={scale} />
           </motion.div>
         </div>
       </div>
@@ -117,6 +123,7 @@ export function ArtworkWall({
           imageUrl={artwork.image}
           imageRef={imageRef}
           containerRef={wallRef}
+          scale={scale}
         />
       )}
 
@@ -125,10 +132,10 @@ export function ArtworkWall({
         variants={staggerContainer}
         initial="initial"
         animate="animate"
-        className="room-shell flex flex-col justify-between gap-6 py-5 md:flex-row md:items-end md:py-6"
+        className="room-shell flex flex-col items-center justify-center gap-6 py-5 text-center md:flex-row md:items-end md:justify-between md:py-6 md:text-left"
       >
         <motion.div variants={fadeUp}>
-          <dl className="grid grid-cols-3 gap-x-3 gap-y-2 text-xs sm:gap-x-8 sm:text-sm md:grid-cols-3">
+          <dl className="grid grid-cols-3 gap-x-3 gap-y-2 justify-items-center text-xs sm:gap-x-8 sm:text-sm md:justify-items-start">
             <div>
               <dt className="text-white/50">Dimensions</dt>
               <dd className="mt-0.5 text-[#f4f1ea]">{artwork.dimensions}</dd>

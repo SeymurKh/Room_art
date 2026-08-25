@@ -19,10 +19,12 @@ export function MobileMagnifier({
   imageUrl,
   imageRef,
   containerRef,
+  scale = 1,
 }: {
   imageUrl: string;
   imageRef: React.RefObject<HTMLDivElement | null>;
   containerRef: React.RefObject<HTMLElement | null>;
+  scale?: number;
 }) {
   const widgetRef = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -65,7 +67,7 @@ export function MobileMagnifier({
       clearTimeout(timer);
       window.removeEventListener("resize", measure);
     };
-  }, [imageRef, containerRef]);
+  }, [imageRef, containerRef, scale]);
 
   /* ---- Touch handlers ---- */
   const handleTouchStart = useCallback(

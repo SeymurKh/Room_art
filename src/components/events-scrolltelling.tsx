@@ -45,7 +45,7 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
 
   return (
     <div ref={containerRef} className="relative hidden md:block" style={{ height: "240vh" }}>
-      <div className="pointer-events-none absolute top-0 left-0 right-0 z-30 h-32 bg-linear-to-b from-[#837D73] to-transparent" />
+      <div className="pointer-events-none absolute top-0 left-0 right-0 z-30 h-32 bg-linear-to-b from-[#0c0c0b] to-transparent" />
 
       <section className="sticky top-0 h-screen overflow-hidden bg-[#11100e]">
         {STRIPES.map((stripe, i) => {

@@ -14,7 +14,8 @@ export default async function EventsPage() {
   const past = data.events.filter((item) => item.status === "Past");
 
   return (
-    <main>
+    <main className="relative">
+      <div className="fixed inset-0 -z-10 bg-[#0c0c0b]" />
       <SiteNav dark />
       <PageHero kicker="Events" title="Events at ROOM" />
 
@@ -32,8 +33,8 @@ export default async function EventsPage() {
 
       {/* Upcoming */}
       {upcoming.length > 0 ? (
-        <section className="room-shell border-t border-black/10 py-8 md:py-16">
-          <p className="section-kicker text-[#6f6a61]">Upcoming</p>
+        <section className="room-shell border-t border-white/10 py-8 md:py-16">
+          <p className="section-kicker text-white/50">Upcoming</p>
           <div className="mt-4 grid grid-cols-2 gap-3 md:mt-8 md:gap-5 md:grid-cols-3">
             {upcoming.map((event) => (
               <EventCard key={event.slug} event={event} />
@@ -44,8 +45,8 @@ export default async function EventsPage() {
 
       {/* Past */}
       {past.length > 0 ? (
-        <section className="room-shell border-t border-black/10 py-8 md:py-16">
-          <p className="section-kicker text-[#6f6a61]">Past archive</p>
+        <section className="room-shell border-t border-white/10 py-8 md:py-16">
+          <p className="section-kicker text-white/50">Past archive</p>
           <div className="mt-4 grid grid-cols-2 gap-3 md:mt-8 md:gap-5 md:grid-cols-3">
             {past.map((event) => (
               <EventCard key={event.slug} event={event} />
@@ -62,8 +63,8 @@ export default async function EventsPage() {
 function EventCard({ event, featured = false }: { event: Event; featured?: boolean }) {
   return (
     <Link href={`/events/${event.slug}`} className="group">
-      <article className="bg-[#ebe7df] p-3">
-        <div className="card-img-overlay relative overflow-hidden rounded-xl bg-[#e2ded4]" style={{ aspectRatio: "3/2" }}>
+      <article className="bg-[#11100e] p-3">
+        <div className="card-img-overlay relative overflow-hidden rounded-xl bg-black" style={{ aspectRatio: "3/2" }}>
           <PositionedImage
             src={event.image}
             alt={event.title}
@@ -74,12 +75,12 @@ function EventCard({ event, featured = false }: { event: Event; featured?: boole
           <span className="overlay-text">View event</span>
         </div>
         <div className="mt-3 flex items-start justify-between gap-2 md:mt-5 md:gap-3">
-          <h2 className="room-serif text-lg leading-none md:text-2xl">
+          <h2 className="room-serif text-lg leading-none text-[#f4f1ea] md:text-2xl">
             {event.title}
           </h2>
-          <ArrowUpRight size={18} className="mt-1 shrink-0 opacity-30 transition group-hover:opacity-100" />
+          <ArrowUpRight size={18} className="mt-1 shrink-0 text-white/30 transition group-hover:text-white/80" />
         </div>
-        <p className="mt-1 text-xs text-[#6f6a61] md:mt-2 md:text-xs">{event.date}</p>
+        <p className="mt-1 text-xs text-white/50 md:mt-2 md:text-xs">{event.date}</p>
 
       </article>
     </Link>

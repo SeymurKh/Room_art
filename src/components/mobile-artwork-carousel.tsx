@@ -9,7 +9,7 @@ import { ArtworkFrame } from "@/components/artwork-frame";
 
 const SWIPE_THRESHOLD = 50;
 
-export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
+export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { artworks: Artwork[]; scale?: number; onScaleChange?: (s: number) => void }) {
   const [index, setIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -53,6 +53,26 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
       />
       <div className="pointer-events-none absolute inset-0 z-0 bg-black/45" aria-hidden="true" />
 
+      {/* Переключатель масштаба */}
+      {onScaleChange ? (
+        <div className="absolute top-4 right-4 z-40 flex items-center gap-1.5">
+          {([1, 1.4, 1.8] as const).map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => onScaleChange(s)}
+              className={`px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.14em] transition ${
+                scale === s
+                  ? "bg-[#f4f1ea] text-[#11100e]"
+                  : "bg-white/10 text-white/60 hover:bg-white/15"
+              }`}
+            >
+              x{s === 1 ? "1" : s === 1.4 ? "2" : "3"}
+            </button>
+          ))}
+        </div>
+      ) : null}
+
       {/* Title */}
       <div className="room-shell relative z-10 mb-6 text-center">
         <p className="room-serif text-lg italic text-[#6f6a61]">Currently on display in Room</p>
@@ -74,7 +94,7 @@ export function MobileArtworkCarousel({ artworks }: { artworks: Artwork[] }) {
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <ArtworkFrame artwork={artwork} priority />
+          <ArtworkFrame artwork={artwork} priority scale={scale} />
         </motion.div>
       </motion.div>
 

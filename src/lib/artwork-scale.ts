@@ -23,13 +23,13 @@ import { useEffect, useState } from "react";
 const REFERENCE_CM = 140;
 const REFERENCE_VW = 0.34; // 140 см → 34% ширины экрана (десктоп)
 const REFERENCE_VW_TABLET = 0.50; // планшет
-const REFERENCE_VW_MOBILE = 0.75; // мобилка
+const REFERENCE_VW_MOBILE = 0.55; // мобилка
 const MIN_WIDTH_FRACTION = 0.12; // нижний порог (десктоп)
 const MIN_WIDTH_FRACTION_TABLET = 0.15; // планшет
-const MIN_WIDTH_FRACTION_MOBILE = 0.25; // мобилка
+const MIN_WIDTH_FRACTION_MOBILE = 0.35; // мобилка
 const MAX_WIDTH_FRACTION = 0.44; // потолок по ширине (десктоп)
 const MAX_WIDTH_FRACTION_TABLET = 0.60; // планшет
-const MAX_WIDTH_FRACTION_MOBILE = 0.92; // мобилка
+const MAX_WIDTH_FRACTION_MOBILE = 0.65; // мобилка
 const MAX_HEIGHT_FRACTION = 0.42; // потолок по высоте (десктоп)
 const MAX_HEIGHT_FRACTION_TABLET = 0.55; // планшет
 const MAX_HEIGHT_FRACTION_MOBILE = 0.75; // мобилка
@@ -44,7 +44,8 @@ export function computeArtworkSize(
   widthCm: number,
   heightCm: number,
   viewport: ViewportSize,
-  square = false
+  square = false,
+  scale = 1
 ): { width: number; height: number } {
   const isMobile = viewport.width < 640;
   const isTablet = !isMobile && viewport.width < 1024;
@@ -82,6 +83,26 @@ export function computeArtworkSize(
   if (heightPx > viewport.height * maxHFrac) {
     heightPx = viewport.height * maxHFrac;
     widthPx = square ? heightPx : heightPx * (safeW / safeH);
+  }
+
+  // Применяем масштаб (x1/x2/x3)
+  if (scale !== 1) {
+    widthPx *= scale;
+    heightPx *= scale;
+    // Защита от overflow — лимит зависит от устройства
+    const capW = isMobile ? 0.90 : isTablet ? 0.80 : 0.70;
+    const maxW = viewport.width * capW;
+    const maxH = viewport.height * 0.85;
+    if (widthPx > maxW) {
+      const ratio = maxW / widthPx;
+      widthPx = maxW;
+      heightPx *= ratio;
+    }
+    if (heightPx > maxH) {
+      const ratio = maxH / heightPx;
+      heightPx = maxH;
+      widthPx *= ratio;
+    }
   }
 
   return { width: widthPx, height: heightPx };
