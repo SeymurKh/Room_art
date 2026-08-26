@@ -35,7 +35,7 @@ export function SiteNav({ dark = false, fixed = true }: { dark?: boolean; fixed?
       variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.22, ease: "easeOut" }}
-      className={`${fixed ? "fixed" : "relative"} inset-x-0 top-0 z-50 border-b backdrop-blur-xl ${
+      className={`${fixed ? "fixed" : "relative"} inset-x-0 top-0 z-50 backdrop-blur-xl ${
         dark
           ? "border-white/10 bg-black/32 text-[#f4f1ea]"
           : "border-black/10 bg-[#f4f1ea]/74 text-[#11100e]"

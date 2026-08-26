@@ -201,10 +201,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
               <p className="mt-3 text-sm md:mt-4">{data.settings.email}</p>
               <p className="text-sm">{data.settings.phone}</p>
               <div className="mt-6 flex flex-wrap gap-3 md:mt-8">
-                <a href={whatsappContactUrl(data.settings)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
-                  Write on WhatsApp <ArrowUpRight size={16} />
-                </a>
-                <Link href="/contact" className="inline-flex items-center justify-center gap-2 border border-black/14 px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em]">
+                <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
                   Contact <ArrowUpRight size={14} />
                 </Link>
               </div>

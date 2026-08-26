@@ -11,12 +11,11 @@ import type { SiteData, Event } from "@/lib/types";
 import { logoutAdmin, saveAdminData, saveSingleEvent } from "@/app/admin/actions";
 import { clamp } from "@/lib/utils";
 
-type Tab = "settings" | "about" | "events";
+type Tab = "settings" | "events";
 type PreviewKey = "hero" | "thumb" | "detail";
 
 const tabs: [Tab, string][] = [
   ["settings", "Settings"],
-  ["about", "About"],
   ["events", "Events"],
 ];
 
@@ -245,8 +244,7 @@ export function AdminDashboard({ initialData, saved, saveError }: { initialData:
         </div>
         {saveError && <div className="mb-6 inline-flex items-start gap-2 border border-red-400/30 bg-red-50/70 px-4 py-3 text-sm text-red-800"><span className="mt-0.5 shrink-0">⚠</span> {saveError}</div>}
         {saved && <div className="mb-6 inline-flex items-center gap-2 border border-black/10 bg-white/50 px-4 py-3 text-sm"><Check size={16} /> Changes saved.</div>}
-        {tab === "settings" && <form action={saveAdminData}><input type="hidden" name="payload" value={payload} readOnly /><Panel title="Global settings"><Grid>{Object.entries(data.settings).map(([key, value]) => <Field key={key} label={key} value={String(value)} onChange={(next) => update("settings", { ...data.settings, [key]: next })} />)}</Grid></Panel></form>}
-        {tab === "about" && <form action={saveAdminData}><input type="hidden" name="payload" value={payload} readOnly /><Panel title="About"><Field multiline label="Concept" value={data.about.concept} onChange={(v) => update("about", { ...data.about, concept: v })} /><Field multiline label="Vision" value={data.about.vision} onChange={(v) => update("about", { ...data.about, vision: v })} /><Field multiline label="Identity" value={data.about.identity} onChange={(v) => update("about", { ...data.about, identity: v })} /></Panel></form>}
+        {tab === "settings" && <form action={saveAdminData}><input type="hidden" name="payload" value={payload} readOnly /><Panel title="Global settings"><Grid>{Object.entries(data.settings).filter(([key]) => key !== "facebook").map(([key, value]) => <Field key={key} label={key} value={String(value)} onChange={(next) => update("settings", { ...data.settings, [key]: next })} />)}</Grid></Panel></form>}
         {tab === "events" && <div>
           <Panel title="Events">
             {data.events.length === 0 ? <p className="py-4 text-sm text-[#6f6a61]">No events yet.</p> : <div className="grid gap-3">{data.events.map((event) => {
