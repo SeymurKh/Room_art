@@ -56,7 +56,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           </div>
 
           {/* Right: creative photo block */}
-          <div className="order-1 md:order-2">
+          <div className="order-1 md:order-2 flex items-center justify-center">
             <ArtistPhotoBlock portrait={artist.portrait} name={artist.name} photos={artist.photos} />
           </div>
         </div>

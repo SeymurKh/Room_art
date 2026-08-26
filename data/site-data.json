@@ -1,31 +1,31 @@
 {
   "settings": {
-    "whatsappNumber": "994501234567",
-    "email": "info@roombaku.com",
-    "phone": "+994 50 123 45 67",
-    "address": "Baku, Azerbaijan",
-    "instagram": "https://instagram.com/roombaku",
-    "facebook": "https://facebook.com/roombaku"
+    "whatsappNumber": "994508880069",
+    "email": "roomcommunityofficial@gmail.com",
+    "phone": "+994 12 598 01 91",
+    "address": "22 Tarlan Aliyarbeyov Street, Baku, Azerbaijan",
+    "instagram": "https://www.instagram.com/roomfineartwinedine/",
+    "facebook": "https://www.instagram.com/roomfineartwinedine/"
   },
   "artists": [
     {
       "slug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "name": "Orkhan Garayev",
       "role": "Artist",
-      "portrait": "/assets/artists/orxan.png",
+      "portrait": "/uploads/artists/0b37c69f-7be6-4a19-82a7-47fc3a345a86.webp",
       "photos": [
         "/uploads/artists/20bf92e7-12e7-4ddd-af96-141c6336a799.webp",
         "/uploads/artists/97009ff4-3a05-4a8f-96de-a9176fec9fc9.webp",
         "/uploads/artists/25348d80-035a-41d1-a40b-6b34525fc8f0.webp"
       ],
       "bio": "Orkhan Garayev (b. 1991, Ganja, Azerbaijan) is a contemporary Azerbaijani artist based in Baku. Working\nacross painting, graphic art, sculpture, installation, and book illustration, he explores the intersection of\ncultural heritage and contemporary visual language. His practice is distinguished by symbolic imagery,\nexpressive color, and poetic narratives that reflect themes of memory, identity, and place. Garayev is a\nmember of the Union of Artists of Azerbaijan, the designer of official Azerbaijani postage stamps, and has\nexhibited internationally. His works are held in public and private collections.",
-      "statement": "My works, including *Red*, *Trapped Earth*, and *Hope*, are part of the permanent collection of the Museum of Modern Art in Baku. I have presented my work at international exhibitions in Turkey, Germany, Russia, Georgia, Switzerland, France, the UAE, Luxembourg, and Belgium, connecting my artistic practice with audiences across different cultural contexts."
+      "statement": "My works, including \"Red\", \"Trapped Earth\", and \"Hope\", are part of the permanent collection of the Museum of Modern Art in Baku. I have presented my work at international exhibitions in Turkey, Germany, Russia, Georgia, Switzerland, France, the UAE, Luxembourg, and Belgium, connecting my artistic practice with audiences across different cultural contexts."
     },
     {
       "slug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "name": "Nigar Kerimova",
       "role": "Artist",
-      "portrait": "/assets/artists/nigar.png",
+      "portrait": "/uploads/artists/07f42d00-1d5b-4719-bae7-a9d28404ba52.webp",
       "photos": [
         "/uploads/artists/5a1e039c-dbb0-48a7-9978-984014580802.webp",
         "/uploads/artists/2a34ec97-57bd-46a8-985a-e044b375420f.webp",
@@ -38,7 +38,7 @@
       "slug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "name": "Roza Muradova",
       "role": "Artist",
-      "portrait": "/uploads/artists/9197d0dc-df70-4c69-8de5-639e902a0ac0.webp",
+      "portrait": "/uploads/artists/9a1d1d15-133f-46c4-9d77-58c317d0e94d.webp",
       "photos": [
         "/uploads/artists/d659bf76-effa-4e41-8aa4-fac1e5ea7c99.webp",
         "/uploads/artists/59388d95-b5ea-4f7e-96f3-ccf0adbd2f8f.webp",
@@ -72,9 +72,9 @@
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
       "medium": "Mixed medium",
-      "dimensions": "110 × 70 cm",
-      "widthCm": 110,
-      "heightCm": 70,
+      "dimensions": "70 × 110 cm",
+      "widthCm": 70,
+      "heightCm": 110,
       "image": "/uploads/artworks/8b550d34-72ae-4558-98f1-19ea1ef28c10.webp",
       "availability": "Available",
       "description": "",
@@ -520,8 +520,8 @@
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2025",
       "medium": "Acrylic on canvas",
-      "dimensions": "18 × 18 cm",
-      "widthCm": 18,
+      "dimensions": "24 × 18 cm",
+      "widthCm": 24,
       "heightCm": 18,
       "image": "/uploads/artworks/5a21efcb-96ba-4703-8208-4c573b3025da.webp",
       "availability": "Available",
@@ -536,8 +536,8 @@
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2025",
       "medium": "Acrylic on canvas",
-      "dimensions": "18 × 18 cm",
-      "widthCm": 18,
+      "dimensions": "25 × 18 cm",
+      "widthCm": 25,
       "heightCm": 18,
       "image": "/uploads/artworks/08cd8658-e737-4f70-b945-c8cd4b99365e.webp",
       "availability": "Available",
@@ -552,8 +552,8 @@
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2025",
       "medium": "Acrylic on canvas",
-      "dimensions": "18 × 18 cm",
-      "widthCm": 18,
+      "dimensions": "25 × 18 cm",
+      "widthCm": 25,
       "heightCm": 18,
       "image": "/uploads/artworks/898e5cee-fbe1-4fb3-aa0e-cdba5c0638b1.webp",
       "availability": "Available",

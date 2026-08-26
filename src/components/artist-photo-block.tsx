@@ -22,7 +22,7 @@ export function ArtistPhotoBlock({
 
   if (!hasPhotos) {
     return (
-      <div className="flex items-center justify-center" style={{ minHeight: "40vh" }}>
+      <div className="flex items-center justify-center w-full">
         <div className="relative w-full max-w-sm aspect-[3/4] overflow-hidden rounded-2xl bg-black shadow-2xl">
           <RoomImage
             src={portrait}
@@ -46,7 +46,7 @@ export function ArtistPhotoBlock({
   const rightPhotos = photos.slice(mid);
 
   return (
-    <div className="flex items-center justify-center gap-3" style={{ minHeight: "40vh" }}>
+    <div className="flex items-center justify-center gap-3 w-full">
       {/* Left column — photos stacked vertically */}
       <div className="flex flex-col gap-3 flex-1 max-w-[28%]">
         {leftPhotos.map((photo, i) => (
