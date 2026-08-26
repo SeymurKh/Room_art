@@ -25,7 +25,7 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
     <footer className="border-t border-black/10 bg-[#11100e] py-8 text-[#f4f1ea] md:py-12">
       <div className="room-shell flex flex-col items-center gap-5 text-center md:grid md:grid-cols-[1.1fr_.9fr_.9fr] md:items-start md:gap-8 md:text-left">
         <div>
-          <Link href="/" className="relative inline-block h-16 w-72">
+          <Link href="/" className="relative block h-10 w-48 md:h-16 md:w-72">
             <Image src="/assets/logo.png" alt="ROOM" fill className="object-contain" />
           </Link>
         </div>

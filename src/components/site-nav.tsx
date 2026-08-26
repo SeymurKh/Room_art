@@ -37,12 +37,12 @@ export function SiteNav({ dark = false, fixed = true }: { dark?: boolean; fixed?
       transition={{ duration: 0.22, ease: "easeOut" }}
       className={`${fixed ? "fixed" : "relative"} inset-x-0 top-0 z-50 backdrop-blur-xl ${
         dark
-          ? "border-white/10 bg-black/32 text-[#f4f1ea]"
+          ? "bg-black/32 text-[#f4f1ea]"
           : "border-black/10 bg-[#f4f1ea]/74 text-[#11100e]"
       }`}
     >
       <div className="room-shell flex h-16 items-center justify-between gap-6">
-        <Link href="/" className="relative h-12 w-64">
+        <Link href="/" className="relative h-10 w-24 md:h-12 md:w-64">
           <Image src="/assets/logo.png" alt="ROOM" fill className="object-contain" priority />
         </Link>
         <nav className="hidden items-center gap-7 text-[0.68rem] font-semibold uppercase tracking-[0.18em] md:flex">

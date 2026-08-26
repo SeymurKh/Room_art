@@ -33,7 +33,7 @@ export default async function EventsPage() {
 
       {/* Upcoming */}
       {upcoming.length > 0 ? (
-        <section className="room-shell border-t border-white/10 py-8 md:py-16">
+        <section className="room-shell py-8 md:py-16">
           <p className="section-kicker text-white/50">Upcoming</p>
           <div className="mt-4 grid grid-cols-2 gap-3 md:mt-8 md:gap-5 md:grid-cols-3">
             {upcoming.map((event) => (
