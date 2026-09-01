@@ -6,7 +6,6 @@ const siteSettingsSchema = z.object({
   phone: z.string().min(1, "Phone is required"),
   address: z.string().min(1, "Address is required"),
   instagram: z.string().url("Instagram must be a valid URL"),
-  facebook: z.string().url("Facebook must be a valid URL"),
 });
 
 const artistSchema = z.object({

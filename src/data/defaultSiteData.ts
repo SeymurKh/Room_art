@@ -7,7 +7,6 @@ export const defaultSiteData: SiteData = {
     phone: "",
     address: "",
     instagram: "",
-    facebook: "",
   },
   artists: [],
   artworks: [],

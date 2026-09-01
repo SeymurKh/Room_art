@@ -42,7 +42,6 @@ function mapSettings(
     phone: row.phone,
     address: row.address,
     instagram: row.instagram,
-    facebook: row.facebook,
   };
 }
 

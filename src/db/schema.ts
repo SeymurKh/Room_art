@@ -7,7 +7,6 @@ export const settings = sqliteTable("settings", {
   phone: text("phone").notNull().default(""),
   address: text("address").notNull().default(""),
   instagram: text("instagram").notNull().default(""),
-  facebook: text("facebook").notNull().default(""),
 });
 
 export const about = sqliteTable("about", {

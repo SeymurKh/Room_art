@@ -4,7 +4,6 @@ export type SiteSettings = {
   phone: string;
   address: string;
   instagram: string;
-  facebook: string;
 };
 
 export type Artist = {

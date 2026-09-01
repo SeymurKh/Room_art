@@ -43,6 +43,13 @@
       "when": 1787231520000,
       "tag": "0005_add_photos_to_artists",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1788286700000,
+      "tag": "0006_remove_facebook_from_settings",
+      "breakpoints": true
     }
   ]
 }

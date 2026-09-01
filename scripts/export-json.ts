@@ -43,15 +43,13 @@ const siteData = {
         phone: settingsRow.phone,
         address: settingsRow.address,
         instagram: settingsRow.instagram,
-        facebook: settingsRow.facebook,
       }
     : {
         whatsappNumber: "",
         email: "",
         phone: "",
         address: "",
-        instagram: "https://instagram.com/roombaku",
-        facebook: "https://facebook.com/roombaku",
+        instagram: "",
       },
   artists: artistRows.map((row) => ({
     slug: row.slug,

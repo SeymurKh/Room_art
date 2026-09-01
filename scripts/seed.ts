@@ -11,7 +11,6 @@ type JsonSettings = {
   phone: string;
   address: string;
   instagram: string;
-  facebook: string;
 };
 
 type JsonAbout = {
