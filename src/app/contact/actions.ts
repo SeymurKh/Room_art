@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { Resend } from "resend";
 
 const TO_EMAIL = "roomcommunityofficial@gmail.com";
@@ -12,13 +11,13 @@ export async function sendContactEmail(formData: FormData) {
   const message = String(formData.get("message") ?? "").trim();
 
   if (!name || !email || !message) {
-    redirect("/contact?error=required");
+    return { error: "Please fill in all required fields." };
   }
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("[contact] RESEND_API_KEY is not configured");
-    redirect("/contact?error=1");
+    return { error: "Email service is not configured." };
   }
 
   const resend = new Resend(apiKey);
@@ -44,10 +43,10 @@ export async function sendContactEmail(formData: FormData) {
         </div>
       `,
     });
+
+    return { success: true };
   } catch (error) {
     console.error("[contact] Failed to send email:", error);
-    redirect("/contact?error=1");
+    return { error: "Failed to send message. Please try again later." };
   }
-
-  redirect("/contact?sent=1");
 }

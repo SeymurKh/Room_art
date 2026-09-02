@@ -6,15 +6,15 @@ import { sendContactEmail } from "@/app/contact/actions";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   async function handleSubmit(formData: FormData) {
-    setError(false);
-    try {
-      await sendContactEmail(formData);
+    setError("");
+    const result = await sendContactEmail(formData);
+    if (result.error) {
+      setError(result.error);
+    } else {
       setSent(true);
-    } catch {
-      setError(true);
     }
   }
 
@@ -54,7 +54,7 @@ export function ContactForm() {
         required
       />
       {error ? (
-        <p className="text-sm text-red-600">Something went wrong. Please try again.</p>
+        <p className="text-sm text-red-600">{error}</p>
       ) : null}
       <button
         type="submit"
