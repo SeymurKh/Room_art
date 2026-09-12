@@ -63,12 +63,13 @@ export function HomeExperience({ data }: { data: SiteData }) {
     },
   ];
 
-  // Фон — 4 фото заведения из public/assets/hero.
+  // Фон — фото заведения из public/assets/hero.
   const slideshowImages = useMemo(() => [
-    "/assets/hero/hero-1.png",
-    "/assets/hero/hero-2.png",
-    "/assets/hero/hero-3.png",
-    "/assets/hero/hero-4.png",
+    "/assets/hero/hero-1.webp",
+    "/assets/hero/hero-2.webp",
+    "/assets/hero/hero-3.webp",
+    "/assets/hero/hero-4.webp",
+    "/assets/hero/hero-5.webp",
   ], []);
 
   return (
