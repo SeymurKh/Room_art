@@ -56,9 +56,9 @@ export function HomeExperience({ data }: { data: SiteData }) {
         ]
       : []),
     {
-      kicker: "New artworks",
-      title: "Discover",
-      meta: "The latest additions",
+      kicker: "The Collection",
+      title: "Explore",
+      meta: "Curated works by our artists",
       href: "/gallery",
     },
   ];

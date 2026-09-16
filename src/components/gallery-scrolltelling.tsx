@@ -2,7 +2,7 @@
 
 import { useRef, useState, useCallback, useEffect } from "react";
 import { useScroll, useSpring, useMotionValue, useMotionValueEvent } from "framer-motion";
-import { SkipForward } from "lucide-react";
+import { ChevronDown, SkipForward } from "lucide-react";
 import type { Artwork } from "@/lib/types";
 import { ArtworkFrame } from "@/components/artwork-frame";
 import { clamp } from "@/lib/utils";
@@ -32,10 +32,12 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
 
   const n = artworks.length;
   const [progress, setProgress] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
 
   // Читаем сглаженный прогресс для отображения
   useMotionValueEvent(smoothProgress, "change", (p) => {
     setProgress(clamp(p, 0, 1));
+    if (n > 1 && p > 0.5 / (n - 1)) setScrolled(true);
   });
 
   // Обновляем target при скролле
@@ -108,6 +110,17 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
 
         {/* Одна общая тень под картиной */}
         <div className="pointer-events-none absolute bottom-10 left-1/2 h-9 w-[62%] -translate-x-1/2 rounded-full bg-black/22 blur-2xl" />
+
+        {/* Scroll hint — bouncing arrow */}
+        <div
+          className="pointer-events-none absolute inset-x-0 top-8 z-30 flex justify-center transition-opacity duration-700"
+          style={{ opacity: scrolled ? 0 : 1 }}
+        >
+          <div className="flex flex-col items-center gap-1">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">Scroll</span>
+            <ChevronDown size={20} className="text-white/50 animate-bounce" />
+          </div>
+        </div>
 
         {/* Текст-табличка + индикатор прогресса + переключатели внизу */}
         <div className="pointer-events-none absolute bottom-4 left-0 right-0 z-30 flex flex-col items-center gap-3 text-center">
