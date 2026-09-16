@@ -88,6 +88,7 @@ export async function saveAdminData(formData: FormData) {
   revalidatePath("/artists");
   revalidatePath("/gallery");
   revalidatePath("/events");
+  revalidatePath("/events/[slug]", "page");
   revalidatePath("/about");
   revalidatePath("/contact");
   revalidatePath("/admin");
@@ -145,6 +146,7 @@ export async function saveArtist(formData: FormData) {
   revalidatePath("/artists");
   revalidatePath("/artists/[slug]", "page");
   revalidatePath("/gallery");
+  revalidatePath("/gallery/[slug]", "page");
   revalidatePath("/admin");
   revalidatePath("/admin/artists");
   redirect("/admin/artists?saved=1");
@@ -182,6 +184,7 @@ export async function createArtist(formData: FormData) {
   revalidatePath("/artists");
   revalidatePath("/artists/[slug]", "page");
   revalidatePath("/gallery");
+  revalidatePath("/gallery/[slug]", "page");
   revalidatePath("/admin");
   revalidatePath("/admin/artists");
   redirect("/admin/artists?saved=1");
@@ -199,9 +202,19 @@ export async function deleteArtist(slug: string) {
   }
   data.artists = data.artists.filter((a) => a.slug !== slug);
   data.artworks = data.artworks.filter((aw) => aw.artistSlug !== slug);
-  await saveSiteData(data);
+  try {
+    await saveSiteData(data);
+  } catch (error) {
+    if (error instanceof SiteDataValidationError) {
+      redirect(`/admin/artists?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
+    }
+    redirect("/admin/artists?error=json");
+    return;
+  }
   revalidatePath("/artists");
+  revalidatePath("/artists/[slug]", "page");
   revalidatePath("/gallery");
+  revalidatePath("/gallery/[slug]", "page");
   revalidatePath("/admin");
   revalidatePath("/admin/artists");
   redirect("/admin/artists");
@@ -254,7 +267,9 @@ export async function saveArtwork(formData: FormData) {
   }
 
   revalidatePath("/artists");
+  revalidatePath("/artists/[slug]", "page");
   revalidatePath("/gallery");
+  revalidatePath("/gallery/[slug]", "page");
   revalidatePath("/admin");
   revalidatePath("/admin/artworks");
   redirect("/admin/artworks?saved=1");
@@ -293,7 +308,9 @@ export async function createArtwork(formData: FormData) {
   }
 
   revalidatePath("/artists");
+  revalidatePath("/artists/[slug]", "page");
   revalidatePath("/gallery");
+  revalidatePath("/gallery/[slug]", "page");
   revalidatePath("/admin");
   revalidatePath("/admin/artworks");
   redirect("/admin/artworks?saved=1");
@@ -305,9 +322,19 @@ export async function deleteArtwork(slug: string) {
   const artwork = data.artworks.find((a) => a.slug === slug);
   if (artwork?.image) await tryDeleteFile(artwork.image);
   data.artworks = data.artworks.filter((a) => a.slug !== slug);
-  await saveSiteData(data);
+  try {
+    await saveSiteData(data);
+  } catch (error) {
+    if (error instanceof SiteDataValidationError) {
+      redirect(`/admin/artworks?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
+    }
+    redirect("/admin/artworks?error=json");
+    return;
+  }
   revalidatePath("/artists");
+  revalidatePath("/artists/[slug]", "page");
   revalidatePath("/gallery");
+  revalidatePath("/gallery/[slug]", "page");
   revalidatePath("/admin");
   revalidatePath("/admin/artworks");
   redirect("/admin/artworks");

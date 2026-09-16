@@ -72,7 +72,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
               <PositionedImage
                 src={event.image}
                 alt={event.title}
-                transform={event.heroTransform}
+                transform={event.detailTransform}
                 containerClassName="h-full w-full"
               />
             </MediaLightbox>

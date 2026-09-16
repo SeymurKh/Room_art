@@ -120,7 +120,7 @@ export async function getSiteData(): Promise<SiteData> {
     featured: row.featured,
     description: row.description,
     gallery: galleryByEvent.get(row.id) ?? [],
-    video: row.video || undefined,
+    video: row.video || "",
   }));
 
   return {

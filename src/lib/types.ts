@@ -1,63 +1,17 @@
-export type SiteSettings = {
-  whatsappNumber: string;
-  email: string;
-  phone: string;
-  address: string;
-  instagram: string;
-};
+import type { z } from "zod";
+import type {
+  artistSchema,
+  artworkSchema,
+  eventSchema,
+  siteDataSchema,
+} from "./site-data-schema";
 
-export type Artist = {
-  slug: string;
-  name: string;
-  role: string;
-  portrait: string;
-  photos: string[];
-  bio: string;
-  statement: string;
-};
+export type Artist = z.infer<typeof artistSchema>;
+export type Artwork = z.infer<typeof artworkSchema>;
+export type Event = z.infer<typeof eventSchema>;
 
-export type Artwork = {
-  slug: string;
-  title: string;
-  artistSlug: string;
-  year: string;
-  medium: string;
-  dimensions: string;
-  widthCm: number;
-  heightCm: number;
-  image: string;
-  availability: "Available" | "Reserved" | "Private collection";
-  description?: string;
-  priceAzn: number | null;
-  displayed: boolean;
-  tondo?: boolean;
-};
+// SiteSettings and AboutContent are derived from the composite schema's shape.
+export type SiteSettings = z.infer<typeof siteDataSchema>["settings"];
+export type AboutContent = z.infer<typeof siteDataSchema>["about"];
 
-export type Event = {
-  slug: string;
-  title: string;
-  status: "Upcoming" | "Current" | "Past";
-  date: string;
-  image: string;
-  heroTransform: string;
-  thumbTransform: string;
-  detailTransform: string;
-  featured: boolean;
-  description: string;
-  gallery?: string[];
-  video?: string;
-};
-
-export type AboutContent = {
-  concept: string;
-  vision: string;
-  identity: string;
-};
-
-export type SiteData = {
-  settings: SiteSettings;
-  artists: Artist[];
-  artworks: Artwork[];
-  events: Event[];
-  about: AboutContent;
-};
+export type SiteData = z.infer<typeof siteDataSchema>;

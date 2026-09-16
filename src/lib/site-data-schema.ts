@@ -8,7 +8,7 @@ const siteSettingsSchema = z.object({
   instagram: z.string().url("Instagram must be a valid URL"),
 });
 
-const artistSchema = z.object({
+export const artistSchema = z.object({
   slug: z.string().min(1),
   name: z.string().min(1),
   role: z.string().min(1),
@@ -18,7 +18,7 @@ const artistSchema = z.object({
   statement: z.string().default(""),
 });
 
-const artworkSchema = z.object({
+export const artworkSchema = z.object({
   slug: z.string().min(1),
   title: z.string().min(1),
   artistSlug: z.string().min(1),
@@ -35,7 +35,7 @@ const artworkSchema = z.object({
   tondo: z.boolean().default(false),
 });
 
-const eventSchema = z.object({
+export const eventSchema = z.object({
   slug: z.string().min(1),
   title: z.string().min(1),
   status: z.enum(["Upcoming", "Current", "Past"]),
