@@ -2,7 +2,7 @@
 
 import { Resend } from "resend";
 
-const TO_EMAIL = "roomcommunityofficial@gmail.com";
+const TO_EMAIL = "community@roomgallery.art";
 
 export async function sendContactEmail(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
