@@ -3,7 +3,7 @@
 import { useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Event } from "@/lib/types";
 
@@ -62,41 +62,43 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
           style={{ x: springX }}
           className="flex items-center justify-center"
         >
-          <motion.div
-            key={event.slug}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="w-full"
-          >
-            <Link href={`/events/${event.slug}`} className="group block">
-              <div className="relative aspect-[4/5] overflow-hidden bg-[#0c0c0b]">
-                {event.image ? (
-                  <Image
-                    src={event.image}
-                    alt={event.title}
-                    fill
-                    sizes="100vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center">
-                    <p className="room-serif text-sm text-white/30">No image</p>
-                  </div>
-                )}
-              </div>
-              <div className="mt-3 text-center">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">
-                  {event.status}
-                </span>
-                <h3 className="room-serif mt-1 text-2xl leading-tight text-[#f4f1ea]">
-                  {event.title}
-                </h3>
-                <p className="mt-1 text-xs text-white/50">{event.date}</p>
-              </div>
-            </Link>
-          </motion.div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={event.slug}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-full"
+            >
+              <Link href={`/events/${event.slug}`} className="group block">
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#0c0c0b]">
+                  {event.image ? (
+                    <Image
+                      src={event.image}
+                      alt={event.title}
+                      fill
+                      sizes="100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center">
+                      <p className="room-serif text-sm text-white/30">No image</p>
+                    </div>
+                  )}
+                </div>
+                <div className="mt-3 text-center">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">
+                    {event.status}
+                  </span>
+                  <h3 className="room-serif mt-1 text-2xl leading-tight text-[#f4f1ea]">
+                    {event.title}
+                  </h3>
+                  <p className="mt-1 text-xs text-white/50">{event.date}</p>
+                </div>
+              </Link>
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
       </div>
 

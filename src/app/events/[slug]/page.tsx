@@ -48,7 +48,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       <SiteNav dark />
 
       {/* Hero — text left, main photo right */}
-      <section className="room-shell grid min-h-[70vh] items-center gap-8 pt-28 pb-12 md:grid-cols-[1fr_1.1fr] md:gap-16 md:pt-32 md:pb-16">
+      <section className="room-shell grid min-h-[70vh] items-center gap-6 pt-24 pb-12 md:grid-cols-[1fr_1.1fr] md:gap-16 md:pt-32 md:pb-16">
         {/* Left: text */}
         <div className="flex flex-col justify-center">
           <p className="section-kicker text-white/50">{event.status}</p>
@@ -67,7 +67,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
         {/* Right: main event photo — fills container */}
         {event.image ? (
-          <div className="relative w-full max-h-[60vh] max-w-[420px] aspect-[5/9] overflow-hidden rounded-2xl bg-black shadow-2xl mx-auto">
+          <div className="relative w-full max-h-[65vh] max-w-[420px] aspect-[3/4] overflow-hidden rounded-2xl bg-black shadow-2xl mx-auto md:aspect-[5/9]">
             <MediaLightbox items={mediaItems} index={0}>
               <PositionedImage
                 src={event.image}

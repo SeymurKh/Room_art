@@ -9,7 +9,7 @@ export function ScrollTools() {
   const [showTopBtn, setShowTopBtn] = useState(false);
 
   useMotionValueEvent(scrollYProgress, "change", (value) => {
-    setShowTopBtn(value > 0.18);
+    setShowTopBtn((prev) => (prev ? value > 0.12 : value > 0.22));
   });
 
   const scrollToTop = useCallback(() => {

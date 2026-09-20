@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
 import { createHash } from "crypto";
-import { isReadOnlyMode } from "@/lib/env";
 
 const cookieName = "room-admin-session";
 
@@ -34,13 +33,11 @@ function sessionValue() {
 }
 
 export async function isAdmin() {
-  if (isReadOnlyMode()) return false;
   const store = await cookies();
   return store.get(cookieName)?.value === sessionValue();
 }
 
 export async function setAdminSession() {
-  if (isReadOnlyMode()) return;
   const store = await cookies();
   store.set(cookieName, sessionValue(), {
     httpOnly: true,

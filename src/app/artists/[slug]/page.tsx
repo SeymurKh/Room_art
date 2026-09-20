@@ -37,7 +37,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       <SiteNav dark />
 
       {/* Hero — 100vh: bio + statement + photos */}
-      <section className="room-shell flex min-h-0 items-start pt-10 pb-6 md:min-h-screen md:items-center md:pt-24 md:pb-16">
+      <section className="room-shell flex min-h-0 items-start pt-20 pb-6 md:min-h-screen md:items-center md:pt-24 md:pb-16">
         <div className="grid w-full gap-4 md:grid-cols-[1fr_1.1fr] md:gap-16">
           {/* Left: text */}
           <div className="flex flex-col justify-center order-2 md:order-1">

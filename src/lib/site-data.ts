@@ -1,5 +1,3 @@
-import { readFileSync } from "fs";
-import path from "path";
 import { asc } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { db } from "@/db/client";
@@ -13,7 +11,6 @@ import {
 } from "@/db/schema";
 import { siteDataSchema } from "@/lib/site-data-schema";
 import { defaultSiteData } from "@/data/defaultSiteData";
-import { isReadOnlyMode } from "@/lib/env";
 import type {
   SiteData,
   Event,
@@ -22,15 +19,6 @@ import type {
   SiteSettings,
   AboutContent,
 } from "@/lib/types";
-
-const dataFile = path.join(process.cwd(), "data", "site-data.json");
-
-function readJsonSiteData(): SiteData {
-  const raw = readFileSync(dataFile, "utf8");
-  const parsed = JSON.parse(raw);
-  const validated = siteDataSchema.parse(parsed);
-  return validated as SiteData;
-}
 
 function mapSettings(
   row: (typeof settingsTable.$inferSelect) | undefined
@@ -55,8 +43,7 @@ function mapAbout(row: (typeof aboutTable.$inferSelect) | undefined): AboutConte
 }
 
 export async function getSiteData(): Promise<SiteData> {
-  // Read-only deploys (Vercel demo) or missing SQLite → read the committed JSON snapshot.
-  if (isReadOnlyMode() || !db) return readJsonSiteData();
+  if (!db) return defaultSiteData;
 
   const [settingsRow] = db.select().from(settingsTable).limit(1).all();
   const [aboutRow] = db.select().from(aboutTable).limit(1).all();
@@ -142,7 +129,7 @@ export class SiteDataValidationError extends Error {
 }
 
 export async function saveSiteData(data: unknown) {
-  if (isReadOnlyMode() || !db) {
+  if (!db) {
     throw new SiteDataValidationError([
       "Database is unavailable. Writes are disabled.",
     ]);
