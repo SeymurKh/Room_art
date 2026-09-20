@@ -7,7 +7,7 @@ import type { SiteData, Artwork } from "@/lib/types";
 import { ArtworkSalon } from "@/components/artwork-salon";
 
 const all = "All";
-const PAGE_SIZE = 24;
+const PAGE_SIZE = 10;
 
 type FormatCategory = "Landscape" | "Square" | "Portrait";
 type SizeCategory = "Small" | "Medium" | "Large";

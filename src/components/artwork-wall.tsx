@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Search } from "lucide-react";
 import type { Artwork, SiteSettings } from "@/lib/types";
 import { whatsappArtworkUrl } from "@/lib/whatsapp";
 import { ArtworkFrame } from "@/components/artwork-frame";
@@ -49,6 +49,7 @@ export function ArtworkWall({
   const imageRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [scale, setScale] = useState(1);
+  const [showMagnifier, setShowMagnifier] = useState(false);
 
   useEffect(() => {
     const update = () => setIsMobile(window.innerWidth < 1024);
@@ -60,7 +61,7 @@ export function ArtworkWall({
   return (
     <section
       ref={wallRef}
-      className="relative grid min-h-screen grid-rows-[auto_1fr_auto] pt-16"
+      className="relative overflow-hidden grid min-h-screen grid-rows-[auto_1fr_auto] pt-16"
       style={{
         backgroundImage: "url('/assets/room-wall.png')",
         backgroundSize: "cover",
@@ -97,6 +98,20 @@ export function ArtworkWall({
                 x{s === 1 ? "1" : s === 1.4 ? "2" : "3"}
               </button>
             ))}
+            {isMobile ? (
+              <button
+                type="button"
+                onClick={() => setShowMagnifier((v) => !v)}
+                className={`grid size-9 place-items-center transition ${
+                  showMagnifier
+                    ? "bg-[#f4f1ea] text-[#11100e]"
+                    : "bg-white/10 text-[#f4f1ea] hover:bg-white/15"
+                }`}
+                aria-label={showMagnifier ? "Hide magnifier" : "Show magnifier"}
+              >
+                <Search size={16} />
+              </button>
+            ) : null}
           </div>
           <div className="text-right">
             {artwork.year ? <p className="text-sm text-[#f4f1ea]">{artwork.year}</p> : null}
@@ -121,7 +136,7 @@ export function ArtworkWall({
         </div>
       </div>
 
-      {isMobile && wallRef.current && (
+      {showMagnifier && isMobile && wallRef.current && (
         <MobileMagnifier
           imageUrl={artwork.image}
           imageRef={imageRef}

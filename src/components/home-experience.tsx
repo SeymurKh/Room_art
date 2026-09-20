@@ -131,9 +131,9 @@ export function HomeExperience({ data }: { data: SiteData }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.4 }}
-                className="flex items-center gap-5"
+                className="flex items-center gap-3 overflow-hidden md:gap-5"
               >
-                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-[#0c0c0b] md:h-28 md:w-28">
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-[#0c0c0b] md:h-28 md:w-28">
                   {activeCurrent.image ? (
                     <RoomImage
                       src={activeCurrent.image}
