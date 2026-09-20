@@ -19,7 +19,7 @@ export function ScrollTools() {
   return (
     <>
       <motion.div
-        className="fixed left-0 right-0 top-0 z-60 h-[2px] origin-left"
+        className="fixed left-0 right-0 top-0 z-60 h-0.5 origin-left"
         style={{
           scaleX: scrollYProgress,
           background:

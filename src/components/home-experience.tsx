@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { SiteData } from "@/lib/types";
 import { useTypewriter } from "@/lib/use-typewriter";
@@ -28,7 +28,8 @@ const reveal = {
 
 export function HomeExperience({ data }: { data: SiteData }) {
   const { word, cursor } = useTypewriter();
-  const current = data.events.find((item) => item.status === "Current" && item.featured) ?? data.events.find((item) => item.status === "Current") ?? null;
+  const currentEvents = data.events.filter((item) => item.status === "Current");
+  const current = currentEvents.find((item) => item.featured) ?? currentEvents[0] ?? null;
   const upcoming = data.events.find((item) => item.status === "Upcoming" && item.featured) ?? data.events.find((item) => item.status === "Upcoming") ?? null;
   const pastFallback = current
     ? null
@@ -37,6 +38,17 @@ export function HomeExperience({ data }: { data: SiteData }) {
         .sort((a, b) => Number(b.featured) - Number(a.featured) || data.events.indexOf(a) - data.events.indexOf(b))[0] ?? null;
   const displayedArtworks = data.artworks.filter((a) => a.displayed);
   const [galleryScale, setGalleryScale] = useState(1);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const activeCurrent = currentEvents.length > 0 ? currentEvents[currentIndex % currentEvents.length] : null;
+
+  useEffect(() => {
+    if (currentEvents.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % currentEvents.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [currentEvents.length]);
 
   const showcase = [
     {
@@ -107,31 +119,54 @@ export function HomeExperience({ data }: { data: SiteData }) {
           </h1>
         </div>
 
-        {current ? (
+        {activeCurrent ? (
           <Link
-            href={`/events/${current.slug}`}
+            href={`/events/${activeCurrent.slug}`}
             className="absolute bottom-6 left-6 z-20 flex max-w-[90vw] items-center gap-5 border border-white/15 bg-black/50 p-4 backdrop-blur-md transition hover:bg-black/70 md:bottom-8 md:left-8 md:p-5"
           >
-            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-[#0c0c0b] md:h-28 md:w-28">
-              {current.image ? (
-                <RoomImage
-                  src={current.image}
-                  alt={current.title}
-                  fill
-                  className="object-contain"
-                  fallbackText={current.title}
-                />
-              ) : null}
-            </div>
-            <div className="min-w-0">
-              <p className="section-kicker flex items-center gap-2 text-white/60"><span className="live-dot" /> Now showing</p>
-              <p className="room-serif mt-1 truncate text-xl leading-tight text-[#f4f1ea] md:text-2xl">
-                {current.title}
-              </p>
-              {current.date ? (
-                <p className="mt-1 truncate text-sm text-white/60">{current.date}</p>
-              ) : null}
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeCurrent.slug}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                className="flex items-center gap-5"
+              >
+                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-[#0c0c0b] md:h-28 md:w-28">
+                  {activeCurrent.image ? (
+                    <RoomImage
+                      src={activeCurrent.image}
+                      alt={activeCurrent.title}
+                      fill
+                      className="object-contain"
+                      fallbackText={activeCurrent.title}
+                    />
+                  ) : null}
+                </div>
+                <div className="min-w-0">
+                  <p className="section-kicker flex items-center gap-2 text-white/60"><span className="live-dot" /> Now showing</p>
+                  <p className="room-serif mt-1 truncate text-xl leading-tight text-[#f4f1ea] md:text-2xl">
+                    {activeCurrent.title}
+                  </p>
+                  {activeCurrent.date ? (
+                    <p className="mt-1 truncate text-sm text-white/60">{activeCurrent.date}</p>
+                  ) : null}
+                  {currentEvents.length > 1 ? (
+                    <div className="mt-2 flex gap-1.5">
+                      {currentEvents.map((_, i) => (
+                        <span
+                          key={i}
+                          className={`h-1 rounded-full transition-all duration-300 ${
+                            i === currentIndex ? "w-4 bg-white/80" : "w-1 bg-white/30"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </Link>
         ) : null}
       </section>

@@ -38,8 +38,12 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
 
   useMotionValueEvent(scrollYProgress, "change", (p) => target.set(p));
 
+  const hasCurrent = events.some((e) => e.status === "Current");
+  const leftStatus: Event["status"] = hasCurrent ? "Current" : "Upcoming";
+  const labels: [string, string] = [hasCurrent ? "Now showing" : "Upcoming", "Past"];
+
   const scrolled = [
-    findFeaturedEvent(events, "Upcoming"),
+    findFeaturedEvent(events, leftStatus),
     findFeaturedEvent(events, "Past"),
   ] as const;
 
@@ -83,7 +87,7 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
                     }`}
                   >
                     <div className="max-w-md">
-                      <p className="section-kicker text-[#f4f1ea]/60">{stripe.key}</p>
+                      <p className="section-kicker text-[#f4f1ea]/60">{labels[i]}</p>
                       <p className="room-serif mt-3 text-3xl leading-tight text-[#f4f1ea] transition-transform duration-500 group-hover:-translate-y-1 md:text-4xl">
                         {event.title}
                       </p>
@@ -93,7 +97,7 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
                 </Link>
               ) : (
                 <div className="flex h-full items-center justify-center opacity-20">
-                  <p className="room-serif text-sm text-white/30">No {stripe.key.toLowerCase()} events</p>
+                  <p className="room-serif text-sm text-white/30">No {labels[i].toLowerCase()} events</p>
                 </div>
               )}
             </motion.div>

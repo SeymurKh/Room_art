@@ -67,7 +67,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
         {/* Right: main event photo — fills container */}
         {event.image ? (
-          <div className="relative w-full max-h-[65vh] max-w-[420px] aspect-[3/4] overflow-hidden rounded-2xl bg-black shadow-2xl mx-auto md:aspect-[5/9]">
+          <div className="relative w-full max-h-[65vh] max-w-105 aspect-3/4 overflow-hidden rounded-2xl bg-black shadow-2xl mx-auto md:aspect-5/9 md:max-h-[60vh]">
             <MediaLightbox items={mediaItems} index={0}>
               <PositionedImage
                 src={event.image}

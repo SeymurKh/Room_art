@@ -72,7 +72,7 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
               className="w-full"
             >
               <Link href={`/events/${event.slug}`} className="group block">
-                <div className="relative aspect-[4/5] overflow-hidden bg-[#0c0c0b]">
+                <div className="relative aspect-4/5 overflow-hidden bg-[#0c0c0b]">
                   {event.image ? (
                     <Image
                       src={event.image}
