@@ -33,12 +33,14 @@ export function EventMediaManager({
   onPhotosChange,
   onVideoChange,
   scheduleDeletion,
+  onUploadingChange,
 }: {
   photos: string[];
   video: string;
-  onPhotosChange: (photos: string[]) => void;
+  onPhotosChange: (update: (current: string[]) => string[]) => void;
   onVideoChange: (video: string) => void;
   scheduleDeletion: (path: string) => void;
+  onUploadingChange: (uploading: boolean) => void;
 }) {
   const photoInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
@@ -58,28 +60,38 @@ export function EventMediaManager({
         continue;
       }
     }
+    const valid = list.filter(
+      (f) => IMAGE_MIME.includes(f.type) && f.size <= MAX_IMAGE
+    );
+    if (valid.length === 0) return;
+
     setUploadingPhoto(true);
+    onUploadingChange(true);
+    const paths: string[] = [];
+    const failures: string[] = [];
     try {
-      const valid = list.filter(
-        (f) => IMAGE_MIME.includes(f.type) && f.size <= MAX_IMAGE
-      );
-      const paths: string[] = [];
       for (const file of valid) {
-        paths.push(await uploadFile(file, "uploads/events"));
+        try {
+          paths.push(await uploadFile(file, "uploads/events"));
+        } catch (error) {
+          console.error(error);
+          failures.push(file.name);
+        }
       }
-      onPhotosChange([...photos, ...paths]);
-    } catch (err) {
-      console.error(err);
-      alert("Photo upload failed.");
+      if (paths.length > 0) onPhotosChange((current) => [...current, ...paths]);
+      if (failures.length > 0) {
+        alert(`Could not upload: ${failures.join(", ")}. Successfully uploaded photos were kept in the form.`);
+      }
     } finally {
       setUploadingPhoto(false);
+      onUploadingChange(false);
       if (photoInputRef.current) photoInputRef.current.value = "";
     }
   }
 
   function removePhoto(path: string) {
     scheduleDeletion(path);
-    onPhotosChange(photos.filter((p) => p !== path));
+    onPhotosChange((current) => current.filter((p) => p !== path));
   }
 
   async function handleVideo(file: File | undefined) {
@@ -93,6 +105,7 @@ export function EventMediaManager({
       return;
     }
     setUploadingVideo(true);
+    onUploadingChange(true);
     try {
       const path = await uploadFile(file, "uploads/events");
       if (video && video !== path) scheduleDeletion(video);
@@ -102,6 +115,7 @@ export function EventMediaManager({
       alert("Video upload failed.");
     } finally {
       setUploadingVideo(false);
+      onUploadingChange(false);
       if (videoInputRef.current) videoInputRef.current.value = "";
     }
   }

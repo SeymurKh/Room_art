@@ -35,6 +35,11 @@ export function EventAccordion({
 }) {
   const [open, setOpen] = useState(false);
   const [pendingDels, setPendingDels] = useState<string[]>([]);
+  const [uploadCount, setUploadCount] = useState(0);
+
+  function trackUpload(isUploading: boolean) {
+    setUploadCount((count) => Math.max(0, count + (isUploading ? 1 : -1)));
+  }
 
   const eventPayload = useMemo(() => JSON.stringify(event), [event]);
 
@@ -55,7 +60,7 @@ export function EventAccordion({
           <button type="button" onClick={() => toggleFeatured(eventIndex, event.featured)} className={`flex items-center gap-1 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider border transition ${event.featured ? "bg-yellow-100 border-yellow-400 text-yellow-800" : "border-black/20 text-[#6f6a61] hover:border-black/40"}`} title={event.featured ? "Featured in hero" : "Not in hero"}>
             <Star size={12} fill={event.featured ? "currentColor" : "none"} />{event.featured ? "Hero ★" : "Feature"}
           </button>
-          <button type="button" onClick={() => deleteEvent(event)} className="grid size-8 place-items-center border border-black/40 text-[#11100e] transition hover:border-red-400 hover:text-red-600"><Trash2 size={14} /></button>
+          <button type="button" onClick={() => deleteEvent(event)} aria-label={`Delete event ${event.title || "new event"}`} title={`Delete ${event.title || "event"}`} className="grid size-8 place-items-center border border-black/40 text-[#11100e] transition hover:border-red-400 hover:text-red-600"><Trash2 size={14} /></button>
         </div>
       </div>
 
@@ -68,10 +73,10 @@ export function EventAccordion({
             <input type="hidden" name="revision" value={revision} readOnly />
             <input type="hidden" name="pendingDeletions" value={JSON.stringify(pendingDels)} />
             <Grid>
-              <Field label="Title" value={event.title} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, title: v } : ev))} />
+              <Field required label="Title" value={event.title} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, title: v } : ev))} />
               <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Status<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.status} onChange={(e) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, status: e.target.value as Event["status"] } : ev))}><option value="Upcoming">Upcoming</option><option value="Current">Current</option><option value="Past">Past</option></select></label>
-              <Field label="Date" value={event.date} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, date: v } : ev))} />
-              <UploadField label="Image" value={event.image} onChange={(v, pending) => { handleImageChange(eventIndex, v); if (pending) scheduleDeletion(pending); }} folder="uploads/events" />
+              <Field required label="Date" value={event.date} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, date: v } : ev))} />
+              <UploadField label="Image" value={event.image} onChange={(v, pending) => { handleImageChange(eventIndex, v); if (pending) scheduleDeletion(pending); }} folder="uploads/events" onUploadingChange={trackUpload} />
             </Grid>
             <Field multiline label="Description" value={event.description} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, description: v } : ev))} />
 
@@ -89,13 +94,14 @@ export function EventAccordion({
             <EventMediaManager
               photos={event.gallery ?? []}
               video={event.video ?? ""}
-              onPhotosChange={(photos) => updateEvents((prev) => prev.map((e, i) => i === eventIndex ? { ...e, gallery: photos } : e))}
+              onPhotosChange={(updatePhotos) => updateEvents((prev) => prev.map((e, i) => i === eventIndex ? { ...e, gallery: updatePhotos(e.gallery ?? []) } : e))}
               onVideoChange={(video) => updateEvents((prev) => prev.map((e, i) => i === eventIndex ? { ...e, video } : e))}
               scheduleDeletion={scheduleDeletion}
+              onUploadingChange={trackUpload}
             />
 
             <div className="mt-4 flex justify-end">
-              <button type="submit" className="inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]"><Save size={16} /> Save event</button>
+              <button type="submit" disabled={uploadCount > 0} className="inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] disabled:opacity-50"><Save size={16} /> {uploadCount > 0 ? "Uploading media…" : "Save event"}</button>
             </div>
           </form>
         </div>

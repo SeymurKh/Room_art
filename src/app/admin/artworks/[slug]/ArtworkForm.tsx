@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Save } from "lucide-react";
 import { UploadField } from "@/components/upload-field";
 import type { Artwork, Artist } from "@/lib/types";
@@ -19,23 +19,27 @@ export function ArtworkForm({
     slug: defaults.slug || `artwork-${crypto.randomUUID()}`,
     displayed: defaults.displayed ?? false,
   });
+  const dataRef = useRef(data);
   const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   function updateField(key: keyof Artwork, value: string | number | boolean | null) {
-    let next = { ...data, [key]: value };
+    const current = dataRef.current;
+    let next = { ...current, [key]: value };
 
     // Auto-calculate dimensions when width or height changes
     if (key === "widthCm" || key === "heightCm") {
-      const width = key === "widthCm" ? (value as number) : data.widthCm;
-      const height = key === "heightCm" ? (value as number) : data.heightCm;
+      const width = key === "widthCm" ? (value as number) : current.widthCm;
+      const height = key === "heightCm" ? (value as number) : current.heightCm;
       if (width > 0 && height > 0) {
         next = { ...next, dimensions: `${width} × ${height} cm` };
       }
     }
 
+    dataRef.current = next;
     setData(next);
     const el = document.getElementById("payload") as HTMLInputElement;
-    if (el) el.value = JSON.stringify({ ...next, __pendingDeletions: pendingDeletions });
+    if (el) el.value = JSON.stringify(next);
   }
 
   function handleImageChange(path: string, pendingDeletion?: string) {
@@ -49,7 +53,7 @@ export function ArtworkForm({
 
   return (
     <div className="max-w-2xl space-y-5">
-      <Field label="Title" value={data.title} onChange={(v) => updateField("title", v)} />
+      <Field required label="Title" value={data.title} onChange={(v) => updateField("title", v)} />
       {preselectedArtist ? (
         <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
           Artist
@@ -62,6 +66,7 @@ export function ArtworkForm({
           <select
             className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]"
             value={data.artistSlug}
+            required
             onChange={(e) => updateField("artistSlug", e.target.value)}
           >
             <option value="">— Select artist —</option>
@@ -72,7 +77,7 @@ export function ArtworkForm({
         </label>
       )}
       <Field label="Year" value={data.year} onChange={(v) => updateField("year", v)} />
-      <Field label="Medium" value={data.medium} onChange={(v) => updateField("medium", v)} placeholder="e.g. Acrylic on canvas" />
+      <Field required label="Medium" value={data.medium} onChange={(v) => updateField("medium", v)} placeholder="e.g. Acrylic on canvas" />
       <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
         Dimensions
         <input
@@ -88,6 +93,7 @@ export function ArtworkForm({
           id="field-width-cm"
           type="number"
           min="1"
+          required
           className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]"
           value={data.widthCm || ""}
           onChange={(e) => updateField("widthCm", e.target.value === "" ? 0 : Number(e.target.value))}
@@ -99,12 +105,13 @@ export function ArtworkForm({
           id="field-height-cm"
           type="number"
           min="1"
+          required
           className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]"
           value={data.heightCm || ""}
           onChange={(e) => updateField("heightCm", e.target.value === "" ? 0 : Number(e.target.value))}
         />
       </label>
-      <UploadField label="Image" value={data.image} onChange={handleImageChange} folder="uploads/artworks" />
+      <UploadField label="Image" value={data.image} onChange={handleImageChange} folder="uploads/artworks" onUploadingChange={setUploadingImage} />
       <input type="hidden" name="pendingDeletions" value={JSON.stringify(pendingDeletions)} />
       <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
         Availability
@@ -151,9 +158,10 @@ export function ArtworkForm({
       </label>
       <button
         type="submit"
+        disabled={uploadingImage || !data.image}
         className="mt-6 inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]"
       >
-        <Save size={16} /> Save artwork
+        <Save size={16} /> {uploadingImage ? "Uploading image…" : !data.image ? "Upload an image to save" : "Save artwork"}
       </button>
     </div>
   );
@@ -165,12 +173,14 @@ function Field({
   onChange,
   multiline = false,
   placeholder,
+  required = false,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   multiline?: boolean;
   placeholder?: string;
+  required?: boolean;
 }) {
   const id = `field-${label.toLowerCase().replace(/\s+/g, "-")}`;
   return (
@@ -182,6 +192,7 @@ function Field({
           className="admin-input mt-2 min-h-28 resize-y text-sm normal-case tracking-normal text-[#11100e]"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          required={required}
           placeholder={placeholder}
         />
       ) : (
@@ -191,6 +202,7 @@ function Field({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
+          required={required}
         />
       )}
     </label>

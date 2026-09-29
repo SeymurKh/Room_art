@@ -18,6 +18,7 @@ export type UploadFieldProps = {
   value: string;
   onChange: (path: string, pendingDeletion?: string) => void;
   folder: string;
+  onUploadingChange?: (uploading: boolean) => void;
 };
 
 export function UploadField({
@@ -25,6 +26,7 @@ export function UploadField({
   value,
   onChange,
   folder,
+  onUploadingChange,
 }: UploadFieldProps) {
   const [uploading, setUploading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -51,6 +53,7 @@ export function UploadField({
     }
 
     setUploading(true);
+    onUploadingChange?.(true);
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -72,6 +75,7 @@ export function UploadField({
       alert("Upload failed due to a network error.");
     } finally {
       setUploading(false);
+      onUploadingChange?.(false);
       if (inputRef.current) inputRef.current.value = "";
     }
   }

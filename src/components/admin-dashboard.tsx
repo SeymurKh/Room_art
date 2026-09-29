@@ -31,14 +31,21 @@ export function AdminDashboard({
   saveError?: string | null;
 }) {
   const [tab, setTab] = useState<Tab>("settings");
-  const [data, setData] = useState(initialData);
+  const [draftData, setDraftData] = useState(initialData);
+  const data = draftData.revision === initialData.revision ? draftData : initialData;
+
+  function updateData(updater: (current: VersionedSiteData) => VersionedSiteData) {
+    setDraftData((current) =>
+      updater(current.revision === initialData.revision ? current : initialData)
+    );
+  }
 
   function updateEvents(fn: (prev: Event[]) => Event[]) {
-    setData((prev) => ({ ...prev, events: fn(prev.events) }));
+    updateData((prev) => ({ ...prev, events: fn(prev.events) }));
   }
 
   function handleImageChange(eventIndex: number, path: string) {
-    setData((prev) => ({
+    updateData((prev) => ({
       ...prev,
       events: prev.events.map((ev, i) => i === eventIndex ? { ...ev, image: path } : ev),
     }));
@@ -55,7 +62,7 @@ export function AdminDashboard({
       heroTransform: "translate(0px, 0px) scale(1)", thumbTransform: "translate(0px, 0px) scale(1)",
       detailTransform: "translate(0px, 0px) scale(1)", featured: false, description: "", gallery: [], video: "",
     };
-    setData((prev) => ({ ...prev, events: [...prev.events, newEvent] }));
+    updateData((prev) => ({ ...prev, events: [...prev.events, newEvent] }));
     setTab("events");
   }
 
@@ -63,7 +70,7 @@ export function AdminDashboard({
     const newFeatured = !currentFeatured;
     const event = data.events[index];
     if (!event) return;
-    setData((prev) => ({
+    updateData((prev) => ({
       ...prev,
       events: prev.events.map((ev, i) => i === index ? { ...ev, featured: newFeatured } : ev),
     }));
@@ -109,17 +116,17 @@ export function AdminDashboard({
             <input type="hidden" name="revision" value={data.revision} readOnly />
             <Panel title="Settings">
               <Grid>
-                <Field label="WhatsApp Number" value={data.settings.whatsappNumber} onChange={(v) => setData((prev) => ({ ...prev, settings: { ...prev.settings, whatsappNumber: v } }))} />
-                <Field label="Email" value={data.settings.email} onChange={(v) => setData((prev) => ({ ...prev, settings: { ...prev.settings, email: v } }))} />
-                <Field label="Phone" value={data.settings.phone} onChange={(v) => setData((prev) => ({ ...prev, settings: { ...prev.settings, phone: v } }))} />
-                <Field label="Address" value={data.settings.address} onChange={(v) => setData((prev) => ({ ...prev, settings: { ...prev.settings, address: v } }))} />
+                <Field required label="WhatsApp Number" value={data.settings.whatsappNumber} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, whatsappNumber: v } }))} />
+                <Field required type="email" label="Email" value={data.settings.email} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, email: v } }))} />
+                <Field required label="Phone" value={data.settings.phone} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, phone: v } }))} />
+                <Field required label="Address" value={data.settings.address} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, address: v } }))} />
               </Grid>
-              <Field label="Instagram URL" value={data.settings.instagram} onChange={(v) => setData((prev) => ({ ...prev, settings: { ...prev.settings, instagram: v } }))} />
+              <Field required type="url" label="Instagram URL" value={data.settings.instagram} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, instagram: v } }))} />
             </Panel>
             <Panel title="About">
-              <Field multiline label="Concept" value={data.about.concept} onChange={(v) => setData((prev) => ({ ...prev, about: { ...prev.about, concept: v } }))} />
-              <Field multiline label="Vision" value={data.about.vision} onChange={(v) => setData((prev) => ({ ...prev, about: { ...prev.about, vision: v } }))} />
-              <Field multiline label="Identity" value={data.about.identity} onChange={(v) => setData((prev) => ({ ...prev, about: { ...prev.about, identity: v } }))} />
+              <Field required multiline label="Concept" value={data.about.concept} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, concept: v } }))} />
+              <Field required multiline label="Vision" value={data.about.vision} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, vision: v } }))} />
+              <Field required multiline label="Identity" value={data.about.identity} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, identity: v } }))} />
             </Panel>
             <div className="mt-6">
               <button type="submit" className="inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]">Save settings</button>

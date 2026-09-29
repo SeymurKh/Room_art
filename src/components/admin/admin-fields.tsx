@@ -18,11 +18,15 @@ export function Field({
   value,
   onChange,
   multiline,
+  required,
+  type = "text",
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   multiline?: boolean;
+  required?: boolean;
+  type?: "text" | "email" | "url";
 }) {
   return (
     <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
@@ -32,12 +36,15 @@ export function Field({
           className="admin-input mt-2 min-h-28 resize-y text-sm normal-case tracking-normal text-[#11100e]"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          required={required}
         />
       ) : (
         <input
           className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]"
+          type={type}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          required={required}
         />
       )}
     </label>

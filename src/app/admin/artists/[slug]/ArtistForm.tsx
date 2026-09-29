@@ -16,6 +16,11 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
   });
   const dataRef = useRef(data);
   const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
+  const [uploadCount, setUploadCount] = useState(0);
+
+  function trackUpload(isUploading: boolean) {
+    setUploadCount((count) => Math.max(0, count + (isUploading ? 1 : -1)));
+  }
 
   function syncPayload(next: Artist) {
     const el = document.getElementById("payload") as HTMLInputElement;
@@ -61,21 +66,22 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
 
   return (
     <div className="max-w-2xl space-y-5">
-      <Field label="Name" value={data.name} onChange={(v) => updateField("name", v)} />
-      <Field label="Role" value={data.role} onChange={(v) => updateField("role", v)} />
-      <UploadField label="Portrait" value={data.portrait} onChange={handlePortraitChange} folder="uploads/artists" />
+      <Field required label="Name" value={data.name} onChange={(v) => updateField("name", v)} />
+      <Field required label="Role" value={data.role} onChange={(v) => updateField("role", v)} />
+      <UploadField label="Portrait" value={data.portrait} onChange={handlePortraitChange} folder="uploads/artists" onUploadingChange={trackUpload} />
       <input type="hidden" name="pendingDeletions" value={JSON.stringify(pendingDeletions)} />
 
       {/* Studio photos */}
-      <StudioPhotosManager photos={data.photos} onAdd={addPhoto} onRemove={removePhoto} />
+      <StudioPhotosManager photos={data.photos} onAdd={addPhoto} onRemove={removePhoto} onUploadingChange={trackUpload} />
 
       <Field multiline label="Bio" value={data.bio} onChange={(v) => updateField("bio", v)} />
       <Field multiline label="Statement" value={data.statement} onChange={(v) => updateField("statement", v)} />
       <button
         type="submit"
+        disabled={uploadCount > 0}
         className="mt-6 inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]"
       >
-        <Save size={16} /> Save artist
+        <Save size={16} /> {uploadCount > 0 ? "Uploading photos…" : "Save artist"}
       </button>
     </div>
   );
@@ -85,10 +91,12 @@ function StudioPhotosManager({
   photos,
   onAdd,
   onRemove,
+  onUploadingChange,
 }: {
   photos: string[];
   onAdd: (path: string) => void;
   onRemove: (index: number) => void;
+  onUploadingChange: (uploading: boolean) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -98,6 +106,7 @@ function StudioPhotosManager({
     const list = Array.from(files).filter((f) => IMAGE_MIME.includes(f.type) && f.size <= MAX_IMAGE);
     if (list.length === 0) return;
     setUploading(true);
+    onUploadingChange(true);
     try {
       for (const file of list) {
         const formData = new FormData();
@@ -117,6 +126,7 @@ function StudioPhotosManager({
       alert("Photo upload failed.");
     } finally {
       setUploading(false);
+      onUploadingChange(false);
       if (inputRef.current) inputRef.current.value = "";
     }
   }
@@ -181,11 +191,13 @@ function Field({
   value,
   onChange,
   multiline = false,
+  required = false,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   multiline?: boolean;
+  required?: boolean;
 }) {
   const id = `field-${label.toLowerCase().replace(/\s+/g, "-")}`;
   return (
@@ -197,6 +209,7 @@ function Field({
           className="admin-input mt-2 min-h-28 resize-y text-sm normal-case tracking-normal text-[#11100e]"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          required={required}
         />
       ) : (
         <input
@@ -204,6 +217,7 @@ function Field({
           className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          required={required}
         />
       )}
     </label>
