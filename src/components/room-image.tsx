@@ -36,6 +36,9 @@ export function RoomImage({
       {...props}
       src={src}
       fill={fill}
+      // Runtime uploads are already resized and WebP-encoded by /api/upload.
+      // Serving them directly avoids production optimizer failures for uploads.
+      unoptimized={typeof src === "string" && src.startsWith("/uploads/")}
       sizes={sizes ?? (fill ? "(max-width: 768px) 100vw, 50vw" : undefined)}
       placeholder="blur"
       blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTRlMGQ4Ii8+PC9zdmc+"
