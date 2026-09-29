@@ -9,7 +9,6 @@ import { useTypewriter } from "@/lib/use-typewriter";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { RoomImage } from "@/components/room-image";
-import { SectionHeading } from "@/components/section-heading";
 import { HeroSlideshowShader } from "@/components/hero-slideshow-shader";
 import { ParallaxWindow } from "@/components/parallax-window";
 import { GalleryScrolltelling } from "@/components/gallery-scrolltelling";
@@ -17,7 +16,6 @@ import { MobileArtworkCarousel } from "@/components/mobile-artwork-carousel";
 import { ArtistsCarousel } from "@/components/artists-carousel";
 import { EventsScrolltelling } from "@/components/events-scrolltelling";
 import { MobileEventsCarousel } from "@/components/mobile-events-carousel";
-import { whatsappContactUrl } from "@/lib/whatsapp";
 
 const reveal = {
   initial: { opacity: 0, y: 26 },

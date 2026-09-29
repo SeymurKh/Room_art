@@ -14,6 +14,7 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
     slug: defaults.slug || `artist-${crypto.randomUUID()}`,
     photos: defaults.photos ?? [],
   });
+  const dataRef = useRef(data);
   const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
 
   function syncPayload(next: Artist) {
@@ -22,7 +23,8 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
   }
 
   function updateField(key: keyof Artist, value: string) {
-    const next = { ...data, [key]: value };
+    const next = { ...dataRef.current, [key]: value };
+    dataRef.current = next;
     setData(next);
     syncPayload(next);
   }
@@ -36,15 +38,19 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
   }
 
   function addPhoto(path: string) {
-    const next = { ...data, photos: [...data.photos, path] };
+    // Upload callbacks may complete in sequence while still holding the same
+    // render's callback. Always append to the latest state to retain every file.
+    const next = { ...dataRef.current, photos: [...dataRef.current.photos, path] };
+    dataRef.current = next;
     setData(next);
     syncPayload(next);
   }
 
   function removePhoto(index: number) {
-    const removed = data.photos[index];
-    const nextPhotos = data.photos.filter((_, i) => i !== index);
-    const next = { ...data, photos: nextPhotos };
+    const removed = dataRef.current.photos[index];
+    const nextPhotos = dataRef.current.photos.filter((_, i) => i !== index);
+    const next = { ...dataRef.current, photos: nextPhotos };
+    dataRef.current = next;
     setData(next);
     if (removed && removed.startsWith("/uploads/")) {
       const nextDel = [...pendingDeletions, removed];

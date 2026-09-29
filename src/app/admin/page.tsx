@@ -30,7 +30,7 @@ export default async function AdminPage({
 
   const data = await getSiteData();
   const saveError = params.error === "validation" && params.details
-    ? `Validation errors: ${decodeURIComponent(params.details)}`
+    ? `Validation errors: ${params.details}`
     : params.error === "json"
       ? "Invalid JSON. Please check your data structure."
       : null;

@@ -55,7 +55,7 @@ export default async function AdminArtworksPage() {
                 <td className="py-3 pr-4 text-[#6f6a61]">{artwork.year}</td>
                 <td className="py-3 pr-4 font-mono text-xs text-[#6f6a61]">{artwork.availability}</td>
                 <td className="py-3">
-                  <form action={deleteArtwork.bind(null, artwork.slug)}>
+                  <form action={deleteArtwork.bind(null, artwork.slug, data.revision)}>
                     <DeleteButton itemName={artwork.title} />
                   </form>
                 </td>

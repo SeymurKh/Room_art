@@ -20,5 +20,6 @@ jobs:
             cd /var/www/roomart
             git pull origin master
             npm ci
+            npm run db:migrate
             NODE_OPTIONS="--max-old-space-size=3072" npm run build
             pm2 restart roomart

@@ -49,7 +49,7 @@ export default async function AdminArtworkPage({
 
   const errorMsg =
     sp.error === "validation" && sp.details
-      ? `Validation: ${decodeURIComponent(sp.details)}`
+      ? `Validation: ${sp.details}`
       : sp.error === "json"
         ? "Invalid JSON."
         : null;
@@ -80,6 +80,7 @@ export default async function AdminArtworkPage({
       <form action={saveAction} className="room-shell py-8">
         <input type="hidden" name="slug" value={defaults.slug} readOnly />
         <input type="hidden" name="payload" id="payload" value={JSON.stringify(defaults)} readOnly />
+        <input type="hidden" name="revision" value={data.revision} readOnly />
 
         {sp.saved === "1" ? (
           <div className="mb-6 border border-black/10 bg-white/50 px-4 py-3 text-sm">Saved.</div>

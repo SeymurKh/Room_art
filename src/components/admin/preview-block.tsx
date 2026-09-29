@@ -34,30 +34,29 @@ export function PreviewBlock({
   const parsed = parseTransform(transform);
   const [live, setLive] = useState(parsed);
   const liveRef = useRef(parsed);
-  liveRef.current = live;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const lastMouseRef = useRef({ x: 0, y: 0 });
   const draggingRef = useRef(false);
 
-  function saveTransform(tx: number, ty: number, scale: number) {
+  const saveTransform = useCallback((tx: number, ty: number, scale: number) => {
     const value = buildTransform(tx, ty, scale);
     updateEvents((prev) =>
       prev.map((ev, i) => (i === index ? { ...ev, [field]: value } : ev))
     );
-  }
+  }, [field, index, updateEvents]);
 
   function handleReset() {
     saveTransform(0, 0, 1);
     setLive({ tx: 0, ty: 0, scale: 1 });
   }
 
-  function beginDrag(clientX: number, clientY: number) {
+  const beginDrag = useCallback((clientX: number, clientY: number) => {
     draggingRef.current = true;
     lastMouseRef.current = { x: clientX, y: clientY };
-  }
+  }, []);
 
-  function moveDrag(clientX: number, clientY: number) {
+  const moveDrag = useCallback((clientX: number, clientY: number) => {
     if (!draggingRef.current) return;
     const dx = clientX - lastMouseRef.current.x;
     const dy = clientY - lastMouseRef.current.y;
@@ -66,14 +65,14 @@ export function PreviewBlock({
     const dxPct = rect && rect.width > 0 ? (dx / rect.width) * 100 : 0;
     const dyPct = rect && rect.height > 0 ? (dy / rect.height) * 100 : 0;
     setLive((prev) => ({ tx: prev.tx + dxPct, ty: prev.ty + dyPct, scale: prev.scale }));
-  }
+  }, []);
 
-  function endDrag() {
+  const endDrag = useCallback(() => {
     if (!draggingRef.current) return;
     draggingRef.current = false;
     const { tx, ty, scale } = liveRef.current;
     saveTransform(tx, ty, scale);
-  }
+  }, [saveTransform]);
 
   useEffect(() => {
     if (draggingRef.current) return;
@@ -84,22 +83,20 @@ export function PreviewBlock({
     );
   }, [parsed]);
 
-  const handlePointerDown = useCallback(
-    (e: React.PointerEvent) => {
-      (e.target as HTMLElement).setPointerCapture(e.pointerId);
-      beginDrag(e.clientX, e.clientY);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+  useEffect(() => {
+    liveRef.current = live;
+  }, [live]);
 
-  const handlePointerMove = useCallback(
-    (e: React.PointerEvent) => moveDrag(e.clientX, e.clientY),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    beginDrag(e.clientX, e.clientY);
+  }, [beginDrag]);
 
-  const handlePointerUp = useCallback(() => endDrag(), []);
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    moveDrag(e.clientX, e.clientY);
+  }, [moveDrag]);
+
+  const handlePointerUp = useCallback(() => endDrag(), [endDrag]);
 
   function handleZoom(delta: number) {
     const next = { ...live, scale: clamp(+(live.scale + delta).toFixed(2), 0.5, 4) };

@@ -39,7 +39,7 @@ export default async function AdminArtistPage({
 
   const errorMsg =
     sp.error === "validation" && sp.details
-      ? `Validation: ${decodeURIComponent(sp.details)}`
+      ? `Validation: ${sp.details}`
       : sp.error === "json"
         ? "Invalid JSON."
         : null;
@@ -72,6 +72,7 @@ export default async function AdminArtistPage({
       <form action={saveAction} className="room-shell py-8">
         <input type="hidden" name="slug" value={defaults.slug} readOnly />
         <input type="hidden" name="payload" id="payload" value={JSON.stringify(defaults)} readOnly />
+        <input type="hidden" name="revision" value={data.revision} readOnly />
 
         {sp.saved === "1" ? (
           <div className="mb-6 border border-black/10 bg-white/50 px-4 py-3 text-sm">Saved.</div>
@@ -119,7 +120,7 @@ export default async function AdminArtistPage({
                     <td className="py-3 pr-4 text-[#6f6a61]">{artwork.year}</td>
                     <td className="py-3 pr-4 text-xs text-[#6f6a61]">{artwork.availability}</td>
                     <td className="py-3">
-                      <form action={deleteArtwork.bind(null, artwork.slug)}>
+                      <form action={deleteArtwork.bind(null, artwork.slug, data.revision)}>
                         <DeleteButton itemName={artwork.title} />
                       </form>
                     </td>

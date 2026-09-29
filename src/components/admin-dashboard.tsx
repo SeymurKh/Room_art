@@ -1,12 +1,18 @@
 ﻿"use client";
 
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Check, LogOut } from "lucide-react";
 import { EventAccordion } from "@/components/admin/event-accordion";
 import { Panel, Grid, Field } from "@/components/admin/admin-fields";
-import type { SiteData, Event } from "@/lib/types";
-import { logoutAdmin, saveAdminData } from "@/app/admin/actions";
+import type { Event } from "@/lib/types";
+import type { VersionedSiteData } from "@/lib/site-data";
+import {
+  deleteSingleEvent,
+  logoutAdmin,
+  saveAdminData,
+  setSingleEventFeatured,
+} from "@/app/admin/actions";
 
 type Tab = "settings" | "events";
 
@@ -20,33 +26,27 @@ export function AdminDashboard({
   saved,
   saveError,
 }: {
-  initialData: SiteData;
+  initialData: VersionedSiteData;
   saved?: boolean;
   saveError?: string | null;
 }) {
   const [tab, setTab] = useState<Tab>("settings");
   const [data, setData] = useState(initialData);
-  const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
 
   function updateEvents(fn: (prev: Event[]) => Event[]) {
     setData((prev) => ({ ...prev, events: fn(prev.events) }));
   }
 
-  function handleImageChange(eventIndex: number, path: string, pendingDeletion?: string) {
+  function handleImageChange(eventIndex: number, path: string) {
     setData((prev) => ({
       ...prev,
       events: prev.events.map((ev, i) => i === eventIndex ? { ...ev, image: path } : ev),
     }));
-    if (pendingDeletion) setPendingDeletions((prev) => [...prev, pendingDeletion]);
   }
 
   function deleteEvent(event: Event) {
     if (!window.confirm(`Delete "${event.title}"? This cannot be undone.`)) return;
-    const deletedMedia = [event.image, ...(event.gallery ?? [])].filter(
-      (p): p is string => !!p && p.startsWith("/uploads/")
-    );
-    setPendingDeletions((prev) => [...prev, ...deletedMedia]);
-    setData((prev) => ({ ...prev, events: prev.events.filter((e) => e.slug !== event.slug) }));
+    void deleteSingleEvent(event.slug, data.revision, [event.image, event.video, ...(event.gallery ?? [])]);
   }
 
   function addNewEvent() {
@@ -59,22 +59,20 @@ export function AdminDashboard({
     setTab("events");
   }
 
-  const scheduleDeletion = useCallback((path: string) => {
-    setPendingDeletions((prev) => [...prev, path]);
-  }, []);
-
   function toggleFeatured(index: number, currentFeatured: boolean) {
     const newFeatured = !currentFeatured;
+    const event = data.events[index];
+    if (!event) return;
     setData((prev) => ({
       ...prev,
       events: prev.events.map((ev, i) => i === index ? { ...ev, featured: newFeatured } : ev),
     }));
+    void setSingleEventFeatured(event.slug, newFeatured, data.revision);
   }
 
   const dataPayload = useMemo(() => {
-    const { __pendingDeletions, ...rest } = data as SiteData & { __pendingDeletions?: string[] };
-    return JSON.stringify({ ...rest, __pendingDeletions: pendingDeletions });
-  }, [data, pendingDeletions]);
+    return JSON.stringify({ settings: data.settings, about: data.about });
+  }, [data.settings, data.about]);
 
   return (
     <main className="min-h-screen bg-[#f4f1ea]">
@@ -108,6 +106,7 @@ export function AdminDashboard({
         {tab === "settings" ? (
           <form action={saveAdminData}>
             <input type="hidden" name="payload" value={dataPayload} readOnly />
+            <input type="hidden" name="revision" value={data.revision} readOnly />
             <Panel title="Settings">
               <Grid>
                 <Field label="WhatsApp Number" value={data.settings.whatsappNumber} onChange={(v) => setData((prev) => ({ ...prev, settings: { ...prev.settings, whatsappNumber: v } }))} />
@@ -132,7 +131,7 @@ export function AdminDashboard({
           <div className="space-y-4">
             {data.events.length === 0 ? <p className="text-sm text-[#6f6a61]">No events yet. Click &quot;+ Add event&quot; to create one.</p> : null}
             {data.events.map((event, i) => (
-              <EventAccordion key={event.slug} event={event} eventIndex={i} updateEvents={updateEvents} deleteEvent={deleteEvent} toggleFeatured={toggleFeatured} handleImageChange={handleImageChange} scheduleDeletion={scheduleDeletion} />
+              <EventAccordion key={event.slug} event={event} eventIndex={i} revision={data.revision} updateEvents={updateEvents} deleteEvent={deleteEvent} toggleFeatured={toggleFeatured} handleImageChange={handleImageChange} />
             ))}
           </div>
         ) : null}

@@ -34,24 +34,27 @@ else
   cd roomart
 fi
 
-echo "=== 7. Create .env.production ==="
-cat > .env.production << 'ENVEOF'
-ADMIN_PASSWORD=RO0M9alleryBaky
-ADMIN_SECRET=4473af8dce22aea1722c6f585b030c23013c273a7409ad4927dbb7e0b8e05381
-DATABASE_URL=./data/room.db
-RESEND_API_KEY=re_YjqBauW8_EtmQvdke84qAmFYchMUzUJ2P
-# Uncomment after verifying roomgallery.art domain in Resend:
-# RESEND_FROM_EMAIL=ROOM Contact Form <noreply@roomgallery.art>
-ENVEOF
+echo "=== 7. Check production environment ==="
+if [ ! -f .env.production ]; then
+  echo "Missing .env.production. Configure secrets on the server before deploying."
+  exit 1
+fi
+for key in ADMIN_PASSWORD ADMIN_SECRET; do
+  if ! grep -Eq "^${key}=.+$" .env.production; then
+    echo "Missing required setting ${key} in .env.production."
+    exit 1
+  fi
+done
+chmod 600 .env.production
 
 echo "=== 8. Install dependencies ==="
 npm ci
 
-echo "=== 9. Build ==="
-npm run build
+echo "=== 9. Apply database migrations ==="
+npm run db:migrate
 
-echo "=== 10. Seed database ==="
-npm run db:seed
+echo "=== 10. Build ==="
+npm run build
 
 echo "=== 11. Start with PM2 ==="
 pm2 delete roomart 2>/dev/null || true

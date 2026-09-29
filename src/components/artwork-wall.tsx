@@ -136,7 +136,7 @@ export function ArtworkWall({
         </div>
       </div>
 
-      {showMagnifier && isMobile && wallRef.current && (
+      {showMagnifier && isMobile && (
         <MobileMagnifier
           imageUrl={artwork.image}
           imageRef={imageRef}

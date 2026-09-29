@@ -1,23 +1,18 @@
 import { cookies } from "next/headers";
-import { createHash } from "crypto";
+import { createHash, timingSafeEqual } from "crypto";
 
 const cookieName = "room-admin-session";
 
 export function ensureAdminCredentials() {
   if (!process.env.ADMIN_PASSWORD || !process.env.ADMIN_SECRET) {
-    const nodeEnv = process.env.NODE_ENV as string | undefined;
-    if (nodeEnv === "production") {
-      console.error(
-        "ADMIN_PASSWORD and ADMIN_SECRET are not set. Using default credentials — this is insecure for production."
-      );
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("ADMIN_PASSWORD and ADMIN_SECRET must be set in production.");
     }
-    console.warn(
-      "  Default password: room-admin"
-    );
   }
 }
 
 function secret() {
+  ensureAdminCredentials();
   return process.env.ADMIN_SECRET ?? "room-local-secret";
 }
 
@@ -32,9 +27,16 @@ function sessionValue() {
     .digest("hex");
 }
 
+function matchesSession(value: string | undefined): boolean {
+  if (!value) return false;
+  const expected = Buffer.from(sessionValue(), "hex");
+  const actual = Buffer.from(value, "hex");
+  return actual.length === expected.length && timingSafeEqual(actual, expected);
+}
+
 export async function isAdmin() {
   const store = await cookies();
-  return store.get(cookieName)?.value === sessionValue();
+  return matchesSession(store.get(cookieName)?.value);
 }
 
 export async function setAdminSession() {

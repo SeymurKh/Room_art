@@ -19,24 +19,28 @@ function getHeroClipPath(status: Event["status"]): string {
 export function EventAccordion({
   event,
   eventIndex,
+  revision,
   updateEvents,
   deleteEvent,
   toggleFeatured,
   handleImageChange,
-  scheduleDeletion,
 }: {
   event: Event;
   eventIndex: number;
+  revision: number;
   updateEvents: (fn: (prev: Event[]) => Event[]) => void;
   deleteEvent: (event: Event) => void;
   toggleFeatured: (index: number, currentFeatured: boolean) => void;
-  handleImageChange: (eventIndex: number, path: string, pendingDeletion?: string) => void;
-  scheduleDeletion: (path: string) => void;
+  handleImageChange: (eventIndex: number, path: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [pendingDels, setPendingDels] = useState<string[]>([]);
 
   const eventPayload = useMemo(() => JSON.stringify(event), [event]);
+
+  function scheduleDeletion(path: string) {
+    setPendingDels((previous) => previous.includes(path) ? previous : [...previous, path]);
+  }
 
   return (
     <div className="border border-black/10 bg-[#f4f1ea]">
@@ -61,12 +65,13 @@ export function EventAccordion({
           <form action={saveSingleEvent}>
             <input type="hidden" name="slug" value={event.slug} />
             <input type="hidden" name="payload" value={eventPayload} readOnly />
+            <input type="hidden" name="revision" value={revision} readOnly />
             <input type="hidden" name="pendingDeletions" value={JSON.stringify(pendingDels)} />
             <Grid>
               <Field label="Title" value={event.title} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, title: v } : ev))} />
               <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Status<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.status} onChange={(e) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, status: e.target.value as Event["status"] } : ev))}><option value="Upcoming">Upcoming</option><option value="Current">Current</option><option value="Past">Past</option></select></label>
               <Field label="Date" value={event.date} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, date: v } : ev))} />
-              <UploadField label="Image" value={event.image} onChange={(v, pending) => { handleImageChange(eventIndex, v, pending); if (pending) setPendingDels((prev) => [...prev, pending]); }} folder="uploads/events" />
+              <UploadField label="Image" value={event.image} onChange={(v, pending) => { handleImageChange(eventIndex, v); if (pending) scheduleDeletion(pending); }} folder="uploads/events" />
             </Grid>
             <Field multiline label="Description" value={event.description} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, description: v } : ev))} />
 

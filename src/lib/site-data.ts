@@ -1,4 +1,4 @@
-import { asc } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { db } from "@/db/client";
 import {
@@ -19,6 +19,8 @@ import type {
   SiteSettings,
   AboutContent,
 } from "@/lib/types";
+
+export type VersionedSiteData = SiteData & { revision: number };
 
 function mapSettings(
   row: (typeof settingsTable.$inferSelect) | undefined
@@ -42,8 +44,13 @@ function mapAbout(row: (typeof aboutTable.$inferSelect) | undefined): AboutConte
   };
 }
 
-export async function getSiteData(): Promise<SiteData> {
-  if (!db) return defaultSiteData;
+export async function getSiteData(): Promise<VersionedSiteData> {
+  if (!db) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("Database is unavailable in production.");
+    }
+    return { ...defaultSiteData, revision: 0 };
+  }
 
   const [settingsRow] = db.select().from(settingsTable).limit(1).all();
   const [aboutRow] = db.select().from(aboutTable).limit(1).all();
@@ -58,7 +65,7 @@ export async function getSiteData(): Promise<SiteData> {
 
   // Fresh/empty DB — return the seeded defaults.
   if (!settingsRow && artistRows.length === 0 && eventRows.length === 0) {
-    return defaultSiteData;
+    return { ...defaultSiteData, revision: 0 };
   }
 
   const galleryByEvent = new Map<number, string[]>();
@@ -112,6 +119,7 @@ export async function getSiteData(): Promise<SiteData> {
 
   return {
     settings: mapSettings(settingsRow),
+    revision: settingsRow?.revision ?? 0,
     artists,
     artworks,
     events,
@@ -128,12 +136,29 @@ export class SiteDataValidationError extends Error {
   }
 }
 
+export class SiteDataConflictError extends SiteDataValidationError {
+  constructor() {
+    super(["Site data changed in another session. Reload the page and try again."]);
+    this.name = "SiteDataConflictError";
+  }
+}
+
 export async function saveSiteData(data: unknown) {
   if (!db) {
     throw new SiteDataValidationError([
       "Database is unavailable. Writes are disabled.",
     ]);
   }
+  const expectedRevision =
+    data && typeof data === "object" && "revision" in data
+      ? (data as { revision?: unknown }).revision
+      : undefined;
+  if (!Number.isInteger(expectedRevision) || (expectedRevision as number) < 0) {
+    throw new SiteDataValidationError([
+      "Missing or invalid data revision. Reload the page and try again.",
+    ]);
+  }
+
   const result = siteDataSchema.safeParse(data);
   if (!result.success) {
     const issues = result.error.issues.map(
@@ -144,6 +169,15 @@ export async function saveSiteData(data: unknown) {
   const parsed = result.data;
 
   db.transaction((tx) => {
+    const [settingsRow] = tx
+      .select({ revision: settingsTable.revision })
+      .from(settingsTable)
+      .where(eq(settingsTable.id, 1))
+      .limit(1)
+      .all();
+    const currentRevision = settingsRow?.revision ?? 0;
+    if (currentRevision !== expectedRevision) throw new SiteDataConflictError();
+
     // Order matters: events_media references events (cascade), so clear it first.
     tx.delete(eventsMedia).run();
     tx.delete(eventsTable).run();
@@ -153,7 +187,7 @@ export async function saveSiteData(data: unknown) {
     tx.delete(aboutTable).run();
 
     tx.insert(settingsTable)
-      .values({ id: 1, ...parsed.settings })
+      .values({ id: 1, revision: currentRevision + 1, ...parsed.settings })
       .run();
 
     tx.insert(aboutTable)

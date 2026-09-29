@@ -25,7 +25,7 @@ export default async function EventsPage() {
           <p className="section-kicker text-[#a58e63]">Now showing</p>
           <div className="mt-4 grid grid-cols-2 gap-3 md:mt-8 md:gap-5 md:grid-cols-3">
             {current.map((event) => (
-              <EventCard key={event.slug} event={event} featured />
+              <EventCard key={event.slug} event={event} />
             ))}
           </div>
         </section>
@@ -60,7 +60,7 @@ export default async function EventsPage() {
   );
 }
 
-function EventCard({ event, featured = false }: { event: Event; featured?: boolean }) {
+function EventCard({ event }: { event: Event }) {
   return (
     <Link href={`/events/${event.slug}`} className="group">
       <article className="bg-[#11100e] p-3">

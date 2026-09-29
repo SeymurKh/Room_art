@@ -30,10 +30,19 @@ export function ContactForm() {
   return (
     <form action={handleSubmit} className="grid gap-4 border border-black/10 bg-white/35 p-5 md:p-10">
       <input
+        type="text"
+        className="hidden"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
+      <input
         className="admin-input"
         name="name"
         placeholder="Name"
         required
+        maxLength={120}
       />
       <input
         className="admin-input"
@@ -41,17 +50,20 @@ export function ContactForm() {
         type="email"
         placeholder="Email"
         required
+        maxLength={254}
       />
       <input
         className="admin-input"
         name="subject"
         placeholder="Subject"
+        maxLength={200}
       />
       <textarea
         className="admin-input min-h-40 resize-none"
         name="message"
         placeholder="Message"
         required
+        maxLength={5000}
       />
       {error ? (
         <p className="text-sm text-red-600">{error}</p>

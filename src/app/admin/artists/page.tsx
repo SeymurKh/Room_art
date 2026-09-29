@@ -53,7 +53,7 @@ export default async function AdminArtistsPage() {
                 <td className="py-3 pr-4 text-[#6f6a61]">{artist.role}</td>
                 <td className="py-3 pr-4 font-mono text-xs text-[#6f6a61]">{artist.slug}</td>
                 <td className="py-3">
-                  <form action={deleteArtist.bind(null, artist.slug)}>
+                  <form action={deleteArtist.bind(null, artist.slug, data.revision)}>
                     <DeleteButton itemName={artist.name} />
                   </form>
                 </td>

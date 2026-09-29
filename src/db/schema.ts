@@ -2,6 +2,7 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const settings = sqliteTable("settings", {
   id: integer("id").primaryKey({ autoIncrement: true }),
+  revision: integer("revision").notNull().default(0),
   whatsappNumber: text("whatsapp_number").notNull().default(""),
   email: text("email").notNull().default(""),
   phone: text("phone").notNull().default(""),

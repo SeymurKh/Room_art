@@ -20,65 +20,54 @@ const MAX_VIDEO_SIZE = 200 * 1024 * 1024; // 200 MB for video
 const MAX_OUTPUT_SIZE = 2 * 1024 * 1024; // 2 MB
 const MAX_DIMENSION = 2400;
 const DEFAULT_QUALITY = 85;
-const FALLBACK_QUALITY = 75;
 
 const UPLOADS_ROOT = path.resolve(process.cwd(), "public", "uploads");
+const UPLOAD_FOLDERS = [
+  "uploads/artists",
+  "uploads/artworks",
+  "uploads/events",
+] as const;
+const MAX_MULTIPART_OVERHEAD = 1024 * 1024;
 
 function isUnderUploads(filePath: string): boolean {
-  if (!filePath || !filePath.startsWith("/uploads/")) return false;
+  if (!/^\/uploads\/(artists|artworks|events)\/[a-zA-Z0-9-]+\.(webp|mp4|webm)$/.test(filePath)) return false;
   const normalized = filePath.replace(/^\//, "").replace(/\//g, path.sep);
   const resolved = path.resolve(process.cwd(), "public", normalized);
-  return resolved.startsWith(UPLOADS_ROOT + path.sep);
+  const relative = path.relative(UPLOADS_ROOT, resolved);
+  return relative !== "" && relative !== ".." && !relative.startsWith(`..${path.sep}`) && !path.isAbsolute(relative);
 }
 
 async function optimizeImage(input: Buffer): Promise<Buffer> {
   const metadata = await sharp(input).metadata();
-  const width = metadata.width ?? 0;
-  const height = metadata.height ?? 0;
+  const attempts = [
+    { dimension: MAX_DIMENSION, quality: DEFAULT_QUALITY },
+    { dimension: 2000, quality: 75 },
+    { dimension: 1600, quality: 60 },
+    { dimension: 1200, quality: 45 },
+  ];
 
-  let pipeline = sharp(input).rotate();
-
-  // Convert to sRGB only when the source is in another color space.
-  // Already-sRGB images (the common case) are left untouched, which avoids
-  // noisy libvips warnings from unusual/exotic embedded ICC profiles.
-  if (metadata.space && metadata.space !== "srgb") {
-    pipeline = pipeline.toColorspace("srgb");
-  }
-
-  if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
-    pipeline = pipeline.resize({
-      width: MAX_DIMENSION,
-      height: MAX_DIMENSION,
+  for (const attempt of attempts) {
+    let pipeline = sharp(input).rotate().resize({
+      width: attempt.dimension,
+      height: attempt.dimension,
       fit: "inside",
       withoutEnlargement: true,
     });
-  }
-
-  let output = await pipeline.webp({ quality: DEFAULT_QUALITY }).toBuffer();
-
-  if (output.length > MAX_OUTPUT_SIZE) {
-    let fallback = sharp(input)
-      .rotate()
-      .resize({
-        width: MAX_DIMENSION,
-        height: MAX_DIMENSION,
-        fit: "inside",
-        withoutEnlargement: true,
-      });
-
     if (metadata.space && metadata.space !== "srgb") {
-      fallback = fallback.toColorspace("srgb");
+      pipeline = pipeline.toColorspace("srgb");
     }
-
-    output = await fallback.webp({ quality: FALLBACK_QUALITY }).toBuffer();
+    const output = await pipeline.webp({ quality: attempt.quality }).toBuffer();
+    if (output.length <= MAX_OUTPUT_SIZE) return output;
   }
 
-  return output;
+  throw new Error("Image cannot be optimized below the output size limit.");
 }
 
 function isAllowed(folder: string, mime: string): boolean {
-  const path_ = folder.replace(/\\/g, "/").toLowerCase();
-  if (path_.includes("video")) return ALLOWED_VIDEO_MIME.includes(mime);
+  if (!(UPLOAD_FOLDERS as readonly string[]).includes(folder)) return false;
+  if (folder === "uploads/events") {
+    return ALLOWED_IMAGE_MIME.includes(mime) || ALLOWED_VIDEO_MIME.includes(mime);
+  }
   return ALLOWED_IMAGE_MIME.includes(mime);
 }
 
@@ -91,10 +80,21 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const formData = await request.formData();
-  const file = formData.get("file") as File | null;
-  const folder = (formData.get("folder") as string) || "uploads";
-  if (!file) {
+  const contentLength = Number(request.headers.get("content-length") ?? 0);
+  if (contentLength > MAX_VIDEO_SIZE + MAX_MULTIPART_OVERHEAD) {
+    return NextResponse.json({ error: "Upload request is too large." }, { status: 413 });
+  }
+
+  let formData: FormData;
+  try {
+    formData = await request.formData();
+  } catch {
+    return NextResponse.json({ error: "Invalid multipart upload." }, { status: 400 });
+  }
+  const file = formData.get("file");
+  const folderValue = formData.get("folder");
+  const folder = typeof folderValue === "string" ? folderValue : "";
+  if (!file || typeof file === "string" || typeof file.arrayBuffer !== "function") {
     return NextResponse.json({ error: "No file provided" }, { status: 400 });
   }
 
@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const uploadsDir = path.resolve(process.cwd(), "public", folder.replace(/\//g, path.sep));
+  const uploadsDir = path.join(UPLOADS_ROOT, folder.slice("uploads/".length));
   await fs.mkdir(uploadsDir, { recursive: true });
 
   const isVideo = ALLOWED_VIDEO_MIME.includes(file.type);
@@ -128,9 +128,30 @@ export async function POST(request: NextRequest) {
   const inputBuffer = Buffer.from(await file.arrayBuffer());
 
   if (isVideo) {
+    const isMp4 = file.type === "video/mp4" && inputBuffer.length >= 12 && inputBuffer.toString("ascii", 4, 8) === "ftyp";
+    const isWebm = file.type === "video/webm" && inputBuffer.subarray(0, 4).equals(Buffer.from([0x1a, 0x45, 0xdf, 0xa3]));
+    if (!isMp4 && !isWebm) {
+      return NextResponse.json({ error: "The uploaded file is not a valid MP4 or WebM video." }, { status: 400 });
+    }
     await fs.writeFile(filePath, inputBuffer);
   } else {
-    const outputBuffer = await optimizeImage(inputBuffer);
+    let outputBuffer: Buffer;
+    try {
+      const metadata = await sharp(inputBuffer).metadata();
+      const expectedFormat: Record<string, string> = {
+        "image/jpeg": "jpeg",
+        "image/png": "png",
+        "image/webp": "webp",
+        "image/avif": "heif",
+        "image/gif": "gif",
+      };
+      if (!metadata.format || metadata.format !== expectedFormat[file.type]) {
+        return NextResponse.json({ error: "Image content does not match its declared file type." }, { status: 400 });
+      }
+      outputBuffer = await optimizeImage(inputBuffer);
+    } catch {
+      return NextResponse.json({ error: "Image is invalid or could not be optimized within the 2MB output limit." }, { status: 400 });
+    }
     await fs.writeFile(filePath, outputBuffer);
   }
 
