@@ -1,12 +1,25 @@
 {
   "settings": {
     "whatsappNumber": "994508880069",
-    "email": "roomcommunityofficial@gmail.com",
+    "email": "community@roomgallery.art",
     "phone": "+994 12 598 01 91",
     "address": "22 Tarlan Aliyarbeyov Street, Baku, Azerbaijan",
     "instagram": "https://www.instagram.com/roomfineartwinedine/"
   },
   "artists": [
+    {
+      "slug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
+      "name": "Emil Majnunov (Moosem135)",
+      "role": "Artist",
+      "portrait": "/uploads/artists/f3f3aa71-f2ad-4835-8fbd-fbcf03a763a7.webp",
+      "photos": [
+        "/uploads/artists/5404f35d-4a9d-4c88-9a3c-b76dbb9a85ff.webp",
+        "/uploads/artists/5ba1ea57-0e10-4c48-b5b9-10c8f841bc71.webp",
+        "/uploads/artists/b7899ffd-bce7-49f4-b55d-401b33915699.webp"
+      ],
+      "bio": "Emil Majnunov (Moosem135) is a graffiti and contemporary artist born in Baku, Azerbaijan, in 1995. He began painting graffiti at the age of 13, marking the beginning of an artistic journey that has continued to evolve for over 17 years.\nOver time, his practice has expanded into graphic design, illustration, paintings, murals, alongside an ongoing experimentation with different styles, techniques, and surfaces. What began as an interest in graffiti during his teenage years gradually became a way of life and an ongoing exploration of visual expression.\nWorking under the name Moosem135, Emil continues to explore the space between graffiti and contemporary art, drawing from years of practice, experimentation, and lived experience.",
+      "statement": "My work explores the space between graffiti and contemporary art through constant experimentation with styles, techniques, and surfaces. Drawing from years of graffiti, painting, illustration, and mural practice, I explore visual expression as a way to connect urban energy with contemporary art."
+    },
     {
       "slug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "name": "Orkhan Garayev",
@@ -221,7 +234,7 @@
       "image": "/uploads/artworks/19194051-bc0d-4fa8-8d63-b8a60dc19010.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 7200,
       "displayed": false,
       "tondo": false
     },
@@ -237,7 +250,7 @@
       "image": "/uploads/artworks/5d854561-0d28-4eee-a026-561fc7362ae7.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 6000,
       "displayed": true,
       "tondo": false
     },
@@ -253,7 +266,7 @@
       "image": "/uploads/artworks/c5ae1be5-dd5a-4cac-80fb-f3d6df17ec2b.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 2400,
       "displayed": true,
       "tondo": false
     },
@@ -269,7 +282,7 @@
       "image": "/uploads/artworks/b9960711-7a86-4bbc-8d7d-1cd3e6f78592.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 840,
       "displayed": true,
       "tondo": false
     },
@@ -285,7 +298,7 @@
       "image": "/uploads/artworks/11286692-0d54-4967-921a-8f1e8f1d2230.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 1800,
       "displayed": true,
       "tondo": false
     },
@@ -301,7 +314,7 @@
       "image": "/uploads/artworks/125afff3-7c39-4491-964b-4b168cc9fde6.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 1800,
       "displayed": true,
       "tondo": false
     },
@@ -311,13 +324,13 @@
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2022",
       "medium": "Acrylic on canvas",
-      "dimensions": "90 × 99 cm",
+      "dimensions": "90 × 100 cm",
       "widthCm": 90,
-      "heightCm": 99,
+      "heightCm": 100,
       "image": "/uploads/artworks/fc2adb88-d563-4874-89bf-d4e3c35caf3f.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 2400,
       "displayed": false,
       "tondo": false
     },
@@ -333,7 +346,7 @@
       "image": "/uploads/artworks/ead8d644-be0a-4283-8e5a-ad537981cfc7.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 2400,
       "displayed": false,
       "tondo": false
     },
@@ -349,7 +362,7 @@
       "image": "/uploads/artworks/a32e1472-8b75-40a1-b1d6-d7675b2e1165.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 4200,
       "displayed": false,
       "tondo": false
     },
@@ -359,13 +372,13 @@
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2021",
       "medium": "Acrylic on canvas",
-      "dimensions": "80 × 99 cm",
+      "dimensions": "80 × 100 cm",
       "widthCm": 80,
-      "heightCm": 99,
+      "heightCm": 100,
       "image": "/uploads/artworks/a0ca72c6-f1c3-459b-8fd6-f69d98ad2557.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 3000,
       "displayed": false,
       "tondo": false
     },
@@ -381,7 +394,7 @@
       "image": "/uploads/artworks/8111b701-e37e-489e-ac96-05a8d25e9f91.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 3000,
       "displayed": true,
       "tondo": false
     },
@@ -397,7 +410,7 @@
       "image": "/uploads/artworks/aacd49ed-a2f1-45bf-ba3e-80dfbb78c1b9.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 4200,
       "displayed": true,
       "tondo": false
     },
@@ -413,7 +426,7 @@
       "image": "/uploads/artworks/241b4c73-129c-4c7e-a8af-f2f5df2e7b28.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 4200,
       "displayed": false,
       "tondo": false
     },
@@ -429,7 +442,7 @@
       "image": "/uploads/artworks/8f14b71e-5227-4bd3-bec5-fe692299a515.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 6000,
       "displayed": false,
       "tondo": false
     },
@@ -445,7 +458,7 @@
       "image": "/uploads/artworks/cca3e33d-b0cf-4d26-b00b-0761161e43d7.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 840,
       "displayed": true,
       "tondo": false
     },
@@ -461,7 +474,7 @@
       "image": "/uploads/artworks/408d9022-aa81-41a5-8778-14116c6b4ec2.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 600,
       "displayed": false,
       "tondo": false
     },
@@ -477,7 +490,7 @@
       "image": "/uploads/artworks/fcdaa798-3daf-4d25-a0c9-8198dc19c1ea.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 960,
       "displayed": false,
       "tondo": false
     },
@@ -493,7 +506,7 @@
       "image": "/uploads/artworks/32b108a3-3ee7-49d1-acd4-13081ab3e406.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 2400,
       "displayed": false,
       "tondo": false
     },
@@ -509,7 +522,7 @@
       "image": "/uploads/artworks/21894c3f-ba35-4845-ad3a-d8f1b7d28468.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 840,
       "displayed": false,
       "tondo": false
     },
@@ -519,13 +532,13 @@
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2025",
       "medium": "Acrylic on canvas",
-      "dimensions": "24 × 18 cm",
-      "widthCm": 24,
+      "dimensions": "25 × 18 cm",
+      "widthCm": 25,
       "heightCm": 18,
       "image": "/uploads/artworks/5a21efcb-96ba-4703-8208-4c573b3025da.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 600,
       "displayed": false,
       "tondo": false
     },
@@ -541,7 +554,7 @@
       "image": "/uploads/artworks/08cd8658-e737-4f70-b945-c8cd4b99365e.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 600,
       "displayed": false,
       "tondo": false
     },
@@ -557,7 +570,7 @@
       "image": "/uploads/artworks/898e5cee-fbe1-4fb3-aa0e-cdba5c0638b1.webp",
       "availability": "Available",
       "description": "",
-      "priceAzn": null,
+      "priceAzn": 600,
       "displayed": false,
       "tondo": false
     },
@@ -1080,8 +1093,8 @@
       "title": "7YA (SevenYouAre)",
       "status": "Past",
       "date": "8–14 September 2025, Ivanovka",
-      "image": "/uploads/events/81d2eccc-a64d-4439-8528-943175c34d36.webp",
-      "heroTransform": "translate(0px, -3px) scale(1)",
+      "image": "/uploads/events/7718ffe5-a943-4556-87e5-7a77a23a2091.webp",
+      "heroTransform": "translate(0px, 0px) scale(1)",
       "thumbTransform": "translate(-1px, -24px) scale(1.9)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": true,
@@ -1100,14 +1113,28 @@
     {
       "slug": "event-1787482539601-jlxl",
       "title": "A Person Between Two Worlds",
-      "status": "Upcoming",
+      "status": "Current",
       "date": "20-25 of September 2026, Room, Baku",
-      "image": "/uploads/events/f9994ae8-041c-46fe-9a9e-417c17f9f81f.webp",
-      "heroTransform": "translate(-1px, 0px) scale(1.05)",
-      "thumbTransform": "translate(0px, 6px) scale(2.65)",
+      "image": "/uploads/events/c80e391b-0b49-4753-97b9-c01f3fb63756.webp",
+      "heroTransform": "translate(-2px, 12px) scale(1.1)",
+      "thumbTransform": "translate(0px, 13px) scale(1.9)",
+      "detailTransform": "translate(0px, 0px) scale(1)",
+      "featured": false,
+      "description": "My artistic practice explores form, lettering, character, and the visual language of contemporary urban culture. Drawing from graffiti, street culture, graphic design, comics, and popular media, I combine familiar visual elements into new structures.\n\nAt the center of my work is a recurring male character, developed from my graffiti practice in 2014–2015. He embodies the tension between traditional values and contemporary urban life — a person whose body belongs to the present, while his mindset remains rooted in the past.\n\nThrough constantly changing techniques, colors, and styles, I use this character to explore identity, cultural heritage, social expectations, and the conflict between tradition and change.\n\nEmil Moosem.",
+      "gallery": [],
+      "video": ""
+    },
+    {
+      "slug": "event-4a19d774-16cb-47d4-9f53-74599828e12b",
+      "title": "Vusala Agharaziyeva - Selected Works",
+      "status": "Current",
+      "date": "17 September - 5 October, ROOM Airport, Baku",
+      "image": "/uploads/events/4bada326-f15b-401f-b7aa-7f3e56aefb83.webp",
+      "heroTransform": "translate(0px, 14px) scale(1)",
+      "thumbTransform": "translate(0px, 0px) scale(1.9)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": true,
-      "description": "My artistic practice explores form, lettering, character, and the visual language of contemporary urban culture. Drawing from graffiti, street culture, graphic design, comics, and popular media, I combine familiar visual elements into new structures.\n\nAt the center of my work is a recurring male character, developed from my graffiti practice in 2014–2015. He embodies the tension between traditional values and contemporary urban life — a person whose body belongs to the present, while his mindset remains rooted in the past.\n\nThrough constantly changing techniques, colors, and styles, I use this character to explore identity, cultural heritage, social expectations, and the conflict between tradition and change.",
+      "description": "A collection of selected works by artist Vusala Agharaziyeva is now on view at ROOM, Baku Airport.\nDiscover the exhibition and experience art in the atmosphere of travel, where every journey can begin with a moment of inspiration.",
       "gallery": [],
       "video": ""
     }

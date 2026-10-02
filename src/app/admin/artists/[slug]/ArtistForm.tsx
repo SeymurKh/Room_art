@@ -37,8 +37,9 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
   function handlePortraitChange(path: string, pendingDeletion?: string) {
     updateField("portrait", path);
     if (pendingDeletion) {
-      const next = [...pendingDeletions, pendingDeletion];
-      setPendingDeletions(next);
+      setPendingDeletions((prev) =>
+        prev.includes(pendingDeletion) ? prev : [...prev, pendingDeletion]
+      );
     }
   }
 
@@ -58,8 +59,9 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
     dataRef.current = next;
     setData(next);
     if (removed && removed.startsWith("/uploads/")) {
-      const nextDel = [...pendingDeletions, removed];
-      setPendingDeletions(nextDel);
+      setPendingDeletions((prev) =>
+        prev.includes(removed) ? prev : [...prev, removed]
+      );
     }
     syncPayload(next);
   }

@@ -5,6 +5,19 @@ import { drizzle } from "drizzle-orm/better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 import * as schema from "../src/db/schema";
 
+// Safety guard: this script WIPES the target database and rebuilds it from
+// data/site-data.json. Never let it run against the production server by accident.
+const isProduction = process.env.NODE_ENV === "production";
+if (isProduction || !process.argv.includes("--force")) {
+  console.error(
+    "db:seed REPLACES ALL DATA in the database with data/site-data.json.\n" +
+      (isProduction
+        ? "Refusing to run with NODE_ENV=production."
+        : "Re-run with an explicit flag if you really mean it: npm run db:seed -- --force")
+  );
+  process.exit(1);
+}
+
 type JsonSettings = {
   whatsappNumber: string;
   email: string;

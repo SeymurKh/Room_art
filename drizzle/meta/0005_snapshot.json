@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-  "prevId": "1ddfbfea-3d56-4cd8-a1b2-395b50e0b3f9",
+  "id": "1ddfbfea-3d56-4cd8-a1b2-395b50e0b3f9",
+  "prevId": "d5b6acec-5130-4ef9-bc7d-6ec3472f93b7",
   "tables": {
     "about": {
       "name": "about",
@@ -454,6 +454,14 @@
         },
         "instagram": {
           "name": "instagram",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "facebook": {
+          "name": "facebook",
           "type": "text",
           "primaryKey": false,
           "notNull": true,

@@ -45,5 +45,11 @@ next-env.d.ts
 /data/*.db-shm
 /data/*.db-wal
 
+# local DB backups
+/data/backup-*/
+
+# source artwork files (uploaded via admin instead)
+/take/
+
 # runtime uploads created on the server; existing tracked media remain tracked
 /public/uploads/

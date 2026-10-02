@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
@@ -32,11 +32,14 @@ export function AdminDashboard({
 }) {
   const [tab, setTab] = useState<Tab>("settings");
   const [draftData, setDraftData] = useState(initialData);
-  const data = draftData.revision === initialData.revision ? draftData : initialData;
+  // The server-side revision can advance without a page reload (featured
+  // toggles), so track it to keep hidden revision inputs and draft checks valid.
+  const [revision, setRevision] = useState(initialData.revision);
+  const data = draftData.revision === revision ? draftData : { ...initialData, revision };
 
   function updateData(updater: (current: VersionedSiteData) => VersionedSiteData) {
     setDraftData((current) =>
-      updater(current.revision === initialData.revision ? current : initialData)
+      updater(current.revision === revision ? current : { ...initialData, revision })
     );
   }
 
@@ -74,7 +77,22 @@ export function AdminDashboard({
       ...prev,
       events: prev.events.map((ev, i) => i === index ? { ...ev, featured: newFeatured } : ev),
     }));
-    void setSingleEventFeatured(event.slug, newFeatured, data.revision);
+    // Brand-new events live only in the draft; the flag persists on "Save event".
+    if (!initialData.events.some((item) => item.slug === event.slug)) return;
+    void setSingleEventFeatured(event.slug, newFeatured, data.revision).then((result) => {
+      if (result.ok) {
+        setRevision(result.revision);
+        setDraftData((prev) =>
+          prev.revision === data.revision ? { ...prev, revision: result.revision } : prev
+        );
+      } else {
+        alert(result.error);
+        updateData((prev) => ({
+          ...prev,
+          events: prev.events.map((ev, i) => i === index ? { ...ev, featured: currentFeatured } : ev),
+        }));
+      }
+    });
   }
 
   const dataPayload = useMemo(() => {

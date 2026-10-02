@@ -7,7 +7,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import { timingSafeEqual } from "crypto";
 import { adminPassword, clearAdminSession, isAdmin, setAdminSession } from "@/lib/auth";
-import { getSiteData, saveSiteData, SiteDataValidationError } from "@/lib/site-data";
+import { getSiteData, saveSiteData, SiteDataConflictError, SiteDataValidationError } from "@/lib/site-data";
 import type { Artist, Artwork, Event, SiteData } from "@/lib/types";
 
 const UPLOADS_ROOT = path.resolve(process.cwd(), "public", "uploads");
@@ -507,27 +507,37 @@ export async function deleteSingleEvent(
   redirect("/admin?saved=1");
 }
 
-export async function setSingleEventFeatured(slug: string, featured: boolean, revision: number) {
-  if (!(await isAdmin())) redirect("/admin");
-  const current = await getSiteData();
-  const data = structuredClone(current);
-  data.revision = parseRevision(revision);
-  const event = data.events.find((item) => item.slug === slug);
-  if (!event) redirect("/admin?error=notfound");
-  event.featured = featured;
-
+export async function setSingleEventFeatured(
+  slug: string,
+  featured: boolean,
+  revision: number
+): Promise<{ ok: true; revision: number } | { ok: false; error: string }> {
+  if (!(await isAdmin())) return { ok: false, error: "Unauthorized" };
   try {
-    await saveSiteData(data);
-  } catch (error) {
-    if (error instanceof SiteDataValidationError) {
-      redirect(`/admin?error=validation&details=${encodeURIComponent(error.issues.join(", "))}`);
+    const current = await getSiteData();
+    const data = structuredClone(current);
+    data.revision = parseRevision(revision);
+    const event = data.events.find((item) => item.slug === slug);
+    if (!event) {
+      return { ok: false, error: "This event is not saved yet. Save the event first." };
     }
-    redirect("/admin?error=json");
-    return;
+    event.featured = featured;
+    await saveSiteData(data);
+    revalidatePath("/");
+    revalidatePath("/events");
+    revalidatePath("/admin");
+    // saveSiteData bumps the revision inside its transaction.
+    return { ok: true, revision: data.revision + 1 };
+  } catch (error) {
+    if (error instanceof SiteDataConflictError) {
+      return {
+        ok: false,
+        error: "Site data changed in another session. Reload the page and try again.",
+      };
+    }
+    if (error instanceof SiteDataValidationError) {
+      return { ok: false, error: error.issues.join(", ") };
+    }
+    return { ok: false, error: "Could not update the featured flag." };
   }
-
-  revalidatePath("/");
-  revalidatePath("/events");
-  revalidatePath("/admin");
-  redirect("/admin?saved=1");
 }

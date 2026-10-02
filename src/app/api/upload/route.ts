@@ -29,14 +29,6 @@ const UPLOAD_FOLDERS = [
 ] as const;
 const MAX_MULTIPART_OVERHEAD = 1024 * 1024;
 
-function isUnderUploads(filePath: string): boolean {
-  if (!/^\/uploads\/(artists|artworks|events)\/[a-zA-Z0-9-]+\.(webp|mp4|webm)$/.test(filePath)) return false;
-  const normalized = filePath.replace(/^\//, "").replace(/\//g, path.sep);
-  const resolved = path.resolve(process.cwd(), "public", normalized);
-  const relative = path.relative(UPLOADS_ROOT, resolved);
-  return relative !== "" && relative !== ".." && !relative.startsWith(`..${path.sep}`) && !path.isAbsolute(relative);
-}
-
 async function optimizeImage(input: Buffer): Promise<Buffer> {
   const metadata = await sharp(input).metadata();
   const attempts = [
@@ -159,27 +151,3 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({ path: publicPath });
 }
 
-export async function DELETE(request: NextRequest) {
-  if (!(await isAdmin())) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const { searchParams } = new URL(request.url);
-  const filePath = searchParams.get("path");
-  if (!filePath) {
-    return NextResponse.json({ error: "No path provided" }, { status: 400 });
-  }
-
-  if (!isUnderUploads(filePath)) {
-    return NextResponse.json({ error: "Invalid path" }, { status: 400 });
-  }
-
-  const normalized = filePath.replace(/^\//, "").replace(/\//g, path.sep);
-  const fullPath = path.resolve(process.cwd(), "public", normalized);
-  try {
-    await fs.unlink(fullPath);
-    return NextResponse.json({ deleted: true });
-  } catch {
-    return NextResponse.json({ deleted: false, error: "File not found" }, { status: 404 });
-  }
-}
