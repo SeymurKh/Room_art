@@ -122,10 +122,18 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
   const titleColor = dark ? "text-[#f4f1ea]" : "text-[#11100e]";
   const subColor = dark ? "text-white/60" : "text-[#6f6a61]";
 
-  // Every artist is rendered as up to three copies around the loop; with the
-  // unbounded position all copies slide continuously, and the duplicates stay
-  // hidden behind the masked viewport edges.
-  const copies = canNavigate ? [-1, 0, 1] : [0];
+  // Sliding window of loop slots around the current position: the visible
+  // window stays populated no matter how many full loops were scrolled.
+  const slots: { key: number; artist: Artist; pos: number }[] = [];
+  if (canNavigate) {
+    const jStart = Math.ceil(position - EDGE) - 1;
+    const jEnd = Math.floor(position + EDGE) + 1;
+    for (let j = jStart; j <= jEnd; j += 1) {
+      slots.push({ key: j, artist: artists[((j % n) + n) % n], pos: j - position });
+    }
+  } else {
+    slots.push({ key: 0, artist: artists[0], pos: 0 });
+  }
 
   return (
     <div
@@ -192,11 +200,8 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerLeave}
         >
-          {artists.map((artist, i) =>
-            copies.map((k) => {
-              const pos = i + k * n - position;
+          {slots.map(({ key, artist, pos }) => {
               const dist = Math.abs(pos);
-              if (dist > EDGE) return null;
               const isCenter = dist === 0;
               const clampedDist = Math.min(dist, 3);
               const scale = 1 - clampedDist * 0.08;
@@ -205,7 +210,7 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
 
               return (
                 <div
-                  key={`${artist.slug}:${k}`}
+                  key={key}
                   className="absolute top-1/2"
                   style={{
                     left: "50%",
@@ -259,8 +264,7 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
                   </Link>
                 </div>
               );
-            }),
-          )}
+          })}
         </div>
       </div>
 
