@@ -3,6 +3,7 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import { useScroll, useSpring, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { ChevronDown, SkipForward } from "lucide-react";
+import Link from "next/link";
 import type { Artwork } from "@/lib/types";
 import { ArtworkFrame } from "@/components/artwork-frame";
 import { clamp } from "@/lib/utils";
@@ -101,9 +102,16 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
             <div
               key={artwork.slug}
               className="absolute inset-0 flex items-center justify-center overflow-hidden"
-              style={{ opacity }}
+              style={{ opacity, pointerEvents: opacity > 0.5 ? "auto" : "none" }}
             >
-              <ArtworkFrame artwork={artwork} priority={i === 0} scale={scale} />
+              <Link
+                href={`/gallery/${artwork.slug}`}
+                aria-label={artwork.title}
+                className="block cursor-pointer"
+                tabIndex={opacity > 0.5 ? 0 : -1}
+              >
+                <ArtworkFrame artwork={artwork} priority={i === 0} scale={scale} />
+              </Link>
             </div>
           );
         })}

@@ -12,6 +12,7 @@ const SWIPE_THRESHOLD = 50;
 export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { artworks: Artwork[]; scale?: number; onScaleChange?: (s: number) => void }) {
   const [index, setIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const draggedRef = useRef(false);
 
   const x = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 260, damping: 30 });
@@ -35,6 +36,10 @@ export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { 
       prev();
     }
     x.set(0);
+    // Suppress the link tap that would otherwise follow a swipe.
+    setTimeout(() => {
+      draggedRef.current = false;
+    }, 150);
   }, [next, prev, x]);
 
   if (n === 0) return null;
@@ -81,6 +86,9 @@ export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { 
         drag={canSwipe ? "x" : false}
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.1}
+        onDragStart={() => {
+          draggedRef.current = true;
+        }}
         onDragEnd={handleDragEnd}
         style={{ x: springX }}
         className="relative z-10 flex flex-1 items-center justify-center overflow-hidden"
@@ -92,7 +100,15 @@ export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { 
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <ArtworkFrame artwork={artwork} priority scale={scale} />
+          <Link
+            href={`/gallery/${artwork.slug}`}
+            aria-label={artwork.title}
+            onClick={(e) => {
+              if (draggedRef.current) e.preventDefault();
+            }}
+          >
+            <ArtworkFrame artwork={artwork} priority scale={scale} />
+          </Link>
         </motion.div>
       </motion.div>
 

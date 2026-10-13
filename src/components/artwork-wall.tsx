@@ -131,7 +131,15 @@ export function ArtworkWall({
             className="relative z-10"
             style={{ transformOrigin: "center bottom" }}
           >
-            <ArtworkFrame artwork={artwork} priority enableLens scale={scale} />
+            <a
+              href={artwork.image}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open full-size image of ${artwork.title}`}
+              className="block cursor-zoom-in"
+            >
+              <ArtworkFrame artwork={artwork} priority enableLens scale={scale} />
+            </a>
           </motion.div>
         </div>
       </div>
