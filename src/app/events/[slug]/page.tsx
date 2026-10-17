@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { PositionedImage } from "@/components/positioned-image";
+import { RoomImage } from "@/components/room-image";
 import { MediaLightbox, type MediaItem } from "@/components/media-lightbox";
 import { getSiteData } from "@/lib/site-data";
 
@@ -111,13 +111,14 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                   return (
                     <MediaLightbox key={src} items={mediaItems} index={itemIndex}>
                       <div className="relative break-inside-avoid overflow-hidden rounded-xl bg-black">
-                        <Image
+                        <RoomImage
                           src={src}
                           alt={`${event.title} — ${i + 1}`}
                           width={600}
                           height={400}
                           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                           className="h-auto w-full object-cover"
+                          fallbackText=""
                         />
                       </div>
                     </MediaLightbox>
