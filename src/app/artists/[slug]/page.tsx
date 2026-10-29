@@ -66,7 +66,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       <section className="room-shell py-16 md:py-24">
         <p className="section-kicker text-white/50">Artworks</p>
         <div className="mt-8 md:mt-10">
-          <ArtworkSalon artworks={artworks} dark />
+          <ArtworkSalon artworks={artworks} dark navContext={{ kind: "artist", artistSlug: artist.slug }} />
         </div>
       </section>
       <SiteFooter settings={data.settings} />

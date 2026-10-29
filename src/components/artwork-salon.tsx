@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Artwork } from "@/lib/types";
+import { buildArtworkHref, type ArtworkNavContext } from "@/lib/artwork-nav";
 import { RoomImage } from "@/components/room-image";
 import { computeArtworkSize, useViewportSize } from "@/lib/artwork-scale";
 
@@ -21,12 +22,15 @@ export function ArtworkSalon({
   artistLabel,
   showPrice = false,
   scale = 1,
+  navContext = { kind: "collection" },
 }: {
   artworks: Artwork[];
   dark?: boolean;
   artistLabel?: (slug: string) => string;
   showPrice?: boolean;
   scale?: number;
+  /** Контекст обхода для prev/next на детальной странице (см. artwork-nav). */
+  navContext?: ArtworkNavContext;
 }) {
   const viewport = useViewportSize();
 
@@ -50,7 +54,7 @@ export function ArtworkSalon({
 
         return (
           <Link
-            href={`/gallery/${artwork.slug}`}
+            href={buildArtworkHref(artwork.slug, navContext)}
             key={artwork.slug}
             className="group block"
             style={{ width: `${size.width}px`, maxWidth: "100%" }}

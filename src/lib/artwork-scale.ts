@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { clamp } from "@/lib/utils";
 
 /**
@@ -110,11 +110,17 @@ const DEFAULT_VIEWPORT: ViewportSize = { width: 1440, height: 800 };
 /**
  * Возвращает текущий размер вьюпорта. До монтирования возвращает стабильный
  * дефолт, поэтому SSR и первый клиентский рендер совпадают (нет hydration-ошибки).
+ *
+ * Реальный размер применяется в layout-эффекте (строго до paint), поэтому кадр
+ * не «прыгает» после первой отрисовки — в том числе при перемонтировании
+ * компонента при переключении картин на детальной странице.
  */
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export function useViewportSize(): ViewportSize {
   const [size, setSize] = useState<ViewportSize>(DEFAULT_VIEWPORT);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const update = () =>
       setSize({ width: window.innerWidth, height: window.innerHeight });
     update();

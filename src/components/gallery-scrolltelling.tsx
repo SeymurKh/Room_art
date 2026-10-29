@@ -5,6 +5,7 @@ import { useScroll, useSpring, useMotionValue, useMotionValueEvent } from "frame
 import { ChevronDown, SkipForward } from "lucide-react";
 import Link from "next/link";
 import type { Artwork } from "@/lib/types";
+import { buildArtworkHref } from "@/lib/artwork-nav";
 import { ArtworkFrame } from "@/components/artwork-frame";
 import { clamp } from "@/lib/utils";
 
@@ -105,7 +106,7 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
               style={{ opacity, pointerEvents: opacity > 0.5 ? "auto" : "none" }}
             >
               <Link
-                href={`/gallery/${artwork.slug}`}
+                href={buildArtworkHref(artwork.slug, { kind: "displayed" })}
                 aria-label={artwork.title}
                 className="block cursor-pointer"
                 tabIndex={opacity > 0.5 ? 0 : -1}

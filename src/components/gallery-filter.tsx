@@ -3,66 +3,15 @@
 import { useMemo } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import type { SiteData, Artwork } from "@/lib/types";
+import type { SiteData } from "@/lib/types";
 import { ArtworkSalon } from "@/components/artwork-salon";
+import { ALL, filterArtworks, priceRangeLabel } from "@/lib/artwork-filter";
 
-const all = "All";
 const PAGE_SIZE = 10;
 
-type FormatCategory = "Landscape" | "Square" | "Portrait";
-type SizeCategory = "Small" | "Medium" | "Large";
-
-function getFormat(artwork: { widthCm: number; heightCm: number }): FormatCategory {
-  const { widthCm, heightCm } = artwork;
-  const max = Math.max(widthCm, heightCm);
-  if (max === 0) return "Portrait";
-  const ratio = Math.abs(widthCm - heightCm) / max;
-  if (ratio <= 0.05) return "Square";
-  return widthCm > heightCm ? "Landscape" : "Portrait";
-}
-
-function getSizeCategory(artwork: { widthCm: number; heightCm: number }): SizeCategory {
-  const max = Math.max(artwork.widthCm, artwork.heightCm);
-  if (max < 50) return "Small";
-  if (max <= 100) return "Medium";
-  return "Large";
-}
-
-function priceRangeLabel(value: string): string {
-  switch (value) {
-    case "under-1000":
-      return "Under AZN 1,000";
-    case "1000-3000":
-      return "AZN 1,000 – 3,000";
-    case "3000-5000":
-      return "AZN 3,000 – 5,000";
-    case "over-5000":
-      return "Over AZN 5,000";
-    default:
-      return all;
-  }
-}
-
-function matchesPriceRange(artwork: Artwork, range: string): boolean {
-  const price = artwork.priceAzn;
-  if (price == null) return false;
-  switch (range) {
-    case "under-1000":
-      return price < 1000;
-    case "1000-3000":
-      return price >= 1000 && price <= 3000;
-    case "3000-5000":
-      return price >= 3000 && price <= 5000;
-    case "over-5000":
-      return price > 5000;
-    default:
-      return true;
-  }
-}
-
-const formatOptions: string[] = [all, "Landscape", "Square", "Portrait"];
-const sizeOptions: string[] = [all, "Small", "Medium", "Large"];
-const priceOptions: string[] = [all, "under-1000", "1000-3000", "3000-5000", "over-5000"];
+const formatOptions: string[] = [ALL, "Landscape", "Square", "Portrait"];
+const sizeOptions: string[] = [ALL, "Small", "Medium", "Large"];
+const priceOptions: string[] = [ALL, "under-1000", "1000-3000", "3000-5000", "over-5000"];
 
 /**
  * Возвращает страницы для пагинации с «окном» вокруг текущей и многоточиями,
@@ -90,18 +39,18 @@ export function GalleryFilter({ data }: { data: SiteData }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const artist = searchParams.get("artist") ?? all;
-  const format = searchParams.get("format") ?? all;
-  const size = searchParams.get("size") ?? all;
-  const priceRange = searchParams.get("price") ?? all;
+  const artist = searchParams.get("artist") ?? ALL;
+  const format = searchParams.get("format") ?? ALL;
+  const size = searchParams.get("size") ?? ALL;
+  const priceRange = searchParams.get("price") ?? ALL;
   const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10) || 1);
 
-  const artistOptions = [all, ...data.artists.map((item) => item.slug)];
+  const artistOptions = [ALL, ...data.artists.map((item) => item.slug)];
   const artistLabel = (slug: string) => data.artists.find((item) => item.slug === slug)?.name ?? slug;
 
   function setParam(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
-    if (value === all || value === "") {
+    if (value === ALL || value === "") {
       params.delete(key);
     } else {
       params.set(key, value);
@@ -114,16 +63,10 @@ export function GalleryFilter({ data }: { data: SiteData }) {
     router.push(`${pathname}?${params.toString()}`, { scroll: key === "page" });
   }
 
+  // Единая логика отбора (artwork-filter) — та же, что и в контекстной навигации
+  // детальной страницы, поэтому порядок обхода совпадает со списком галереи.
   const filtered = useMemo(
-    () =>
-      data.artworks.filter((item) => {
-        return (
-          (artist === all || item.artistSlug === artist) &&
-          (format === all || getFormat(item) === format) &&
-          (size === all || getSizeCategory(item) === size) &&
-          (priceRange === all || matchesPriceRange(item, priceRange))
-        );
-      }),
+    () => filterArtworks(data.artworks, { artist, format, size, price: priceRange }),
     [artist, format, size, priceRange, data.artworks],
   );
 
@@ -151,7 +94,13 @@ export function GalleryFilter({ data }: { data: SiteData }) {
         </p>
       ) : (
         <div className="mt-10">
-          <ArtworkSalon artworks={pageItems} dark artistLabel={artistLabel} showPrice />
+          <ArtworkSalon
+            artworks={pageItems}
+            dark
+            artistLabel={artistLabel}
+            showPrice
+            navContext={{ kind: "gallery", filters: { artist, format, size, price: priceRange } }}
+          />
         </div>
       )}
 
@@ -214,7 +163,7 @@ function Filter({
   value: string;
   options: string[];
   onChange: (value: string) => void;
-  getLabel?: (value: string) => string;
+  getLabel?: (item: string) => string;
 }) {
   return (
     <label className="block text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white/50">

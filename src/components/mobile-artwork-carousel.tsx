@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Artwork } from "@/lib/types";
+import { buildArtworkHref } from "@/lib/artwork-nav";
 import { ArtworkFrame } from "@/components/artwork-frame";
 
 const SWIPE_THRESHOLD = 50;
@@ -101,7 +102,7 @@ export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { 
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
           <Link
-            href={`/gallery/${artwork.slug}`}
+            href={buildArtworkHref(artwork.slug, { kind: "displayed" })}
             aria-label={artwork.title}
             onClick={(e) => {
               if (draggedRef.current) e.preventDefault();
@@ -115,7 +116,7 @@ export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { 
       {/* Bottom: title, all gallery, dots */}
       <div className="room-shell absolute bottom-4 left-0 right-0 z-10 flex flex-col items-center gap-2">
         <Link
-          href={`/gallery/${artwork.slug}`}
+          href={buildArtworkHref(artwork.slug, { kind: "displayed" })}
           className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]/80"
         >
           {artwork.title} <ArrowUpRight size={14} />

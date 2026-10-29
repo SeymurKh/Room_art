@@ -9,40 +9,73 @@ import { ArtworkFrame } from "@/components/artwork-frame";
 import { MobileMagnifier } from "@/components/mobile-magnifier";
 
 // Акт 1 — картина «поднимается со спины на ноги»:
-// из положения лёжа (rotateX) встаёт вертикально на своё место на стене
-const frameVariants: Variants = {
-  initial: { opacity: 0, rotateX: 50, y: 48 },
-  animate: {
-    opacity: 1,
-    rotateX: 0,
-    y: 0,
-    transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-// Акт 3 — надписи появляются последними
-const staggerContainer: Variants = {
-  animate: {
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 1.1,
+// из положения лёжа (rotateX) встаёт вертикально на своё место на стене.
+// quick — укороченный вход при переключении между картинами (direction: 1 —
+// next, вход справа; -1 — prev, вход слева).
+// Exit-анимаций в этом компоненте НЕТ намеренно: весь «уход» принадлежит одному
+// motion-узлу в ArtworkViewer — так AnimatePresence mode="wait" дожидается ровно
+// одного exit-промиса и не зависает на координации вложенных узлов.
+function frameVariants(quick: boolean, direction: 1 | -1): Variants {
+  if (quick) {
+    return {
+      initial: { opacity: 0, rotateX: 22, y: 24, x: 28 * direction, filter: "blur(4px)" },
+      animate: {
+        opacity: 1,
+        rotateX: 0,
+        y: 0,
+        x: 0,
+        filter: "blur(0px)",
+        transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+      },
+    };
+  }
+  return {
+    initial: { opacity: 0, rotateX: 50, y: 48 },
+    animate: {
+      opacity: 1,
+      rotateX: 0,
+      y: 0,
+      transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
     },
-  },
-};
+  };
+}
 
-const fadeUp: Variants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
-};
+// Акт 3 — надписи появляются последними (quick — быстрее при переключении)
+function staggerContainer(quick: boolean): Variants {
+  return {
+    animate: {
+      transition: quick
+        ? { staggerChildren: 0.06, delayChildren: 0.15 }
+        : { staggerChildren: 0.12, delayChildren: 1.1 },
+    },
+  };
+}
+
+function fadeUp(quick: boolean): Variants {
+  return {
+    initial: { opacity: 0, y: quick ? 14 : 20 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: quick ? 0.45 : 0.7, ease: "easeOut" as const },
+    },
+  };
+}
 
 export function ArtworkWall({
   artwork,
   artist,
   settings,
+  quick = false,
+  direction = 1,
 }: {
   artwork: Artwork;
   artist: string;
   settings: SiteSettings;
+  /** Укороченная анимация входа — при переключении между картинами. */
+  quick?: boolean;
+  /** Направление переключения: 1 — next (вход справа), -1 — prev (слева). */
+  direction?: 1 | -1;
 }) {
   const priceLabel = artwork.priceAzn != null ? `${artwork.priceAzn.toLocaleString("en-US")} AZN` : null;
   const wallRef = useRef<HTMLElement>(null);
@@ -50,6 +83,10 @@ export function ArtworkWall({
   const [isMobile, setIsMobile] = useState(false);
   const [scale, setScale] = useState(1);
   const [showMagnifier, setShowMagnifier] = useState(false);
+
+  const frameV = frameVariants(quick, direction);
+  const staggerV = staggerContainer(quick);
+  const fadeV = fadeUp(quick);
 
   useEffect(() => {
     const update = () => setIsMobile(window.innerWidth < 1024);
@@ -71,18 +108,18 @@ export function ArtworkWall({
       <div className="pointer-events-none absolute inset-0 z-0 bg-black/45" aria-hidden="true" />
       {/* Top header info */}
       <motion.header
-        variants={staggerContainer}
+        variants={staggerV}
         initial="initial"
         animate="animate"
         className="room-shell relative z-10 flex flex-col items-center gap-4 py-5 text-center md:flex-row md:items-start md:justify-between md:gap-6 md:py-6 md:text-left"
       >
-        <motion.div variants={fadeUp}>
+        <motion.div variants={fadeV}>
           <p className="section-kicker text-[#f4f1ea]">{artist}</p>
           <h1 className="room-serif mt-2 max-w-md text-3xl font-medium leading-[0.95] text-[#f4f1ea] md:text-5xl">
             {artwork.title}
           </h1>
         </motion.div>
-        <motion.div variants={fadeUp} className="flex flex-col items-center gap-3 md:flex-row md:items-start md:gap-6">
+        <motion.div variants={fadeV} className="flex flex-col items-center gap-3 md:flex-row md:items-start md:gap-6">
           <div className="flex items-center gap-2">
             {([1, 1.4, 1.8] as const).map((s) => (
               <button
@@ -125,7 +162,7 @@ export function ArtworkWall({
         <div className="relative w-fit">
           <motion.div
             ref={imageRef}
-            variants={frameVariants}
+            variants={frameV}
             initial="initial"
             animate="animate"
             className="relative z-10"
@@ -155,12 +192,12 @@ export function ArtworkWall({
 
       {/* Bottom / side details */}
       <motion.footer
-        variants={staggerContainer}
+        variants={staggerV}
         initial="initial"
         animate="animate"
         className="room-shell relative z-10 flex flex-col items-center justify-center gap-6 py-5 text-center md:flex-row md:items-end md:justify-between md:py-6 md:text-left"
       >
-        <motion.div variants={fadeUp}>
+        <motion.div variants={fadeV}>
           <dl className="grid grid-cols-3 gap-x-3 gap-y-2 justify-items-center text-xs sm:gap-x-8 sm:text-sm md:justify-items-start">
             <div>
               <dt className="text-[#f4f1ea]">Dimensions</dt>
@@ -179,7 +216,7 @@ export function ArtworkWall({
           </dl>
         </motion.div>
 
-        <motion.div variants={fadeUp}>
+        <motion.div variants={fadeV}>
           <a
             href={whatsappArtworkUrl(settings, artwork)}
             target="_blank"

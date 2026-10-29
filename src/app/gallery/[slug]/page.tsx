@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
-import { ArtworkWall } from "@/components/artwork-wall";
+import { ArtworkViewer } from "@/components/artwork-viewer";
 import { getSiteData } from "@/lib/site-data";
 
 export async function generateStaticParams() {
@@ -30,11 +31,19 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
   const data = await getSiteData();
   const artwork = data.artworks.find((item) => item.slug === slug);
   if (!artwork) notFound();
-  const artist = data.artists.find((item) => item.slug === artwork.artistSlug)?.name ?? "ROOM artist";
+  const artistNames = Object.fromEntries(data.artists.map((artist) => [artist.slug, artist.name]));
   return (
     <main>
       <SiteNav dark />
-      <ArtworkWall artwork={artwork} artist={artist} settings={data.settings} />
+      {/* Suspense — требование Next для компонентов с useSearchParams (см. ArtworkViewer). */}
+      <Suspense fallback={null}>
+        <ArtworkViewer
+          artworks={data.artworks}
+          artistNames={artistNames}
+          initialSlug={artwork.slug}
+          settings={data.settings}
+        />
+      </Suspense>
       <SiteFooter settings={data.settings} />
     </main>
   );
