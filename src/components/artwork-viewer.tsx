@@ -43,18 +43,18 @@ const wrapperRest = { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" };
  *   клик → «уход» текущей (0.22s) → подмена контента → «вход» новой.
  *
  * AnimatePresence mode="wait" здесь не используется намеренно: его оркестрация
- * exit-промисов при быстрых кликах и побочных перерисовках (setNavContext,
- * document.title) позволяла «уходу» и «входу» идти на перегонки — тогда итоговый
- * экран зависел от того, какая анимация успела завершиться первой. Здесь в каждый
- * момент времени работает ровно одна анимация, а результат детерминирован:
- * на экране всегда последняя выбранная работа.
+ * exit-промисов при быстрых кликах и побочных перерисовках позволяла «уходу» и
+ * «входу» идти на перегонки — итоговый экран зависел от порядка завершения
+ * анимаций. Здесь в каждый момент работает ровно одна анимация, а результат
+ * детерминирован: на экране всегда последняя выбранная работа.
  *
  * Быстрые клики копятся в currentSlugRef: трижды «next» подряд — прокрутка на
  * три картины, даже если клики пришли во время «ухода».
  *
  * Переключение происходит на месте: URL синхронизируется через history.replaceState
  * (страницы остаются статическими), соседние изображения префетчатся заранее.
- * Управление: шевроны по краям с превью, стрелки клавиатуры ←/→, свайп на мобильных.
+ * Управление: десктоп — стрелки по краям с превью; мобильный — только свайп,
+ * с тонкими подсказками-шевронами, которые гаснут после первого перехода.
  */
 export function ArtworkViewer({
   artworks,
@@ -74,6 +74,7 @@ export function ArtworkViewer({
   const [phase, setPhase] = useState<"enter" | "exit">("enter");
   const [direction, setDirection] = useState<1 | -1>(1);
   const [quickEntry, setQuickEntry] = useState(false);
+  const [hintDismissed, setHintDismissed] = useState(false);
   const [navContext, setNavContext] = useState<ArtworkNavContext>({ kind: "collection" });
 
   const currentSlugRef = useRef(initialSlug);
@@ -113,6 +114,7 @@ export function ArtworkViewer({
       currentSlugRef.current = slug;
       setDirection(dir);
       setQuickEntry(true);
+      setHintDismissed(true);
       setCurrentSlug(slug);
       // URL меняется без навигации: контекст (ctx) сохраняется,
       // страница остаётся статической.
@@ -211,7 +213,7 @@ export function ArtworkViewer({
 
   return (
     <div
-      className="relative"
+      className="relative overflow-x-clip"
       onClickCapture={onClickCapture}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
@@ -228,8 +230,7 @@ export function ArtworkViewer({
       </Suspense>
 
       {/* Единственная анимация смены: уход (phase="exit") → подмена ключа
-          (completeExit) → вход (внутренние варианты ArtworkWall). Никакого
-          AnimatePresence — уход и вход физически не могут идти параллельно. */}
+          (completeExit) → вход (внутренние варианты ArtworkWall). */}
       <motion.div
         key={displayed.slug}
         className="relative z-10"
@@ -265,6 +266,10 @@ export function ArtworkViewer({
             artistName={artistNames[adjacent.next.artistSlug] ?? "ROOM artist"}
             onClick={() => navigate(adjacent.next.slug, 1)}
           />
+          {/* На мобильном кнопки скрыты: остаётся только свайп — ему намекают
+              тонкие шевроны, которые гаснут после первого перехода. */}
+          <SwipeHint side="prev" dismissed={hintDismissed} />
+          <SwipeHint side="next" dismissed={hintDismissed} />
         </>
       ) : null}
     </div>
@@ -288,7 +293,7 @@ function NavContextSync({ onContext }: { onContext: (ctx: ArtworkNavContext) => 
   return null;
 }
 
-/** Кнопка переключения с превью соседней работы (превью — только на десктопе). */
+/** Кнопка переключения (десктоп) с превью соседней работы. */
 function NavButton({
   side,
   artwork,
@@ -311,35 +316,84 @@ function NavButton({
       onFocus={() => setHovered(true)}
       onBlur={() => setHovered(false)}
       aria-label={`${isPrev ? "Previous" : "Next"} artwork: ${artwork.title}`}
-      className={`absolute top-1/2 z-30 -translate-y-1/2 ${
-        isPrev ? "left-2 md:left-4" : "right-2 md:right-4"
+      className={`group absolute top-1/2 z-30 hidden -translate-y-1/2 md:block ${
+        isPrev ? "left-3 md:left-8 lg:left-10" : "right-3 md:right-8 lg:right-10"
       }`}
     >
-      <span className="grid size-11 place-items-center rounded-full border border-white/20 bg-black/40 text-[#f4f1ea] backdrop-blur transition hover:border-white/40 hover:bg-black/60">
-        {isPrev ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
-      </span>
-      <span
-        className={`pointer-events-none absolute left-1/2 top-full mt-3 hidden w-44 -translate-x-1/2 border border-white/15 bg-black/70 p-2 text-left backdrop-blur transition duration-200 md:block ${
-          hovered ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
-        }`}
-      >
-        <span className="relative block aspect-[4/3] w-full overflow-hidden bg-white/5">
-          <RoomImage
-            src={artwork.image}
-            alt={artwork.title}
-            fill
-            sizes="176px"
-            className="object-contain"
-            fallbackText={artwork.title}
-          />
-        </span>
-        <span className="mt-2 block truncate text-xs font-semibold uppercase tracking-[0.12em] text-[#f4f1ea]">
-          {artwork.title}
-        </span>
-        <span className="mt-0.5 block truncate text-[0.62rem] uppercase tracking-[0.14em] text-white/50">
-          {artistName}
+      <span className="grid size-12 place-items-center rounded-full border border-white/25 bg-black/35 text-[#f4f1ea] shadow-[0_10px_28px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-200 hover:scale-105 hover:border-white/50 hover:bg-white/10 group-active:scale-95 group-focus-visible:ring-2 group-focus-visible:ring-white/60">
+        <span
+          className={`transition-transform duration-200 ${
+            isPrev ? "group-hover:-translate-x-0.5" : "group-hover:translate-x-0.5"
+          }`}
+        >
+          {isPrev ? <ChevronLeft size={20} strokeWidth={1.75} /> : <ChevronRight size={20} strokeWidth={1.75} />}
         </span>
       </span>
+      <NavPreview side={side} artwork={artwork} artistName={artistName} visible={hovered} />
     </button>
+  );
+}
+
+/**
+ * Превью соседней работы под кнопкой. Прижато внутренней стороной к кнопке
+ * (prev — left-0, next — right-0): карточка растёт вглубь страницы и никогда
+ * не выходит за её границы.
+ */
+function NavPreview({
+  side,
+  artwork,
+  artistName,
+  visible,
+}: {
+  side: "prev" | "next";
+  artwork: Artwork;
+  artistName: string;
+  visible: boolean;
+}) {
+  const isPrev = side === "prev";
+  return (
+    <span
+      className={`pointer-events-none absolute top-full mt-3 hidden w-44 border border-white/15 bg-black/70 p-2 text-left backdrop-blur transition duration-200 md:block ${
+        isPrev ? "left-0" : "right-0"
+      } ${visible ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"}`}
+    >
+      <span className="relative block aspect-[4/3] w-full overflow-hidden bg-white/5">
+        <RoomImage
+          src={artwork.image}
+          alt={artwork.title}
+          fill
+          sizes="176px"
+          className="object-contain"
+          fallbackText={artwork.title}
+        />
+      </span>
+      <span className="mt-2 block truncate text-xs font-semibold uppercase tracking-[0.12em] text-[#f4f1ea]">
+        {artwork.title}
+      </span>
+      <span className="mt-0.5 block truncate text-[0.62rem] uppercase tracking-[0.14em] text-white/50">
+        {artistName}
+      </span>
+    </span>
+  );
+}
+
+/** Мобильная подсказка «листай свайпом» — тонкие шевроны с лёгким покачиванием. */
+function SwipeHint({ side, dismissed }: { side: "prev" | "next"; dismissed: boolean }) {
+  const isPrev = side === "prev";
+  return (
+    <span
+      aria-hidden="true"
+      className={`pointer-events-none absolute top-1/2 z-30 -translate-y-1/2 transition-opacity duration-500 md:hidden ${
+        dismissed ? "opacity-0" : "opacity-100"
+      } ${isPrev ? "left-1.5" : "right-1.5"}`}
+    >
+      <motion.span
+        className="block text-white/35"
+        animate={{ x: isPrev ? [-2, 2, -2] : [2, -2, 2] }}
+        transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut" }}
+      >
+        {isPrev ? <ChevronLeft size={16} strokeWidth={1.5} /> : <ChevronRight size={16} strokeWidth={1.5} />}
+      </motion.span>
+    </span>
   );
 }

@@ -23,24 +23,53 @@ function WhatsAppIcon({ size = 18 }: { size?: number }) {
 export function SiteFooter({ settings }: { settings: SiteSettings }) {
   return (
     <footer className="border-t border-black/10 bg-[#11100e] py-8 text-[#f4f1ea] md:py-12">
-      <div className="room-shell flex flex-col items-center gap-5 text-center md:grid md:grid-cols-[1.1fr_.9fr_.9fr] md:items-start md:gap-8 md:text-left">
+      <div className="room-shell flex flex-col items-center gap-6 text-center md:grid md:grid-cols-[1.1fr_.9fr_.9fr] md:items-start md:gap-8 md:text-left">
+        {/* Логотип */}
         <div>
           <Link href="/" className="relative block h-10 w-48 md:h-16 md:w-72">
             <Image src="/assets/logo.png" alt="ROOM" fill className="object-contain" />
           </Link>
         </div>
-        <div className="text-xs leading-7 text-white/70 md:text-sm">
+
+        {/* Контакты */}
+        <div className="text-xs leading-7 text-white/70 md:text-sm md:leading-8">
           <p>{settings.address}</p>
           <p>{settings.phone}</p>
           <p>{settings.email}</p>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70 md:items-start md:justify-start">
-          <a href={settings.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-white">
+
+        {/* Соцсети: строки той же высоты, что и у контактов (h-7/h-8) —
+            базовые линии колонок совпадают, «рассинхрона уровней» нет. */}
+        <div className="flex flex-col items-center gap-0 text-xs font-semibold uppercase tracking-[0.18em] text-white/70 md:items-start">
+          <a
+            href={settings.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-7 items-center gap-2 transition hover:text-white md:h-8"
+          >
             <InstagramIcon size={18} /> Instagram
           </a>
-          <a href={`https://wa.me/${settings.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-white">
+          <a
+            href={`https://wa.me/${settings.whatsappNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-7 items-center gap-2 transition hover:text-white md:h-8"
+          >
             <WhatsAppIcon size={18} /> WhatsApp
           </a>
+        </div>
+      </div>
+
+      {/* Копирайт и правовой нотис */}
+      <div className="room-shell mt-8 border-t border-white/10 pt-6">
+        <div className="flex flex-col items-center gap-2 text-center md:flex-row md:items-center md:justify-between md:text-left">
+          <p className="text-xs text-white/60">
+            © {new Date().getFullYear()} ROOM. All rights reserved.
+          </p>
+          <p className="max-w-xl text-[0.68rem] leading-5 text-white/40">
+            All images and content are protected by copyright. Unauthorized copying, reproduction, or
+            distribution is prohibited and may be prosecuted under applicable law.
+          </p>
         </div>
       </div>
     </footer>
