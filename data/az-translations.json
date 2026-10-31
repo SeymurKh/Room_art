@@ -1,0 +1,94 @@
+{
+  "roles": {
+    "Artist": "Rəssam"
+  },
+  "media": {
+    "Acrylic on canvas": "Kətan üzərində akril boya",
+    "Acrylic on canvas, plexiglass": "Kətan və pleksiqlass üzərində akril boya",
+    "Acrylic on cardboard": "Karton üzərində akril boya",
+    "Acrylics on canvas": "Kətan üzərində akril boya",
+    "Airbrush and acrylic marker on canvas": "Kətan üzərində aerograf və akril marker",
+    "Free hand acrylic marker on paper": "Kağız üzərində sərbəst əl ilə akril marker",
+    "Marker on paper": "Kağız üzərində marker",
+    "Markers on paper": "Kağız üzərində marker",
+    "Mixed media": "Qarışıq texnika",
+    "Mixed media on MDF panel": "MDF panel üzərində qarışıq texnika",
+    "Mixed media on canvas": "Kətan üzərində qarışıq texnika",
+    "Mixed medium": "Qarışıq texnika",
+    "Oil on canvas": "Kətan üzərində yağlı boya",
+    "Oil on paper": "Kağız üzərində yağlı boya",
+    "Oil on wood": "Ağac üzərində yağlı boya",
+    "Spray paint and acrylic markers on holographic paper": "Holografik kağız üzərində sprey boya və akril markerlər",
+    "Spray paint and acrylics on canvas": "Kətan üzərində sprey boya və akril",
+    "Spray paint on canvas": "Kətan üzərində sprey boya",
+    "Spray paint on holographic paper": "Holografik kağız üzərində sprey boya",
+    "Spray paint, acrylic markers and airbrush on canvas": "Kətan üzərində sprey boya, akril markerlər və aerograf",
+    "Spray paint, acrylics and airbrush on canvas": "Kətan üzərində sprey boya, akril və aerograf"
+  },
+  "settings": {
+    "address": "Bakı, Tərlan Əliyarbəyov küçəsi 22"
+  },
+  "events": {
+    "seven-ya": {
+      "date": "8–14 sentyabr 2025, İvanovka",
+      "description": "ROOM Baku və DaMir – House of Imagination 8–14 sentyabr 2025-ci il tarixlərində İvanovkada keçirilən 7-YA (SevenYouAre) sənət layihəsini təqdim edir. Bir həftə ərzində yeddi sənətçi — Vüsalə Ağaraziyeva, Nigar Familsoy, Günel Axundlu, Orxan Qarayev, Sərxan Hacıyev, Müşfiq Heydərov və Rüfənə Məmmədova — birlikdə yaşayıb yaradaraq «Mən»in çoxluğunu araşdırıblar. «7-YA» adı hər bir insanın daxilində müxtəlif vəziyyətlərin və rolların mövcudluğu ideyasını əks etdirir. Yeddi iştirakçı, yeddi gün və identikliyin yeddi tərəfi rəsmlərdə, eskizlərdə və dialoq, emalatxanalar və birgə yaradıcılıq yolu ilə formalaşmış kollektiv installyasiyada birləşdi. Sərgi şəhər mərkəzində yerləşən, şərab mədəniyyətinin sənət və qastronomiya ilə qovuşduğu şərab evi — ROOM Baku-da keçirilir. Burada sənətçilərin əsərləri və layihənin video portreti ziyarətçiləri identiklik və eyni vaxtda çoxlu olmaq cəsarəti üzərində düşünməyə dəvət edir."
+    },
+    "event-1787482539601-jlxl": {
+      "date": "20 sentyabr – 18 oktyabr 2026, ROOM, Bakı",
+      "description": "Sənət yaradıcılığım formanı, yazını, personajı və müasir şəhər mədəniyyətinin vizual dilini araşdırır. Qrafiti, küçə mədəniyyəti, qrafik dizayn, komikslər və populyar mediadan qidalanaraq tanış vizual elementləri yeni strukturlarda birləşdirirəm.\n\nİşlərimin mərkəzində 2014–2015-ci illərdə qrafiti yaradıcılığımdan formalaşmış təkrarlanan kişi personajı dayanır. O, ənənəvi dəyərlərlə müasir şəhər həyatı arasındakı gərginliyi təcəssüm etdirir — bədəni bu günə mənsub olan, düşüncə tərzi isə keçmişə köklənmiş insan.\n\nDaim dəyişən texnikalar, rənglər və üslublar vasitəsilə bu personajdan identiklik, mədəni irs, sosial gözləntilər və ənənə ilə dəyişiklik arasındakı ziddiyyəti araşdırmaq üçün istifadə edirəm.\n\nEmil Moosem."
+    },
+    "event-0ccca3d2-722b-4c82-95b4-071609e8db7b": {
+      "date": "6 oktyabr – 6 noyabr, ROOM Airport, Bakı",
+      "description": "Öz yaradıcılığında Sərxan Hacıyev dualizmi — ziddlərin, vəziyyətlərin və mənaların birgə mövcudluğunu araşdırır.\nSərgi qüvvələrin — maddi ilə qeyri-maddi, görünən ilə görünməz, daxili ilə xarici — arasındakı sərhədlər üzərində düşünən əsərləri bir araya gətirir."
+    },
+    "event-4a19d774-16cb-47d4-9f53-74599828e12b": {
+      "date": "17 sentyabr – 5 oktyabr, ROOM Airport, Bakı",
+      "description": "Sənətçi Vüsalə Ağaraziyevanın seçilmiş əsərlər kolleksiyası hazırda Bakı Hava Limanında yerləşən ROOM-da nümayişdədir.\nSərgini kəşf edin və sənəti səyahət atmosferində yaşayın — hər bir səyahət ilham anı ilə başlaya bilər."
+    }
+  },
+  "artists": {
+    "artist-a00b81d5-be95-41cd-9975-f65d35f1f282": {
+      "bio": "Çinarə Çi (Çinarə Soltanova) 1996-cı ildə Şamaxıda anadan olan və Azərbaycanda yaşayan azərbaycanlı vizual sənətçidir. Onun yaradıcılığı rəngkarlıq, eksperimental installyasiyalar, video və qarışıq texnikanı əhatə edir.\nO, Bakı Dövlət Universitetində Filologiya ixtisası üzrə təhsil almış və hazırda Azərbaycan Dövlət Mədəniyyət və İncəsənət Universitetində molbert rəngkarlığı ixtisası üzrə təhsilini davam etdirir. Ədəbiyyat sahəsindəki təhsili onun sənət yanaşmasında mühüm rol oynayır və yaddaş, mədəni hekayələr və insan təcrübəsinə marağını formalaşdırır.\nOnun əsərləri Azərbaycanın müxtəlif guşələrində kollektiv sərgilərdə və müasir sənət platformalarında nümayiş etdirilib.",
+      "statement": "Yaradıcılığım insan fiquru və portretə yönəlib; yaddaşı, psixoloji vəziyyətləri, özünüdərki və mənsubiyyəti araşdırır. Klassik rəngkarlıq texnikalarını ifadəli deformasiya, qatlar və eksperimental səthlərlə birləşdirirəm. Yaradıcılığıma həmçinin ədəbiyyat, mifologiya, şəxsi yaddaş və doğulduğum şəhər Şamaxının mədəni tarixi təsir göstərir."
+    },
+    "artist-c45dfacf-1729-4695-bd2d-31839f980c22": {
+      "bio": "Emil Məcnunov (Moosem135) 1995-ci ildə Azərbaycanın Bakı şəhərində anadan olmuş qrafiti və müasir sənətçidir. O, 13 yaşında qrafiti çəkməyə başlayıb — bu, 17 ildən artıqdır davam edən sənət yolunun başlanğıcı olub.\nZamanla onun yaradıcılığı qrafik dizayn, illüstrasiya, rəsm əsərləri və divar rəsmlərinə genişlənib, eyni zamanda müxtəlif üslublar, texnikalar və səthlərlə daimi sınaq aparır. Yeniyetməlik dövründə qrafitiyə maraq kimi başlayan şey getdikcə həyat tərzinə və vizual ifadənin davamlı tədqiqatına çevrilib.\nMoosem135 adı altında çalışan Emil qrafiti ilə müasir sənət arasındakı məkanı araşdırmağa davam edir və illərlə qazanılmış təcrübə, sınaq və həyat təcrübəsindən qidalanır.",
+      "statement": "İşlərim üslublar, texnikalar və səthlərlə daimi sınaq yolu ilə qrafiti ilə müasir sənət arasındakı məkanı araşdırır. İllərlə qrafiti, rəngkarlıq, illüstrasiya və divar rəsmi təcrübəsindən qidalanaraq vizual ifadəni şəhər enerjisini müasir sənətlə birləşdirən vasitə kimi araşdırıram."
+    },
+    "artist-2cad6b97-dee3-414c-b689-ca64cb105825": {
+      "bio": "Günay Baylarova 1994-cü ildə Azərbaycanın Bakı şəhərində anadan olmuş müasir sənətçidir. O, Azərbaycan Dövlət Mədəniyyət və İncəsənət Universitetində bakalavr və magistr dərəcələrinə malikdir. Onun yaradıcılığı kətan üzərində qarışıq texnikalara yönəlib, abstrakt və fiqurativ yanaşmaları birləşdirir. Baylarova Azərbaycanda və beynəlxalq miqyasda, o cümlədən London, Vaterlo, Milan, Miami, Yaponiya və Türkiyədə keçirilən böyük mədəni layihələrdə və sərgilərdə iştirak edib.",
+      "statement": "Yaradıcılığım kətan üzərində qarışıq texnikalar vasitəsilə abstrakt və fiqurativ yanaşmaların sintezini araşdırır. Mən forma, rəng, faktura və mövzu üzərində işləyərək konseptual dərinliklə vizual ifadə arasında balans yaradıram. Bu birləşmə sayəsində öz sənət dilimi inkişaf etdirməyə və vizual ifadənin yeni formalarını kəşf etməyə davam edirəm."
+    },
+    "artist-b9661a77-0e6b-4482-a6ef-8652339a039f": {
+      "bio": "Günel Rəvilova (1981-ci il, Bakı, Azərbaycan) rəngkarlıq, qrafika və mozaika üzərində çalışan müasir azərbaycanlı vizual sənətçidir. Sənətçi ailəsində böyüyən o, sənətlə erkən yaşlarda bağlılıq qurub. Mühasibat uçotu və audit, habelə beynəlxalq hüquq ixtisasları üzrə təhsil aldıqdan sonra 2023-cü ildə Azərbaycan Dövlət Rəssamlıq Akademiyasının rəngkarlıq proqramına qəbul olub. Azərbaycan Rəssamlar İttifaqının üzvü olan sənətçi beynəlxalq sənət layihələrində və sərgilərdə, o cümlədən Pekin və Şanxayda keçirilən təqdimatlarda iştirak edib. Yaradıcılığı ilə yanaşı, o, həm də sənət təhsilçisi kimi fəaliyyət göstərir.",
+      "statement": "İşlərim daxili dünya ilə xarici reallıq arasındakı gərginliyi araşdırır. Surreal obrazlar və abstraksiya vasitəsilə qadın identikliyi, yaddaş, ailə və emosional transformasiya mövzularını araşdırıram, tanış olanı təsəvvür edilənlə qarışdıraraq tez-tez görünməz qalanı üzə çıxarıram."
+    },
+    "artist-3575eb5c-0754-4fc4-869b-45c105a2f919": {
+      "bio": "İntiqam Ağayev 1966-cı ildə Azərbaycanın Sumqayıt şəhərində anadan olub. O, 1983–1989-cu illərdə Əzim Əzimzadə adına Azərbaycan Dövlət Rəssamlıq Məktəbində təhsil alıb.\nKaryerası ərzində Ağayev müxtəlif yerli və beynəlxalq sərgilərdə iştirak edib. O, 2012-ci ildə Azərbaycan Rəssamlar İttifaqının üzvü olub və 2016-cı ildə İttifaqın sərgi zalında «My Memories» adlı fərdi sərgisini təqdim edib.\nOnun sənət yaradıcılığı yaddaş, gündəlik həyat, təbiət və tarixi təcrübə mövzularını araşdırır. 2022-ci ildən Ağayev «Caravan Art» qrupunun üzvüdür."
+    },
+    "artist-57285a75-d189-4024-885d-495afe284878": {
+      "bio": "Nazrin Xələfova (d. 1992) Bakıda yaşayan vizual sənətçidir. O, Azərbaycan Dövlət Rəssamlıq Akademiyasını bitirib və həm bakalavr, həm də magistr dərəcəsini monumental rəngkarlıq ixtisası üzrə alıb. Onun sənət yaradıcılığı rəngkarlıq, heykəltəraşlıq və keramikanı əhatə edir.\n\n2017-ci ildən o, Azərbaycan Rəssamlar İttifaqının Yaradıcılıq Emalatxanasında çalışır. O, yerli və beynəlxalq sərgilərdə iştirak edib, əsərləri Azərbaycanda və xaricdə şəxsi kolleksiyalarda, habelə Azərbaycan Dövlət Rəsm Qalereyasının kolleksiyasında saxlanılır.",
+      "statement": "Sənət yaradıcılığım rəngkarlıq, heykəltəraşlıq və keramikaya köklənib. Məni bu vasitələrin ifadə imkanları və rəng, forma, faktura və materialın vizual təcrübəni necə formalaşdıra biləcəyi maraqlandırır.\n\nHər bir əsərə sənət dili ilə sınaq aparmaq, kompozisiyaya yeni yanaşmalar inkişaf etdirmək və materialla ifadə arasındakı əlaqəni araşdırmaq imkanı kimi yanaşıram. Müxtəlif vasitələr arasında hərəkət etmək mənə yaradıcılığımı daim genişləndirməyə və vizual kommunikasiyanın yeni imkanlarını kəşf etməyə imkan verir."
+    },
+    "artist-6937bb11-649c-4679-8be5-e34a088ef0a4": {
+      "bio": "Nigar Kərimova Bakıda anadan olmuş azərbaycanlı sənətçi, «Benu Art Studio by Karimova»-nın qurucusu və 2017-ci ildən Azərbaycan Rəssamlar İttifaqının üzvüdür. O, uşaqlıqdan rəsm çəkməyə başlayıb və doqquz yaşında ilk fərdi sərgisini keçirib.\n\nOnun sənət yaradıcılığı impresionizm və simvolizmi birləşdirir, daxili psixoloji vəziyyətlər, yaddaş, instinkt, identiklik və şüuraltı mövzularına yönəlib. O, əsasən yağlı boya və akril, habelə suluboya və qarışıq texnika ilə işləyir.\n\nKərimova müxtəlif yerli və beynəlxalq sərgilərdə, o cümlədən Barselonada keçirilən təqdimatlarda və Azərbaycan Dövlət Muzeyində təşkil olunan sərgilərdə iştirak edib. Onun əsərləri Azərbaycan, Kanada, ABŞ, Almaniya, İsveç, Rusiya və Türkiyədə şəxsi kolleksiyalarda saxlanılır.\n\nHazırda o, «Benu Art Studio by Karimova»-ya rəhbərlik etməklə yanaşı, sənət yaradıcılığını davam etdirir.",
+      "statement": "Sənət yaradıcılığım yaddaşı, zamanı, identikliyi və insan təcrübəsini formalaşdıran görünməz qüvvələri araşdırır. Rəngkarlıq və qarışıq texnika vasitəsilə simvolizm və metaforadan istifadə edərək tanış obrazları emosiya, şüuraltı və şəxsi yaddaş əksinə çevirirəm.\n\nBakının və onun mədəni irsinin ilham verdiyi işlərim məkan, identiklik və təcrübə arasındakı əlaqəni araşdırır. Mən sənəti dialoq məkanı kimi görürəm və hər bir izləyicini öz mənalarını və emosiyalarını kəşf etməyə dəvət edirəm."
+    },
+    "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e": {
+      "bio": "Orxan Qarayev (1991-ci il, Gəncə, Azərbaycan) Bakıda yaşayan müasir azərbaycanlı sənətçidir. Rəngkarlıq, qrafika, heykəltəraşlıq, installyasiya və kitab illüstrasiyası üzərində çalışan sənətçi mədəni irs ilə müasir vizual dilin qovşağını araşdırır. Onun yaradıcılığı yaddaş, identiklik və məkan mövzularını əks etdirən simvolik obrazlar, ifadəli rənglər və poetik nəqhlərlə seçilir. Qarayev Azərbaycan Rəssamlar İttifaqının üzvü, Azərbaycanın rəsmi poçt markalarının dizayneridir və beynəlxalq sərgilərdə iştirak edib. Onun əsərləri dövlət və şəxsi kolleksiyalarda saxlanılır.",
+      "statement": "«Red», «Trapped Earth» və «Hope» daxil olmaqla işlərim Bakı Müasir İncəsənət Muzeyinin daimi kolleksiyasının bir hissəsidir. Yaradıcılığımı Türkiyə, Almaniya, Rusiya, Gürcüstan, İsveçrə, Fransa, BƏƏ, Lüksemburq və Belçikada keçirilən beynəlxalq sərgilərdə təqdim etmişəm və sənət yaradıcılığımı müxtəlif mədəni kontekstlərdəki tamaşaçılarla birləşdirmişəm."
+    },
+    "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874": {
+      "bio": "Roza Muradova Bakıda yaşayan müasir rəssamdır; yağlı boya, akril, mürəkkəb və suluboya ilə işləyir. Onun yaradıcılığı hərəkət, emosiya və abstraksiya ilə fiqurativlik arasındakı dəyişkən sərhədi araşdırır.\n\nİfadəli jestlər, qatlanmış fırça işi və fakturanın incə işlənməsi sayəsində Muradova daxili psixoloji vəziyyətləri və fraqmentləşmiş xatirələri oyadan atmosfer kompozisiyalar yaradır. Onun işləri tez-tez ritm və transformasiya mənbəyi kimi təbiətdən qidalanır, üzvi formaları intuitiv vizual dilə çevirir.\n\nOnun rəsmləri beynəlxalq sərgilərdə nümayiş etdirilib və dünyanın müxtəlif guşələrində şəxsi kolleksiyalarda saxlanılır.",
+      "statement": "Mən rəngkarlığa intuitiv proses kimi yanaşıram, forma və mənanın hərəkət və spontanlıq vasitəsilə üzə çıxmasına imkan verirəm. Qatlar üzərində işləyərək transformasiyanı araşdırıram: formalar görünür, əriyir və dəyişir, dəyişkən emosiyaları və qavrayışı əks etdirir.\n\nMinimal, düşünülmüş jestlər vasitəsilə şəxsi şərhə dəvət edən açıq kompozisiyalar yaradıram."
+    },
+    "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522": {
+      "bio": "Sabina Səfərova 1982-ci ildə Bakıda anadan olmuş azərbaycanlı sənətçidir. O, Qərb Universitetində beynəlxalq və Avropa hüququ ixtisası üzrə magistr dərəcəsinə malikdir və Azərbaycan Dövlət Rəssamlıq Akademiyasında təsviri incəsənət üzrə təhsil alıb. Hüquq sahəsində təhsil almasına baxmayaraq, rəngkarlıq on ildən artıqdır ki, onun yaradıcılığının mərkəzi hissəsi olaraq qalır. O, Azərbaycanda və beynəlxalq miqyasda, o cümlədən İspaniya, İtaliya, Belçika və Lüksemburqda keçirilən layihələrdə iştirak edib. Səfərova Azərbaycan Rəssamlar İttifaqının üzvüdür.",
+      "statement": "Sənət yaradıcılığım emosiyaları rəng və forma vasitəsilə ifadə etmək yolu kimi rəngkarlığa yönəlib. Hüquq sahəsində illərlə akademik və peşəkar inkişafdan sonra mən rəsmi sənət təhsilinə qayıtdım və rəngkarlığı əsas ifadə vasitəm kimi inkişaf etdirməyə davam etdim. İşlərimdə şəxsi təcrübəni, emosiyaları və rəng, forma və yaddaş arasındakı əlaqəni araşdırıram."
+    },
+    "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e": {
+      "bio": "Sərxan Hacıyev Bakıda yaşayan multidisiplinar vizual sənətçidir; rəngkarlıq, video və məkan təcrübələri üzərində işləyir. Onun yaradıcılığı müstəqil əsərlərdən məkana xüsusi layihələrə qədər genişlənir, material və rəqəmsal prosesləri bir-birinə bağlı vizual mühitlər və nəqhlərdə birləşdirir. Emalatxana fəaliyyəti ilə yanaşı, o, xüsusilə musiqi və vizual mədəniyyət sahəsindələrarası əməkdaşlıqlarda iştirak edir.",
+      "statement": "Yaradıcılığım keçid vəziyyətlərini, qavrayışı və daxili təcrübə ilə xarici reallıq arasındakı əlaqəni araşdırır. Obrazlar, materiallıq və sükut anları vasitəsilə yaddaşı, emosional rezonansı və mənanın dəyişkənliyini araşdırır, izləyiciləri həll olunmamış qalanı yaşamağa dəvət edirəm."
+    }
+  }
+}

@@ -93,7 +93,7 @@
 | Previous | Əvvəlki |
 | Next | Növbəti |
 | Visit us | Bizi ziyarət edin |
-| Let's connect | Gəlin əlaqə saxlayaq |
+| Let's connect | Bizimlə əlaqə |
 | Inquire on WhatsApp | WhatsApp-da maraqlanın |
 | Currently on display in Room | Hazırda ROOM-da nümayişdə |
 | Availability | Mövcudluq |

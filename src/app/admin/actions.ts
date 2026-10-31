@@ -147,7 +147,8 @@ export async function saveAdminData(formData: FormData) {
     const merged = {
       revision: expectedRevision,
       settings: incoming.settings,
-      about: incoming.about,
+      // Секция About удалена из админки — сохраняем существующее содержимое как есть.
+      about: current.about,
       events: current.events,
       artists: current.artists,
       artworks: current.artworks,
@@ -161,13 +162,6 @@ export async function saveAdminData(formData: FormData) {
     }
     redirect("/admin?error=json");
   }
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
   revalidatePath("/", "layout");
   redirect("/admin?saved=1");
 }
@@ -219,11 +213,6 @@ export async function saveArtist(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
   redirect("/admin/artists?saved=1");
 }
 
@@ -262,11 +251,6 @@ export async function createArtist(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
   redirect("/admin/artists?saved=1");
 }
 
@@ -288,11 +272,6 @@ export async function deleteArtist(slug: string, revision: number) {
     redirect("/admin/artists?error=json");
     return;
   }
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
   revalidatePath("/", "layout");
   redirect("/admin/artists");
 }
@@ -341,11 +320,6 @@ export async function saveArtwork(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
   redirect("/admin/artworks?saved=1");
 }
 
@@ -387,11 +361,6 @@ export async function createArtwork(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
   redirect("/admin/artworks?saved=1");
 }
 
@@ -412,11 +381,6 @@ export async function deleteArtwork(slug: string, revision: number) {
     redirect("/admin/artworks?error=json");
     return;
   }
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
   revalidatePath("/", "layout");
   redirect("/admin/artworks");
 }
@@ -468,9 +432,6 @@ export async function saveSingleEvent(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
   redirect("/admin?saved=1");
 }
 
@@ -501,9 +462,6 @@ export async function deleteSingleEvent(
   }
 
   revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
-  revalidatePath("/", "layout");
   redirect("/admin?saved=1");
 }
 
@@ -523,8 +481,6 @@ export async function setSingleEventFeatured(
     }
     event.featured = featured;
     await saveSiteData(data);
-    revalidatePath("/", "layout");
-    revalidatePath("/", "layout");
     revalidatePath("/", "layout");
     // saveSiteData bumps the revision inside its transaction.
     return { ok: true, revision: data.revision + 1 };

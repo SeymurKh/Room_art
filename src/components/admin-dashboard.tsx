@@ -99,8 +99,8 @@ export function AdminDashboard({
   }
 
   const dataPayload = useMemo(() => {
-    return JSON.stringify({ settings: data.settings, about: data.about });
-  }, [data.settings, data.about]);
+    return JSON.stringify({ settings: data.settings });
+  }, [data.settings]);
 
   return (
     <main className="min-h-screen bg-[#f4f1ea]">
@@ -146,11 +146,6 @@ export function AdminDashboard({
                 <LocalizedField required label="Address" value={data.settings.address} lang={lang} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, address: v } }))} />
               </Grid>
               <Field required type="url" label="Instagram URL" value={data.settings.instagram} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, instagram: v } }))} />
-            </Panel>
-            <Panel title="About">
-              <LocalizedField required multiline label="Concept" value={data.about.concept} lang={lang} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, concept: v } }))} />
-              <LocalizedField required multiline label="Vision" value={data.about.vision} lang={lang} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, vision: v } }))} />
-              <LocalizedField required multiline label="Identity" value={data.about.identity} lang={lang} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, identity: v } }))} />
             </Panel>
             <div className="mt-6">
               <button type="submit" className="inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]">Save settings</button>

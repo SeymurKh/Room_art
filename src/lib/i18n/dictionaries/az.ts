@@ -57,7 +57,7 @@ export const az: Dictionary = {
       "Ənənəvi qalereya kimi fəaliyyət göstərmək əvəzinə, ROOM rəssamlar və tamaşaçılar üçün görüşmək, yeni perspektivlər kəşf etmək və sənətlə fərqli şəkildə məşğul olmaq üçün açıq mühit yaradır.",
     aboutP4:
       "Sərgilər, rəssamlarla əməkdaşlıq, çıxışlar və mədəni tədbirlər vasitəsilə ROOM sənət mübadiləsi və mənalı əlaqələr üçün dinamik platforma yaratmağı hədəfləyir.",
-    connectTitle: "Gəlin əlaqə saxlayaq",
+    connectTitle: "Bizimlə əlaqə",
     contactBtn: "Əlaqə",
     roomInteriorAlt: "Məkan interyeri",
     onDisplay: "Hazırda ROOM-da nümayişdə",
@@ -162,7 +162,7 @@ export const az: Dictionary = {
   },
 
   contact: {
-    title: "Gəlin əlaqə saxlayaq",
+    title: "Bizimlə əlaqə",
     copy: "Əməkdaşlıq, tədbirlər, rəssam təklifləri, tərəfdaşlıq və fərdi baxışlar üçün.",
     visitUs: "Bizi ziyarət edin",
     namePlaceholder: "Ad",
