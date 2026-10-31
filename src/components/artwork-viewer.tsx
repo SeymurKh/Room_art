@@ -14,6 +14,8 @@ import {
   resolveArtworkPool,
   type ArtworkNavContext,
 } from "@/lib/artwork-nav";
+import { getDictionary } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n/config";
 
 const SWIPE_THRESHOLD = 50;
 const CLICK_SUPPRESS_MS = 300;
@@ -61,12 +63,16 @@ export function ArtworkViewer({
   artistNames,
   initialSlug,
   settings,
+  lang,
 }: {
   artworks: Artwork[];
   artistNames: Record<string, string>;
   initialSlug: string;
   settings: SiteSettings;
+  lang: Locale;
 }) {
+  const t = getDictionary(lang);
+  const fallbackArtist = t.artwork.fallbackArtist;
   // currentSlug — логическая позиция обхода (меняется сразу по клику);
   // displayedSlug — то, что сейчас физически отрисовано (меняется после «ухода»).
   const [currentSlug, setCurrentSlug] = useState(initialSlug);
@@ -118,9 +124,9 @@ export function ArtworkViewer({
       setCurrentSlug(slug);
       // URL меняется без навигации: контекст (ctx) сохраняется,
       // страница остаётся статической.
-      window.history.replaceState(null, "", buildArtworkHref(slug, navContext));
+      window.history.replaceState(null, "", buildArtworkHref(slug, navContext, lang));
     },
-    [navContext]
+    [navContext, lang]
   );
 
   // Запуск «ухода», когда логическая позиция ушла вперёд, а предыдущий
@@ -245,7 +251,7 @@ export function ArtworkViewer({
       >
         <ArtworkWall
           artwork={displayed}
-          artist={artistNames[displayed.artistSlug] ?? "ROOM artist"}
+          artist={artistNames[displayed.artistSlug] ?? fallbackArtist}
           settings={settings}
           quick={quickEntry}
           direction={direction}
@@ -257,13 +263,15 @@ export function ArtworkViewer({
           <NavButton
             side="prev"
             artwork={adjacent.prev}
-            artistName={artistNames[adjacent.prev.artistSlug] ?? "ROOM artist"}
+            artistName={artistNames[adjacent.prev.artistSlug] ?? fallbackArtist}
+            label={t.artwork.prevArtwork(adjacent.prev.title)}
             onClick={() => navigate(adjacent.prev.slug, -1)}
           />
           <NavButton
             side="next"
             artwork={adjacent.next}
-            artistName={artistNames[adjacent.next.artistSlug] ?? "ROOM artist"}
+            artistName={artistNames[adjacent.next.artistSlug] ?? fallbackArtist}
+            label={t.artwork.nextArtwork(adjacent.next.title)}
             onClick={() => navigate(adjacent.next.slug, 1)}
           />
           {/* На мобильном кнопки скрыты: остаётся только свайп — ему намекают
@@ -298,11 +306,13 @@ function NavButton({
   side,
   artwork,
   artistName,
+  label,
   onClick,
 }: {
   side: "prev" | "next";
   artwork: Artwork;
   artistName: string;
+  label: string;
   onClick: () => void;
 }) {
   const [hovered, setHovered] = useState(false);
@@ -315,7 +325,7 @@ function NavButton({
       onMouseLeave={() => setHovered(false)}
       onFocus={() => setHovered(true)}
       onBlur={() => setHovered(false)}
-      aria-label={`${isPrev ? "Previous" : "Next"} artwork: ${artwork.title}`}
+      aria-label={label}
       className={`group absolute top-1/2 z-30 hidden -translate-y-1/2 md:block ${
         isPrev ? "left-3 md:left-8 lg:left-10" : "right-3 md:right-8 lg:right-10"
       }`}

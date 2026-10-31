@@ -7,10 +7,15 @@ import { ArrowUpRight } from "lucide-react";
 import type { Artwork } from "@/lib/types";
 import { buildArtworkHref } from "@/lib/artwork-nav";
 import { ArtworkFrame } from "@/components/artwork-frame";
+import { getDictionary } from "@/lib/i18n";
+import { localeHref } from "@/lib/i18n/config";
+import { useLang } from "@/lib/use-lang";
 
 const SWIPE_THRESHOLD = 50;
 
 export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { artworks: Artwork[]; scale?: number; onScaleChange?: (s: number) => void }) {
+  const lang = useLang();
+  const t = getDictionary(lang);
   const [index, setIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const draggedRef = useRef(false);
@@ -61,7 +66,7 @@ export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { 
 
       {/* Title + переключатель масштаба */}
       <div className="room-shell relative z-10 flex flex-col items-center gap-3 text-center">
-        <p className="room-serif text-lg italic text-[#6f6a61]">Currently on display in Room</p>
+        <p className="room-serif text-lg italic text-[#6f6a61]">{t.home.onDisplay}</p>
         {onScaleChange ? (
           <div className="flex items-center gap-1.5">
             {([1, 1.4, 1.8] as const).map((s) => (
@@ -102,7 +107,7 @@ export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { 
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
           <Link
-            href={buildArtworkHref(artwork.slug, { kind: "displayed" })}
+            href={buildArtworkHref(artwork.slug, { kind: "displayed" }, lang)}
             aria-label={artwork.title}
             onClick={(e) => {
               if (draggedRef.current) e.preventDefault();
@@ -116,16 +121,16 @@ export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { 
       {/* Bottom: title, all gallery, dots */}
       <div className="room-shell absolute bottom-4 left-0 right-0 z-10 flex flex-col items-center gap-2">
         <Link
-          href={buildArtworkHref(artwork.slug, { kind: "displayed" })}
+          href={buildArtworkHref(artwork.slug, { kind: "displayed" }, lang)}
           className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]/80"
         >
           {artwork.title} <ArrowUpRight size={14} />
         </Link>
         <Link
-          href="/gallery"
+          href={localeHref(lang, "/gallery")}
           className="flex items-center gap-2 border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] transition hover:bg-white/10"
         >
-          All gallery <ArrowUpRight size={12} />
+          {t.home.allGallery} <ArrowUpRight size={12} />
         </Link>
 
         {canSwipe && (
@@ -138,7 +143,7 @@ export function MobileArtworkCarousel({ artworks, scale = 1, onScaleChange }: { 
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   i === index ? "w-6 bg-[#f4f1ea]" : "w-1.5 bg-[#f4f1ea]/20"
                 }`}
-                aria-label={`Go to artwork ${i + 1}`}
+                aria-label={t.home.goToArtwork(i + 1)}
               />
             ))}
           </div>

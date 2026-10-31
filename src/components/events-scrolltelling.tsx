@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useScroll, motion, useTransform, useSpring, useMotionValue, useMotionValueEvent } from "framer-motion";
 import { PositionedImage } from "@/components/positioned-image";
 import type { Event } from "@/lib/types";
+import { getDictionary } from "@/lib/i18n";
+import { localeHref, pickLocalized } from "@/lib/i18n/config";
+import { useLang } from "@/lib/use-lang";
 
 type EventsScrolltellingProps = { events: Event[] };
 
@@ -19,6 +22,8 @@ function findFeaturedEvent(events: Event[], status: Event["status"]) {
 }
 
 export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
+  const lang = useLang();
+  const t = getDictionary(lang);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -40,7 +45,11 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
 
   const hasCurrent = events.some((e) => e.status === "Current");
   const leftStatus: Event["status"] = hasCurrent ? "Current" : "Upcoming";
-  const labels: [string, string] = [hasCurrent ? "Now showing" : "Upcoming", "Past"];
+  const labels: [string, string] = [hasCurrent ? t.events.nowShowing : t.events.upcoming, t.events.past];
+  const noEventLabels: [string, string] = [
+    hasCurrent ? t.events.noCurrent : t.events.noUpcoming,
+    t.events.noPast,
+  ];
 
   const scrolled = [
     findFeaturedEvent(events, leftStatus),
@@ -63,7 +72,7 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
             >
               {event ? (
                 <Link
-                  href={`/events/${event.slug}`}
+                  href={localeHref(lang, `/events/${event.slug}`)}
                   className="group relative block h-full w-full"
                 >
                   <div className="absolute inset-0">
@@ -77,7 +86,7 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-[#11100e]">
-                        <p className="room-serif text-sm text-white/30">No image</p>
+                        <p className="room-serif text-sm text-white/30">{t.events.noImage}</p>
                       </div>
                     )}
                   </div>
@@ -91,13 +100,13 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
                       <p className="room-serif mt-3 text-3xl leading-tight text-[#f4f1ea] transition-transform duration-500 group-hover:-translate-y-1 md:text-4xl">
                         {event.title}
                       </p>
-                      <p className="section-kicker mt-3 text-[#f4f1ea]/60">{event.date}</p>
+                      <p className="section-kicker mt-3 text-[#f4f1ea]/60">{pickLocalized(event.date, lang)}</p>
                     </div>
                   </div>
                 </Link>
               ) : (
                 <div className="flex h-full items-center justify-center opacity-20">
-                  <p className="room-serif text-sm text-white/30">No {labels[i].toLowerCase()} events</p>
+                  <p className="room-serif text-sm text-white/30">{noEventLabels[i]}</p>
                 </div>
               )}
             </motion.div>
@@ -105,7 +114,7 @@ export function EventsScrolltelling({ events }: EventsScrolltellingProps) {
         })}
         <div className="pointer-events-none absolute bottom-6 left-0 right-0 z-30 text-center">
           <p className="room-serif text-sm italic text-[#f4f1ea]/25 md:text-base">
-            Events at ROOM
+            {t.events.title}
           </p>
         </div>
       </section>

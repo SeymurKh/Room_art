@@ -1,5 +1,6 @@
 import type { Artwork } from "@/lib/types";
 import { ALL, filterArtworks, type GalleryFilterCriteria } from "@/lib/artwork-filter";
+import type { Locale } from "@/lib/i18n/config";
 
 /**
  * Контекстная навигация между картинами на детальной странице (/gallery/[slug]).
@@ -82,8 +83,11 @@ export function getAdjacentArtwork(
   return { prev, next };
 }
 
-/** Ссылка на работу с сохранением контекста обхода (ctx + параметры фильтра). */
-export function buildArtworkHref(slug: string, ctx: ArtworkNavContext): string {
+/**
+ * Ссылка на работу с сохранением контекста обхода (ctx + параметры фильтра).
+ * lang — локаль текущей страницы: EN без префикса, AZ с /az.
+ */
+export function buildArtworkHref(slug: string, ctx: ArtworkNavContext, lang: Locale = "en"): string {
   const params = new URLSearchParams();
   switch (ctx.kind) {
     case "artist":
@@ -105,5 +109,7 @@ export function buildArtworkHref(slug: string, ctx: ArtworkNavContext): string {
       break;
   }
   const query = params.toString();
-  return query ? `/gallery/${slug}?${query}` : `/gallery/${slug}`;
+  const path = `/gallery/${slug}`;
+  const localized = lang === "az" ? `/az${path}` : path;
+  return query ? `${localized}?${query}` : localized;
 }

@@ -161,14 +161,14 @@ export async function saveAdminData(formData: FormData) {
     }
     redirect("/admin?error=json");
   }
-  revalidatePath("/");
-  revalidatePath("/artists");
-  revalidatePath("/gallery");
-  revalidatePath("/events");
-  revalidatePath("/events/[slug]", "page");
-  revalidatePath("/about");
-  revalidatePath("/contact");
-  revalidatePath("/admin");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
   redirect("/admin?saved=1");
 }
 
@@ -218,12 +218,12 @@ export async function saveArtist(formData: FormData) {
     return;
   }
 
-  revalidatePath("/artists");
-  revalidatePath("/artists/[slug]", "page");
-  revalidatePath("/gallery");
-  revalidatePath("/gallery/[slug]", "page");
-  revalidatePath("/admin");
-  revalidatePath("/admin/artists");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
   redirect("/admin/artists?saved=1");
 }
 
@@ -261,12 +261,12 @@ export async function createArtist(formData: FormData) {
     return;
   }
 
-  revalidatePath("/artists");
-  revalidatePath("/artists/[slug]", "page");
-  revalidatePath("/gallery");
-  revalidatePath("/gallery/[slug]", "page");
-  revalidatePath("/admin");
-  revalidatePath("/admin/artists");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
   redirect("/admin/artists?saved=1");
 }
 
@@ -288,12 +288,12 @@ export async function deleteArtist(slug: string, revision: number) {
     redirect("/admin/artists?error=json");
     return;
   }
-  revalidatePath("/artists");
-  revalidatePath("/artists/[slug]", "page");
-  revalidatePath("/gallery");
-  revalidatePath("/gallery/[slug]", "page");
-  revalidatePath("/admin");
-  revalidatePath("/admin/artists");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
   redirect("/admin/artists");
 }
 
@@ -340,12 +340,12 @@ export async function saveArtwork(formData: FormData) {
     return;
   }
 
-  revalidatePath("/artists");
-  revalidatePath("/artists/[slug]", "page");
-  revalidatePath("/gallery");
-  revalidatePath("/gallery/[slug]", "page");
-  revalidatePath("/admin");
-  revalidatePath("/admin/artworks");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
   redirect("/admin/artworks?saved=1");
 }
 
@@ -386,12 +386,12 @@ export async function createArtwork(formData: FormData) {
     return;
   }
 
-  revalidatePath("/artists");
-  revalidatePath("/artists/[slug]", "page");
-  revalidatePath("/gallery");
-  revalidatePath("/gallery/[slug]", "page");
-  revalidatePath("/admin");
-  revalidatePath("/admin/artworks");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
   redirect("/admin/artworks?saved=1");
 }
 
@@ -412,12 +412,12 @@ export async function deleteArtwork(slug: string, revision: number) {
     redirect("/admin/artworks?error=json");
     return;
   }
-  revalidatePath("/artists");
-  revalidatePath("/artists/[slug]", "page");
-  revalidatePath("/gallery");
-  revalidatePath("/gallery/[slug]", "page");
-  revalidatePath("/admin");
-  revalidatePath("/admin/artworks");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
   redirect("/admin/artworks");
 }
 
@@ -467,10 +467,10 @@ export async function saveSingleEvent(formData: FormData) {
     return;
   }
 
-  revalidatePath("/");
-  revalidatePath("/events");
-  revalidatePath("/events/[slug]", "page");
-  revalidatePath("/admin");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
   redirect("/admin?saved=1");
 }
 
@@ -500,10 +500,10 @@ export async function deleteSingleEvent(
     return;
   }
 
-  revalidatePath("/");
-  revalidatePath("/events");
-  revalidatePath("/events/[slug]", "page");
-  revalidatePath("/admin");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
+  revalidatePath("/", "layout");
   redirect("/admin?saved=1");
 }
 
@@ -523,9 +523,9 @@ export async function setSingleEventFeatured(
     }
     event.featured = featured;
     await saveSiteData(data);
-    revalidatePath("/");
-    revalidatePath("/events");
-    revalidatePath("/admin");
+    revalidatePath("/", "layout");
+    revalidatePath("/", "layout");
+    revalidatePath("/", "layout");
     // saveSiteData bumps the revision inside its transaction.
     return { ok: true, revision: data.revision + 1 };
   } catch (error) {

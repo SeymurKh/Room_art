@@ -5,6 +5,10 @@ import { drizzle } from "drizzle-orm/better-sqlite3";
 import { asc } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { siteDataSchema } from "../src/lib/site-data-schema";
+import { toLocalizedText } from "../src/lib/i18n/config";
+
+/** Локализуемые колонки читаем как JSON {en,az}; легаси-строки нормализуются. */
+const loc = (value: string | null | undefined) => toLocalizedText(value ?? "");
 
 const DB_PATH = path.resolve(
   process.cwd(),
@@ -41,37 +45,37 @@ const siteData = {
         whatsappNumber: settingsRow.whatsappNumber,
         email: settingsRow.email,
         phone: settingsRow.phone,
-        address: settingsRow.address,
+        address: loc(settingsRow.address),
         instagram: settingsRow.instagram,
       }
     : {
         whatsappNumber: "",
         email: "",
         phone: "",
-        address: "",
+        address: { en: "", az: "" },
         instagram: "",
       },
   artists: artistRows.map((row) => ({
     slug: row.slug,
     name: row.name,
-    role: row.role,
+    role: loc(row.role),
     portrait: row.portrait,
     photos: (() => { try { return JSON.parse(row.photos); } catch { return []; } })(),
-    bio: row.bio,
-    statement: row.statement,
+    bio: loc(row.bio),
+    statement: loc(row.statement),
   })),
   artworks: artworkRows.map((row) => ({
     slug: row.slug,
     title: row.title,
     artistSlug: row.artistSlug,
     year: row.year,
-    medium: row.medium,
+    medium: loc(row.medium),
     dimensions: row.dimensions,
     widthCm: row.widthCm,
     heightCm: row.heightCm,
     image: row.image,
     availability: row.availability,
-    description: row.description,
+    description: loc(row.description),
     priceAzn: row.priceAzn ?? null,
     displayed: row.displayed,
     tondo: row.tondo,
@@ -80,23 +84,27 @@ const siteData = {
     slug: row.slug,
     title: row.title,
     status: row.status,
-    date: row.date,
+    date: loc(row.date),
     image: row.image,
     heroTransform: row.heroTransform,
     thumbTransform: row.thumbTransform,
     detailTransform: row.detailTransform,
     featured: row.featured,
-    description: row.description,
+    description: loc(row.description),
     gallery: galleryByEvent.get(row.id) ?? [],
     video: row.video || undefined,
   })),
   about: aboutRow
     ? {
-        concept: aboutRow.concept,
-        vision: aboutRow.vision,
-        identity: aboutRow.identity,
+        concept: loc(aboutRow.concept),
+        vision: loc(aboutRow.vision),
+        identity: loc(aboutRow.identity),
       }
-    : { concept: "", vision: "", identity: "" },
+    : {
+        concept: { en: "", az: "" },
+        vision: { en: "", az: "" },
+        identity: { en: "", az: "" },
+      },
 };
 
 // Validate before writing so the snapshot always matches the public schema.

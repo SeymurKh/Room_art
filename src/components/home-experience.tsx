@@ -16,6 +16,13 @@ import { MobileArtworkCarousel } from "@/components/mobile-artwork-carousel";
 import { ArtistsCarousel } from "@/components/artists-carousel";
 import { EventsScrolltelling } from "@/components/events-scrolltelling";
 import { MobileEventsCarousel } from "@/components/mobile-events-carousel";
+import { getDictionary, type Dictionary } from "@/lib/i18n";
+import {
+  localeHref,
+  pickLocalized,
+  type Locale,
+} from "@/lib/i18n/config";
+import { useLang } from "@/lib/use-lang";
 
 const reveal = {
   initial: { opacity: 0, y: 26 },
@@ -25,7 +32,9 @@ const reveal = {
 } as const;
 
 export function HomeExperience({ data }: { data: SiteData }) {
-  const { word, cursor } = useTypewriter();
+  const lang: Locale = useLang();
+  const dict: Dictionary = getDictionary(lang);
+  const { word, cursor } = useTypewriter(dict.home.typewriter);
   const currentEvents = data.events.filter((item) => item.status === "Current");
   const current = currentEvents.find((item) => item.featured) ?? currentEvents[0] ?? null;
   const upcoming = data.events.find((item) => item.status === "Upcoming" && item.featured) ?? data.events.find((item) => item.status === "Upcoming") ?? null;
@@ -50,25 +59,25 @@ export function HomeExperience({ data }: { data: SiteData }) {
 
   const showcase = [
     {
-      kicker: current ? "Current event" : pastFallback ? "Past event" : "Events",
-      title: current?.title ?? pastFallback?.title ?? "All events",
-      meta: current?.date ?? pastFallback?.date ?? "",
+      kicker: current ? dict.home.kickerCurrent : pastFallback ? dict.home.kickerPast : dict.home.kickerEvents,
+      title: current?.title ?? pastFallback?.title ?? dict.home.allEvents,
+      meta: current ? pickLocalized(current.date, lang) : pastFallback ? pickLocalized(pastFallback.date, lang) : "",
       href: current ? `/events/${current.slug}` : pastFallback ? `/events/${pastFallback.slug}` : "/events",
     },
     ...(upcoming
       ? [
           {
-            kicker: "Upcoming event" as const,
+            kicker: dict.home.kickerUpcoming,
             title: upcoming.title,
-            meta: upcoming.date,
+            meta: pickLocalized(upcoming.date, lang),
             href: `/events/${upcoming.slug}`,
           },
         ]
       : []),
     {
-      kicker: "The Collection",
-      title: "Explore",
-      meta: "Curated works by our artists",
+      kicker: dict.home.kickerCollection,
+      title: dict.home.explore,
+      meta: dict.home.exploreMeta,
       href: "/gallery",
     },
   ];
@@ -119,7 +128,7 @@ export function HomeExperience({ data }: { data: SiteData }) {
 
         {activeCurrent ? (
           <Link
-            href={`/events/${activeCurrent.slug}`}
+            href={localeHref(lang, `/events/${activeCurrent.slug}`)}
             className="absolute bottom-6 left-6 z-20 flex max-w-[90vw] items-center gap-5 border border-white/15 bg-black/50 p-4 backdrop-blur-md transition hover:bg-black/70 md:bottom-8 md:left-8 md:p-5"
           >
             <AnimatePresence mode="wait">
@@ -143,12 +152,12 @@ export function HomeExperience({ data }: { data: SiteData }) {
                   ) : null}
                 </div>
                 <div className="min-w-0">
-                  <p className="section-kicker flex items-center gap-2 text-white/60"><span className="live-dot" /> Now showing</p>
+                  <p className="section-kicker flex items-center gap-2 text-white/60"><span className="live-dot" /> {dict.home.nowShowing}</p>
                   <p className="room-serif mt-1 truncate text-xl leading-tight text-[#f4f1ea] md:text-2xl">
                     {activeCurrent.title}
                   </p>
-                  {activeCurrent.date ? (
-                    <p className="mt-1 truncate text-sm text-white/60">{activeCurrent.date}</p>
+                  {pickLocalized(activeCurrent.date, lang) ? (
+                    <p className="mt-1 truncate text-sm text-white/60">{pickLocalized(activeCurrent.date, lang)}</p>
                   ) : null}
                   {currentEvents.length > 1 ? (
                     <div className="mt-2 flex gap-1.5">
@@ -169,10 +178,10 @@ export function HomeExperience({ data }: { data: SiteData }) {
         ) : null}
       </section>
 
-      <ParallaxWindow src="/assets/window-bg.jpg" alt="Room interior" className="hidden md:block">
+      <ParallaxWindow src="/assets/window-bg.jpg" alt={dict.home.roomInteriorAlt} className="hidden md:block">
         <div className={`room-shell grid divide-y divide-white/10 md:divide-x md:divide-y-0 ${showcase.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
           {showcase.map(({ kicker, title, meta, href }) => (
-            <Link href={href} key={kicker} className="group block py-8 md:px-8">
+            <Link href={localeHref(lang, href)} key={kicker} className="group block py-8 md:px-8">
               <p className="section-kicker text-white/85">{kicker}</p>
               <p className="room-serif mt-3 text-2xl leading-none text-[#f4f1ea] md:mt-4 md:text-3xl">{title}</p>
               <p className="mt-2 text-sm text-white/80">{meta}</p>
@@ -195,19 +204,19 @@ export function HomeExperience({ data }: { data: SiteData }) {
           <motion.div {...reveal}>
             <div className="flex flex-wrap items-start justify-between gap-6">
               <div className="max-w-3xl">
-                <h2 className="room-serif text-4xl font-medium leading-[0.96] text-[#f4f1ea] sm:text-5xl md:text-7xl">Artists</h2>
-                <p className="mt-5 max-w-xl text-sm leading-7 text-white/62">Individual practices with biographies, statements, and portfolios.</p>
+                <h2 className="room-serif text-4xl font-medium leading-[0.96] text-[#f4f1ea] sm:text-5xl md:text-7xl">{dict.home.artistsTitle}</h2>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-white/62">{dict.home.artistsCopy}</p>
               </div>
               <Link
-                href="/artists"
+                href={localeHref(lang, "/artists")}
                 className="inline-flex shrink-0 items-center gap-2 border border-white/20 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] transition hover:bg-white/10"
               >
-                All artists <ArrowUpRight size={14} />
+                {dict.home.allArtists} <ArrowUpRight size={14} />
               </Link>
             </div>
           </motion.div>
           <div className="mt-10 md:mt-12">
-            <ArtistsCarousel artists={data.artists} dark />
+            <ArtistsCarousel artists={data.artists} dark lang={lang} />
           </div>
         </div>
       </section>
@@ -220,30 +229,30 @@ export function HomeExperience({ data }: { data: SiteData }) {
       <section className="flex min-h-[50vh] items-center bg-[#ebe7df] py-12 md:py-32">
         <div className="room-shell grid gap-10 md:grid-cols-2 md:gap-16">
           <motion.div {...reveal}>
-            <h2 className="room-serif text-4xl font-medium leading-[0.96] sm:text-5xl md:text-7xl">About us</h2>
+            <h2 className="room-serif text-4xl font-medium leading-[0.96] sm:text-5xl md:text-7xl">{dict.home.aboutTitle}</h2>
             <div className="mt-5 max-w-2xl space-y-4 text-sm leading-7 text-[#6f6a61]">
-              <p>ROOM is a contemporary art and cultural space where art, people, ideas, and experiences come together.</p>
-              <p>ROOM brings together artists, exhibitions, events, and a constantly evolving selection of artworks within a space that connects contemporary art with everyday life.</p>
-              <p>Rather than functioning as a traditional gallery, ROOM creates an open environment for artists and audiences to meet, discover new perspectives, and engage with art in different ways.</p>
-              <p>Through exhibitions, artist collaborations, talks, and cultural events, ROOM aims to create a dynamic platform for artistic exchange and meaningful connections.</p>
+              <p>{dict.home.aboutP1}</p>
+              <p>{dict.home.aboutP2}</p>
+              <p>{dict.home.aboutP3}</p>
+              <p>{dict.home.aboutP4}</p>
             </div>
           </motion.div>
           <motion.div {...reveal}>
-            <h2 className="room-serif text-4xl font-medium leading-[0.96] sm:text-5xl md:text-7xl">Let&apos;s connect</h2>
+            <h2 className="room-serif text-4xl font-medium leading-[0.96] sm:text-5xl md:text-7xl">{dict.home.connectTitle}</h2>
             <div className="mt-6 border border-black/10 bg-white/35 p-5 md:p-10">
-              <p className="text-sm leading-7 text-[#6f6a61]">{data.settings.address}</p>
+              <p className="text-sm leading-7 text-[#6f6a61]">{pickLocalized(data.settings.address, lang)}</p>
               <p className="mt-3 text-sm md:mt-4">{data.settings.email}</p>
               <p className="text-sm">{data.settings.phone}</p>
               <div className="mt-6 flex flex-wrap gap-3 md:mt-8">
-                <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
-                  Contact <ArrowUpRight size={14} />
+                <Link href={localeHref(lang, "/contact")} className="inline-flex items-center justify-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea]">
+                  {dict.home.contactBtn} <ArrowUpRight size={14} />
                 </Link>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
-      <SiteFooter settings={data.settings} />
+      <SiteFooter settings={data.settings} lang={lang} />
     </main>
   );
 }

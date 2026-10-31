@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getDictionary } from "@/lib/i18n";
+import { localeHref, pickLocalized, type Locale } from "@/lib/i18n/config";
 import type { SiteSettings } from "@/lib/types";
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
@@ -20,20 +22,21 @@ function WhatsAppIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-export function SiteFooter({ settings }: { settings: SiteSettings }) {
+export function SiteFooter({ settings, lang }: { settings: SiteSettings; lang: Locale }) {
+  const t = getDictionary(lang);
   return (
     <footer className="border-t border-black/10 bg-[#11100e] py-8 text-[#f4f1ea] md:py-12">
       <div className="room-shell flex flex-col items-center gap-6 text-center md:grid md:grid-cols-[1.1fr_.9fr_.9fr] md:items-start md:gap-8 md:text-left">
         {/* Логотип */}
         <div>
-          <Link href="/" className="relative block h-10 w-48 md:h-16 md:w-72">
+          <Link href={localeHref(lang, "/")} className="relative block h-10 w-48 md:h-16 md:w-72">
             <Image src="/assets/logo.png" alt="ROOM" fill className="object-contain" />
           </Link>
         </div>
 
         {/* Контакты */}
         <div className="text-xs leading-7 text-white/70 md:text-sm md:leading-8">
-          <p>{settings.address}</p>
+          <p>{pickLocalized(settings.address, lang)}</p>
           <p>{settings.phone}</p>
           <p>{settings.email}</p>
         </div>
@@ -64,11 +67,10 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
       <div className="room-shell mt-8 border-t border-white/10 pt-6">
         <div className="flex flex-col items-center gap-2 text-center md:flex-row md:items-center md:justify-between md:text-left">
           <p className="text-xs text-white/60">
-            © {new Date().getFullYear()} ROOM. All rights reserved.
+            © {new Date().getFullYear()} ROOM. {t.footer.rights}
           </p>
           <p className="max-w-xl text-[0.68rem] leading-5 text-white/40">
-            All images and content are protected by copyright. Unauthorized copying, reproduction, or
-            distribution is prohibited and may be prosecuted under applicable law.
+            {t.footer.copyright}
           </p>
         </div>
       </div>

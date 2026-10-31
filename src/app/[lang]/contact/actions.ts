@@ -17,13 +17,12 @@ const contactSchema = z.object({
 });
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => {
+  return value.replace(/[&<>"]/g, (character) => {
     const entities: Record<string, string> = {
       "&": "&amp;",
       "<": "&lt;",
       ">": "&gt;",
       '"': "&quot;",
-      "'": "&#39;",
     };
     return entities[character];
   });
@@ -52,9 +51,14 @@ function isRateLimited(clientKey: string): boolean {
   return false;
 }
 
+/**
+ * Отправка контактной формы. Ошибки возвращаются КЛЮЧАМИ
+ * (validation | rateLimit | notConfigured | send) — переводит их
+ * клиентская форма, чтобы сообщение было на языке пользователя.
+ */
 export async function sendContactEmail(formData: FormData) {
   if (String(formData.get("website") ?? "").trim()) {
-    return { success: true };
+    return { success: true as const };
   }
 
   const parsed = contactSchema.safeParse({
@@ -64,7 +68,7 @@ export async function sendContactEmail(formData: FormData) {
     message: String(formData.get("message") ?? ""),
   });
   if (!parsed.success) {
-    return { error: "Please check the required fields and their length." };
+    return { error: "validation" as const };
   }
 
   const { name, email, message } = parsed.data;
@@ -74,13 +78,13 @@ export async function sendContactEmail(formData: FormData) {
     || requestHeaders.get("x-forwarded-for")?.split(",").at(-1)?.trim()
     || "unknown";
   if (isRateLimited(clientKey)) {
-    return { error: "Please wait a few minutes before sending another message." };
+    return { error: "rateLimit" as const };
   }
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("[contact] RESEND_API_KEY is not configured");
-    return { error: "Email service is not configured." };
+    return { error: "notConfigured" as const };
   }
 
   const resend = new Resend(apiKey);
@@ -109,12 +113,12 @@ export async function sendContactEmail(formData: FormData) {
 
     if (error) {
       console.error("[contact] Email provider rejected a message");
-      return { error: "Failed to send message. Please try again later." };
+      return { error: "send" as const };
     }
 
-    return { success: true };
+    return { success: true as const };
   } catch {
     console.error("[contact] Failed to send email");
-    return { error: "Failed to send message. Please try again later." };
+    return { error: "send" as const };
   }
 }

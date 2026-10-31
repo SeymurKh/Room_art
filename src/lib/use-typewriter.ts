@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-const words = ["Gallery.", "Exhibitions.", "Platform."];
+const defaultWords = ["Gallery.", "Exhibitions.", "Platform."];
 const typeSpeed = 55; // ms per character typing
 const deleteSpeed = 22; // ms per character deleting
 const pauseAfterType = 1800; // pause after full word is typed
 const pauseAfterDelete = 300; // pause before typing next word
 
-export function useTypewriter() {
+export function useTypewriter(words: string[] = defaultWords) {
   const [word, setWord] = useState("");
   const [cursor, setCursor] = useState(true);
 
@@ -59,7 +59,7 @@ export function useTypewriter() {
 
     tick();
     return () => clearTimeout(timeout);
-  }, []);
+  }, [words]);
 
   useEffect(() => {
     const cleanup = animate();

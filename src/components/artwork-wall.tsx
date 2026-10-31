@@ -7,6 +7,9 @@ import type { Artwork, SiteSettings } from "@/lib/types";
 import { whatsappArtworkUrl } from "@/lib/whatsapp";
 import { ArtworkFrame } from "@/components/artwork-frame";
 import { MobileMagnifier } from "@/components/mobile-magnifier";
+import { getDictionary } from "@/lib/i18n";
+import { formatDimensions, pickLocalized } from "@/lib/i18n/config";
+import { useLang } from "@/lib/use-lang";
 
 // Акт 1 — картина «поднимается со спины на ноги»:
 // из положения лёжа (rotateX) встаёт вертикально на своё место на стене.
@@ -78,6 +81,8 @@ export function ArtworkWall({
   direction?: 1 | -1;
 }) {
   const priceLabel = artwork.priceAzn != null ? `${artwork.priceAzn.toLocaleString("en-US")} AZN` : null;
+  const lang = useLang();
+  const t = getDictionary(lang);
   const wallRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -144,7 +149,7 @@ export function ArtworkWall({
                     ? "bg-[#f4f1ea] text-[#11100e]"
                     : "bg-white/10 text-[#f4f1ea] hover:bg-white/15"
                 }`}
-                aria-label={showMagnifier ? "Hide magnifier" : "Show magnifier"}
+                aria-label={showMagnifier ? t.artwork.hideMagnifier : t.artwork.showMagnifier}
               >
                 <Search size={16} />
               </button>
@@ -152,7 +157,7 @@ export function ArtworkWall({
           </div>
           <div className="text-right">
             {artwork.year ? <p className="text-sm text-[#f4f1ea]">{artwork.year}</p> : null}
-            <p className="mt-1 text-sm text-[#f4f1ea]">{artwork.medium}</p>
+            <p className="mt-1 text-sm text-[#f4f1ea]">{pickLocalized(artwork.medium, lang)}</p>
           </div>
         </motion.div>
       </motion.header>
@@ -172,7 +177,7 @@ export function ArtworkWall({
               href={artwork.image}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Open full-size image of ${artwork.title}`}
+              aria-label={t.artwork.openFull(artwork.title)}
               className="block cursor-zoom-in"
             >
               <ArtworkFrame artwork={artwork} priority enableLens scale={scale} />
@@ -200,16 +205,22 @@ export function ArtworkWall({
         <motion.div variants={fadeV}>
           <dl className="grid grid-cols-3 gap-x-3 gap-y-2 justify-items-center text-xs sm:gap-x-8 sm:text-sm md:justify-items-start">
             <div>
-              <dt className="text-[#f4f1ea]">Dimensions</dt>
-              <dd className="mt-0.5 text-[#f4f1ea]">{artwork.dimensions}</dd>
+              <dt className="text-[#f4f1ea]">{t.artwork.dimensions}</dt>
+              <dd className="mt-0.5 text-[#f4f1ea]">{formatDimensions(artwork, lang)}</dd>
             </div>
             <div>
-              <dt className="text-[#f4f1ea]">Availability</dt>
-              <dd className="mt-0.5 text-[#f4f1ea]">{artwork.availability}</dd>
+              <dt className="text-[#f4f1ea]">{t.artwork.availability}</dt>
+              <dd className="mt-0.5 text-[#f4f1ea]">
+                {artwork.availability === "Available"
+                  ? t.artwork.available
+                  : artwork.availability === "Reserved"
+                    ? t.artwork.reserved
+                    : t.artwork.privateCollection}
+              </dd>
             </div>
             {priceLabel ? (
               <div>
-                <dt className="text-[#f4f1ea]">Price</dt>
+                <dt className="text-[#f4f1ea]">{t.artwork.price}</dt>
                 <dd className="mt-0.5 text-[#f4f1ea]">{priceLabel}</dd>
               </div>
             ) : null}
@@ -218,12 +229,12 @@ export function ArtworkWall({
 
         <motion.div variants={fadeV}>
           <a
-            href={whatsappArtworkUrl(settings, artwork)}
+            href={whatsappArtworkUrl(settings, artwork, lang)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 bg-[#11100e] px-6 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea] transition hover:bg-[#11100e]/85"
           >
-            Inquire on WhatsApp <ArrowUpRight size={16} />
+            {t.artwork.inquireWhatsapp} <ArrowUpRight size={16} />
           </a>
         </motion.div>
       </motion.footer>

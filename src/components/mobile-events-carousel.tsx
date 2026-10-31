@@ -6,10 +6,15 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motio
 import { ArrowUpRight } from "lucide-react";
 import { RoomImage } from "@/components/room-image";
 import type { Event } from "@/lib/types";
+import { getDictionary } from "@/lib/i18n";
+import { localeHref, pickLocalized } from "@/lib/i18n/config";
+import { useLang } from "@/lib/use-lang";
 
 const SWIPE_THRESHOLD = 50;
 
 export function MobileEventsCarousel({ events }: { events: Event[] }) {
+  const lang = useLang();
+  const t = getDictionary(lang);
   // Order: current first, then upcoming, then past
   const sorted = [...events].sort((a, b) => {
     const order: Record<string, number> = { Current: 0, Upcoming: 1, Past: 2 };
@@ -50,7 +55,7 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
   return (
     <section className="relative flex min-h-screen flex-col justify-center bg-[#11100e] py-12 text-[#f4f1ea] md:hidden" ref={containerRef}>
       <div className="room-shell mb-2">
-        <p className="room-serif text-3xl font-medium leading-none">Events</p>
+        <p className="room-serif text-3xl font-medium leading-none">{t.events.kicker}</p>
       </div>
 
       <div className="relative overflow-hidden">
@@ -71,7 +76,7 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
               transition={{ duration: 0.3 }}
               className="w-full"
             >
-              <Link href={`/events/${event.slug}`} className="group block">
+              <Link href={localeHref(lang, `/events/${event.slug}`)} className="group block">
                 <div className="relative aspect-4/5 overflow-hidden bg-[#0c0c0b]">
                   {event.image ? (
                     <RoomImage
@@ -84,18 +89,18 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center">
-                      <p className="room-serif text-sm text-white/30">No image</p>
+                      <p className="room-serif text-sm text-white/30">{t.events.noImage}</p>
                     </div>
                   )}
                 </div>
                 <div className="mt-3 text-center">
                   <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">
-                    {event.status}
+                    {event.status === "Upcoming" ? t.events.upcoming : event.status === "Current" ? t.events.nowShowing : t.events.past}
                   </span>
                   <h3 className="room-serif mt-1 text-2xl leading-tight text-[#f4f1ea]">
                     {event.title}
                   </h3>
-                  <p className="mt-1 text-xs text-white/50">{event.date}</p>
+                  <p className="mt-1 text-xs text-white/50">{pickLocalized(event.date, lang)}</p>
                 </div>
               </Link>
             </motion.div>
@@ -114,15 +119,15 @@ export function MobileEventsCarousel({ events }: { events: Event[] }) {
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   i === index ? "w-6 bg-[#f4f1ea]" : "w-1.5 bg-[#f4f1ea]/20"
                 }`}
-                aria-label={`Go to event ${i + 1}`}
+                aria-label={t.events.goTo(i + 1)}
               />
             ))}
           </div>
           <Link
-            href="/events"
+            href={localeHref(lang, "/events")}
             className="flex items-center gap-2 border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#f4f1ea] transition hover:bg-white/10"
           >
-            All events <ArrowUpRight size={14} />
+            {t.events.allEvents} <ArrowUpRight size={14} />
           </Link>
         </div>
       )}

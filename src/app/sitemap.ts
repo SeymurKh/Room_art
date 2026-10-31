@@ -1,44 +1,33 @@
 import type { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://roomgallery.art";
+const BASE = "https://roomgallery.art";
 
+/** Пара URL-ов одной страницы в обеих локали + hreflang-альтернативы. */
+function entry(
+  path: string,
+  opts: { changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]; priority: number }
+): MetadataRoute.Sitemap[number] {
+  return {
+    url: `${BASE}${path}`,
+    lastModified: new Date(),
+    changeFrequency: opts.changeFrequency,
+    priority: opts.priority,
+    alternates: {
+      languages: {
+        en: `${BASE}${path}`,
+        az: `${BASE}/az${path === "/" ? "" : path}`,
+      },
+    },
+  };
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/gallery`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/artists`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/events`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
+    entry("/", { changeFrequency: "weekly", priority: 1 }),
+    entry("/gallery", { changeFrequency: "weekly", priority: 0.9 }),
+    entry("/artists", { changeFrequency: "monthly", priority: 0.8 }),
+    entry("/events", { changeFrequency: "weekly", priority: 0.8 }),
+    entry("/about", { changeFrequency: "monthly", priority: 0.6 }),
+    entry("/contact", { changeFrequency: "monthly", priority: 0.5 }),
   ];
 }

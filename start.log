@@ -1,0 +1,10 @@
+
+> room-art-app@0.1.0 start
+> next start
+
+▲ Next.js 16.2.9
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.64:3000
+✓ Ready in 159ms
+
+(process:15792): GLib-GObject-CRITICAL **: 23:40:58.844: value "32" of type 'gint' is invalid or out of range for property 'space' of type 'VipsInterpretation'

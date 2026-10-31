@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Check, LogOut } from "lucide-react";
 import { EventAccordion } from "@/components/admin/event-accordion";
-import { Panel, Grid, Field } from "@/components/admin/admin-fields";
+import { Panel, Grid, Field, LangToggle, LocalizedField, type EditLang } from "@/components/admin/admin-fields";
 import type { Event } from "@/lib/types";
 import type { VersionedSiteData } from "@/lib/site-data";
 import {
@@ -31,6 +31,7 @@ export function AdminDashboard({
   saveError?: string | null;
 }) {
   const [tab, setTab] = useState<Tab>("settings");
+  const [lang, setLang] = useState<EditLang>("en");
   const [draftData, setDraftData] = useState(initialData);
   // The server-side revision can advance without a page reload (featured
   // toggles), so track it to keep hidden revision inputs and draft checks valid.
@@ -61,9 +62,11 @@ export function AdminDashboard({
 
   function addNewEvent() {
     const newEvent: Event = {
-      slug: `event-${crypto.randomUUID()}`, title: "", status: "Upcoming", date: "", image: "",
+      slug: `event-${crypto.randomUUID()}`, title: "", status: "Upcoming",
+      date: { en: "", az: "" }, image: "",
       heroTransform: "translate(0px, 0px) scale(1)", thumbTransform: "translate(0px, 0px) scale(1)",
-      detailTransform: "translate(0px, 0px) scale(1)", featured: false, description: "", gallery: [], video: "",
+      detailTransform: "translate(0px, 0px) scale(1)", featured: false,
+      description: { en: "", az: "" }, gallery: [], video: "",
     };
     updateData((prev) => ({ ...prev, events: [...prev.events, newEvent] }));
     setTab("events");
@@ -132,19 +135,22 @@ export function AdminDashboard({
           <form action={saveAdminData}>
             <input type="hidden" name="payload" value={dataPayload} readOnly />
             <input type="hidden" name="revision" value={data.revision} readOnly />
+            <div className="mb-6">
+              <LangToggle lang={lang} onChange={setLang} />
+            </div>
             <Panel title="Settings">
               <Grid>
                 <Field required label="WhatsApp Number" value={data.settings.whatsappNumber} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, whatsappNumber: v } }))} />
                 <Field required type="email" label="Email" value={data.settings.email} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, email: v } }))} />
                 <Field required label="Phone" value={data.settings.phone} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, phone: v } }))} />
-                <Field required label="Address" value={data.settings.address} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, address: v } }))} />
+                <LocalizedField required label="Address" value={data.settings.address} lang={lang} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, address: v } }))} />
               </Grid>
               <Field required type="url" label="Instagram URL" value={data.settings.instagram} onChange={(v) => updateData((prev) => ({ ...prev, settings: { ...prev.settings, instagram: v } }))} />
             </Panel>
             <Panel title="About">
-              <Field required multiline label="Concept" value={data.about.concept} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, concept: v } }))} />
-              <Field required multiline label="Vision" value={data.about.vision} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, vision: v } }))} />
-              <Field required multiline label="Identity" value={data.about.identity} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, identity: v } }))} />
+              <LocalizedField required multiline label="Concept" value={data.about.concept} lang={lang} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, concept: v } }))} />
+              <LocalizedField required multiline label="Vision" value={data.about.vision} lang={lang} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, vision: v } }))} />
+              <LocalizedField required multiline label="Identity" value={data.about.identity} lang={lang} onChange={(v) => updateData((prev) => ({ ...prev, about: { ...prev.about, identity: v } }))} />
             </Panel>
             <div className="mt-6">
               <button type="submit" className="inline-flex items-center gap-2 bg-[#11100e] px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea]">Save settings</button>

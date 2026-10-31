@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { toLocalizedText } from "@/lib/i18n/config";
 
 const slugSchema = z
   .string()
@@ -6,22 +7,45 @@ const slugSchema = z
   .max(120, "Slug must be 120 characters or fewer")
   .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Use lowercase letters, numbers, and single hyphens");
 
-const siteSettingsSchema = z.object({
+/**
+ * Локализованный текст. На входе принимает и легаси-строку (до миграции),
+ * и объект { en, az }. EN обязателен; AZ может быть пуст (фолбэк на EN
+ * происходит при отображении — см. pickLocalized).
+ */
+const localizedInput = (value: unknown) => toLocalizedText(value);
+
+export const localizedTextSchema = z.preprocess(
+  localizedInput,
+  z.object({
+    en: z.string().default(""),
+    az: z.string().default(""),
+  })
+);
+
+export const localizedRequiredSchema = z.preprocess(
+  localizedInput,
+  z.object({
+    en: z.string().min(1, "English text is required"),
+    az: z.string().default(""),
+  })
+);
+
+export const siteSettingsSchema = z.object({
   whatsappNumber: z.string().min(1, "WhatsApp number is required"),
   email: z.string().email("Invalid email format"),
   phone: z.string().min(1, "Phone is required"),
-  address: z.string().min(1, "Address is required"),
+  address: localizedRequiredSchema,
   instagram: z.string().url("Instagram must be a valid URL"),
 });
 
 export const artistSchema = z.object({
   slug: slugSchema,
   name: z.string().min(1),
-  role: z.string().min(1),
+  role: localizedRequiredSchema,
   portrait: z.string().default(""),
   photos: z.array(z.string()).default([]),
-  bio: z.string().default(""),
-  statement: z.string().default(""),
+  bio: localizedTextSchema,
+  statement: localizedTextSchema,
 });
 
 export const artworkSchema = z.object({
@@ -29,13 +53,13 @@ export const artworkSchema = z.object({
   title: z.string().min(1),
   artistSlug: z.string().min(1),
   year: z.string().default(""),
-  medium: z.string().min(1),
+  medium: localizedRequiredSchema,
   dimensions: z.string().min(1),
   widthCm: z.number().positive(),
   heightCm: z.number().positive(),
   image: z.string().min(1),
   availability: z.enum(["Available", "Reserved", "Private collection"]),
-  description: z.string().default(""),
+  description: localizedTextSchema,
   priceAzn: z.number().int().nonnegative().nullable().default(null),
   displayed: z.boolean().default(false),
   tondo: z.boolean().default(false),
@@ -45,21 +69,21 @@ export const eventSchema = z.object({
   slug: slugSchema,
   title: z.string().min(1),
   status: z.enum(["Upcoming", "Current", "Past"]),
-  date: z.string().min(1, "Date is required"),
+  date: localizedRequiredSchema,
   image: z.string(),
   heroTransform: z.string().default("translate(0px, 0px) scale(1)"),
   thumbTransform: z.string().default("translate(0px, 0px) scale(1)"),
   detailTransform: z.string().default("translate(0px, 0px) scale(1)"),
   featured: z.boolean().default(false),
-  description: z.string(),
+  description: localizedTextSchema,
   gallery: z.array(z.string()).default([]),
   video: z.string().default(""),
 });
 
 const aboutContentSchema = z.object({
-  concept: z.string().min(1),
-  vision: z.string().min(1),
-  identity: z.string().min(1),
+  concept: localizedRequiredSchema,
+  vision: localizedRequiredSchema,
+  identity: localizedRequiredSchema,
 });
 
 export const siteDataSchema = z.object({

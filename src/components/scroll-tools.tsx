@@ -3,8 +3,12 @@
 import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { useState, useCallback } from "react";
+import { getDictionary } from "@/lib/i18n";
+import { useLang } from "@/lib/use-lang";
 
 export function ScrollTools() {
+  const lang = useLang();
+  const t = getDictionary(lang);
   const { scrollYProgress } = useScroll();
   const [showTopBtn, setShowTopBtn] = useState(false);
 
@@ -36,7 +40,7 @@ export function ScrollTools() {
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={scrollToTop}
             className="fixed bottom-6 right-6 z-50 grid size-12 place-items-center border border-black/12 bg-[#f4f1ea]/90 text-[#11100e] backdrop-blur transition hover:bg-[#11100e] hover:text-[#f4f1ea]"
-            aria-label="Scroll to top"
+            aria-label={t.ui.scrollToTop}
           >
             <ArrowUp size={18} />
           </motion.button>

@@ -3,108 +3,186 @@
     "whatsappNumber": "994508880069",
     "email": "community@roomgallery.art",
     "phone": "+994 12 598 01 91",
-    "address": "22 Tarlan Aliyarbeyov Street, Baku, Azerbaijan",
+    "address": {
+      "en": "22 Tarlan Aliyarbeyov Street, Baku, Azerbaijan",
+      "az": ""
+    },
     "instagram": "https://www.instagram.com/roomfineartwinedine/"
   },
   "artists": [
     {
       "slug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "name": "Sarkhan Gadzhiev",
-      "role": "Artist",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
       "portrait": "/uploads/artists/be6c9bf9-81e4-4011-830a-ae00d8b3af5a.webp",
       "photos": [],
-      "bio": "Sarkhan Gadzhiev is a multidisciplinary visual artist based in Baku, working across painting, video, and spatial practices. His work spans autonomous artworks and site-specific projects, combining material and digital processes into interconnected visual environments and narratives. Alongside his studio practice, he engages in interdisciplinary collaborations, particularly in music and visual culture.",
-      "statement": "My practice explores states of transition, perception, and the relationship between inner experience and external reality. Through imagery, materiality, and moments of stillness, I investigate memory, emotional resonance, and the ambiguity of meaning, inviting viewers to experience what remains unresolved."
+      "bio": {
+        "en": "Sarkhan Gadzhiev is a multidisciplinary visual artist based in Baku, working across painting, video, and spatial practices. His work spans autonomous artworks and site-specific projects, combining material and digital processes into interconnected visual environments and narratives. Alongside his studio practice, he engages in interdisciplinary collaborations, particularly in music and visual culture.",
+        "az": ""
+      },
+      "statement": {
+        "en": "My practice explores states of transition, perception, and the relationship between inner experience and external reality. Through imagery, materiality, and moments of stillness, I investigate memory, emotional resonance, and the ambiguity of meaning, inviting viewers to experience what remains unresolved.",
+        "az": ""
+      }
     },
     {
       "slug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "name": "Gunay Baylarova",
-      "role": "Artist",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
       "portrait": "/uploads/artists/a3067f8b-785a-462a-9542-422917d613b2.webp",
       "photos": [
         "/uploads/artists/7345cd5c-caaa-43f6-8fa3-719b08a210b7.webp"
       ],
-      "bio": "Gunay Baylarova is a contemporary artist born in Baku, Azerbaijan, in 1994. She holds Bachelor’s and Master’s degrees from the Azerbaijan State University of Culture and Arts. Her practice focuses on mixed-media techniques on canvas, combining abstract and figurative approaches. Baylarova has participated in major cultural projects and exhibitions in Azerbaijan and internationally, including events in London, Waterloo, Milan, Miami, Japan and Turkey.",
-      "statement": "My practice explores the synthesis of abstract and figurative approaches through mixed-media techniques on canvas. I work with form, colour, texture and subject to create a balance between conceptual depth and visual expression. Through this combination, I continue to develop my own artistic language and explore new forms of visual expression."
+      "bio": {
+        "en": "Gunay Baylarova is a contemporary artist born in Baku, Azerbaijan, in 1994. She holds Bachelor’s and Master’s degrees from the Azerbaijan State University of Culture and Arts. Her practice focuses on mixed-media techniques on canvas, combining abstract and figurative approaches. Baylarova has participated in major cultural projects and exhibitions in Azerbaijan and internationally, including events in London, Waterloo, Milan, Miami, Japan and Turkey.",
+        "az": ""
+      },
+      "statement": {
+        "en": "My practice explores the synthesis of abstract and figurative approaches through mixed-media techniques on canvas. I work with form, colour, texture and subject to create a balance between conceptual depth and visual expression. Through this combination, I continue to develop my own artistic language and explore new forms of visual expression.",
+        "az": ""
+      }
     },
     {
       "slug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "name": "Intigam Agayev",
-      "role": "Artist",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
       "portrait": "/uploads/artists/d355231f-6033-48cb-98b5-16f1e4ff0aff.webp",
       "photos": [],
-      "bio": "Intigam Agayev was born in Sumgayit, Azerbaijan, in 1966. He studied at the Azerbaijan State Art School named after Azim Azimzade from 1983 to 1989.  \nThroughout his career, Agayev has participated in numerous local and international exhibitions. He became a member of the Union of Artists of Azerbaijan in 2012 and held his solo exhibition My Memories at the Union’s exhibition hall in 2016.  \nHis artistic practice explores themes of memory, everyday life, nature, and historical experience. Since 2022, Agayev has been a member of the Caravan Art group",
-      "statement": ""
+      "bio": {
+        "en": "Intigam Agayev was born in Sumgayit, Azerbaijan, in 1966. He studied at the Azerbaijan State Art School named after Azim Azimzade from 1983 to 1989.  \nThroughout his career, Agayev has participated in numerous local and international exhibitions. He became a member of the Union of Artists of Azerbaijan in 2012 and held his solo exhibition My Memories at the Union’s exhibition hall in 2016.  \nHis artistic practice explores themes of memory, everyday life, nature, and historical experience. Since 2022, Agayev has been a member of the Caravan Art group",
+        "az": ""
+      },
+      "statement": {
+        "en": "",
+        "az": ""
+      }
     },
     {
       "slug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "name": "Sabina Safarova",
-      "role": "Artist",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
       "portrait": "/uploads/artists/e3637d7b-44cd-404c-8695-fbc2c2d52048.webp",
       "photos": [
         "/uploads/artists/12d9c620-548f-4c68-96f6-4c8e7b791076.webp",
         "/uploads/artists/2c9af116-4aa3-4060-badf-1927afaf45f4.webp",
         "/uploads/artists/54be2d97-199f-4611-b942-6f2f31b57933.webp"
       ],
-      "bio": "Sabina Safarova is an Azerbaijani artist born in Baku in 1982. She holds a Master’s degree in International and European Law from Western University and studied Fine Arts at the Azerbaijan State Academy of Art. Although trained in law, painting has remained a central part of her creative practice for over a decade. She has participated in exhibitions in Azerbaijan and internationally, including projects in Spain, Italy, Belgium and Luxembourg. Safarova is a member of the Union of Artists of Azerbaijan.",
-      "statement": "My artistic practice is centered on painting as a way of expressing emotions through color and form. After years of academic and professional development in law, I returned to formal art education and continued to develop painting as my primary means of expression. Through my work, I explore personal experience, emotions and the relationship between color, form and memory."
+      "bio": {
+        "en": "Sabina Safarova is an Azerbaijani artist born in Baku in 1982. She holds a Master’s degree in International and European Law from Western University and studied Fine Arts at the Azerbaijan State Academy of Art. Although trained in law, painting has remained a central part of her creative practice for over a decade. She has participated in exhibitions in Azerbaijan and internationally, including projects in Spain, Italy, Belgium and Luxembourg. Safarova is a member of the Union of Artists of Azerbaijan.",
+        "az": ""
+      },
+      "statement": {
+        "en": "My artistic practice is centered on painting as a way of expressing emotions through color and form. After years of academic and professional development in law, I returned to formal art education and continued to develop painting as my primary means of expression. Through my work, I explore personal experience, emotions and the relationship between color, form and memory.",
+        "az": ""
+      }
     },
     {
       "slug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "name": "Chinara Soltanova (Chinara Chi)",
-      "role": "Artist",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
       "portrait": "/uploads/artists/15f1c087-0cd6-431d-93c9-4c63bb5d4ba5.webp",
       "photos": [
         "/uploads/artists/ca0ce2b4-f39a-4102-839f-7e4832bbc761.webp",
         "/uploads/artists/0e24bd80-b426-49ad-8d6c-e6ba126f2cc4.webp",
         "/uploads/artists/b0a277f6-b88f-4f13-bac9-51df8b9a2311.webp"
       ],
-      "bio": "Chinara Chi (Chinara Soltanova) is an Azerbaijani visual artist born in Shamakhi in 1996 and based in Azerbaijan. Her practice encompasses painting, experimental installations, video and mixed media.\nShe studied Philology at Baku State University and is currently pursuing a degree in Easel Painting at the Azerbaijan State University of Culture and Arts. Her background in literature plays an important role in her artistic approach and informs her interest in memory, cultural narratives and human experience.\nHer work has been presented in group exhibitions and contemporary art platforms across Azerbaijan.",
-      "statement": "My practice focuses on the human figure and portraiture, exploring memory, psychological states, self-perception and belonging. I combine classical painting techniques with expressive distortion, layering and experimental surfaces. My work is also informed by literature, mythology, personal memory and the cultural history of my birthplace, Shamakhi."
+      "bio": {
+        "en": "Chinara Chi (Chinara Soltanova) is an Azerbaijani visual artist born in Shamakhi in 1996 and based in Azerbaijan. Her practice encompasses painting, experimental installations, video and mixed media.\nShe studied Philology at Baku State University and is currently pursuing a degree in Easel Painting at the Azerbaijan State University of Culture and Arts. Her background in literature plays an important role in her artistic approach and informs her interest in memory, cultural narratives and human experience.\nHer work has been presented in group exhibitions and contemporary art platforms across Azerbaijan.",
+        "az": ""
+      },
+      "statement": {
+        "en": "My practice focuses on the human figure and portraiture, exploring memory, psychological states, self-perception and belonging. I combine classical painting techniques with expressive distortion, layering and experimental surfaces. My work is also informed by literature, mythology, personal memory and the cultural history of my birthplace, Shamakhi.",
+        "az": ""
+      }
     },
     {
       "slug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "name": "Emil Majnunov (Moosem135)",
-      "role": "Artist",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
       "portrait": "/uploads/artists/f3f3aa71-f2ad-4835-8fbd-fbcf03a763a7.webp",
       "photos": [
         "/uploads/artists/5404f35d-4a9d-4c88-9a3c-b76dbb9a85ff.webp",
         "/uploads/artists/5ba1ea57-0e10-4c48-b5b9-10c8f841bc71.webp",
         "/uploads/artists/b7899ffd-bce7-49f4-b55d-401b33915699.webp"
       ],
-      "bio": "Emil Majnunov (Moosem135) is a graffiti and contemporary artist born in Baku, Azerbaijan, in 1995. He began painting graffiti at the age of 13, marking the beginning of an artistic journey that has continued to evolve for over 17 years.\nOver time, his practice has expanded into graphic design, illustration, paintings, murals, alongside an ongoing experimentation with different styles, techniques, and surfaces. What began as an interest in graffiti during his teenage years gradually became a way of life and an ongoing exploration of visual expression.\nWorking under the name Moosem135, Emil continues to explore the space between graffiti and contemporary art, drawing from years of practice, experimentation, and lived experience.",
-      "statement": "My work explores the space between graffiti and contemporary art through constant experimentation with styles, techniques, and surfaces. Drawing from years of graffiti, painting, illustration, and mural practice, I explore visual expression as a way to connect urban energy with contemporary art."
+      "bio": {
+        "en": "Emil Majnunov (Moosem135) is a graffiti and contemporary artist born in Baku, Azerbaijan, in 1995. He began painting graffiti at the age of 13, marking the beginning of an artistic journey that has continued to evolve for over 17 years.\nOver time, his practice has expanded into graphic design, illustration, paintings, murals, alongside an ongoing experimentation with different styles, techniques, and surfaces. What began as an interest in graffiti during his teenage years gradually became a way of life and an ongoing exploration of visual expression.\nWorking under the name Moosem135, Emil continues to explore the space between graffiti and contemporary art, drawing from years of practice, experimentation, and lived experience.",
+        "az": ""
+      },
+      "statement": {
+        "en": "My work explores the space between graffiti and contemporary art through constant experimentation with styles, techniques, and surfaces. Drawing from years of graffiti, painting, illustration, and mural practice, I explore visual expression as a way to connect urban energy with contemporary art.",
+        "az": ""
+      }
     },
     {
       "slug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "name": "Orkhan Garayev",
-      "role": "Artist",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
       "portrait": "/uploads/artists/b7e5149d-215d-44f5-876c-76b6b6901226.webp",
       "photos": [
         "/uploads/artists/20bf92e7-12e7-4ddd-af96-141c6336a799.webp",
         "/uploads/artists/97009ff4-3a05-4a8f-96de-a9176fec9fc9.webp",
         "/uploads/artists/25348d80-035a-41d1-a40b-6b34525fc8f0.webp"
       ],
-      "bio": "Orkhan Garayev (b. 1991, Ganja, Azerbaijan) is a contemporary Azerbaijani artist based in Baku. Working\nacross painting, graphic art, sculpture, installation, and book illustration, he explores the intersection of\ncultural heritage and contemporary visual language. His practice is distinguished by symbolic imagery,\nexpressive color, and poetic narratives that reflect themes of memory, identity, and place. Garayev is a\nmember of the Union of Artists of Azerbaijan, the designer of official Azerbaijani postage stamps, and has\nexhibited internationally. His works are held in public and private collections.",
-      "statement": "My works, including \"Red\", \"Trapped Earth\", and \"Hope\", are part of the permanent collection of the Museum of Modern Art in Baku. I have presented my work at international exhibitions in Turkey, Germany, Russia, Georgia, Switzerland, France, the UAE, Luxembourg, and Belgium, connecting my artistic practice with audiences across different cultural contexts."
+      "bio": {
+        "en": "Orkhan Garayev (b. 1991, Ganja, Azerbaijan) is a contemporary Azerbaijani artist based in Baku. Working\nacross painting, graphic art, sculpture, installation, and book illustration, he explores the intersection of\ncultural heritage and contemporary visual language. His practice is distinguished by symbolic imagery,\nexpressive color, and poetic narratives that reflect themes of memory, identity, and place. Garayev is a\nmember of the Union of Artists of Azerbaijan, the designer of official Azerbaijani postage stamps, and has\nexhibited internationally. His works are held in public and private collections.",
+        "az": ""
+      },
+      "statement": {
+        "en": "My works, including \"Red\", \"Trapped Earth\", and \"Hope\", are part of the permanent collection of the Museum of Modern Art in Baku. I have presented my work at international exhibitions in Turkey, Germany, Russia, Georgia, Switzerland, France, the UAE, Luxembourg, and Belgium, connecting my artistic practice with audiences across different cultural contexts.",
+        "az": ""
+      }
     },
     {
       "slug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "name": "Nigar Kerimova",
-      "role": "Artist",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
       "portrait": "/uploads/artists/d978178a-d7f6-418d-926b-523bf63fb04e.webp",
       "photos": [
         "/uploads/artists/5a1e039c-dbb0-48a7-9978-984014580802.webp",
         "/uploads/artists/2a34ec97-57bd-46a8-985a-e044b375420f.webp",
         "/uploads/artists/25b06123-7393-4767-b46c-75b329b01081.webp"
       ],
-      "bio": "Nigar Karimova is a Baku-born Azerbaijani artist, founder of Benu Art Studio by Karimova and a member of the Union of Artists of Azerbaijan since 2017. She began drawing in childhood and held her first solo exhibition at the age of nine.\n\nHer artistic practice combines Impressionism and Symbolism, focusing on inner psychological states, memory, instinct, identity, and the subconscious. She works primarily with oil and acrylic, as well as watercolor and mixed media.\n\nKarimova has participated in numerous local and international exhibitions, including showcases in Barcelona and exhibitions at the Azerbaijan State Museum. Her works are held in private collections in Azerbaijan, Canada, the USA, Germany, Sweden, Russia, and Turkey.\n\nShe currently continues her artistic practice while directing Benu Art Studio by Karimova.",
-      "statement": "My artistic practice explores memory, time, identity, and the invisible forces shaping human experience. Through painting and mixed media, I use symbolism and metaphor to transform familiar images into reflections of emotion, the subconscious, and personal memory.\n\nInspired by Baku and its cultural heritage, my work explores the connection between place, identity, and experience. I see art as a space for dialogue, inviting each viewer to discover their own meanings and emotions."
+      "bio": {
+        "en": "Nigar Karimova is a Baku-born Azerbaijani artist, founder of Benu Art Studio by Karimova and a member of the Union of Artists of Azerbaijan since 2017. She began drawing in childhood and held her first solo exhibition at the age of nine.\n\nHer artistic practice combines Impressionism and Symbolism, focusing on inner psychological states, memory, instinct, identity, and the subconscious. She works primarily with oil and acrylic, as well as watercolor and mixed media.\n\nKarimova has participated in numerous local and international exhibitions, including showcases in Barcelona and exhibitions at the Azerbaijan State Museum. Her works are held in private collections in Azerbaijan, Canada, the USA, Germany, Sweden, Russia, and Turkey.\n\nShe currently continues her artistic practice while directing Benu Art Studio by Karimova.",
+        "az": ""
+      },
+      "statement": {
+        "en": "My artistic practice explores memory, time, identity, and the invisible forces shaping human experience. Through painting and mixed media, I use symbolism and metaphor to transform familiar images into reflections of emotion, the subconscious, and personal memory.\n\nInspired by Baku and its cultural heritage, my work explores the connection between place, identity, and experience. I see art as a space for dialogue, inviting each viewer to discover their own meanings and emotions.",
+        "az": ""
+      }
     },
     {
       "slug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "name": "Roza Muradova",
-      "role": "Artist",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
       "portrait": "/uploads/artists/9ad35ad2-608e-4ae5-b820-5c7eb64f536a.webp",
       "photos": [
         "/uploads/artists/d659bf76-effa-4e41-8aa4-fac1e5ea7c99.webp",
@@ -112,8 +190,14 @@
         "/uploads/artists/330e2754-a43c-4f77-aeab-2b1f5ecbf8ed.webp",
         "/uploads/artists/9187297f-7cb9-4d95-b4c4-acbd60efcc79.webp"
       ],
-      "bio": "Roza Muradova is a contemporary painter based in Baku, Azerbaijan, working across oil, acrylic, ink, and watercolor. Her practice explores the relationship between movement, emotion, and the shifting boundary between abstraction and figuration.\n\nThrough expressive gestures, layered brushwork, and subtle use of texture, Muradova creates atmospheric compositions that evoke inner psychological states and fragmented memories. Her work often draws from nature as a source of rhythm and transformation, translating organic forms into intuitive visual language.\n\nHer paintings have been exhibited internationally and are held in private collections worldwide.",
-      "statement": "I approach painting as an intuitive process, allowing form and meaning to emerge through movement and spontaneity. Working in layers, I explore transformation, where forms appear, dissolve, and change, reflecting shifting emotions and perception.\n\nThrough minimal, deliberate gestures, I create open compositions that invite personal interpretation."
+      "bio": {
+        "en": "Roza Muradova is a contemporary painter based in Baku, Azerbaijan, working across oil, acrylic, ink, and watercolor. Her practice explores the relationship between movement, emotion, and the shifting boundary between abstraction and figuration.\n\nThrough expressive gestures, layered brushwork, and subtle use of texture, Muradova creates atmospheric compositions that evoke inner psychological states and fragmented memories. Her work often draws from nature as a source of rhythm and transformation, translating organic forms into intuitive visual language.\n\nHer paintings have been exhibited internationally and are held in private collections worldwide.",
+        "az": ""
+      },
+      "statement": {
+        "en": "I approach painting as an intuitive process, allowing form and meaning to emerge through movement and spontaneity. Working in layers, I explore transformation, where forms appear, dissolve, and change, reflecting shifting emotions and perception.\n\nThrough minimal, deliberate gestures, I create open compositions that invite personal interpretation.",
+        "az": ""
+      }
     }
   ],
   "artworks": [
@@ -122,13 +206,19 @@
       "title": "Beauty In The Darkness",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 80 cm",
       "widthCm": 60,
       "heightCm": 80,
       "image": "/uploads/artworks/2f950a1f-7dd9-43ff-aa2b-f9d32a633c51.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -138,13 +228,19 @@
       "title": "Dualism",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 70 cm",
       "widthCm": 70,
       "heightCm": 70,
       "image": "/uploads/artworks/ad11d340-daae-4e35-9895-d7b53c46a2f3.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -154,13 +250,19 @@
       "title": "I Have Just Realized That They Do Not Keep Me Alive Because I Am Alive, but Because There Is Still Something They Need From Me",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "30 × 20 cm",
       "widthCm": 30,
       "heightCm": 20,
       "image": "/uploads/artworks/adce4cea-5d6c-4d7c-8213-5f9a3b9b94b6.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 300,
       "displayed": false,
       "tondo": false
@@ -170,13 +272,19 @@
       "title": "I. Problems of an Existential Nature - Birth (Affliction)",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 70 cm",
       "widthCm": 90,
       "heightCm": 70,
       "image": "/uploads/artworks/2a074ddd-2b7e-41cb-a398-344bdf81f071.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1200,
       "displayed": false,
       "tondo": false
@@ -186,13 +294,19 @@
       "title": "II. Problems of an Existential Nature - Life (Aspiration)",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 120 cm",
       "widthCm": 90,
       "heightCm": 120,
       "image": "/uploads/artworks/bdb87397-5ebf-46c7-b48d-bab40d7eada5.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1920,
       "displayed": false,
       "tondo": false
@@ -202,13 +316,19 @@
       "title": "III. Problems of an Existential Nature - Death (Liberation)",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 90 cm",
       "widthCm": 70,
       "heightCm": 90,
       "image": "/uploads/artworks/90e0e17a-d7e9-44d8-862f-ade7ae7b4a58.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -218,13 +338,19 @@
       "title": "Sadness",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 80 cm",
       "widthCm": 70,
       "heightCm": 80,
       "image": "/uploads/artworks/0dfce250-e433-4c52-a46b-5c09636fef13.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1200,
       "displayed": false,
       "tondo": false
@@ -234,13 +360,19 @@
       "title": "Swaggerer",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 80 cm",
       "widthCm": 60,
       "heightCm": 80,
       "image": "/uploads/artworks/b7650610-a357-4585-864f-edb6ee83dfb6.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -250,13 +382,19 @@
       "title": "Tenderness as an Object of Suffering",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "30 × 20 cm",
       "widthCm": 30,
       "heightCm": 20,
       "image": "/uploads/artworks/09525c49-b992-4efa-928a-be1c06d63874.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 300,
       "displayed": false,
       "tondo": false
@@ -266,13 +404,19 @@
       "title": "The Call",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 120 cm",
       "widthCm": 100,
       "heightCm": 120,
       "image": "/uploads/artworks/25824a3a-dfe4-46be-8188-0e091984712a.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1920,
       "displayed": false,
       "tondo": false
@@ -282,13 +426,19 @@
       "title": "Under the Moon",
       "artistSlug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 120 cm",
       "widthCm": 90,
       "heightCm": 120,
       "image": "/uploads/artworks/625b0c65-6b74-4a04-ba99-650c480700ea.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
@@ -298,13 +448,19 @@
       "title": "Those who meet",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 110 cm",
       "widthCm": 90,
       "heightCm": 110,
       "image": "/uploads/artworks/b313db62-1320-4748-8cc1-49bc2ff49e0e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1920,
       "displayed": false,
       "tondo": false
@@ -314,13 +470,19 @@
       "title": "Dawn",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Mixed media on canvas",
+      "medium": {
+        "en": "Mixed media on canvas",
+        "az": ""
+      },
       "dimensions": "110 × 100 cm",
       "widthCm": 110,
       "heightCm": 100,
       "image": "/uploads/artworks/f44e0075-b729-4f07-8d01-e8591277130b.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1620,
       "displayed": false,
       "tondo": false
@@ -330,13 +492,19 @@
       "title": "Dream",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 110 cm",
       "widthCm": 80,
       "heightCm": 110,
       "image": "/uploads/artworks/0a8e79dc-7f85-4d60-96c7-92c559758b54.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1620,
       "displayed": false,
       "tondo": false
@@ -346,13 +514,19 @@
       "title": "Escape",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Mixed media on canvas",
+      "medium": {
+        "en": "Mixed media on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 140 cm",
       "widthCm": 100,
       "heightCm": 140,
       "image": "/uploads/artworks/ce916a5d-68c3-4088-aae9-fd153b659694.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1920,
       "displayed": false,
       "tondo": false
@@ -362,13 +536,19 @@
       "title": "Face",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Mixed media on canvas",
+      "medium": {
+        "en": "Mixed media on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 110 cm",
       "widthCm": 90,
       "heightCm": 110,
       "image": "/uploads/artworks/b3be823d-82fa-4ff3-8e06-0fdf83494204.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1620,
       "displayed": false,
       "tondo": false
@@ -378,13 +558,19 @@
       "title": "Figure",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 130 cm",
       "widthCm": 90,
       "heightCm": 130,
       "image": "/uploads/artworks/3e5fa7d0-161c-49f0-80f6-3c223383e1bd.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2100,
       "displayed": false,
       "tondo": false
@@ -394,13 +580,19 @@
       "title": "Forest",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 100 cm",
       "widthCm": 60,
       "heightCm": 100,
       "image": "/uploads/artworks/3dddf8fa-2690-468c-bcbe-5f97f06c1e54.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 960,
       "displayed": false,
       "tondo": false
@@ -410,13 +602,19 @@
       "title": "Path",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 70 cm",
       "widthCm": 90,
       "heightCm": 70,
       "image": "/uploads/artworks/ea65aeca-f1a1-4cb5-9a6e-2a436886607c.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1320,
       "displayed": false,
       "tondo": false
@@ -426,13 +624,19 @@
       "title": "Portal",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "110 × 110 cm",
       "widthCm": 110,
       "heightCm": 110,
       "image": "/uploads/artworks/f09d170d-4d46-4a1a-848c-1dfc6b29d6f6.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1920,
       "displayed": false,
       "tondo": false
@@ -442,13 +646,19 @@
       "title": "Red",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "115 × 150 cm",
       "widthCm": 115,
       "heightCm": 150,
       "image": "/uploads/artworks/3ab4f99a-f3ea-45a3-a743-8b968164951d.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
@@ -458,13 +668,19 @@
       "title": "Soul",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Mixed media on MDF panel",
+      "medium": {
+        "en": "Mixed media on MDF panel",
+        "az": ""
+      },
       "dimensions": "70 × 130 cm",
       "widthCm": 70,
       "heightCm": 130,
       "image": "/uploads/artworks/026adce7-723c-40c6-8118-23b8b7ae504e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -474,13 +690,19 @@
       "title": "Prayer",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Mixed media on canvas",
+      "medium": {
+        "en": "Mixed media on canvas",
+        "az": ""
+      },
       "dimensions": "180 × 130 cm",
       "widthCm": 180,
       "heightCm": 130,
       "image": "/uploads/artworks/9fdcd5f0-73f0-4997-8ea2-0daef11bb25c.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 3720,
       "displayed": false,
       "tondo": false
@@ -490,13 +712,19 @@
       "title": "Red",
       "artistSlug": "artist-2cad6b97-dee3-414c-b689-ca64cb105825",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 100 cm",
       "widthCm": 100,
       "heightCm": 100,
       "image": "/uploads/artworks/5b3bab73-56ff-44c6-aac8-a916e43ac9c8.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1620,
       "displayed": false,
       "tondo": false
@@ -506,13 +734,19 @@
       "title": "A Solitary Passenger",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2018",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 110 cm",
       "widthCm": 90,
       "heightCm": 110,
       "image": "/uploads/artworks/1b1c49eb-f55d-4008-b7a2-8907e0616293.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 3396,
       "displayed": false,
       "tondo": false
@@ -522,13 +756,19 @@
       "title": "Absheron motif",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 50 cm",
       "widthCm": 70,
       "heightCm": 50,
       "image": "/uploads/artworks/59751791-f799-4755-80b1-0266113d6468.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1008,
       "displayed": false,
       "tondo": false
@@ -538,13 +778,19 @@
       "title": "Afrodita of Absheron",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2015",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 60 cm",
       "widthCm": 80,
       "heightCm": 60,
       "image": "/uploads/artworks/065b536d-ff86-4766-9865-40c5de478e04.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 678,
       "displayed": false,
       "tondo": false
@@ -554,13 +800,19 @@
       "title": "Angels of Caspian sea",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 110 cm",
       "widthCm": 90,
       "heightCm": 110,
       "image": "/uploads/artworks/2cad87a7-0eea-435e-81e2-4a9a5a1414e2.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 4752,
       "displayed": false,
       "tondo": false
@@ -570,13 +822,19 @@
       "title": "Asiman",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 50 cm",
       "widthCm": 70,
       "heightCm": 50,
       "image": "/uploads/artworks/88a8c212-d739-4d93-9fca-869b1b7c8950.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 348,
       "displayed": false,
       "tondo": false
@@ -586,13 +844,19 @@
       "title": "Asiman",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "50 × 70 cm",
       "widthCm": 50,
       "heightCm": 70,
       "image": "/uploads/artworks/94ab6166-81e3-4c72-a6f1-c78d151d8bd3.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 348,
       "displayed": false,
       "tondo": false
@@ -602,13 +866,19 @@
       "title": "Baku Deniz Mall",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2025",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 50 cm",
       "widthCm": 70,
       "heightCm": 50,
       "image": "/uploads/artworks/e70c9ea4-721d-40e0-ab02-5381f489f4ff.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 360,
       "displayed": false,
       "tondo": false
@@ -618,13 +888,19 @@
       "title": "Baku Deniz Mall",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2025",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 50 cm",
       "widthCm": 70,
       "heightCm": 50,
       "image": "/uploads/artworks/f5eb6b72-39fd-4228-967c-ea1d7130dfa2.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 360,
       "displayed": false,
       "tondo": false
@@ -634,13 +910,19 @@
       "title": "Baku",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "110 × 110 cm",
       "widthCm": 110,
       "heightCm": 110,
       "image": "/uploads/artworks/14856d95-4434-434f-b1c7-a6d96f48c2a6.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 6325,
       "displayed": false,
       "tondo": false
@@ -650,13 +932,19 @@
       "title": "Black Horizon",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "50 × 70 cm",
       "widthCm": 50,
       "heightCm": 70,
       "image": "/uploads/artworks/3c7e7675-d9e1-4f92-8c00-ef23250cc432.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 360,
       "displayed": false,
       "tondo": false
@@ -666,13 +954,19 @@
       "title": "Caravan",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2016",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 100 cm",
       "widthCm": 70,
       "heightCm": 100,
       "image": "/uploads/artworks/7c85b181-facf-4e1e-823f-c15e5e7e96ef.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 4752,
       "displayed": false,
       "tondo": false
@@ -682,13 +976,19 @@
       "title": "Coming from Goycay",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2018",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "85 × 110 cm",
       "widthCm": 85,
       "heightCm": 110,
       "image": "/uploads/artworks/cc13153f-ec18-4667-ab4d-0b72177d7c5a.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2712,
       "displayed": false,
       "tondo": false
@@ -698,13 +998,19 @@
       "title": "Legend of Shanapipik",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2019",
-      "medium": "Mixed media",
+      "medium": {
+        "en": "Mixed media",
+        "az": ""
+      },
       "dimensions": "58 × 86 cm",
       "widthCm": 58,
       "heightCm": 86,
       "image": "/uploads/artworks/51099027-21e4-4847-8658-d0489102402d.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2712,
       "displayed": false,
       "tondo": false
@@ -714,13 +1020,19 @@
       "title": "Naturmort",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2016",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 60 cm",
       "widthCm": 80,
       "heightCm": 60,
       "image": "/uploads/artworks/12339614-1fd0-44fa-bf85-e5e3469b948d.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1356,
       "displayed": false,
       "tondo": false
@@ -730,13 +1042,19 @@
       "title": "Naturmort",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2016",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 55 cm",
       "widthCm": 90,
       "heightCm": 55,
       "image": "/uploads/artworks/fe7bc2f4-909e-49da-a8db-fcb782da5749.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 678,
       "displayed": false,
       "tondo": false
@@ -746,13 +1064,19 @@
       "title": "Old city",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2015",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 70 cm",
       "widthCm": 100,
       "heightCm": 70,
       "image": "/uploads/artworks/81552067-0cdf-4d63-ae6a-dbc8f9ee660f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2712,
       "displayed": false,
       "tondo": false
@@ -762,13 +1086,19 @@
       "title": "Road",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 50 cm",
       "widthCm": 70,
       "heightCm": 50,
       "image": "/uploads/artworks/060dfa0c-2775-4424-a176-f5ebb3cc2b3e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 360,
       "displayed": false,
       "tondo": false
@@ -778,13 +1108,19 @@
       "title": "Roofs of the Old City",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2018",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 100 cm",
       "widthCm": 100,
       "heightCm": 100,
       "image": "/uploads/artworks/138a43f5-0b3b-47b8-9ed7-b8a09b3f14af.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 4752,
       "displayed": false,
       "tondo": false
@@ -794,13 +1130,19 @@
       "title": "Silence",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 50 cm",
       "widthCm": 70,
       "heightCm": 50,
       "image": "/uploads/artworks/acc95c12-63e9-429e-9026-a34a6ecac9e0.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 480,
       "displayed": false,
       "tondo": false
@@ -810,13 +1152,19 @@
       "title": "Tbilisi",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "120 × 110 cm",
       "widthCm": 120,
       "heightCm": 110,
       "image": "/uploads/artworks/3712b8e1-f86d-4b02-8a1e-ce18aff61083.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 4752,
       "displayed": false,
       "tondo": false
@@ -826,13 +1174,19 @@
       "title": "The Caravan of Humanity",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2024",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "110 × 110 cm",
       "widthCm": 110,
       "heightCm": 110,
       "image": "/uploads/artworks/72e1894c-409f-463a-9ba4-9b3e82c1ec43.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 4752,
       "displayed": false,
       "tondo": false
@@ -842,13 +1196,19 @@
       "title": "The Nest of Hope",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 50 cm",
       "widthCm": 70,
       "heightCm": 50,
       "image": "/uploads/artworks/8ed9108b-8381-4133-a4ba-2957bb1e69e7.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 360,
       "displayed": false,
       "tondo": false
@@ -858,13 +1218,19 @@
       "title": "The Path of Time",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2026",
-      "medium": "Mixed media",
+      "medium": {
+        "en": "Mixed media",
+        "az": ""
+      },
       "dimensions": "70 × 50 cm",
       "widthCm": 70,
       "heightCm": 50,
       "image": "/uploads/artworks/a4d732c8-b850-4eb7-bd90-d53f49db3b15.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 360,
       "displayed": false,
       "tondo": false
@@ -874,13 +1240,19 @@
       "title": "The Tree of Wishes",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2026",
-      "medium": "Mixed media",
+      "medium": {
+        "en": "Mixed media",
+        "az": ""
+      },
       "dimensions": "70 × 50 cm",
       "widthCm": 70,
       "heightCm": 50,
       "image": "/uploads/artworks/56e2ec92-17ca-48e6-918f-4d003b08ce43.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 360,
       "displayed": false,
       "tondo": false
@@ -890,13 +1262,19 @@
       "title": "Thirst",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "40 × 50 cm",
       "widthCm": 40,
       "heightCm": 50,
       "image": "/uploads/artworks/b9e67826-5113-492e-8e42-4668b018ddeb.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 288,
       "displayed": false,
       "tondo": false
@@ -906,13 +1284,19 @@
       "title": "Three friends",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "45 × 60 cm",
       "widthCm": 45,
       "heightCm": 60,
       "image": "/uploads/artworks/e770db88-a8e1-439f-a1a7-93630ad2fea0.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 876,
       "displayed": false,
       "tondo": false
@@ -922,13 +1306,19 @@
       "title": "Three friends",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "45 × 60 cm",
       "widthCm": 45,
       "heightCm": 60,
       "image": "/uploads/artworks/ec3664c2-7431-4281-b1ed-ccb3d09b3203.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 876,
       "displayed": false,
       "tondo": false
@@ -938,13 +1328,19 @@
       "title": "Three friends",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "45 × 60 cm",
       "widthCm": 45,
       "heightCm": 60,
       "image": "/uploads/artworks/1c41fc56-ceab-4977-b5d6-dffd32c4dcbc.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 876,
       "displayed": false,
       "tondo": false
@@ -954,13 +1350,19 @@
       "title": "Three friends",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "45 × 60 cm",
       "widthCm": 45,
       "heightCm": 60,
       "image": "/uploads/artworks/f1eaf550-1562-4c81-8989-e7ecb5a47b63.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 876,
       "displayed": false,
       "tondo": false
@@ -970,13 +1372,19 @@
       "title": "Three friends",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "120 × 60 cm",
       "widthCm": 120,
       "heightCm": 60,
       "image": "/uploads/artworks/cb5d56fa-f53d-4d67-ba05-3e58cff35418.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 3336,
       "displayed": false,
       "tondo": false
@@ -986,13 +1394,19 @@
       "title": "Three friends",
       "artistSlug": "artist-3575eb5c-0754-4fc4-869b-45c105a2f919",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "40 × 60 cm",
       "widthCm": 40,
       "heightCm": 60,
       "image": "/uploads/artworks/1f440bf5-f56a-4625-83b1-476a6a584a2f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 876,
       "displayed": false,
       "tondo": false
@@ -1002,13 +1416,19 @@
       "title": "AIR ELEMENT",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2023",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 110 cm",
       "widthCm": 100,
       "heightCm": 110,
       "image": "/uploads/artworks/082f2a65-511c-4dae-b2ea-f78959857229.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1200,
       "displayed": false,
       "tondo": false
@@ -1018,13 +1438,19 @@
       "title": "WATER LILIES",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2024",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 80 cm",
       "widthCm": 100,
       "heightCm": 80,
       "image": "/uploads/artworks/0f6982ed-e906-4467-9208-de0c85e2e914.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2880,
       "displayed": false,
       "tondo": false
@@ -1034,13 +1460,19 @@
       "title": "AWAKENING",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 50 cm",
       "widthCm": 60,
       "heightCm": 50,
       "image": "/uploads/artworks/65ba3ec7-b891-4e3e-abd2-dd446ce3de74.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -1050,13 +1482,19 @@
       "title": "LIGHTNESS",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 50 cm",
       "widthCm": 60,
       "heightCm": 50,
       "image": "/uploads/artworks/21d629e2-b323-4d56-8b78-648ed89b2647.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 660,
       "displayed": false,
       "tondo": false
@@ -1066,13 +1504,19 @@
       "title": "GOLD CLOUDS",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 40 cm",
       "widthCm": 80,
       "heightCm": 40,
       "image": "/uploads/artworks/7076e8fb-4a79-4b4b-8ab4-318cf8f89c5b.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1140,
       "displayed": false,
       "tondo": false
@@ -1082,13 +1526,19 @@
       "title": "CONTEMPLATION",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 50 cm",
       "widthCm": 60,
       "heightCm": 50,
       "image": "/uploads/artworks/b578ee47-11f9-4770-9e9c-706d826ae3d1.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 960,
       "displayed": false,
       "tondo": false
@@ -1098,13 +1548,19 @@
       "title": "STILL LIFE",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 70 cm",
       "widthCm": 60,
       "heightCm": 70,
       "image": "/uploads/artworks/23d20f04-c42d-4474-ba08-210fdb50b3e3.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1200,
       "displayed": false,
       "tondo": false
@@ -1114,13 +1570,19 @@
       "title": "EARTH ELEMENT",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2023",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "110 × 100 cm",
       "widthCm": 110,
       "heightCm": 100,
       "image": "/uploads/artworks/aa6f4443-ab7f-4616-b5e0-ac60f8d29776.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -1130,13 +1592,19 @@
       "title": "CELEBRATING LIFE",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 70 cm",
       "widthCm": 60,
       "heightCm": 70,
       "image": "/uploads/artworks/8129a457-a72b-47af-9efc-f77b7a814ff1.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -1146,13 +1614,19 @@
       "title": "BATTLE",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2023",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 80 cm",
       "widthCm": 100,
       "heightCm": 80,
       "image": "/uploads/artworks/320fc6d1-a375-4a22-92ba-dbb2af2b82e2.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
@@ -1162,13 +1636,19 @@
       "title": "THE FISH",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2017",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 70 cm",
       "widthCm": 80,
       "heightCm": 70,
       "image": "/uploads/artworks/cac43c4f-fae6-471a-9117-fa69421ef96f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1560,
       "displayed": false,
       "tondo": false
@@ -1178,13 +1658,19 @@
       "title": "MELTED CHESS",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2023",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 110 cm",
       "widthCm": 80,
       "heightCm": 110,
       "image": "/uploads/artworks/3bf2bc3f-a8db-4963-86ba-7cdad8f14e36.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 3000,
       "displayed": false,
       "tondo": false
@@ -1194,13 +1680,19 @@
       "title": "AT SUNSET",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 80 cm",
       "widthCm": 80,
       "heightCm": 80,
       "image": "/uploads/artworks/6babe46f-78b1-41f3-9d1a-c41a267aff0e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2040,
       "displayed": false,
       "tondo": false
@@ -1210,13 +1702,19 @@
       "title": "FIRE ELEMENT",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2023",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "110 × 100 cm",
       "widthCm": 110,
       "heightCm": 100,
       "image": "/uploads/artworks/4705418b-6210-490f-ac94-1022d42b99a6.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1800,
       "displayed": false,
       "tondo": false
@@ -1226,13 +1724,19 @@
       "title": "MAIDEN TOWER",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "30 × 40 cm",
       "widthCm": 30,
       "heightCm": 40,
       "image": "/uploads/artworks/bfb11f89-08cf-42ec-a32d-ca711c53ea64.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 360,
       "displayed": false,
       "tondo": false
@@ -1242,13 +1746,19 @@
       "title": "ORANGE SAMOVAR",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 80 cm",
       "widthCm": 70,
       "heightCm": 80,
       "image": "/uploads/artworks/44a9632f-8f0e-40c7-a20b-d00e8cc7d1da.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1560,
       "displayed": false,
       "tondo": false
@@ -1258,13 +1768,19 @@
       "title": "MUGHAM",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2024",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 80 cm",
       "widthCm": 70,
       "heightCm": 80,
       "image": "/uploads/artworks/5823b5cf-0349-44bd-9e83-574526228fcd.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1560,
       "displayed": false,
       "tondo": false
@@ -1274,13 +1790,19 @@
       "title": "TALK TO ME",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 70 cm",
       "widthCm": 60,
       "heightCm": 70,
       "image": "/uploads/artworks/6a4116bd-85aa-4f49-bd9b-bdacacc83df1.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1560,
       "displayed": false,
       "tondo": false
@@ -1290,13 +1812,19 @@
       "title": "SEDUCTION 1 (A WOMAN LOVES THROUGH ATTENTION)",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2024",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 90 cm",
       "widthCm": 70,
       "heightCm": 90,
       "image": "/uploads/artworks/277dd2f0-5bad-4abb-8389-bfed59420bef.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1560,
       "displayed": false,
       "tondo": false
@@ -1306,13 +1834,19 @@
       "title": "SEDUCTION 1 (A WOMAN LOVES WITH HER EARS)",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2024",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 90 cm",
       "widthCm": 70,
       "heightCm": 90,
       "image": "/uploads/artworks/df90238e-44e1-4e7a-8850-957abf45d625.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1560,
       "displayed": false,
       "tondo": false
@@ -1322,13 +1856,19 @@
       "title": "DANCE WITH ME",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 70 cm",
       "widthCm": 60,
       "heightCm": 70,
       "image": "/uploads/artworks/76178c13-fd11-414f-b798-19e15d46d16d.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1560,
       "displayed": false,
       "tondo": false
@@ -1338,13 +1878,19 @@
       "title": "MARS",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 70 cm",
       "widthCm": 60,
       "heightCm": 70,
       "image": "/uploads/artworks/6e7e023a-357f-48dc-9845-3f9f54871778.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -1354,13 +1900,19 @@
       "title": "DANCE WITH ME",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 60 cm",
       "widthCm": 70,
       "heightCm": 60,
       "image": "/uploads/artworks/41d4cd2f-6d27-49ce-b509-af504737c2e2.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -1370,13 +1922,19 @@
       "title": "SALIN",
       "artistSlug": "artist-f0055b7a-c040-4c2d-ba1e-9fb3943ea522",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 70 cm",
       "widthCm": 60,
       "heightCm": 70,
       "image": "/uploads/artworks/6b0875d7-74ab-40db-9a6b-8a0d003b36a6.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1560,
       "displayed": false,
       "tondo": false
@@ -1386,13 +1944,19 @@
       "title": "Avtoportret",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Oil on paper",
+      "medium": {
+        "en": "Oil on paper",
+        "az": ""
+      },
       "dimensions": "30 × 42 cm",
       "widthCm": 30,
       "heightCm": 42,
       "image": "/uploads/artworks/5a86f97e-5760-4fb6-87a6-053c280adca3.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 780,
       "displayed": false,
       "tondo": false
@@ -1402,13 +1966,19 @@
       "title": "Bacı",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "40 × 50 cm",
       "widthCm": 40,
       "heightCm": 50,
       "image": "/uploads/artworks/8f60f988-b031-4020-9f41-0705663e552e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -1418,13 +1988,19 @@
       "title": "Çevrilmə",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "45 × 50 cm",
       "widthCm": 45,
       "heightCm": 50,
       "image": "/uploads/artworks/a0a33920-c831-4a3b-9926-286167577534.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 960,
       "displayed": false,
       "tondo": false
@@ -1434,13 +2010,19 @@
       "title": "I feel differently",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 110 cm",
       "widthCm": 70,
       "heightCm": 110,
       "image": "/uploads/artworks/9e9f0619-c638-4f24-8b7b-60ae724edb49.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 3600,
       "displayed": false,
       "tondo": false
@@ -1450,13 +2032,19 @@
       "title": "Flowers from nature",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Oil on wood",
+      "medium": {
+        "en": "Oil on wood",
+        "az": ""
+      },
       "dimensions": "30 × 60 cm",
       "widthCm": 30,
       "heightCm": 60,
       "image": "/uploads/artworks/696ff17d-81a9-44c0-8fa3-a6f979251900.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 660,
       "displayed": false,
       "tondo": false
@@ -1466,13 +2054,19 @@
       "title": "Mavi sırğalı",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 90 cm",
       "widthCm": 70,
       "heightCm": 90,
       "image": "/uploads/artworks/b8cb5c77-6c7a-4ab4-9293-bcbb06aa03c0.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 3360,
       "displayed": false,
       "tondo": false
@@ -1482,13 +2076,19 @@
       "title": "Özüm",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 70 cm",
       "widthCm": 100,
       "heightCm": 70,
       "image": "/uploads/artworks/f6048596-abfa-42f0-a69f-7d0fbbeb3edd.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 3360,
       "displayed": false,
       "tondo": false
@@ -1498,13 +2098,19 @@
       "title": "I feel tortured",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Oil on paper",
+      "medium": {
+        "en": "Oil on paper",
+        "az": ""
+      },
       "dimensions": "15 × 21 cm",
       "widthCm": 15,
       "heightCm": 21,
       "image": "/uploads/artworks/c7696e1b-63a0-4a25-87ca-64ea32a81ace.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 780,
       "displayed": false,
       "tondo": false
@@ -1514,13 +2120,19 @@
       "title": "I'll go",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "65 × 80 cm",
       "widthCm": 65,
       "heightCm": 80,
       "image": "/uploads/artworks/a7a5bb6b-051e-4963-871a-da7cc162af5b.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2040,
       "displayed": false,
       "tondo": false
@@ -1530,13 +2142,19 @@
       "title": "Red",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "40 × 50 cm",
       "widthCm": 40,
       "heightCm": 50,
       "image": "/uploads/artworks/bd844ebc-10fc-4c15-a648-d8f2fb71a7fc.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1140,
       "displayed": false,
       "tondo": false
@@ -1546,13 +2164,19 @@
       "title": "Vida",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "2026",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "105 × 140 cm",
       "widthCm": 105,
       "heightCm": 140,
       "image": "/uploads/artworks/3c5bd5f4-f0e5-42df-973c-a59e32ab9434.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 4200,
       "displayed": false,
       "tondo": false
@@ -1562,13 +2186,19 @@
       "title": "N 1",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Marker on paper",
+      "medium": {
+        "en": "Marker on paper",
+        "az": ""
+      },
       "dimensions": "15 × 21 cm",
       "widthCm": 15,
       "heightCm": 21,
       "image": "/uploads/artworks/7b5665cf-1a5d-4562-8bb3-e6699977bc2b.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 180,
       "displayed": false,
       "tondo": false
@@ -1578,13 +2208,19 @@
       "title": "N 2",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Marker on paper",
+      "medium": {
+        "en": "Marker on paper",
+        "az": ""
+      },
       "dimensions": "15 × 21 cm",
       "widthCm": 15,
       "heightCm": 21,
       "image": "/uploads/artworks/4e6d5903-fde4-47ca-8c45-60168d5c1f63.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 180,
       "displayed": false,
       "tondo": false
@@ -1594,13 +2230,19 @@
       "title": "N 4",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Marker on paper",
+      "medium": {
+        "en": "Marker on paper",
+        "az": ""
+      },
       "dimensions": "15 × 21 cm",
       "widthCm": 15,
       "heightCm": 21,
       "image": "/uploads/artworks/10911962-fa30-4521-882d-952d4b257392.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 180,
       "displayed": false,
       "tondo": false
@@ -1610,13 +2252,19 @@
       "title": "Artist",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "2025",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "35 × 40 cm",
       "widthCm": 35,
       "heightCm": 40,
       "image": "/uploads/artworks/0cf17330-7e67-402e-9f0c-17cdb525a839.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 780,
       "displayed": false,
       "tondo": false
@@ -1626,13 +2274,19 @@
       "title": "Beginning",
       "artistSlug": "artist-a00b81d5-be95-41cd-9975-f65d35f1f282",
       "year": "",
-      "medium": "Oil on canvas",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 80 cm",
       "widthCm": 60,
       "heightCm": 80,
       "image": "/uploads/artworks/396b4172-dd2e-44b1-8c81-f9c4481234da.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 3840,
       "displayed": false,
       "tondo": false
@@ -1642,13 +2296,19 @@
       "title": "Between two worlds",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Acrylics on canvas",
+      "medium": {
+        "en": "Acrylics on canvas",
+        "az": ""
+      },
       "dimensions": "30 × 40 cm",
       "widthCm": 30,
       "heightCm": 40,
       "image": "/uploads/artworks/1b3363e6-2cea-4b7b-a2a8-a65b20348fdd.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 720,
       "displayed": true,
       "tondo": false
@@ -1658,13 +2318,19 @@
       "title": "Chaotic decisions",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Spray paint, acrylics and airbrush on canvas",
+      "medium": {
+        "en": "Spray paint, acrylics and airbrush on canvas",
+        "az": ""
+      },
       "dimensions": "50 × 60 cm",
       "widthCm": 50,
       "heightCm": 60,
       "image": "/uploads/artworks/35cd8c43-2366-432b-9f7f-b4c159156ac9.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": true,
       "tondo": false
@@ -1674,13 +2340,19 @@
       "title": "Creative overthinking",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Spray paint, acrylic markers and airbrush on canvas",
+      "medium": {
+        "en": "Spray paint, acrylic markers and airbrush on canvas",
+        "az": ""
+      },
       "dimensions": "40 × 40 cm",
       "widthCm": 40,
       "heightCm": 40,
       "image": "/uploads/artworks/99c27f5a-739a-4ab8-a36f-615cdc70ed50.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 960,
       "displayed": true,
       "tondo": false
@@ -1690,13 +2362,19 @@
       "title": "Dummy",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Spray paint, acrylics and airbrush on canvas",
+      "medium": {
+        "en": "Spray paint, acrylics and airbrush on canvas",
+        "az": ""
+      },
       "dimensions": "40 × 50 cm",
       "widthCm": 40,
       "heightCm": 50,
       "image": "/uploads/artworks/bec48d58-ae73-480d-b1a3-76e6095cdb5f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 540,
       "displayed": true,
       "tondo": false
@@ -1706,13 +2384,19 @@
       "title": "Finding piece in hell",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Spray paint and acrylics on canvas",
+      "medium": {
+        "en": "Spray paint and acrylics on canvas",
+        "az": ""
+      },
       "dimensions": "50 × 100 cm",
       "widthCm": 50,
       "heightCm": 100,
       "image": "/uploads/artworks/acd04f86-ea12-4881-be94-8c4d57581053.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1800,
       "displayed": true,
       "tondo": false
@@ -1722,13 +2406,19 @@
       "title": "Love letters",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Spray paint, acrylic markers and airbrush on canvas",
+      "medium": {
+        "en": "Spray paint, acrylic markers and airbrush on canvas",
+        "az": ""
+      },
       "dimensions": "50 × 50 cm",
       "widthCm": 50,
       "heightCm": 50,
       "image": "/uploads/artworks/c2c40dbc-19b9-4c67-91d4-214a14fdc74e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -1738,13 +2428,19 @@
       "title": "Multi character series",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Free hand acrylic marker on paper",
+      "medium": {
+        "en": "Free hand acrylic marker on paper",
+        "az": ""
+      },
       "dimensions": "21 × 30 cm",
       "widthCm": 21,
       "heightCm": 30,
       "image": "/uploads/artworks/80a2e8d2-16f9-4d7e-9f7c-ebd384fa4996.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 540,
       "displayed": false,
       "tondo": false
@@ -1754,13 +2450,19 @@
       "title": "Multi character series",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Free hand acrylic marker on paper",
+      "medium": {
+        "en": "Free hand acrylic marker on paper",
+        "az": ""
+      },
       "dimensions": "21 × 30 cm",
       "widthCm": 21,
       "heightCm": 30,
       "image": "/uploads/artworks/ecbb2e48-4735-4811-a8da-df2f25340662.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 540,
       "displayed": false,
       "tondo": false
@@ -1770,13 +2472,19 @@
       "title": "Multi character series",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Markers on paper",
+      "medium": {
+        "en": "Markers on paper",
+        "az": ""
+      },
       "dimensions": "30 × 42 cm",
       "widthCm": 30,
       "heightCm": 42,
       "image": "/uploads/artworks/105cb1b0-e232-49c0-9bc7-80bfb104c59b.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 720,
       "displayed": false,
       "tondo": false
@@ -1786,13 +2494,19 @@
       "title": "Multi character series",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Free hand acrylic marker on paper",
+      "medium": {
+        "en": "Free hand acrylic marker on paper",
+        "az": ""
+      },
       "dimensions": "21 × 30 cm",
       "widthCm": 21,
       "heightCm": 30,
       "image": "/uploads/artworks/00fbc052-86aa-44af-8f99-84e637290af9.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 540,
       "displayed": false,
       "tondo": false
@@ -1802,13 +2516,19 @@
       "title": "Neon faces 1",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Spray paint and acrylic markers on holographic paper",
+      "medium": {
+        "en": "Spray paint and acrylic markers on holographic paper",
+        "az": ""
+      },
       "dimensions": "53 × 25 cm",
       "widthCm": 53,
       "heightCm": 25,
       "image": "/uploads/artworks/070d5c99-f5ae-4480-92c1-3021015fbbf7.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2160,
       "displayed": true,
       "tondo": false
@@ -1818,13 +2538,19 @@
       "title": "Neon faces 2",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Spray paint and acrylic markers on holographic paper",
+      "medium": {
+        "en": "Spray paint and acrylic markers on holographic paper",
+        "az": ""
+      },
       "dimensions": "53 × 28 cm",
       "widthCm": 53,
       "heightCm": 28,
       "image": "/uploads/artworks/9b8864aa-6c82-48e5-bcdb-5287b6a9c771.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2160,
       "displayed": true,
       "tondo": false
@@ -1834,13 +2560,19 @@
       "title": "Shapes and letters",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Spray paint, acrylics and airbrush on canvas",
+      "medium": {
+        "en": "Spray paint, acrylics and airbrush on canvas",
+        "az": ""
+      },
       "dimensions": "50 × 50 cm",
       "widthCm": 50,
       "heightCm": 50,
       "image": "/uploads/artworks/ab9d6bf6-643c-4a9a-a731-1df08332b038.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -1850,13 +2582,19 @@
       "title": "Splitface",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Spray paint on holographic paper",
+      "medium": {
+        "en": "Spray paint on holographic paper",
+        "az": ""
+      },
       "dimensions": "48 × 68 cm",
       "widthCm": 48,
       "heightCm": 68,
       "image": "/uploads/artworks/3c87413d-7fa9-4fe9-9aeb-33aa292cce56.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 720,
       "displayed": true,
       "tondo": false
@@ -1866,13 +2604,19 @@
       "title": "Untitled face",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Airbrush and acrylic marker on canvas",
+      "medium": {
+        "en": "Airbrush and acrylic marker on canvas",
+        "az": ""
+      },
       "dimensions": "20 × 25 cm",
       "widthCm": 20,
       "heightCm": 25,
       "image": "/uploads/artworks/4eab9a31-dd4f-49d2-b405-05bda709b9d4.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 420,
       "displayed": false,
       "tondo": false
@@ -1882,13 +2626,19 @@
       "title": "Untitled face",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Airbrush and acrylic marker on canvas",
+      "medium": {
+        "en": "Airbrush and acrylic marker on canvas",
+        "az": ""
+      },
       "dimensions": "20 × 30 cm",
       "widthCm": 20,
       "heightCm": 30,
       "image": "/uploads/artworks/4df099b5-e52f-4e6d-8b14-1bc9d2285964.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 420,
       "displayed": false,
       "tondo": false
@@ -1898,13 +2648,19 @@
       "title": "Untitled faces",
       "artistSlug": "artist-c45dfacf-1729-4695-bd2d-31839f980c22",
       "year": "",
-      "medium": "Spray paint on canvas",
+      "medium": {
+        "en": "Spray paint on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 80 cm",
       "widthCm": 70,
       "heightCm": 80,
       "image": "/uploads/artworks/4ac941a7-232f-4096-ac9a-4cc3afbeca7f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1080,
       "displayed": true,
       "tondo": false
@@ -1914,13 +2670,19 @@
       "title": "Moonlight",
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
-      "medium": "Mixed medium",
+      "medium": {
+        "en": "Mixed medium",
+        "az": ""
+      },
       "dimensions": "110 × 60 cm",
       "widthCm": 110,
       "heightCm": 60,
       "image": "/uploads/artworks/42a7a58c-4c81-4eb5-8ea6-3f1a4e7ba08a.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1500,
       "displayed": false,
       "tondo": false
@@ -1930,13 +2692,19 @@
       "title": "Eva",
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
-      "medium": "Mixed medium",
+      "medium": {
+        "en": "Mixed medium",
+        "az": ""
+      },
       "dimensions": "70 × 110 cm",
       "widthCm": 70,
       "heightCm": 110,
       "image": "/uploads/artworks/8b550d34-72ae-4558-98f1-19ea1ef28c10.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1700,
       "displayed": false,
       "tondo": false
@@ -1946,13 +2714,19 @@
       "title": "Red cat",
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 100 cm",
       "widthCm": 100,
       "heightCm": 100,
       "image": "/uploads/artworks/41f61b58-feb8-4063-80b6-4952e52ae000.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1000,
       "displayed": false,
       "tondo": false
@@ -1962,13 +2736,19 @@
       "title": "Depth of the ocean",
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "130 × 80 cm",
       "widthCm": 130,
       "heightCm": 80,
       "image": "/uploads/artworks/bd5b74a1-a904-4929-be89-ccc2cabd8a2e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1700,
       "displayed": false,
       "tondo": false
@@ -1978,13 +2758,19 @@
       "title": "Sunflowers",
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
-      "medium": "Mixed medium",
+      "medium": {
+        "en": "Mixed medium",
+        "az": ""
+      },
       "dimensions": "20 × 25 cm",
       "widthCm": 20,
       "heightCm": 25,
       "image": "/uploads/artworks/f34d8b2b-18fe-4ff5-b44a-e52d2dc767d4.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 400,
       "displayed": false,
       "tondo": false
@@ -1994,13 +2780,19 @@
       "title": "Watermelon",
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
-      "medium": "Mixed medium",
+      "medium": {
+        "en": "Mixed medium",
+        "az": ""
+      },
       "dimensions": "47 × 28 cm",
       "widthCm": 47,
       "heightCm": 28,
       "image": "/uploads/artworks/e727bcd8-7069-485f-be9a-76b9cd5ee609.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 350,
       "displayed": false,
       "tondo": false
@@ -2010,13 +2802,19 @@
       "title": "August in May",
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
-      "medium": "Mixed medium",
+      "medium": {
+        "en": "Mixed medium",
+        "az": ""
+      },
       "dimensions": "110 × 70 cm",
       "widthCm": 110,
       "heightCm": 70,
       "image": "/uploads/artworks/19ec8c70-1372-415f-9522-3627d6d33852.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1300,
       "displayed": false,
       "tondo": false
@@ -2026,13 +2824,19 @@
       "title": "Lilac",
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 100 cm",
       "widthCm": 100,
       "heightCm": 100,
       "image": "/uploads/artworks/db278355-7fb6-4ce3-8612-968bae4fce27.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1200,
       "displayed": false,
       "tondo": false
@@ -2042,13 +2846,19 @@
       "title": "Sunflowers",
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
-      "medium": "Mixed medium",
+      "medium": {
+        "en": "Mixed medium",
+        "az": ""
+      },
       "dimensions": "120 × 60 cm",
       "widthCm": 120,
       "heightCm": 60,
       "image": "/uploads/artworks/a1cb35f9-8ac1-4a4a-84dd-55c35c162a7f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1500,
       "displayed": false,
       "tondo": false
@@ -2058,13 +2868,19 @@
       "title": "A basket of pears",
       "artistSlug": "artist-7f66d66c-b16c-450c-bb90-5a1bcf6e6874",
       "year": "",
-      "medium": "Mixed medium",
+      "medium": {
+        "en": "Mixed medium",
+        "az": ""
+      },
       "dimensions": "100 × 100 cm",
       "widthCm": 100,
       "heightCm": 100,
       "image": "/uploads/artworks/b77630e2-ec54-466f-ae23-739c27a2e074.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1500,
       "displayed": false,
       "tondo": false
@@ -2074,13 +2890,19 @@
       "title": "Connected destinies",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2023",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "140 × 120 cm",
       "widthCm": 140,
       "heightCm": 120,
       "image": "/uploads/artworks/19194051-bc0d-4fa8-8d63-b8a60dc19010.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 7200,
       "displayed": false,
       "tondo": false
@@ -2090,13 +2912,19 @@
       "title": "Endless roads",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2023",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "120 × 140 cm",
       "widthCm": 120,
       "heightCm": 140,
       "image": "/uploads/artworks/5d854561-0d28-4eee-a026-561fc7362ae7.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 6000,
       "displayed": false,
       "tondo": false
@@ -2106,13 +2934,19 @@
       "title": "Reunion",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2023",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 100 cm",
       "widthCm": 100,
       "heightCm": 100,
       "image": "/uploads/artworks/c5ae1be5-dd5a-4cac-80fb-f3d6df17ec2b.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
@@ -2122,13 +2956,19 @@
       "title": "Sleepy valley",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2023",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 45 cm",
       "widthCm": 60,
       "heightCm": 45,
       "image": "/uploads/artworks/b9960711-7a86-4bbc-8d7d-1cd3e6f78592.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -2138,13 +2978,19 @@
       "title": "Red track",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2023",
-      "medium": "Acrylic on canvas, plexiglass",
+      "medium": {
+        "en": "Acrylic on canvas, plexiglass",
+        "az": ""
+      },
       "dimensions": "80 × 80 cm",
       "widthCm": 80,
       "heightCm": 80,
       "image": "/uploads/artworks/11286692-0d54-4967-921a-8f1e8f1d2230.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1800,
       "displayed": false,
       "tondo": false
@@ -2154,13 +3000,19 @@
       "title": "Black track",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2023",
-      "medium": "Acrylic on canvas, plexiglass",
+      "medium": {
+        "en": "Acrylic on canvas, plexiglass",
+        "az": ""
+      },
       "dimensions": "80 × 80 cm",
       "widthCm": 80,
       "heightCm": 80,
       "image": "/uploads/artworks/125afff3-7c39-4491-964b-4b168cc9fde6.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1800,
       "displayed": false,
       "tondo": false
@@ -2170,13 +3022,19 @@
       "title": "Distant gaze",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2022",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 100 cm",
       "widthCm": 90,
       "heightCm": 100,
       "image": "/uploads/artworks/fc2adb88-d563-4874-89bf-d4e3c35caf3f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
@@ -2186,13 +3044,19 @@
       "title": "Good idea",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2024",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 100 cm",
       "widthCm": 100,
       "heightCm": 100,
       "image": "/uploads/artworks/ead8d644-be0a-4283-8e5a-ad537981cfc7.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
@@ -2202,13 +3066,19 @@
       "title": "Fading reality",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2022",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "130 × 90 cm",
       "widthCm": 130,
       "heightCm": 90,
       "image": "/uploads/artworks/a32e1472-8b75-40a1-b1d6-d7675b2e1165.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 4200,
       "displayed": false,
       "tondo": false
@@ -2218,13 +3088,19 @@
       "title": "Cruise",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2021",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 100 cm",
       "widthCm": 80,
       "heightCm": 100,
       "image": "/uploads/artworks/a0ca72c6-f1c3-459b-8fd6-f69d98ad2557.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 3000,
       "displayed": false,
       "tondo": false
@@ -2234,13 +3110,19 @@
       "title": "The road to Karabakh",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2020",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 70 cm",
       "widthCm": 100,
       "heightCm": 70,
       "image": "/uploads/artworks/8111b701-e37e-489e-ac96-05a8d25e9f91.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 3000,
       "displayed": false,
       "tondo": false
@@ -2250,13 +3132,19 @@
       "title": "Yellow helicopter",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2018",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "130 × 100 cm",
       "widthCm": 130,
       "heightCm": 100,
       "image": "/uploads/artworks/aacd49ed-a2f1-45bf-ba3e-80dfbb78c1b9.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 4200,
       "displayed": false,
       "tondo": false
@@ -2266,13 +3154,19 @@
       "title": "Sweet season",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2023",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 100 cm",
       "widthCm": 80,
       "heightCm": 100,
       "image": "/uploads/artworks/241b4c73-129c-4c7e-a8af-f2f5df2e7b28.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 4200,
       "displayed": false,
       "tondo": false
@@ -2282,13 +3176,19 @@
       "title": "Soul",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2023",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "120 × 140 cm",
       "widthCm": 120,
       "heightCm": 140,
       "image": "/uploads/artworks/8f14b71e-5227-4bd3-bec5-fe692299a515.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 6000,
       "displayed": false,
       "tondo": false
@@ -2298,13 +3198,19 @@
       "title": "Breath of the Earth",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2024",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "55 × 45 cm",
       "widthCm": 55,
       "heightCm": 45,
       "image": "/uploads/artworks/cca3e33d-b0cf-4d26-b00b-0761161e43d7.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -2314,13 +3220,19 @@
       "title": "Synapses",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2025",
-      "medium": "Acrylic on cardboard",
+      "medium": {
+        "en": "Acrylic on cardboard",
+        "az": ""
+      },
       "dimensions": "38 × 30 cm",
       "widthCm": 38,
       "heightCm": 30,
       "image": "/uploads/artworks/408d9022-aa81-41a5-8778-14116c6b4ec2.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -2330,13 +3242,19 @@
       "title": "Dialogue",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2024",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 60 cm",
       "widthCm": 70,
       "heightCm": 60,
       "image": "/uploads/artworks/fcdaa798-3daf-4d25-a0c9-8198dc19c1ea.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 960,
       "displayed": false,
       "tondo": false
@@ -2346,13 +3264,19 @@
       "title": "First flower, first meeting",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2024",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 100 cm",
       "widthCm": 100,
       "heightCm": 100,
       "image": "/uploads/artworks/32b108a3-3ee7-49d1-acd4-13081ab3e406.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
@@ -2362,13 +3286,19 @@
       "title": "Another world",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2024",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "50 × 40 cm",
       "widthCm": 50,
       "heightCm": 40,
       "image": "/uploads/artworks/21894c3f-ba35-4845-ad3a-d8f1b7d28468.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -2378,13 +3308,19 @@
       "title": "Locus. The island within / series",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2025",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "25 × 18 cm",
       "widthCm": 25,
       "heightCm": 18,
       "image": "/uploads/artworks/5a21efcb-96ba-4703-8208-4c573b3025da.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -2394,13 +3330,19 @@
       "title": "Locus. The island within / series",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2025",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "25 × 18 cm",
       "widthCm": 25,
       "heightCm": 18,
       "image": "/uploads/artworks/08cd8658-e737-4f70-b945-c8cd4b99365e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -2410,13 +3352,19 @@
       "title": "Locus. The island within / series",
       "artistSlug": "artist-41246aab-ed2c-4f9a-851d-9dff0013bd0e",
       "year": "2025",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "25 × 18 cm",
       "widthCm": 25,
       "heightCm": 18,
       "image": "/uploads/artworks/898e5cee-fbe1-4fb3-aa0e-cdba5c0638b1.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -2426,13 +3374,19 @@
       "title": "Детство",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "95 × 100 cm",
       "widthCm": 95,
       "heightCm": 100,
       "image": "/uploads/artworks/f16bb252-0ab4-4bfc-82d8-2a154872d91c.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2160,
       "displayed": false,
       "tondo": false
@@ -2442,13 +3396,19 @@
       "title": "Кясалар",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 120 cm",
       "widthCm": 90,
       "heightCm": 120,
       "image": "/uploads/artworks/0d8caed9-3bdf-4e14-af20-8b2dff8b17d7.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
@@ -2458,13 +3418,19 @@
       "title": "Родительская Любовь или Слепая Любовь",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 80 cm",
       "widthCm": 60,
       "heightCm": 80,
       "image": "/uploads/artworks/1f3eeb51-9a01-4f9d-af53-d2a4dbe8258d.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -2474,13 +3440,19 @@
       "title": "Медузы-Иллюзии",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 80 cm",
       "widthCm": 80,
       "heightCm": 80,
       "image": "/uploads/artworks/5c514aa3-78b7-4bea-a7ff-8168b854067d.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -2490,13 +3462,19 @@
       "title": "Бабочки",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "55 × 70 cm",
       "widthCm": 55,
       "heightCm": 70,
       "image": "/uploads/artworks/851bbd78-8a37-4b31-bfb1-241ac52c3d8f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 360,
       "displayed": false,
       "tondo": false
@@ -2506,13 +3484,19 @@
       "title": "Сплетницы",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 100 cm",
       "widthCm": 80,
       "heightCm": 100,
       "image": "/uploads/artworks/82d6776f-355e-4893-bebc-858afa5e3a77.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1800,
       "displayed": false,
       "tondo": false
@@ -2522,13 +3506,19 @@
       "title": "Оранжевое На Синем",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "40 × 60 cm",
       "widthCm": 40,
       "heightCm": 60,
       "image": "/uploads/artworks/e749ca89-8b7d-4172-88dc-193d973c86d3.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 300,
       "displayed": false,
       "tondo": false
@@ -2538,13 +3528,19 @@
       "title": "Подсолнухи",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 100 cm",
       "widthCm": 80,
       "heightCm": 100,
       "image": "/uploads/artworks/678c7c75-db91-4f90-ae8f-7428dde55b4c.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 900,
       "displayed": false,
       "tondo": false
@@ -2554,13 +3550,19 @@
       "title": "Гранатовый Натюрморт",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 70 cm",
       "widthCm": 100,
       "heightCm": 70,
       "image": "/uploads/artworks/601532f7-fb13-4860-9812-3bbd6638c25f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -2570,13 +3572,19 @@
       "title": "Гранатовое Дерево",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 110 cm",
       "widthCm": 100,
       "heightCm": 110,
       "image": "/uploads/artworks/7c9baae6-6aee-4101-9307-964d64f83e6a.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1800,
       "displayed": false,
       "tondo": false
@@ -2586,13 +3594,19 @@
       "title": "Полет",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 115 cm",
       "widthCm": 100,
       "heightCm": 115,
       "image": "/uploads/artworks/00151cd3-3cef-428f-8d69-022afbae369a.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 900,
       "displayed": false,
       "tondo": false
@@ -2602,13 +3616,19 @@
       "title": "Игра",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 110 cm",
       "widthCm": 100,
       "heightCm": 110,
       "image": "/uploads/artworks/6ea40b07-3400-4ca0-8364-463832ae6343.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1560,
       "displayed": false,
       "tondo": false
@@ -2618,13 +3638,19 @@
       "title": "Хранитель Истории",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "110 × 120 cm",
       "widthCm": 110,
       "heightCm": 120,
       "image": "/uploads/artworks/033665cb-2174-4a67-a440-5955fc05a2ad.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
@@ -2634,13 +3660,19 @@
       "title": "Код Памяти",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "100 × 120 cm",
       "widthCm": 100,
       "heightCm": 120,
       "image": "/uploads/artworks/e4abdc18-c80a-4db2-9b22-7cc664f0ba98.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1440,
       "displayed": false,
       "tondo": false
@@ -2650,13 +3682,19 @@
       "title": "Осень",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "90 × 60 cm",
       "widthCm": 90,
       "heightCm": 60,
       "image": "/uploads/artworks/23b37b81-a74c-4d14-8afd-617cde4be46b.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 660,
       "displayed": false,
       "tondo": false
@@ -2666,13 +3704,19 @@
       "title": "Сеновал",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "70 × 60 cm",
       "widthCm": 70,
       "heightCm": 60,
       "image": "/uploads/artworks/f0c52672-72c6-410e-8491-5546ba9da30e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -2682,13 +3726,19 @@
       "title": "Загадочный Лес",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 50 cm",
       "widthCm": 60,
       "heightCm": 50,
       "image": "/uploads/artworks/b6ba2247-4d4f-4256-b32c-4ee09ef2421e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 780,
       "displayed": false,
       "tondo": false
@@ -2698,13 +3748,19 @@
       "title": "Рыба с Жемчужной",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "80 × 60 cm",
       "widthCm": 80,
       "heightCm": 60,
       "image": "/uploads/artworks/e0aa0b7f-aacd-49ba-bb52-7d34dd5674d6.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 480,
       "displayed": false,
       "tondo": false
@@ -2714,13 +3770,19 @@
       "title": "Красные Рыбы-Страсть",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 80 cm",
       "widthCm": 60,
       "heightCm": 80,
       "image": "/uploads/artworks/597d71ec-2a58-4103-b2a7-2f4b62942ed9.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -2730,13 +3792,19 @@
       "title": "Синие Рыбы-Глубина",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 80 cm",
       "widthCm": 60,
       "heightCm": 80,
       "image": "/uploads/artworks/c7d18090-a600-4afa-87fd-dd6ccbab038a.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -2746,13 +3814,19 @@
       "title": "Зеленые Рыбы-Покой",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 80 cm",
       "widthCm": 60,
       "heightCm": 80,
       "image": "/uploads/artworks/418bf9ed-a3eb-47d3-9bed-e5f7abd4a4c0.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -2762,13 +3836,19 @@
       "title": "На Грани",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 80 cm",
       "widthCm": 60,
       "heightCm": 80,
       "image": "/uploads/artworks/2fa7f63c-517c-47a0-bd68-d6e69e54dd06.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -2778,13 +3858,19 @@
       "title": "Что Знает Зеркало",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 80 cm",
       "widthCm": 60,
       "heightCm": 80,
       "image": "/uploads/artworks/f184938c-adfe-4bda-8376-b18a3ca69636.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -2794,13 +3880,19 @@
       "title": "Иллюзия Времени",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 80 cm",
       "widthCm": 60,
       "heightCm": 80,
       "image": "/uploads/artworks/ed2948ff-8514-4ee1-a761-a0ddda3c9035.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -2810,13 +3902,19 @@
       "title": "Оракул",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "60 × 60 cm",
       "widthCm": 60,
       "heightCm": 60,
       "image": "/uploads/artworks/6195ff5d-0058-485f-9560-33de6783b81b.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 600,
       "displayed": false,
       "tondo": false
@@ -2826,13 +3924,19 @@
       "title": "Танец В Звездную Ночь",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "50 × 55 cm",
       "widthCm": 50,
       "heightCm": 55,
       "image": "/uploads/artworks/a5fce684-dfeb-42e6-b959-4586dac3af8c.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 480,
       "displayed": false,
       "tondo": false
@@ -2842,13 +3946,19 @@
       "title": "Вверх",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "50 × 50 cm",
       "widthCm": 50,
       "heightCm": 50,
       "image": "/uploads/artworks/1ea89fbc-fb61-483c-b9d7-4d5dd623aaf7.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 300,
       "displayed": false,
       "tondo": true
@@ -2858,13 +3968,19 @@
       "title": "Игры Под Луной",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "50 × 55 cm",
       "widthCm": 50,
       "heightCm": 55,
       "image": "/uploads/artworks/d168e5ad-299d-4d58-9924-1380253a822f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 480,
       "displayed": false,
       "tondo": false
@@ -2874,13 +3990,19 @@
       "title": "Весна",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "75 × 55 cm",
       "widthCm": 75,
       "heightCm": 55,
       "image": "/uploads/artworks/46d5e92d-1929-46bb-bcb5-3bf5f6bea2a0.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -2890,13 +4012,19 @@
       "title": "Секретная Шкатулка",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "65 × 65 cm",
       "widthCm": 65,
       "heightCm": 65,
       "image": "/uploads/artworks/372e7b45-49a3-44d4-aeb4-82a157f5ac04.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 840,
       "displayed": false,
       "tondo": false
@@ -2906,13 +4034,19 @@
       "title": "Древний Баку",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "120 × 90 cm",
       "widthCm": 120,
       "heightCm": 90,
       "image": "/uploads/artworks/c985d11c-e27b-438d-ba8a-983230b9205f.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 1800,
       "displayed": false,
       "tondo": false
@@ -2922,13 +4056,19 @@
       "title": "Пугало",
       "artistSlug": "artist-6937bb11-649c-4679-8be5-e34a088ef0a4",
       "year": "",
-      "medium": "Acrylic on canvas",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
       "dimensions": "110 × 90 cm",
       "widthCm": 110,
       "heightCm": 90,
       "image": "/uploads/artworks/207c5122-4725-4fe9-b97d-be90d717980e.webp",
       "availability": "Available",
-      "description": "",
+      "description": {
+        "en": "",
+        "az": ""
+      },
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
@@ -2939,13 +4079,19 @@
       "slug": "seven-ya",
       "title": "7YA (SevenYouAre)",
       "status": "Past",
-      "date": "8–14 September 2025, Ivanovka",
+      "date": {
+        "en": "8–14 September 2025, Ivanovka",
+        "az": ""
+      },
       "image": "/uploads/events/7718ffe5-a943-4556-87e5-7a77a23a2091.webp",
       "heroTransform": "translate(0px, 0px) scale(1)",
       "thumbTransform": "translate(-1px, -24px) scale(1.9)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": false,
-      "description": "ROOM Baku and DaMir – House of Imagination present 7-YA (SevenYouAre), an art project held from September 8–14, 2025, in Ivanovka. For one week, seven artists — Vusala Agharaziyeva, Nigar Familsoy, Gunel Akhundlu, Orkhan Garayev, Sarkhan Gadzhiev, Mushfig Heydarov, and Rufana Mamedova — lived and worked together, exploring the multiplicity of the \"Self.\" The name \"7-YA\" reflects the idea that within each person exists a multitude of states and roles. Seven participants, seven days, and seven facets of identity came together in paintings, sketches, and a collective installation shaped through dialogue, workshops, and shared creation. The exhibition is hosted at ROOM Baku — a wine house in the city center where wine culture meets art and gastronomy. Here, the artists' works and a video portrait of the project invite visitors to reflect on identity and the courage to be many at once.",
+      "description": {
+        "en": "ROOM Baku and DaMir – House of Imagination present 7-YA (SevenYouAre), an art project held from September 8–14, 2025, in Ivanovka. For one week, seven artists — Vusala Agharaziyeva, Nigar Familsoy, Gunel Akhundlu, Orkhan Garayev, Sarkhan Gadzhiev, Mushfig Heydarov, and Rufana Mamedova — lived and worked together, exploring the multiplicity of the \"Self.\" The name \"7-YA\" reflects the idea that within each person exists a multitude of states and roles. Seven participants, seven days, and seven facets of identity came together in paintings, sketches, and a collective installation shaped through dialogue, workshops, and shared creation. The exhibition is hosted at ROOM Baku — a wine house in the city center where wine culture meets art and gastronomy. Here, the artists' works and a video portrait of the project invite visitors to reflect on identity and the courage to be many at once.",
+        "az": ""
+      },
       "gallery": [
         "/assets/events/7ya-group-portraits.webp",
         "/assets/events/7ya-plener.webp",
@@ -2961,13 +4107,19 @@
       "slug": "event-1787482539601-jlxl",
       "title": "A Person Between Two Worlds",
       "status": "Current",
-      "date": "20 September - 29 October 2026, Room, Baku",
+      "date": {
+        "en": "20 September - 29 October 2026, Room, Baku",
+        "az": ""
+      },
       "image": "/uploads/events/c80e391b-0b49-4753-97b9-c01f3fb63756.webp",
       "heroTransform": "translate(-2px, 12px) scale(1.1)",
       "thumbTransform": "translate(0px, 13px) scale(1.9)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": false,
-      "description": "My artistic practice explores form, lettering, character, and the visual language of contemporary urban culture. Drawing from graffiti, street culture, graphic design, comics, and popular media, I combine familiar visual elements into new structures.\n\nAt the center of my work is a recurring male character, developed from my graffiti practice in 2014–2015. He embodies the tension between traditional values and contemporary urban life — a person whose body belongs to the present, while his mindset remains rooted in the past.\n\nThrough constantly changing techniques, colors, and styles, I use this character to explore identity, cultural heritage, social expectations, and the conflict between tradition and change.\n\nEmil Moosem.",
+      "description": {
+        "en": "My artistic practice explores form, lettering, character, and the visual language of contemporary urban culture. Drawing from graffiti, street culture, graphic design, comics, and popular media, I combine familiar visual elements into new structures.\n\nAt the center of my work is a recurring male character, developed from my graffiti practice in 2014–2015. He embodies the tension between traditional values and contemporary urban life — a person whose body belongs to the present, while his mindset remains rooted in the past.\n\nThrough constantly changing techniques, colors, and styles, I use this character to explore identity, cultural heritage, social expectations, and the conflict between tradition and change.\n\nEmil Moosem.",
+        "az": ""
+      },
       "gallery": [],
       "video": ""
     },
@@ -2975,13 +4127,19 @@
       "slug": "event-4a19d774-16cb-47d4-9f53-74599828e12b",
       "title": "Vusala Agharaziyeva - Selected Works",
       "status": "Past",
-      "date": "17 September - 5 October, ROOM Airport, Baku",
+      "date": {
+        "en": "17 September - 5 October, ROOM Airport, Baku",
+        "az": ""
+      },
       "image": "/uploads/events/4bada326-f15b-401f-b7aa-7f3e56aefb83.webp",
       "heroTransform": "translate(0px, 14px) scale(1)",
       "thumbTransform": "translate(0px, 0px) scale(1.9)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": true,
-      "description": "A collection of selected works by artist Vusala Agharaziyeva is now on view at ROOM, Baku Airport.\nDiscover the exhibition and experience art in the atmosphere of travel, where every journey can begin with a moment of inspiration.",
+      "description": {
+        "en": "A collection of selected works by artist Vusala Agharaziyeva is now on view at ROOM, Baku Airport.\nDiscover the exhibition and experience art in the atmosphere of travel, where every journey can begin with a moment of inspiration.",
+        "az": ""
+      },
       "gallery": [],
       "video": ""
     },
@@ -2989,20 +4147,35 @@
       "slug": "event-0ccca3d2-722b-4c82-95b4-071609e8db7b",
       "title": "Sarkhan Gadzhiyev Solo Exhibition",
       "status": "Current",
-      "date": "6 October - 6 November, Room Airport, Baku",
+      "date": {
+        "en": "6 October - 6 November, Room Airport, Baku",
+        "az": ""
+      },
       "image": "/uploads/events/82bb1e4a-e249-486d-b874-f14bfbcbb416.webp",
       "heroTransform": "translate(0px, 13px) scale(1)",
       "thumbTransform": "translate(1px, 21px) scale(1.9)",
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": true,
-      "description": "In his work, Sarkhan Gadzhiev explores dualism — the coexistence of opposites, states, and meanings.\nThe exhibition brings together works that reflect on the boundaries between opposing forces: the material and the immaterial, the visible and the invisible, the inner and the outer.",
+      "description": {
+        "en": "In his work, Sarkhan Gadzhiev explores dualism — the coexistence of opposites, states, and meanings.\nThe exhibition brings together works that reflect on the boundaries between opposing forces: the material and the immaterial, the visible and the invisible, the inner and the outer.",
+        "az": ""
+      },
       "gallery": [],
       "video": ""
     }
   ],
   "about": {
-    "concept": "ROOM is a contemporary art space in the heart of Baku where art, wine, and culture come together through exhibitions, talks, and curated encounters.",
-    "vision": "To support contemporary artists and build a thoughtful creative community around collecting, learning, and conversation.",
-    "identity": "Minimal, neutral, atmospheric, and emotionally precise. ROOM places the artwork first and lets the digital experience behave like a gallery visit."
+    "concept": {
+      "en": "ROOM is a contemporary art space in the heart of Baku where art, wine, and culture come together through exhibitions, talks, and curated encounters.",
+      "az": ""
+    },
+    "vision": {
+      "en": "To support contemporary artists and build a thoughtful creative community around collecting, learning, and conversation.",
+      "az": ""
+    },
+    "identity": {
+      "en": "Minimal, neutral, atmospheric, and emotionally precise. ROOM places the artwork first and lets the digital experience behave like a gallery visit.",
+      "az": ""
+    }
   }
 }

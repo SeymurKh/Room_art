@@ -5,7 +5,9 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import type { SiteData } from "@/lib/types";
 import { ArtworkSalon } from "@/components/artwork-salon";
-import { ALL, filterArtworks, priceRangeLabel } from "@/lib/artwork-filter";
+import { ALL, filterArtworks } from "@/lib/artwork-filter";
+import { getDictionary } from "@/lib/i18n";
+import { useLang } from "@/lib/use-lang";
 
 const PAGE_SIZE = 10;
 
@@ -38,6 +40,8 @@ export function GalleryFilter({ data }: { data: SiteData }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const lang = useLang();
+  const t = getDictionary(lang);
 
   const artist = searchParams.get("artist") ?? ALL;
   const format = searchParams.get("format") ?? ALL;
@@ -77,20 +81,20 @@ export function GalleryFilter({ data }: { data: SiteData }) {
   return (
     <>
       <div className="grid grid-cols-2 gap-3 border-b border-white/10 pb-6 lg:grid-cols-4">
-        <Filter label="Artist" value={artist} options={artistOptions} getLabel={artistLabel} onChange={(v) => setParam("artist", v)} />
-        <Filter label="Format" value={format} options={formatOptions} onChange={(v) => setParam("format", v)} />
-        <Filter label="Size" value={size} options={sizeOptions} onChange={(v) => setParam("size", v)} />
-        <Filter label="Price" value={priceRange} options={priceOptions} getLabel={priceRangeLabel} onChange={(v) => setParam("price", v)} />
+        <Filter label={t.gallery.filterArtist} value={artist} options={artistOptions} getLabel={artistLabel} onChange={(v) => setParam("artist", v)} />
+        <Filter label={t.gallery.filterFormat} value={format} options={formatOptions} getLabel={(v) => (v === "All" ? t.gallery.all : v === "Landscape" ? t.gallery.landscape : v === "Square" ? t.gallery.square : t.gallery.portrait)} onChange={(v) => setParam("format", v)} />
+        <Filter label={t.gallery.filterSize} value={size} options={sizeOptions} getLabel={(v) => (v === "All" ? t.gallery.all : v === "Small" ? t.gallery.small : v === "Medium" ? t.gallery.medium : t.gallery.large)} onChange={(v) => setParam("size", v)} />
+        <Filter label={t.gallery.filterPrice} value={priceRange} options={priceOptions} getLabel={(v) => (v === "All" ? t.gallery.all : v === "under-1000" ? t.gallery.priceUnder : v === "1000-3000" ? t.gallery.priceMid1 : v === "3000-5000" ? t.gallery.priceMid2 : t.gallery.priceOver)} onChange={(v) => setParam("price", v)} />
       </div>
 
       <p className="mt-8 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white/50">
-        {filtered.length} {filtered.length === 1 ? "artwork" : "artworks"}
-        {safePage > 1 ? ` · page ${safePage} of ${totalPages}` : ""}
+        {t.gallery.count(filtered.length)}
+        {safePage > 1 ? ` · ${t.gallery.pageOf(safePage, totalPages)}` : ""}
       </p>
 
       {pageItems.length === 0 ? (
         <p className="mt-16 text-center text-sm text-white/40">
-          No artworks match the selected filters.
+          {t.gallery.empty}
         </p>
       ) : (
         <div className="mt-10">
@@ -105,13 +109,13 @@ export function GalleryFilter({ data }: { data: SiteData }) {
       )}
 
       {totalPages > 1 && (
-        <nav className="mt-14 flex items-center justify-center gap-2" aria-label="Gallery pagination">
+        <nav className="mt-14 flex items-center justify-center gap-2" aria-label={t.gallery.pagination}>
           <button
             type="button"
             onClick={() => setParam("page", String(safePage - 1))}
             disabled={safePage <= 1}
             className="flex h-10 w-10 items-center justify-center border border-white/20 text-[#f4f1ea] transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-30"
-            aria-label="Previous page"
+            aria-label={t.gallery.prevPage}
           >
             <ChevronLeft size={18} />
           </button>
@@ -130,7 +134,7 @@ export function GalleryFilter({ data }: { data: SiteData }) {
                     ? "border-[#f4f1ea] bg-[#f4f1ea] text-[#11100e]"
                     : "border-white/20 text-[#f4f1ea] hover:bg-white/10"
                 }`}
-                aria-label={`Page ${p}`}
+                aria-label={t.gallery.goToPage(p)}
                 aria-current={p === safePage ? "page" : undefined}
               >
                 {p}
@@ -142,7 +146,7 @@ export function GalleryFilter({ data }: { data: SiteData }) {
             onClick={() => setParam("page", String(safePage + 1))}
             disabled={safePage >= totalPages}
             className="flex h-10 w-10 items-center justify-center border border-white/20 text-[#f4f1ea] transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-30"
-            aria-label="Next page"
+            aria-label={t.gallery.nextPage}
           >
             <ChevronRight size={18} />
           </button>

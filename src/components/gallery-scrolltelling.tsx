@@ -8,6 +8,8 @@ import type { Artwork } from "@/lib/types";
 import { buildArtworkHref } from "@/lib/artwork-nav";
 import { ArtworkFrame } from "@/components/artwork-frame";
 import { clamp } from "@/lib/utils";
+import { getDictionary } from "@/lib/i18n";
+import { useLang } from "@/lib/use-lang";
 
 type GalleryScrolltellingProps = {
   artworks: Artwork[];
@@ -20,6 +22,8 @@ type GalleryScrolltellingProps = {
  * Инерционный скролл с кроссфейдом и снапом к ближайшей картине при остановке.
  */
 export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: GalleryScrolltellingProps) {
+  const lang = useLang();
+  const t = getDictionary(lang);
   const containerRef = useRef<HTMLDivElement>(null);
   const snapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -106,7 +110,7 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
               style={{ opacity, pointerEvents: opacity > 0.5 ? "auto" : "none" }}
             >
               <Link
-                href={buildArtworkHref(artwork.slug, { kind: "displayed" })}
+                href={buildArtworkHref(artwork.slug, { kind: "displayed" }, lang)}
                 aria-label={artwork.title}
                 className="block cursor-pointer"
                 tabIndex={opacity > 0.5 ? 0 : -1}
@@ -126,7 +130,7 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
           style={{ opacity: scrolled ? 0 : 1 }}
         >
           <div className="flex flex-col items-center gap-1">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">Scroll</span>
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">{t.gallery.scrollHint}</span>
             <ChevronDown size={20} className="text-white/50 animate-bounce" />
           </div>
         </div>
@@ -134,7 +138,7 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
         {/* Текст-табличка + индикатор прогресса + переключатели внизу */}
         <div className="pointer-events-none absolute bottom-4 left-0 right-0 z-30 flex flex-col items-center gap-3 text-center">
           <p className="room-serif text-base italic text-[#6f6a61] md:text-lg">
-            What{"'"}s currently on display at ROOM
+            {t.gallery.onDisplayTitle}
           </p>
           {/* Индикатор прогресса — полоска с метками */}
           <div className="flex items-center gap-3">
@@ -178,9 +182,9 @@ export function GalleryScrolltelling({ artworks, scale = 1, onScaleChange }: Gal
                   type="button"
                   onClick={handleSkip}
                   className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/60 transition hover:bg-white/10 hover:text-white/80"
-                  aria-label="Skip to next artwork"
+                  aria-label={t.gallery.skipToNext}
                 >
-                  Skip <SkipForward size={12} />
+                  {t.gallery.skip} <SkipForward size={12} />
                 </button>
               )}
             </div>

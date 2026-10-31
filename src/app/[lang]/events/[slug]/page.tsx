@@ -8,22 +8,48 @@ import { PositionedImage } from "@/components/positioned-image";
 import { RoomImage } from "@/components/room-image";
 import { MediaLightbox, type MediaItem } from "@/components/media-lightbox";
 import { getSiteData } from "@/lib/site-data";
+import { getDictionary } from "@/lib/i18n";
+import {
+  isLocale,
+  localeHref,
+  pickLocalized,
+  type Locale,
+} from "@/lib/i18n/config";
 
 export async function generateStaticParams() {
   const data = await getSiteData();
   return data.events.map((event) => ({ slug: event.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string; slug: string }>;
+}): Promise<Metadata> {
+  const { lang, slug } = await params;
+  const locale: Locale = isLocale(lang) ? lang : "en";
+  const t = getDictionary(locale);
   const data = await getSiteData();
   const event = data.events.find((item) => item.slug === slug);
-  if (!event) return { title: "Event not found" };
-  return { title: event.title, description: event.description };
+  if (!event) return { title: t.pages.eventNotFound };
+  return {
+    title: event.title,
+    description: pickLocalized(event.description, locale),
+    alternates: {
+      canonical: localeHref(locale, `/events/${event.slug}`),
+      languages: {
+        en: `/events/${event.slug}`,
+        az: `/az/events/${event.slug}`,
+      },
+    },
+  };
 }
 
-export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default async function EventPage({ params }: { params: Promise<{ lang: string; slug: string }> }) {
+  const { lang, slug } = await params;
+  if (!isLocale(lang)) notFound();
+  const locale: Locale = lang;
+  const t = getDictionary(locale);
   const data = await getSiteData();
   const event = data.events.find((item) => item.slug === slug);
   if (!event) notFound();
@@ -45,23 +71,23 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       {/* Dark background */}
       <div className="fixed inset-0 -z-10 bg-[#0c0c0b]" />
 
-      <SiteNav dark />
+      <SiteNav dark lang={locale} />
 
       {/* Hero — text left, main photo right */}
       <section className="room-shell grid min-h-[70vh] items-center gap-6 pt-24 pb-12 md:grid-cols-[1fr_1.1fr] md:gap-16 md:pt-32 md:pb-16">
         {/* Left: text */}
         <div className="flex flex-col justify-center">
-          <p className="section-kicker text-white/50">{event.status}</p>
+          <p className="section-kicker text-white/50">{t.events.kicker}</p>
           <h1 className="room-serif mt-3 text-4xl font-medium leading-[0.92] text-[#f4f1ea] md:text-6xl lg:text-7xl">
             {event.title}
           </h1>
-          <p className="mt-4 text-sm tracking-[0.08em] text-white/60">{event.date}</p>
-          <p className="mt-6 max-w-lg text-lg leading-8 text-white/85" style={{ fontWeight: 100, WebkitFontSmoothing: "antialiased" }}>{event.description}</p>
+          <p className="mt-4 text-sm tracking-[0.08em] text-white/60">{pickLocalized(event.date, locale)}</p>
+          <p className="mt-6 max-w-lg text-lg leading-8 text-white/85" style={{ fontWeight: 100, WebkitFontSmoothing: "antialiased" }}>{pickLocalized(event.description, locale)}</p>
           <Link
-            href="/events"
+            href={localeHref(locale, "/events")}
             className="mt-8 inline-flex w-fit items-center gap-2 border border-white/20 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#f4f1ea] transition hover:bg-white/10"
           >
-            <ArrowUpRight size={14} /> All events
+            <ArrowUpRight size={14} /> {t.events.allEvents}
           </Link>
         </div>
 
@@ -129,7 +155,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         </section>
       ) : null}
 
-      <SiteFooter settings={data.settings} />
+      <SiteFooter settings={data.settings} lang={locale} />
     </main>
   );
 }

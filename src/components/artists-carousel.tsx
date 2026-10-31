@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import type { Artist } from "@/lib/types";
 import { RoomImage } from "@/components/room-image";
+import { getDictionary } from "@/lib/i18n";
+import { localeHref, pickLocalized, type Locale } from "@/lib/i18n/config";
 
 const CARD_W = 280;
 const CARD_W_MOBILE = 260;
@@ -37,7 +39,8 @@ function circularOffset(index: number, active: number, n: number): number {
   return ((((index - active + half) % n) + n) % n) - half;
 }
 
-export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; dark?: boolean }) {
+export function ArtistsCarousel({ artists, dark = false, lang }: { artists: Artist[]; dark?: boolean; lang: Locale }) {
+  const t = getDictionary(lang);
   const width = useWindowWidth();
   const isMobile = width < 640;
   const cardW = isMobile ? CARD_W_MOBILE : CARD_W;
@@ -225,10 +228,10 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
                   }}
                 >
                   <Link
-                    href={`/artists/${artist.slug}`}
+                    href={localeHref(lang, `/artists/${artist.slug}`)}
                     className="group block"
                     tabIndex={isCenter ? 0 : -1}
-                    aria-label={isCenter ? `${artist.name}, ${artist.role}` : undefined}
+                    aria-label={isCenter ? `${artist.name}, ${pickLocalized(artist.role, lang)}` : undefined}
                     aria-hidden={!isCenter}
                   >
                     <div
@@ -246,7 +249,7 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
                       />
                       {isCenter && (
                         <span className="absolute inset-0 flex items-center justify-center bg-black/0 text-sm uppercase tracking-[0.14em] text-white opacity-0 transition duration-500 group-hover:bg-black/30 group-hover:opacity-100">
-                          View artist
+                          {t.artists.viewArtist}
                         </span>
                       )}
                     </div>
@@ -256,7 +259,7 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
                           <p className={`text-sm font-semibold uppercase tracking-[0.12em] ${titleColor}`}>
                             {artist.name}
                           </p>
-                          <p className={`mt-1 text-sm ${subColor}`}>{artist.role}</p>
+                          <p className={`mt-1 text-sm ${subColor}`}>{pickLocalized(artist.role, lang)}</p>
                         </div>
                         <ArrowUpRight size={18} className="opacity-30 transition group-hover:opacity-100" />
                       </div>
@@ -287,7 +290,7 @@ export function ArtistsCarousel({ artists, dark = false }: { artists: Artist[]; 
                     ? "w-1.5 bg-[#f4f1ea]/30"
                     : "w-1.5 bg-[#11100e]/20"
               }`}
-              aria-label={`Go to ${artist.name}`}
+              aria-label={t.artists.goTo(artist.name)}
             />
           ))}
         </div>

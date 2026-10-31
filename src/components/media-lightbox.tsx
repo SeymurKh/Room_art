@@ -2,6 +2,8 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { getDictionary } from "@/lib/i18n";
+import { useLang } from "@/lib/use-lang";
 
 export type MediaItem = {
   src: string;
@@ -24,6 +26,8 @@ export function MediaLightbox({
 }) {
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState(initialIndex);
+  const lang = useLang();
+  const t = getDictionary(lang);
 
   const close = useCallback(() => setOpen(false), []);
   const prev = useCallback(() => setCurrent((i) => (i - 1 + items.length) % items.length), [items.length]);
@@ -62,7 +66,7 @@ export function MediaLightbox({
             type="button"
             onClick={close}
             className="absolute right-4 top-4 z-[110] grid size-10 place-items-center rounded-full border border-white/20 bg-black/50 text-white transition hover:bg-white/20"
-            aria-label="Close"
+            aria-label={t.ui.close}
           >
             <X size={20} />
           </button>
@@ -73,7 +77,7 @@ export function MediaLightbox({
               type="button"
               onClick={(e) => { e.stopPropagation(); prev(); }}
               className="absolute left-4 top-1/2 z-[110] -translate-y-1/2 grid size-12 place-items-center rounded-full border border-white/20 bg-black/50 text-white transition hover:bg-white/20"
-              aria-label="Previous"
+              aria-label={t.ui.previous}
             >
               <ChevronLeft size={24} />
             </button>
@@ -109,7 +113,7 @@ export function MediaLightbox({
               type="button"
               onClick={(e) => { e.stopPropagation(); next(); }}
               className="absolute right-4 top-1/2 z-[110] -translate-y-1/2 grid size-12 place-items-center rounded-full border border-white/20 bg-black/50 text-white transition hover:bg-white/20"
-              aria-label="Next"
+              aria-label={t.ui.next}
             >
               <ChevronRight size={24} />
             </button>

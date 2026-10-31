@@ -1,8 +1,18 @@
+import { notFound } from "next/navigation";
 import { PageHero } from "@/components/page-hero";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { ContactForm } from "@/components/contact-form";
 import { getSiteData } from "@/lib/site-data";
+import { getDictionary } from "@/lib/i18n";
+import { isLocale, pickLocalized, type Locale } from "@/lib/i18n/config";
+import { pageMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const locale: Locale = isLocale(lang) ? lang : "en";
+  return pageMetadata(locale, "/contact", { title: getDictionary(locale).contact.title });
+}
 
 function InstagramIcon() {
   return (
@@ -22,17 +32,21 @@ function WhatsAppIcon() {
   );
 }
 
-export default async function ContactPage() {
+export default async function ContactPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const locale: Locale = lang;
+  const t = getDictionary(locale);
   const data = await getSiteData();
   return (
     <main className="flex min-h-screen flex-col">
-      <SiteNav dark />
-      <PageHero title="Let's connect" copy="For collaborations, events, artist proposals, partnerships, and private viewings." />
+      <SiteNav dark lang={locale} />
+      <PageHero title={t.contact.title} copy={t.contact.copy} />
       <section className="room-shell flex-1 grid gap-10 py-12 md:grid-cols-[.8fr_1.2fr] md:gap-12 md:py-16">
         <aside className="text-sm leading-8 text-[#6f6a61]">
-          <h2 className="room-serif text-2xl text-[#11100e]">Visit us</h2>
+          <h2 className="room-serif text-2xl text-[#11100e]">{t.contact.visitUs}</h2>
           <div className="mt-4">
-            <p>{data.settings.address}</p>
+            <p>{pickLocalized(data.settings.address, locale)}</p>
             <p>{data.settings.phone}</p>
             <p>{data.settings.email}</p>
           </div>
@@ -45,9 +59,9 @@ export default async function ContactPage() {
             </a>
           </div>
         </aside>
-        <ContactForm />
+        <ContactForm lang={locale} />
       </section>
-      <SiteFooter settings={data.settings} />
+      <SiteFooter settings={data.settings} lang={locale} />
     </main>
   );
 }

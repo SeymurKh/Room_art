@@ -1,19 +1,21 @@
 import type { SiteData } from "@/lib/types";
 
+const empty = { en: "", az: "" } as const;
+
 export const defaultSiteData: SiteData = {
   settings: {
     whatsappNumber: "",
     email: "",
     phone: "",
-    address: "",
+    address: { ...empty },
     instagram: "",
   },
   artists: [],
   artworks: [],
   events: [],
   about: {
-    concept: "",
-    vision: "",
-    identity: "",
+    concept: { ...empty },
+    vision: { ...empty },
+    identity: { ...empty },
   },
 };

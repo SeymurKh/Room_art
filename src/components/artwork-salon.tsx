@@ -6,6 +6,9 @@ import type { Artwork } from "@/lib/types";
 import { buildArtworkHref, type ArtworkNavContext } from "@/lib/artwork-nav";
 import { RoomImage } from "@/components/room-image";
 import { computeArtworkSize, useViewportSize } from "@/lib/artwork-scale";
+import { getDictionary } from "@/lib/i18n";
+import { formatDimensions, pickLocalized } from "@/lib/i18n/config";
+import { useLang } from "@/lib/use-lang";
 
 /**
  * ArtworkSalon — «салонная развеска» с честным восприятием размера.
@@ -33,6 +36,8 @@ export function ArtworkSalon({
   navContext?: ArtworkNavContext;
 }) {
   const viewport = useViewportSize();
+  const lang = useLang();
+  const t = getDictionary(lang);
 
   const titleColor = dark ? "text-[#f4f1ea]" : "text-[#11100e]";
   const subColor = dark ? "text-white/55" : "text-[#6f6a61]";
@@ -54,7 +59,7 @@ export function ArtworkSalon({
 
         return (
           <Link
-            href={buildArtworkHref(artwork.slug, navContext)}
+            href={buildArtworkHref(artwork.slug, navContext, lang)}
             key={artwork.slug}
             className="group block"
             style={{ width: `${size.width}px`, maxWidth: "100%" }}
@@ -75,7 +80,7 @@ export function ArtworkSalon({
                 fallbackText={artwork.title}
                 sizes="(max-width: 640px) 60vw, (max-width: 1024px) 40vw, 30vw"
               />
-              <span className="overlay-text">View artwork</span>
+              <span className="overlay-text">{t.gallery.viewArtwork}</span>
             </div>
             <div className="mt-3 flex items-start justify-between gap-3">
               <div className="min-w-0">
@@ -85,9 +90,9 @@ export function ArtworkSalon({
                 <p className={`mt-1 text-[0.68rem] font-semibold uppercase tracking-[0.14em] ${subColor}`}>
                   {artistLabel
                     ? `${artistLabel(artwork.artistSlug)}${artwork.year ? ` · ${artwork.year}` : ""}`
-                    : `${artwork.medium}${artwork.year ? `, ${artwork.year}` : ""}`}
+                    : `${pickLocalized(artwork.medium, lang)}${artwork.year ? `, ${artwork.year}` : ""}`}
                 </p>
-                <p className={`mt-1 text-xs ${dimColor}`}>{artwork.dimensions}</p>
+                <p className={`mt-1 text-xs ${dimColor}`}>{formatDimensions(artwork, lang)}</p>
                 {showPrice && artwork.priceAzn != null ? (
                   <p className={`mt-1 text-xs font-semibold tracking-[0.06em] ${titleColor}`}>
                     {artwork.priceAzn.toLocaleString("en-US")} AZN

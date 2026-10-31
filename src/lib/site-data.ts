@@ -11,6 +11,7 @@ import {
 } from "@/db/schema";
 import { siteDataSchema } from "@/lib/site-data-schema";
 import { defaultSiteData } from "@/data/defaultSiteData";
+import { toLocalizedText, type LocalizedText } from "@/lib/i18n/config";
 import type {
   SiteData,
   Event,
@@ -22,6 +23,16 @@ import type {
 
 export type VersionedSiteData = SiteData & { revision: number };
 
+/** Читает JSON-колонку LocalizedText; терпимо к легаси-строкам до миграции. */
+function readLocalized(raw: string | null | undefined): LocalizedText {
+  return toLocalizedText(raw ?? "");
+}
+
+/** Сериализует LocalizedText для text-колонки SQLite. */
+function writeLocalized(value: LocalizedText | string | null | undefined): string {
+  return JSON.stringify(toLocalizedText(value));
+}
+
 function mapSettings(
   row: (typeof settingsTable.$inferSelect) | undefined
 ): SiteSettings {
@@ -30,7 +41,7 @@ function mapSettings(
     whatsappNumber: row.whatsappNumber,
     email: row.email,
     phone: row.phone,
-    address: row.address,
+    address: readLocalized(row.address),
     instagram: row.instagram,
   };
 }
@@ -38,9 +49,9 @@ function mapSettings(
 function mapAbout(row: (typeof aboutTable.$inferSelect) | undefined): AboutContent {
   if (!row) return defaultSiteData.about;
   return {
-    concept: row.concept,
-    vision: row.vision,
-    identity: row.identity,
+    concept: readLocalized(row.concept),
+    vision: readLocalized(row.vision),
+    identity: readLocalized(row.identity),
   };
 }
 
@@ -78,11 +89,11 @@ export async function getSiteData(): Promise<VersionedSiteData> {
   const artists: Artist[] = artistRows.map((row) => ({
     slug: row.slug,
     name: row.name,
-    role: row.role,
+    role: readLocalized(row.role),
     portrait: row.portrait,
     photos: (() => { try { return JSON.parse(row.photos); } catch { return []; } })(),
-    bio: row.bio,
-    statement: row.statement,
+    bio: readLocalized(row.bio),
+    statement: readLocalized(row.statement),
   }));
 
   const artworks: Artwork[] = artworkRows.map((row) => ({
@@ -90,13 +101,13 @@ export async function getSiteData(): Promise<VersionedSiteData> {
     title: row.title,
     artistSlug: row.artistSlug,
     year: row.year,
-    medium: row.medium,
+    medium: readLocalized(row.medium),
     dimensions: row.dimensions,
     widthCm: row.widthCm,
     heightCm: row.heightCm,
     image: row.image,
     availability: row.availability as Artwork["availability"],
-    description: row.description,
+    description: readLocalized(row.description),
     priceAzn: row.priceAzn ?? null,
     displayed: row.displayed,
     tondo: row.tondo,
@@ -106,13 +117,13 @@ export async function getSiteData(): Promise<VersionedSiteData> {
     slug: row.slug,
     title: row.title,
     status: row.status as Event["status"],
-    date: row.date,
+    date: readLocalized(row.date),
     image: row.image,
     heroTransform: row.heroTransform,
     thumbTransform: row.thumbTransform,
     detailTransform: row.detailTransform,
     featured: row.featured,
-    description: row.description,
+    description: readLocalized(row.description),
     gallery: galleryByEvent.get(row.id) ?? [],
     video: row.video || "",
   }));
@@ -187,17 +198,35 @@ export async function saveSiteData(data: unknown) {
     tx.delete(aboutTable).run();
 
     tx.insert(settingsTable)
-      .values({ id: 1, revision: currentRevision + 1, ...parsed.settings })
+      .values({
+        id: 1,
+        revision: currentRevision + 1,
+        whatsappNumber: parsed.settings.whatsappNumber,
+        email: parsed.settings.email,
+        phone: parsed.settings.phone,
+        address: writeLocalized(parsed.settings.address),
+        instagram: parsed.settings.instagram,
+      })
       .run();
 
     tx.insert(aboutTable)
-      .values({ id: 1, ...parsed.about })
+      .values({
+        id: 1,
+        concept: writeLocalized(parsed.about.concept),
+        vision: writeLocalized(parsed.about.vision),
+        identity: writeLocalized(parsed.about.identity),
+      })
       .run();
 
     for (const artist of parsed.artists) {
       tx.insert(artistsTable).values({
-        ...artist,
+        slug: artist.slug,
+        name: artist.name,
+        role: writeLocalized(artist.role),
+        portrait: artist.portrait,
         photos: JSON.stringify(artist.photos ?? []),
+        bio: writeLocalized(artist.bio),
+        statement: writeLocalized(artist.statement),
       }).run();
     }
 
@@ -208,13 +237,13 @@ export async function saveSiteData(data: unknown) {
           title: artwork.title,
           artistSlug: artwork.artistSlug,
           year: artwork.year,
-          medium: artwork.medium,
+          medium: writeLocalized(artwork.medium),
           dimensions: artwork.dimensions,
           widthCm: artwork.widthCm,
           heightCm: artwork.heightCm,
           image: artwork.image,
           availability: artwork.availability,
-          description: artwork.description ?? "",
+          description: writeLocalized(artwork.description),
           priceAzn: artwork.priceAzn ?? null,
           displayed: artwork.displayed,
           tondo: artwork.tondo ?? false,
@@ -229,13 +258,13 @@ export async function saveSiteData(data: unknown) {
           slug: event.slug,
           title: event.title,
           status: event.status,
-          date: event.date,
+          date: writeLocalized(event.date),
           image: event.image,
           heroTransform: event.heroTransform,
           thumbTransform: event.thumbTransform,
           detailTransform: event.detailTransform,
           featured: event.featured,
-          description: event.description,
+          description: writeLocalized(event.description),
           video: event.video ?? "",
         })
         .returning({ id: eventsTable.id })
@@ -251,6 +280,5 @@ export async function saveSiteData(data: unknown) {
   });
 
   revalidatePath("/", "layout");
-  revalidatePath("/events");
 }
 

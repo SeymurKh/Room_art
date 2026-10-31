@@ -7,7 +7,7 @@ import { UploadField } from "@/components/upload-field";
 import { EventMediaManager } from "@/components/event-media-manager";
 import { STRIPES } from "@/components/events-scrolltelling";
 import { PreviewBlock } from "@/components/admin/preview-block";
-import { Field, Grid } from "@/components/admin/admin-fields";
+import { Field, Grid, LangToggle, LocalizedField, type EditLang } from "@/components/admin/admin-fields";
 import { saveSingleEvent } from "@/app/admin/actions";
 import type { Event } from "@/lib/types";
 
@@ -34,6 +34,7 @@ export function EventAccordion({
   handleImageChange: (eventIndex: number, path: string) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const [lang, setLang] = useState<EditLang>("en");
   const [pendingDels, setPendingDels] = useState<string[]>([]);
   const [uploadCount, setUploadCount] = useState(0);
 
@@ -72,13 +73,14 @@ export function EventAccordion({
             <input type="hidden" name="payload" value={eventPayload} readOnly />
             <input type="hidden" name="revision" value={revision} readOnly />
             <input type="hidden" name="pendingDeletions" value={JSON.stringify(pendingDels)} />
+            <LangToggle lang={lang} onChange={setLang} />
             <Grid>
               <Field required label="Title" value={event.title} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, title: v } : ev))} />
               <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">Status<select className="admin-input mt-2 text-sm normal-case tracking-normal text-[#11100e]" value={event.status} onChange={(e) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, status: e.target.value as Event["status"] } : ev))}><option value="Upcoming">Upcoming</option><option value="Current">Current</option><option value="Past">Past</option></select></label>
-              <Field required label="Date" value={event.date} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, date: v } : ev))} />
+              <LocalizedField required label="Date" value={event.date} lang={lang} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, date: v } : ev))} />
               <UploadField label="Image" value={event.image} onChange={(v, pending) => { handleImageChange(eventIndex, v); if (pending) scheduleDeletion(pending); }} folder="uploads/events" onUploadingChange={trackUpload} />
             </Grid>
-            <Field multiline label="Description" value={event.description} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, description: v } : ev))} />
+            <LocalizedField multiline label="Description" value={event.description} lang={lang} onChange={(v) => updateEvents((prev) => prev.map((ev, i) => i === eventIndex ? { ...ev, description: v } : ev))} />
 
             <div className="mt-4 border-t border-black/10 pt-4">
               <div className="flex items-center justify-between mb-3">

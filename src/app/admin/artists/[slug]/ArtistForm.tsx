@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { Plus, Save, Trash2 } from "lucide-react";
 import { UploadField } from "@/components/upload-field";
+import { LangToggle, LocalizedField, type EditLang } from "@/components/admin/admin-fields";
 import type { Artist } from "@/lib/types";
 
 const IMAGE_MIME = ["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"];
@@ -14,6 +15,7 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
     slug: defaults.slug || `artist-${crypto.randomUUID()}`,
     photos: defaults.photos ?? [],
   });
+  const [lang, setLang] = useState<EditLang>("en");
   const dataRef = useRef(data);
   const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
   const [uploadCount, setUploadCount] = useState(0);
@@ -27,7 +29,7 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
     if (el) el.value = JSON.stringify(next);
   }
 
-  function updateField(key: keyof Artist, value: string) {
+  function updateField(key: keyof Artist, value: unknown) {
     const next = { ...dataRef.current, [key]: value };
     dataRef.current = next;
     setData(next);
@@ -68,16 +70,23 @@ export function ArtistForm({ defaults }: { defaults: Artist }) {
 
   return (
     <div className="max-w-2xl space-y-5">
+      <LangToggle lang={lang} onChange={setLang} />
       <Field required label="Name" value={data.name} onChange={(v) => updateField("name", v)} />
-      <Field required label="Role" value={data.role} onChange={(v) => updateField("role", v)} />
+      <LocalizedField
+        required
+        label="Role"
+        value={data.role}
+        lang={lang}
+        onChange={(v) => updateField("role", v)}
+      />
       <UploadField label="Portrait" value={data.portrait} onChange={handlePortraitChange} folder="uploads/artists" onUploadingChange={trackUpload} />
       <input type="hidden" name="pendingDeletions" value={JSON.stringify(pendingDeletions)} />
 
       {/* Studio photos */}
       <StudioPhotosManager photos={data.photos} onAdd={addPhoto} onRemove={removePhoto} onUploadingChange={trackUpload} />
 
-      <Field multiline label="Bio" value={data.bio} onChange={(v) => updateField("bio", v)} />
-      <Field multiline label="Statement" value={data.statement} onChange={(v) => updateField("statement", v)} />
+      <LocalizedField multiline label="Bio" value={data.bio} lang={lang} onChange={(v) => updateField("bio", v)} />
+      <LocalizedField multiline label="Statement" value={data.statement} lang={lang} onChange={(v) => updateField("statement", v)} />
       <button
         type="submit"
         disabled={uploadCount > 0}

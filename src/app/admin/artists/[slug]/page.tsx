@@ -30,11 +30,11 @@ export default async function AdminArtistPage({
   const defaults: Artist = artist ?? {
     slug: "",
     name: "",
-    role: "",
+    role: { en: "", az: "" },
     portrait: "",
     photos: [],
-    bio: "",
-    statement: "",
+    bio: { en: "", az: "" },
+    statement: { en: "", az: "" },
   };
 
   const errorMsg =

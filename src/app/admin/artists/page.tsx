@@ -4,6 +4,7 @@ import { isAdmin } from "@/lib/auth";
 import { getSiteData } from "@/lib/site-data";
 import { deleteArtist } from "@/app/admin/actions";
 import { DeleteButton } from "@/components/delete-button";
+import { AzBadge } from "@/components/admin/admin-fields";
 
 export const dynamic = "force-dynamic";
 
@@ -49,8 +50,9 @@ export default async function AdminArtistsPage() {
                   <Link href={`/admin/artists/${artist.slug}`} className="font-semibold text-[#11100e] transition hover:opacity-70">
                     {artist.name}
                   </Link>
+                  <AzBadge fields={[artist.role, artist.bio, artist.statement]} />
                 </td>
-                <td className="py-3 pr-4 text-[#6f6a61]">{artist.role}</td>
+                <td className="py-3 pr-4 text-[#6f6a61]">{artist.role.en}</td>
                 <td className="py-3 pr-4 font-mono text-xs text-[#6f6a61]">{artist.slug}</td>
                 <td className="py-3">
                   <form action={deleteArtist.bind(null, artist.slug, data.revision)}>

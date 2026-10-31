@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { Save } from "lucide-react";
 import { UploadField } from "@/components/upload-field";
+import { LangToggle, LocalizedField, type EditLang } from "@/components/admin/admin-fields";
 import type { Artwork, Artist } from "@/lib/types";
 
 export function ArtworkForm({
@@ -19,11 +20,12 @@ export function ArtworkForm({
     slug: defaults.slug || `artwork-${crypto.randomUUID()}`,
     displayed: defaults.displayed ?? false,
   });
+  const [lang, setLang] = useState<EditLang>("en");
   const dataRef = useRef(data);
   const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
   const [uploadingImage, setUploadingImage] = useState(false);
 
-  function updateField(key: keyof Artwork, value: string | number | boolean | null) {
+  function updateField(key: keyof Artwork, value: unknown) {
     const current = dataRef.current;
     let next = { ...current, [key]: value };
 
@@ -53,6 +55,7 @@ export function ArtworkForm({
 
   return (
     <div className="max-w-2xl space-y-5">
+      <LangToggle lang={lang} onChange={setLang} />
       <Field required label="Title" value={data.title} onChange={(v) => updateField("title", v)} />
       {preselectedArtist ? (
         <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
@@ -77,7 +80,21 @@ export function ArtworkForm({
         </label>
       )}
       <Field label="Year" value={data.year} onChange={(v) => updateField("year", v)} />
-      <Field required label="Medium" value={data.medium} onChange={(v) => updateField("medium", v)} placeholder="e.g. Acrylic on canvas" />
+      <LocalizedField
+        required
+        label="Medium"
+        value={data.medium}
+        lang={lang}
+        onChange={(v) => updateField("medium", v)}
+        placeholder="e.g. Acrylic on canvas / Kətan üzərində akril boya"
+      />
+      <LocalizedField
+        multiline
+        label="Description"
+        value={data.description}
+        lang={lang}
+        onChange={(v) => updateField("description", v)}
+      />
       <label className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6f6a61]">
         Dimensions
         <input
