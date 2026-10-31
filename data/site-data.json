@@ -11,6 +11,50 @@
   },
   "artists": [
     {
+      "slug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "name": "Gunel Ravilova",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
+      "portrait": "/uploads/artists/f411626c-1077-48bf-9a3d-cde3d8c300bf.webp",
+      "photos": [
+        "/uploads/artists/cb603670-1f5e-4ea8-bbac-3e59d1c6426f.webp",
+        "/uploads/artists/c30a6f22-e497-4a74-97b3-28e6af4d5216.webp",
+        "/uploads/artists/3e5718e7-a362-4564-b10f-5b2f6a060e5f.webp"
+      ],
+      "bio": {
+        "en": "Gunel Ravilova (b. 1981, Baku, Azerbaijan) is a contemporary Azerbaijani visual artist working across painting, graphic art, and mosaic. Born into an artistic family, she developed an early connection with art. After studying Accounting and Auditing and International Law, she enrolled in the painting program at the Azerbaijan State Academy of Arts in 2023. A member of the Azerbaijan Artists’ Union, she has participated in international artistic projects and exhibitions, including presentations in Beijing and Shanghai. Alongside her artistic practice, she works as an art educator.",
+        "az": ""
+      },
+      "statement": {
+        "en": "My work explores the tension between inner life and external reality. Through surreal imagery and abstraction, I examine female identity, memory, family, and emotional transformation, blending the familiar with the imagined to reveal what often remains unseen.",
+        "az": ""
+      }
+    },
+    {
+      "slug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "name": "Nazrin Khalafova",
+      "role": {
+        "en": "Artist",
+        "az": ""
+      },
+      "portrait": "/uploads/artists/6152bffc-22b9-4ecc-b472-2e425de42fa1.webp",
+      "photos": [
+        "/uploads/artists/945a1f5e-7f1b-4ce1-adde-99f9661ed707.webp",
+        "/uploads/artists/759dce73-0ece-4323-90ab-305b3c8ca88b.webp",
+        "/uploads/artists/e9b7d225-309c-40a9-b57a-9747eb350116.webp"
+      ],
+      "bio": {
+        "en": "Nazrin Khalafova (b. 1992) is a visual artist based in Baku, Azerbaijan. She graduated from the Azerbaijan State Academy of Fine Arts, where she received both her Bachelor's and Master's degrees in Monumental Painting. Her artistic practice encompasses painting, sculpture, and ceramics.\n\nSince 2017, she has worked at the Creative Studio of the Union of Artists of Azerbaijan. She has participated in local and international exhibitions, and her works are held in private collections in Azerbaijan and abroad, as well as in the collection of the Azerbaijan State Art Gallery.",
+        "az": ""
+      },
+      "statement": {
+        "en": "My artistic practice is rooted in painting, sculpture, and ceramics. I am interested in exploring the expressive possibilities of these mediums and the ways in which colour, form, texture, and material can shape a visual experience.\n\nI approach each work as an opportunity to experiment with artistic language, develop new approaches to composition, and explore the relationship between material and expression. Moving between different mediums allows me to continually expand my practice and discover new possibilities for visual communication.",
+        "az": ""
+      }
+    },
+    {
       "slug": "artist-779e37a7-2beb-4f45-a5d7-b66ee5a9451e",
       "name": "Sarkhan Gadzhiev",
       "role": {
@@ -201,6 +245,666 @@
     }
   ],
   "artworks": [
+    {
+      "slug": "artwork-781b3978-755e-4333-ba74-19f30bdc3ac7",
+      "title": "Səni mən içərimdən həm də çöldən görürəm",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2025",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
+      "dimensions": "70 × 70 cm",
+      "widthCm": 70,
+      "heightCm": 70,
+      "image": "/uploads/artworks/2c4167f8-f3b2-4ca5-843a-f3d1dfeaf56c.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3000,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-dc77df5f-dd72-489b-9ad7-8649b4707e22",
+      "title": "Yuxu",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "",
+      "medium": {
+        "en": "Acrylic on canvas",
+        "az": ""
+      },
+      "dimensions": "100 × 70 cm",
+      "widthCm": 100,
+      "heightCm": 70,
+      "image": "/uploads/artworks/2d747904-4e37-423d-be4c-5c0c3e27dedc.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3360,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-72802681-2a31-41e4-8eb1-52cefd8c0961",
+      "title": "Ag rəqs",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2023",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/67f938e1-18cf-4dcd-a647-f0be06516cae.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4200,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-575fd580-78d0-473b-8fc1-5a0b5ca2a6bb",
+      "title": "Al yelkənlər",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2023",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/544e2f2a-3586-4925-8681-0436ead53312.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4200,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-af705172-9d40-42c2-8c0a-576918134bf0",
+      "title": "Qapımı asta ört",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2025",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/8ee68dab-f114-484f-b7d9-a06c18b94bab.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4200,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-f3bd58b6-fbe0-4a44-a5b7-4d922c88d0a8",
+      "title": "Tərs baş",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2024",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "80 × 110 cm",
+      "widthCm": 80,
+      "heightCm": 110,
+      "image": "/uploads/artworks/abbc1a44-52ea-4ea3-8555-f52444f14403.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3000,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-361e64d0-6051-446d-b141-baf3541ef3b7",
+      "title": "Evin pərisi",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2023",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "80 × 120 cm",
+      "widthCm": 80,
+      "heightCm": 120,
+      "image": "/uploads/artworks/57cada59-b6c2-426a-b743-e7881964c419.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4800,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-32340d1d-9cbf-46bb-89ae-b8d8aa081684",
+      "title": "7 gözəl",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2023",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "70 × 60 cm",
+      "widthCm": 70,
+      "heightCm": 60,
+      "image": "/uploads/artworks/d1602eb2-d544-417d-bdcd-d62ff4bf0898.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 1440,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-d4af0371-5b4d-4ccf-854d-1832f73810c8",
+      "title": "Dahilimdə olan mən",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2026",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "70 × 70 cm",
+      "widthCm": 70,
+      "heightCm": 70,
+      "image": "/uploads/artworks/8ab4b819-f6bb-493c-ab58-8b12a504a9ee.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3000,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-11401638-d84b-4d4c-88d3-dec0cec44e5e",
+      "title": "Səni görürəm",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2025",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "70 × 70 cm",
+      "widthCm": 70,
+      "heightCm": 70,
+      "image": "/uploads/artworks/62fa8fd5-e505-42ae-86de-aff4383344c8.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3000,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-2d7f4e3a-9f0a-4ecb-a47a-f7c2eecc1f84",
+      "title": "Lalələri sevən qız",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2020",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "90 × 90 cm",
+      "widthCm": 90,
+      "heightCm": 90,
+      "image": "/uploads/artworks/da0c3459-6f5c-4b79-9a65-293142d1a577.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2160,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-dd08fe34-ef37-48e7-9c17-fbdaa863690a",
+      "title": "Balıq sevgisi",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2024",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "90 × 110 cm",
+      "widthCm": 90,
+      "heightCm": 110,
+      "image": "/uploads/artworks/d457cc4b-529a-4883-8ef8-d809e406648f.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3000,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-3c4b96eb-88ac-4a4b-a664-590548a0511a",
+      "title": "Bir bagın hekayəsi",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2025",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/a127628c-5eec-40ff-8e69-b25d31dc48c4.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4200,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-fefe46c1-bfd8-4e2f-9296-3e37a6038153",
+      "title": "Evlər arası",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2026",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "120 × 90 cm",
+      "widthCm": 120,
+      "heightCm": 90,
+      "image": "/uploads/artworks/3d053d69-94eb-486f-92c9-c8263e53c2e1.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4200,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-bf0e2446-c592-45b3-b22e-7636614c9b3a",
+      "title": "Gizli sevgi",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2026",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "60 × 130 cm",
+      "widthCm": 60,
+      "heightCm": 130,
+      "image": "/uploads/artworks/83333fbb-760b-4f85-86ab-24bb45617d63.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 5400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-f77b477a-2a2e-49dc-9452-83b6744ad20b",
+      "title": "Hamıya lazım",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2025",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/c5d7bc35-da20-4eb5-a429-f3838b9f4005.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4200,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-74898094-5cd9-463f-82a1-6fb3fa886f88",
+      "title": "Kötüklər",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2026",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "60 × 130 cm",
+      "widthCm": 60,
+      "heightCm": 130,
+      "image": "/uploads/artworks/f777d009-d07b-4d7b-9017-6c67ad5aa403.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4200,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-80d578b7-5058-484d-b940-7daaded3929f",
+      "title": "Məhvi",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2025",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "60 × 130 cm",
+      "widthCm": 60,
+      "heightCm": 130,
+      "image": "/uploads/artworks/eb6f1a20-9e69-4ba9-808f-20c8bf599e4f.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3000,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-14e3881a-ded9-46ca-b85d-6095f89112a9",
+      "title": "Sevgi",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "2026",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "60 × 130 cm",
+      "widthCm": 60,
+      "heightCm": 130,
+      "image": "/uploads/artworks/1e100b11-9c53-401b-8713-a9cb6c199054.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4200,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-c5d0b4ca-b50c-4a4b-a9bc-dc658b4ff577",
+      "title": "İlbizı Qadın",
+      "artistSlug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/b967a013-84f6-4d47-b333-87f0e4a5d7f5.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4200,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-06865eec-5162-47cc-a02a-3ce12bf8571d",
+      "title": "İstanbul",
+      "artistSlug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "115 × 90 cm",
+      "widthCm": 115,
+      "heightCm": 90,
+      "image": "/uploads/artworks/5292adc3-b279-48b9-9a1e-7cc4e50a7377.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2160,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-40ed0aaa-4cff-4418-a513-d1261bca671b",
+      "title": "You can stand under my umbrella",
+      "artistSlug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "90 × 140 cm",
+      "widthCm": 90,
+      "heightCm": 140,
+      "image": "/uploads/artworks/6a6148fa-3da7-4b20-9882-802b596514ed.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3000,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-f4888e3d-6053-4c5c-9371-048ec48c537e",
+      "title": "Taksa",
+      "artistSlug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "112 × 55 cm",
+      "widthCm": 112,
+      "heightCm": 55,
+      "image": "/uploads/artworks/62049c8e-309f-4043-bd6f-74a6718cfb1d.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3000,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-cda29f94-185b-4972-9552-2e622256dedf",
+      "title": "Summer flowers",
+      "artistSlug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "75 × 95 cm",
+      "widthCm": 75,
+      "heightCm": 95,
+      "image": "/uploads/artworks/172d5485-3d3d-4c57-b963-f9f4a041df96.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 1200,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-5e3d79dc-58ed-422d-939c-a4c5742f23e4",
+      "title": "Summer day",
+      "artistSlug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "90 × 140 cm",
+      "widthCm": 90,
+      "heightCm": 140,
+      "image": "/uploads/artworks/adcfaa61-c01e-420c-9a49-d3a02b8e2675.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3000,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-62ecd393-4d8b-4a0a-8edd-c6466c952c03",
+      "title": "Spring Morning",
+      "artistSlug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "120 × 100 cm",
+      "widthCm": 120,
+      "heightCm": 100,
+      "image": "/uploads/artworks/0f6b0061-8f45-4ceb-b5bc-69e20ebe238e.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 1800,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-7ac80ad5-310e-4287-88db-29ef0fac377a",
+      "title": "Qasid",
+      "artistSlug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "110 × 160 cm",
+      "widthCm": 110,
+      "heightCm": 160,
+      "image": "/uploads/artworks/b1a7c1e4-3d8e-48a9-bbb3-5938bc18a8e5.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3600,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-afacd277-981f-4ffe-b976-56fc556838c2",
+      "title": "Still life with pears",
+      "artistSlug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "100 × 80 cm",
+      "widthCm": 100,
+      "heightCm": 80,
+      "image": "/uploads/artworks/274c00da-0176-4d05-81e1-c21117477887.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 1440,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-99aa4e4b-9ad3-49a5-b7da-29872dd07084",
+      "title": "Caspian beauty",
+      "artistSlug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "130 × 100 cm",
+      "widthCm": 130,
+      "heightCm": 100,
+      "image": "/uploads/artworks/630d1074-6206-4d08-8500-89cfd43bf90a.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-0b5f715c-acfb-42bd-8d1b-d0ec95447ab3",
+      "title": "Aylı Gecə",
+      "artistSlug": "artist-57285a75-d189-4024-885d-495afe284878",
+      "year": "",
+      "medium": {
+        "en": "Oil on canvas",
+        "az": ""
+      },
+      "dimensions": "90 × 100 cm",
+      "widthCm": 90,
+      "heightCm": 100,
+      "image": "/uploads/artworks/c0b4bc10-9692-4fb5-b13c-ffd1c73514b2.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
     {
       "slug": "beauty-in-the-darkness",
       "title": "Beauty In The Darkness",
@@ -2304,12 +3008,12 @@
       "widthCm": 30,
       "heightCm": 40,
       "image": "/uploads/artworks/1b3363e6-2cea-4b7b-a2a8-a65b20348fdd.webp",
-      "availability": "Available",
+      "availability": "Private collection",
       "description": {
         "en": "",
         "az": ""
       },
-      "priceAzn": 720,
+      "priceAzn": null,
       "displayed": true,
       "tondo": false
     },
@@ -2370,12 +3074,12 @@
       "widthCm": 40,
       "heightCm": 50,
       "image": "/uploads/artworks/bec48d58-ae73-480d-b1a3-76e6095cdb5f.webp",
-      "availability": "Available",
+      "availability": "Private collection",
       "description": {
         "en": "",
         "az": ""
       },
-      "priceAzn": 540,
+      "priceAzn": null,
       "displayed": true,
       "tondo": false
     },
@@ -2656,12 +3360,12 @@
       "widthCm": 70,
       "heightCm": 80,
       "image": "/uploads/artworks/4ac941a7-232f-4096-ac9a-4cc3afbeca7f.webp",
-      "availability": "Available",
+      "availability": "Private collection",
       "description": {
         "en": "",
         "az": ""
       },
-      "priceAzn": 1080,
+      "priceAzn": null,
       "displayed": true,
       "tondo": false
     },
@@ -4106,9 +4810,9 @@
     {
       "slug": "event-1787482539601-jlxl",
       "title": "A Person Between Two Worlds",
-      "status": "Current",
+      "status": "Past",
       "date": {
-        "en": "20 September - 29 October 2026, Room, Baku",
+        "en": "20 September - 18 October 2026, Room, Baku",
         "az": ""
       },
       "image": "/uploads/events/c80e391b-0b49-4753-97b9-c01f3fb63756.webp",
@@ -4120,7 +4824,24 @@
         "en": "My artistic practice explores form, lettering, character, and the visual language of contemporary urban culture. Drawing from graffiti, street culture, graphic design, comics, and popular media, I combine familiar visual elements into new structures.\n\nAt the center of my work is a recurring male character, developed from my graffiti practice in 2014–2015. He embodies the tension between traditional values and contemporary urban life — a person whose body belongs to the present, while his mindset remains rooted in the past.\n\nThrough constantly changing techniques, colors, and styles, I use this character to explore identity, cultural heritage, social expectations, and the conflict between tradition and change.\n\nEmil Moosem.",
         "az": ""
       },
-      "gallery": [],
+      "gallery": [
+        "/uploads/events/dc9ed451-605f-462f-a518-e99b3abe2170.webp",
+        "/uploads/events/09419869-ba83-48c5-be00-3c3352ab21a4.webp",
+        "/uploads/events/f3b7d22b-a7b3-4932-b33b-7192666bdfa3.webp",
+        "/uploads/events/3896bc07-6ed9-4bc0-85a6-95e29e290c62.webp",
+        "/uploads/events/fb743987-b9c5-4b1e-8ff2-f750814276cc.webp",
+        "/uploads/events/02b0a9eb-d176-4180-8fda-915ba3b40cf8.webp",
+        "/uploads/events/1c1df38d-8f72-4fa3-b8f7-41dea3165416.webp",
+        "/uploads/events/d85dc1c7-26f1-4614-ba45-3d6560131ae2.webp",
+        "/uploads/events/c729dea9-e5cc-4750-8c7c-bac0398504c6.webp",
+        "/uploads/events/639dbcf5-2bf9-4110-b0d9-f5a00d2ffa95.webp",
+        "/uploads/events/e2a130d7-05de-4e95-b098-93c43117fe7a.webp",
+        "/uploads/events/164ad81f-4eba-40ad-9f61-6d236753f634.webp",
+        "/uploads/events/0fe090f5-f1a3-4ddb-a148-02d779a0ab56.webp",
+        "/uploads/events/1c5867d9-c58b-4177-ae3d-fed08ec2e934.webp",
+        "/uploads/events/76f6af3d-b583-4e9d-823b-ae80c606bbcd.webp",
+        "/uploads/events/f92195a3-6021-4e05-9697-b84c13fd11ce.webp"
+      ],
       "video": ""
     },
     {
