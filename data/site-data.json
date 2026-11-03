@@ -11,6 +11,27 @@
   },
   "artists": [
     {
+      "slug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "name": "Zarnishan Yusif",
+      "role": {
+        "en": "Artist",
+        "az": "Rəssam"
+      },
+      "portrait": "/uploads/artists/5395bbc9-bff6-4c21-bb15-995cbe0b5990.webp",
+      "photos": [
+        "/uploads/artists/2a7605fb-61a4-4db3-8d99-8b28aae387bd.webp",
+        "/uploads/artists/0b2453ea-a5e5-489e-90d2-0b84c3e99292.webp"
+      ],
+      "bio": {
+        "en": "Zarnishan Yusif (b. 1985) is an Azerbaijani artist and graduate of Baku Art Academy, who has been dedicated to painting since 2009. Over the years, she has received several awards from the Union of Artists of Azerbaijan and participated in numerous exhibitions in Azerbaijan and abroad, including the international exhibition \"Fly to Baku\". She has also taken part in art and public art projects organized by the Heydar Aliyev Foundation. In 2019, Yusif was selected to represent Azerbaijan at the 58th Venice Biennale of Contemporary Art. Two of her works were selected for the permanent collection of the Black Gold Museum (KAPSARC) in Saudi Arabia. She is also featured in the 2022 publication \"Azerbaijan Contemporary Art\".",
+        "az": "Zərnişan Yusif (1985)\n\nBakıda fəaliyyət göstərən müasir rəssam, Azərbaycan Dövlət Rəssamlıq Akademiyasının bakalavr və magistr məzunudur. Azərbaycan Rəssamlar İttifaqının üzvü və müxtəlif incəsənət mükafatlarının laureatıdır. 2016, 2018 və 2024-cü illərdə Bakıda üç fərdi sərgisi keçirilib. 2019-cu ildə 58-ci Venesiya Biennalesində Azərbaycanı təmsil edib. Əsərləri Səudiyyə Ərəbistanındakı Qara Qızıl Muzeyinin (KAPSARC) daimi kolleksiyasına daxil edilib. Heydər Əliyev Fondunun və YARAT Müasir İncəsənət Məkanının layihələrində iştirak edib."
+      },
+      "statement": {
+        "en": "Themes are central to my artistic practice. I often work in series, exploring each subject from different perspectives. Using found objects, photographs, postcards, banknotes, printed images, and textiles, I create collages in which every element carries its own symbolic meaning.\n\nCollage has become a way of exploring personal transformation and questioning my relationship with art. My work reflects an ongoing dialogue with myself, where experimentation, self-discovery, and artistic evolution are essential parts of the process.",
+        "az": "Mənim yaradıcılığımda mövzu əsas rol oynayır. Müxtəlif mövzuları silsilələr vasitəsilə araşdıraraq onlara fərqli rakurslardan yanaşmağa çalışıram. Fotoşəkillər, məktublar, açıqcalar, əskinaslar və digər tapılmış obyektlər işlərimin əsas materiallarını təşkil edir. Hər bir detal düşünülmüş seçimdir və simvolik məna daşıyır.\n\n“Qədim Azərbaycan”, “Pul” və “Sizə məktub var” seriyalarında tarix, yaddaş, dəyərlər və zamanla dəyişən ənənələrə müraciət edirəm. Kollaj mənim üçün həm özümü ifadə etmək, həm də daxili dəyişikliklərimi araşdırmaq vasitəsidir. Yaradıcılığım daim özünü kəşf etmək və inkişaf etmək prosesidir."
+      }
+    },
+    {
       "slug": "artist-b9661a77-0e6b-4482-a6ef-8652339a039f",
       "name": "Gunel Ravilova",
       "role": {
@@ -85,7 +106,7 @@
       ],
       "bio": {
         "en": "Gunay Baylarova is a contemporary artist born in Baku, Azerbaijan, in 1994. She holds Bachelor’s and Master’s degrees from the Azerbaijan State University of Culture and Arts. Her practice focuses on mixed-media techniques on canvas, combining abstract and figurative approaches. Baylarova has participated in major cultural projects and exhibitions in Azerbaijan and internationally, including events in London, Waterloo, Milan, Miami, Japan and Turkey.",
-        "az": "Günay Baylarova 1994-cü ildə Azərbaycanın Bakı şəhərində anadan olmuş müasir sənətçidir. O, Azərbaycan Dövlət Mədəniyyət və İncəsənət Universitetində bakalavr və magistr dərəcələrinə malikdir. Onun yaradıcılığı kətan üzərində qarışıq texnikalara yönəlib, abstrakt və fiqurativ yanaşmaları birləşdirir. Baylarova Azərbaycanda və beynəlxalq miqyasda, o cümlədən London, Vaterlo, Milan, Miami, Yaponiya və Türkiyədə keçirilən böyük mədəni layihələrdə və sərgilərdə iştirak edib."
+        "az": "Günay Bəylərova 1994-cü ildə Azərbaycanın Bakı şəhərində anadan olmuş müasir sənətçidir. O, Azərbaycan Dövlət Mədəniyyət və İncəsənət Universitetində bakalavr və magistr dərəcələrinə malikdir. Onun yaradıcılığı kətan üzərində qarışıq texnikalara yönəlib, abstrakt və fiqurativ yanaşmaları birləşdirir. Bəylərova Azərbaycanda və beynəlxalq miqyasda, o cümlədən Londonda Vaterlo, Milan, Mayami, Yaponiya və Türkiyədə keçirilən böyük mədəni layihələrdə və sərgilərdə iştirak edib."
       },
       "statement": {
         "en": "My practice explores the synthesis of abstract and figurative approaches through mixed-media techniques on canvas. I work with form, colour, texture and subject to create a balance between conceptual depth and visual expression. Through this combination, I continue to develop my own artistic language and explore new forms of visual expression.",
@@ -231,8 +252,7 @@
       "photos": [
         "/uploads/artists/d659bf76-effa-4e41-8aa4-fac1e5ea7c99.webp",
         "/uploads/artists/59388d95-b5ea-4f7e-96f3-ccf0adbd2f8f.webp",
-        "/uploads/artists/330e2754-a43c-4f77-aeab-2b1f5ecbf8ed.webp",
-        "/uploads/artists/9187297f-7cb9-4d95-b4c4-acbd60efcc79.webp"
+        "/uploads/artists/330e2754-a43c-4f77-aeab-2b1f5ecbf8ed.webp"
       ],
       "bio": {
         "en": "Roza Muradova is a contemporary painter based in Baku, Azerbaijan, working across oil, acrylic, ink, and watercolor. Her practice explores the relationship between movement, emotion, and the shifting boundary between abstraction and figuration.\n\nThrough expressive gestures, layered brushwork, and subtle use of texture, Muradova creates atmospheric compositions that evoke inner psychological states and fragmented memories. Her work often draws from nature as a source of rhythm and transformation, translating organic forms into intuitive visual language.\n\nHer paintings have been exhibited internationally and are held in private collections worldwide.",
@@ -4776,6 +4796,754 @@
       "priceAzn": 2400,
       "displayed": false,
       "tondo": false
+    },
+    {
+      "slug": "artwork-d489d4ba-1e01-4a12-8222-89d0b8fc0240",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/0d382cc6-f87a-40e1-8816-936ca9aa8746.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-b29d8fac-d6cf-4a09-83cc-b9d3b8efc60b",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/78cce16f-ba48-4fc3-bbd5-b58033ce4b5c.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-07cfac62-e169-4ae8-aeb1-5f65ace6692b",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/61233aef-1c3c-489b-8e54-c5a67652efbd.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-cb0adf39-9d64-41b3-a9ff-2d227387b052",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/478a4cc0-ed64-4d67-b018-115d67c65f26.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-ddfbe5d7-effa-4a7a-bc48-5019332b1b10",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2022",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/9d961c58-cf9d-47de-bc50-e7e562245e0f.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-46c2f025-e361-45c7-a911-97f6e8c6aa7e",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2022",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/966c6a04-0cb6-4915-ad45-466e0d8dacf7.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-d7df0dda-3692-4ace-a390-fc73f326dd7f",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/42a8b5a2-b299-47a4-b474-4dacadc2bc25.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-1a5f8ff2-70ac-409c-8857-a8f35a518a61",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/d063b945-bb92-4edf-bd7a-1593ad4f043c.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-8bfe78c6-472c-45d6-a494-6d1cf53f76b2",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/f954b8d5-5312-4c90-bfd1-22cecd9ee16f.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-93d68e96-cafb-4610-870e-b73874d04905",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/f229a4de-03ab-4157-8202-1f930d621536.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-65a618c9-4da3-4421-b9d5-09360ad1cbe4",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/af7e83d9-1b80-4164-98b0-ef02b965e9e6.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-95914b9c-8bc2-4336-8ba2-a0cc3ae37aab",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2024",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "60 × 60 cm",
+      "widthCm": 60,
+      "heightCm": 60,
+      "image": "/uploads/artworks/9a078dfd-a2da-4fd6-9279-b3e4768e36a0.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 960,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-6f17f587-952d-46c1-ba24-756a0a480686",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/0ad45cc9-e187-4b3e-8902-5a9c35026a6b.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-265f85ca-7781-42a4-8831-67b72c1667df",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2022",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "180 × 150 cm",
+      "widthCm": 180,
+      "heightCm": 150,
+      "image": "/uploads/artworks/ee9c5967-f8df-43ec-8f48-2a7165887160.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4800,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-95da0ea9-f705-4c7e-ac0e-3e3845a2f712",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2022",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "180 × 150 cm",
+      "widthCm": 180,
+      "heightCm": 150,
+      "image": "/uploads/artworks/ee9f2173-4ea9-4549-abf8-6645e6108e5b.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4800,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-25b8f7df-8270-4264-a20e-5fd34a1fa771",
+      "title": "Mail for you (USSR)",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "180 × 150 cm",
+      "widthCm": 180,
+      "heightCm": 150,
+      "image": "/uploads/artworks/c1f1093e-ed07-4000-b1b4-f79da784a0ad.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4800,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-0b89c73d-0e9a-4c16-b015-34c121f3797b",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/b906c07d-3cdc-41cb-8e76-0be2f25c4f6b.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-277d176f-1d2f-4fa0-917c-4a7392620a6f",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2022",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/7b400920-b1d7-4383-9511-71f8aa67239b.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-ac6b9c26-50cd-4f4e-86e5-a1543961f177",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2024",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "60 × 60 cm",
+      "widthCm": 60,
+      "heightCm": 60,
+      "image": "/uploads/artworks/a2e1618f-272f-454c-8cf8-44c64c6af5d4.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 960,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-6395931b-42d3-4b56-9216-32b0d8e779b8",
+      "title": "Mail for you (Art)",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "180 × 150 cm",
+      "widthCm": 180,
+      "heightCm": 150,
+      "image": "/uploads/artworks/68b80bd9-b277-42ab-92e8-501748dabf52.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4800,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-0ebda736-c1de-4352-96f9-9ef63c4a02d3",
+      "title": "Mail for you (Space)",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "180 × 150 cm",
+      "widthCm": 180,
+      "heightCm": 150,
+      "image": "/uploads/artworks/b037d886-ad50-410b-b9d0-439464459767.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4800,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-e9c5a641-e5b6-4bcc-9725-523ca3a9f1cf",
+      "title": "Mail for you (USSR)",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "180 × 150 cm",
+      "widthCm": 180,
+      "heightCm": 150,
+      "image": "/uploads/artworks/6ec6098c-707d-4fb8-bac7-b0add1fc27ba.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 4800,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-72993cf8-4edd-4e41-9078-777d50830301",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2022",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/b93b3d1e-aac6-4b66-885f-2dc819389763.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-8385b548-c748-4311-946c-be8c8d6d82cb",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2022",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/e8738e65-d99d-4a7e-9c79-1fee4371d43c.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-af5775e7-6e0d-45d7-a9e3-cd5610d6a545",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/4e4bd378-cbaf-4b18-bb76-f929ecb95976.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-ae1a80d5-42b6-4150-b44f-2de1960d7d32",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2024",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/b2aebf2b-9d06-4eb7-883d-bb1128063f33.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-332eda20-0103-478b-9ee5-245ed7c0e5d4",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/ec67f261-b116-4b6e-b729-42e24a0103da.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-d1e19ad7-ea86-4ab0-b943-f97d828beee1",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2022",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "100 × 100 cm",
+      "widthCm": 100,
+      "heightCm": 100,
+      "image": "/uploads/artworks/cc4813b0-0aed-4dc8-8d87-b4b5a31892af.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 2400,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-75125aad-e0d2-42a2-86c8-b313e631d1f1",
+      "title": "Mail for you (each other)",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2023",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "145 × 35 cm",
+      "widthCm": 145,
+      "heightCm": 35,
+      "image": "/uploads/artworks/20efa492-088f-43f2-840b-7e803e9c052a.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 3000,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-2db1d665-abc6-4d03-8049-8f14c450331a",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2024",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "60 × 60 cm",
+      "widthCm": 60,
+      "heightCm": 60,
+      "image": "/uploads/artworks/d0bced1a-32d5-49f5-ad23-c7d5b7f48bc4.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 960,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-40db0c64-9caa-470c-8dbc-03cbe3e46589",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2024",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "60 × 60 cm",
+      "widthCm": 60,
+      "heightCm": 60,
+      "image": "/uploads/artworks/17c653a6-2505-4b62-b8f7-9f51e9e43efd.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 960,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-86e7867c-387c-4b7c-9472-eda7b50add7c",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2024",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "60 × 60 cm",
+      "widthCm": 60,
+      "heightCm": 60,
+      "image": "/uploads/artworks/ad885407-6137-4755-8622-c06ccc692b1f.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 960,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-d59430e4-15f9-4274-a917-ee843a51d6c7",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2024",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "60 × 60 cm",
+      "widthCm": 60,
+      "heightCm": 60,
+      "image": "/uploads/artworks/0732c3fd-086c-477d-bb7a-36d354eec1dd.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 960,
+      "displayed": false,
+      "tondo": false
+    },
+    {
+      "slug": "artwork-6ee247a2-980d-46bd-95d2-45ea75b2bc45",
+      "title": "Mail for you",
+      "artistSlug": "artist-1aaf4a73-d1a8-4c3f-b6c3-785869f5d7c3",
+      "year": "2024",
+      "medium": {
+        "en": "Acrylic, collage on canvas",
+        "az": "Kətan üzərində akril, kollaj"
+      },
+      "dimensions": "60 × 60 cm",
+      "widthCm": 60,
+      "heightCm": 60,
+      "image": "/uploads/artworks/9dfdc4a3-de62-4637-a7dd-7a252994837a.webp",
+      "availability": "Available",
+      "description": {
+        "en": "",
+        "az": ""
+      },
+      "priceAzn": 960,
+      "displayed": false,
+      "tondo": false
     }
   ],
   "events": [
@@ -4821,8 +5589,8 @@
       "detailTransform": "translate(0px, 0px) scale(1)",
       "featured": false,
       "description": {
-        "en": "My artistic practice explores form, lettering, character, and the visual language of contemporary urban culture. Drawing from graffiti, street culture, graphic design, comics, and popular media, I combine familiar visual elements into new structures.\n\nAt the center of my work is a recurring male character, developed from my graffiti practice in 2014–2015. He embodies the tension between traditional values and contemporary urban life — a person whose body belongs to the present, while his mindset remains rooted in the past.\n\nThrough constantly changing techniques, colors, and styles, I use this character to explore identity, cultural heritage, social expectations, and the conflict between tradition and change.\n\nEmil Moosem.",
-        "az": "Sənət yaradıcılığım formanı, yazını, personajı və müasir şəhər mədəniyyətinin vizual dilini araşdırır. Qrafiti, küçə mədəniyyəti, qrafik dizayn, komikslər və populyar mediadan qidalanaraq tanış vizual elementləri yeni strukturlarda birləşdirirəm.\n\nİşlərimin mərkəzində 2014–2015-ci illərdə qrafiti yaradıcılığımdan formalaşmış təkrarlanan kişi personajı dayanır. O, ənənəvi dəyərlərlə müasir şəhər həyatı arasındakı gərginliyi təcəssüm etdirir — bədəni bu günə mənsub olan, düşüncə tərzi isə keçmişə köklənmiş insan.\n\nDaim dəyişən texnikalar, rənglər və üslublar vasitəsilə bu personajdan identiklik, mədəni irs, sosial gözləntilər və ənənə ilə dəyişiklik arasındakı ziddiyyəti araşdırmaq üçün istifadə edirəm.\n\nEmil Moosem."
+        "en": "\"My artistic practice explores form, lettering, character, and the visual language of contemporary urban culture. Drawing from graffiti, street culture, graphic design, comics, and popular media, I combine familiar visual elements into new structures.\n\nAt the center of my work is a recurring male character, developed from my graffiti practice in 2014–2015. He embodies the tension between traditional values and contemporary urban life — a person whose body belongs to the present, while his mindset remains rooted in the past.\n\nThrough constantly changing techniques, colors, and styles, I use this character to explore identity, cultural heritage, social expectations, and the conflict between tradition and change\".\n\nEmil Moosem.",
+        "az": "\"Sənət yaradıcılığım formanı, yazını, personajı və müasir şəhər mədəniyyətinin vizual dilini araşdırır. Qrafiti, küçə mədəniyyəti, qrafik dizayn, komikslər və populyar mediadan qidalanaraq tanış vizual elementləri yeni strukturlarda birləşdirirəm.\n\nİşlərimin mərkəzində 2014–2015-ci illərdə qrafiti yaradıcılığımdan formalaşmış təkrarlanan kişi personajı dayanır. O, ənənəvi dəyərlərlə müasir şəhər həyatı arasındakı gərginliyi təcəssüm etdirir — bədəni bu günə mənsub olan, düşüncə tərzi isə keçmişə köklənmiş insan.\n\nDaim dəyişən texnikalar, rənglər və üslublar vasitəsilə bu personajdan identiklik, mədəni irs, sosial gözləntilər və ənənə ilə dəyişiklik arasındakı ziddiyyəti araşdırmaq üçün istifadə edirəm\".\n\nEmil Moosem."
       },
       "gallery": [
         "/uploads/events/dc9ed451-605f-462f-a518-e99b3abe2170.webp",
