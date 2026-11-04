@@ -86,8 +86,11 @@ export function ArtworkViewer({
   const currentSlugRef = useRef(initialSlug);
   const phaseRef = useRef<"enter" | "exit">("enter");
   const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const touchStart = useRef<{ x: number; y: number } | null>(null);
-  const suppressClickRef = useRef(false);
+  // Точка старта касания хранится с identifier: прерванные жесты (touchcancel —
+  // pull-to-refresh, системные жесты) не дают старым координатам выстрелить
+  // случайным переходом (именно так картинка «возвращалась к первой»).
+  const touchStart = useRef<{ id: number; x: number; y: number } | null>(null);
+  const suppressClickUntil = useRef(0);
 
   const current = artworks.find((item) => item.slug === currentSlug) ?? artworks[0];
   const displayed = artworks.find((item) => item.slug === displayedSlug) ?? artworks[0];
@@ -179,10 +182,22 @@ export function ArtworkViewer({
     }
   }, [adjacent]);
 
-  // Свайп на сенсорных экранах.
+  // Свайп на сенсорных экранах. Касание хранится с identifier: прерванные жесты
+  // (touchcancel — pull-to-refresh, системные жесты) не дают старым координатам
+  // выстрелить случайным переходом (так картинка «возвращалась к первой»).
   const onTouchStart = useCallback((event: React.TouchEvent) => {
+    if (event.touches.length !== 1) {
+      // мультитач (пинч-зум) — жест не наш
+      touchStart.current = null;
+      return;
+    }
     const touch = event.touches[0];
-    touchStart.current = { x: touch.clientX, y: touch.clientY };
+    touchStart.current = { id: touch.identifier, x: touch.clientX, y: touch.clientY };
+  }, []);
+
+  const onTouchCancel = useCallback(() => {
+    // Жест прерван браузером — забываем его, чтобы «хвост» не сработал свайпом.
+    touchStart.current = null;
   }, []);
 
   const onTouchEnd = useCallback(
@@ -190,16 +205,23 @@ export function ArtworkViewer({
       const start = touchStart.current;
       touchStart.current = null;
       if (!start || !adjacent) return;
-      const touch = event.changedTouches[0];
+      // Ищем то же касание, что и на старте (пальцы завершаются вразнобой).
+      const touch = Array.from(event.changedTouches).find((t) => t.identifier === start.id);
+      if (!touch) return;
       const dx = touch.clientX - start.x;
       const dy = touch.clientY - start.y;
+
+      // Любой заметный жест гасит синтетический click: после скролла/свайпа он
+      // «прошивается» сквозь ссылку/кнопку под пальцем (отсюда «обновления»).
+      if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+        suppressClickUntil.current = Date.now() + CLICK_SUPPRESS_MS;
+      }
+      // Палец ещё на экране (мульти-тач) — переключения нет.
+      if (event.touches.length > 0) return;
+
       if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy) * 1.5) {
-        // После свайпа браузер шлёт синтетический click — гасим его,
-        // иначе он «прошивается» сквозь ссылку/кнопку под пальцем.
-        suppressClickRef.current = true;
-        setTimeout(() => {
-          suppressClickRef.current = false;
-        }, CLICK_SUPPRESS_MS);
+        // После свайпа браузер шлёт синтетический click — гасим его.
+        suppressClickUntil.current = Date.now() + CLICK_SUPPRESS_MS;
         if (dx < 0) navigate(adjacent.next.slug, 1);
         else navigate(adjacent.prev.slug, -1);
       }
@@ -208,11 +230,25 @@ export function ArtworkViewer({
   );
 
   const onClickCapture = useCallback((event: React.MouseEvent) => {
-    if (suppressClickRef.current) {
+    if (suppressClickUntil.current > Date.now()) {
       event.preventDefault();
       event.stopPropagation();
-      suppressClickRef.current = false;
     }
+  }, []);
+
+  // Отключаем «pull-to-refresh» на странице работы: вертикальное дёргание
+  // перезагружало страницу вместо переключения картины.
+  useEffect(() => {
+    const root = document.documentElement;
+    const body = document.body;
+    const prevRoot = root.style.overscrollBehaviorY;
+    const prevBody = body.style.overscrollBehaviorY;
+    root.style.overscrollBehaviorY = "contain";
+    body.style.overscrollBehaviorY = "contain";
+    return () => {
+      root.style.overscrollBehaviorY = prevRoot;
+      body.style.overscrollBehaviorY = prevBody;
+    };
   }, []);
 
   if (!displayed) return null;
@@ -223,6 +259,7 @@ export function ArtworkViewer({
       onClickCapture={onClickCapture}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
+      onTouchCancel={onTouchCancel}
     >
       {/* Постоянная подложка стены: пока старая работа уходит, а новая входит,
           «стена» остаётся неподвижной и не мигает. */}
