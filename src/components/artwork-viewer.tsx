@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -23,7 +23,9 @@ const EXIT_DURATION_MS = 220;
 /** Страховка: если exit-анимация почему-то не даст onAnimationComplete, подмена случится по таймеру. */
 const EXIT_FALLBACK_MS = EXIT_DURATION_MS + 250;
 
-/** Фон стены — тот же, что и в ArtworkWall: подложка держит «стену» неподвижной при смене работ. */
+/** Фон стены — единственный на всю страницу и всегда неподвижный: ArtworkWall
+ *  фон больше не рисует (его секция прозрачна), поэтому анимация смены картин
+ *  трогает только картину и информацию — «стена» не шевелится и не мигает. */
 const wallStyle: React.CSSProperties = {
   backgroundImage: "url('/assets/room-wall.png')",
   backgroundSize: "cover",
@@ -32,6 +34,9 @@ const wallStyle: React.CSSProperties = {
 
 const wrapperExit = { opacity: 0, y: -18, scale: 0.98, filter: "blur(4px)" };
 const wrapperRest = { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" };
+
+/** Layout-эффект на клиенте (строго до paint), обычный useEffect на сервере. */
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /**
  * ArtworkViewer — переключение картин прямо на slug-странице (/gallery/[slug]).
@@ -82,6 +87,12 @@ export function ArtworkViewer({
   const [quickEntry, setQuickEntry] = useState(false);
   const [hintDismissed, setHintDismissed] = useState(false);
   const [navContext, setNavContext] = useState<ArtworkNavContext>({ kind: "collection" });
+  // Масштаб (x1/x2/x3) и мобильная лупа живут здесь, а не в ArtworkWall:
+  // секция перемонтируется при каждой смене картины (key), иначе эти настройки
+  // сбрасывались бы — картина «прыгала» в другой размер после переключения.
+  const [scale, setScale] = useState(1);
+  const [showMagnifier, setShowMagnifier] = useState(false);
+  const toggleMagnifier = useCallback(() => setShowMagnifier((value) => !value), []);
 
   const currentSlugRef = useRef(initialSlug);
   const phaseRef = useRef<"enter" | "exit">("enter");
@@ -264,7 +275,9 @@ export function ArtworkViewer({
       {/* Постоянная подложка стены: пока старая работа уходит, а новая входит,
           «стена» остаётся неподвижной и не мигает. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0" style={wallStyle} />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 bg-black/45" />
+      {/* Затемнение одним слоем: 70% визуально совпадает с прежним двойным
+          bg-black/45 (0.45 + 0.45 ≈ 0.70), но уже без пульсации при переключении. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 bg-black/70" />
 
       {/* Контекст обхода читается клиентски (useSearchParams); всё остальное дерево
           остаётся предрендеренным — см. Next docs: Prerendering / useSearchParams. */}
@@ -292,6 +305,10 @@ export function ArtworkViewer({
           settings={settings}
           quick={quickEntry}
           direction={direction}
+          scale={scale}
+          onScaleChange={setScale}
+          showMagnifier={showMagnifier}
+          onToggleMagnifier={toggleMagnifier}
         />
       </motion.div>
 
@@ -332,7 +349,9 @@ function NavContextSync({ onContext }: { onContext: (ctx: ArtworkNavContext) => 
     () => parseNavContext(new URLSearchParams(searchParams.toString())),
     [searchParams]
   );
-  useEffect(() => {
+  // Layout-эффект (строго до paint): контекст применяется до первой отрисовки,
+  // и соседние кнопки/превью сразу считают нужный пул — без кадра с fallback.
+  useIsomorphicLayoutEffect(() => {
     onContext(ctx);
   }, [ctx, onContext]);
   return null;

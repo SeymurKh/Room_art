@@ -71,6 +71,10 @@ export function ArtworkWall({
   settings,
   quick = false,
   direction = 1,
+  scale,
+  onScaleChange,
+  showMagnifier,
+  onToggleMagnifier,
 }: {
   artwork: Artwork;
   artist: string;
@@ -79,6 +83,13 @@ export function ArtworkWall({
   quick?: boolean;
   /** Направление переключения: 1 — next (вход справа), -1 — prev (слева). */
   direction?: 1 | -1;
+  /** Масштаб x1/x2/x3. Управляется из ArtworkViewer, чтобы переживать
+   *  перемонтирование секции при смене картины (иначе сбрасывался в x1). */
+  scale: number;
+  onScaleChange: (scale: number) => void;
+  /** Мобильная лупа — тоже управляется из ArtworkViewer (не сбрасывается). */
+  showMagnifier: boolean;
+  onToggleMagnifier: () => void;
 }) {
   const priceLabel = artwork.priceAzn != null ? `${artwork.priceAzn.toLocaleString("en-US")} AZN` : null;
   const lang = useLang();
@@ -86,8 +97,6 @@ export function ArtworkWall({
   const wallRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [scale, setScale] = useState(1);
-  const [showMagnifier, setShowMagnifier] = useState(false);
 
   const frameV = frameVariants(quick, direction);
   const staggerV = staggerContainer(quick);
@@ -100,17 +109,14 @@ export function ArtworkWall({
     return () => window.removeEventListener("resize", update);
   }, []);
 
+  // Фона у секции нет намеренно: «стена» живёт в ArtworkViewer одним неподвижным
+  // слоем — анимация смены картин трогает только картину и информацию, а фон
+  // не шевелится и не мигает при переключении.
   return (
     <section
       ref={wallRef}
       className="relative overflow-hidden grid min-h-screen grid-rows-[auto_1fr_auto] pt-16"
-      style={{
-        backgroundImage: "url('/assets/room-wall.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
     >
-      <div className="pointer-events-none absolute inset-0 z-0 bg-black/45" aria-hidden="true" />
       {/* Top header info */}
       <motion.header
         variants={staggerV}
@@ -120,7 +126,9 @@ export function ArtworkWall({
       >
         <motion.div variants={fadeV}>
           <p className="section-kicker text-[#f4f1ea]">{artist}</p>
-          <h1 className="room-serif mt-2 max-w-md text-3xl font-medium leading-[0.95] text-[#f4f1ea] md:text-5xl">
+          {/* min-h на две строки: одно- и двухстрочные названия не меняют
+              высоту шапки — центр картины не «прыгает» при переключении. */}
+          <h1 className="room-serif mt-2 max-w-md min-h-[1.9em] text-3xl font-medium leading-[0.95] text-[#f4f1ea] md:text-5xl">
             {artwork.title}
           </h1>
         </motion.div>
@@ -130,7 +138,7 @@ export function ArtworkWall({
               <button
                 key={s}
                 type="button"
-                onClick={() => setScale(s)}
+                onClick={() => onScaleChange(s)}
                 className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] transition ${
                   scale === s
                     ? "bg-[#f4f1ea] text-[#11100e]"
@@ -140,20 +148,21 @@ export function ArtworkWall({
                 x{s === 1 ? "1" : s === 1.4 ? "2" : "3"}
               </button>
             ))}
-            {isMobile ? (
-              <button
-                type="button"
-                onClick={() => setShowMagnifier((v) => !v)}
-                className={`grid size-9 place-items-center transition ${
-                  showMagnifier
-                    ? "bg-[#f4f1ea] text-[#11100e]"
-                    : "bg-white/10 text-[#f4f1ea] hover:bg-white/15"
-                }`}
-                aria-label={showMagnifier ? t.artwork.hideMagnifier : t.artwork.showMagnifier}
-              >
-                <Search size={16} />
-              </button>
-            ) : null}
+            {/* Кнопка лупы видна только на мобильных (lg:hidden — тот же порог
+                1024px, что был у isMobile), но рендерится всегда: CSS, а не
+                JS-флаг — кнопка не «выпрыгивает» в хедер после перерисовки. */}
+            <button
+              type="button"
+              onClick={onToggleMagnifier}
+              className={`grid size-9 place-items-center transition lg:hidden ${
+                showMagnifier
+                  ? "bg-[#f4f1ea] text-[#11100e]"
+                  : "bg-white/10 text-[#f4f1ea] hover:bg-white/15"
+              }`}
+              aria-label={showMagnifier ? t.artwork.hideMagnifier : t.artwork.showMagnifier}
+            >
+              <Search size={16} />
+            </button>
           </div>
           <div className="text-right">
             {artwork.year ? <p className="text-sm text-[#f4f1ea]">{artwork.year}</p> : null}
@@ -203,14 +212,16 @@ export function ArtworkWall({
         className="room-shell relative z-10 flex flex-col items-center justify-center gap-6 py-5 text-center md:flex-row md:items-end md:justify-between md:py-6 md:text-left"
       >
         <motion.div variants={fadeV}>
+          {/* Значения с min-h на две строки: высота футера одинакова для
+              одно- и двухстрочных значений — картина остаётся по центру. */}
           <dl className="grid grid-cols-3 gap-x-3 gap-y-2 justify-items-center text-xs sm:gap-x-8 sm:text-sm md:justify-items-start">
             <div>
               <dt className="text-[#f4f1ea]">{t.artwork.dimensions}</dt>
-              <dd className="mt-0.5 text-[#f4f1ea]">{formatDimensions(artwork, lang)}</dd>
+              <dd className="mt-0.5 min-h-[2.9em] text-[#f4f1ea]">{formatDimensions(artwork, lang)}</dd>
             </div>
             <div>
               <dt className="text-[#f4f1ea]">{t.artwork.availability}</dt>
-              <dd className="mt-0.5 text-[#f4f1ea]">
+              <dd className="mt-0.5 min-h-[2.9em] text-[#f4f1ea]">
                 {artwork.availability === "Available"
                   ? t.artwork.available
                   : artwork.availability === "Reserved"
@@ -221,7 +232,7 @@ export function ArtworkWall({
             {priceLabel ? (
               <div>
                 <dt className="text-[#f4f1ea]">{t.artwork.price}</dt>
-                <dd className="mt-0.5 text-[#f4f1ea]">{priceLabel}</dd>
+                <dd className="mt-0.5 min-h-[2.9em] text-[#f4f1ea]">{priceLabel}</dd>
               </div>
             ) : null}
           </dl>
